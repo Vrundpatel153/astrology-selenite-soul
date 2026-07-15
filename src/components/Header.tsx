@@ -41,11 +41,13 @@ const SIDEBAR_SECTIONS = [
   {
     heading: "My Account",
     links: [
-      { label: "My Cart",     href: "/cart" },
-      { label: "Checkout",    href: "/checkout" },
-      { label: "Track Order", href: "/" },
-      { label: "Returns",     href: "/" },
-      { label: "Contact Us",  href: "/" },
+      { label: "My Cart",      href: "/cart" },
+      { label: "My Wishlist",  href: "/wishlist" },
+      { label: "Track Order",  href: "/orders" },
+      { label: "Returns",      href: "/shipping" },
+      { label: "Shipping Info",href: "/shipping" },
+      { label: "FAQ",          href: "/faq" },
+      { label: "Contact Us",   href: "/contact" },
     ],
   },
 ];

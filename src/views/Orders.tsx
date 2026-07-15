@@ -45,32 +45,32 @@ export default function Orders() {
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
 
-      <section className="pt-20 pb-12 px-6 text-center bg-[#f5ede4]">
+      <section className="pt-16 pb-10 px-4 sm:px-6 text-center bg-[#f5ede4]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-4">My Account</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-4">Track Your Orders</h1>
-          <p className="text-[#2a1f1a]/60 max-w-lg mx-auto">Follow your crystal journey from our studio to your doorstep.</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">My Account</p>
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">Track Your Orders</h1>
+          <p className="text-[#2a1f1a]/60 max-w-lg mx-auto text-sm">Follow your crystal journey from our studio to your doorstep.</p>
         </motion.div>
       </section>
 
-      <section className="py-16 px-6">
+      <section className="py-10 md:py-16 px-4 sm:px-6">
         <div className="max-w-[900px] mx-auto">
 
           {/* Track form */}
-          <ScrollReveal direction="up" className="mb-14">
-            <div className="bg-white border border-[#e8d9cf] p-8">
-              <h2 className="text-xl font-serif font-light mb-6">Track an Order</h2>
-              <div className="flex gap-0">
+          <ScrollReveal direction="up" className="mb-10 md:mb-14">
+            <div className="bg-white border border-[#e8d9cf] p-5 md:p-8">
+              <h2 className="text-lg md:text-xl font-serif font-light mb-4 md:mb-6">Track an Order</h2>
+              <div className="flex flex-col sm:flex-row gap-0">
                 <input
                   type="text"
-                  placeholder="Enter Order ID (e.g. SS-2024-0847) or tracking number"
+                  placeholder="Order ID or tracking number"
                   value={trackId}
                   onChange={e => setTrackId(e.target.value)}
-                  className="flex-1 border border-[#e8d9cf] px-4 py-3.5 text-sm outline-none focus:border-[#c8a951] transition-colors"
+                  className="flex-1 border border-[#e8d9cf] px-4 py-3 text-sm outline-none focus:border-[#c8a951] transition-colors"
                 />
                 <motion.button
                   onClick={() => setTracked(true)}
-                  className="bg-[#c8a951] text-[#2a1f1a] px-6 py-3.5 text-[11px] font-bold uppercase tracking-widest flex items-center gap-2"
+                  className="bg-[#c8a951] text-[#2a1f1a] px-6 py-3 text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 w-full sm:w-auto"
                   whileHover={{ backgroundColor: "#d4b565" }}
                   whileTap={{ scale: 0.97 }}
                 >

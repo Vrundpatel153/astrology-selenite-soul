@@ -83,15 +83,15 @@ export default function FAQ() {
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
 
-      <section className="pt-20 pb-12 px-6 text-center bg-[#f5ede4]">
+      <section className="pt-16 pb-10 px-4 sm:px-6 text-center bg-[#f5ede4]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-4">Help Centre</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-4">Frequently Asked Questions</h1>
-          <p className="text-[#2a1f1a]/60 max-w-lg mx-auto">Everything you need to know about our crystals, orders, and Vedic astrology services.</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Help Centre</p>
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">Frequently Asked Questions</h1>
+          <p className="text-[#2a1f1a]/60 max-w-lg mx-auto text-sm">Everything you need to know about our crystals, orders, and Vedic astrology services.</p>
         </motion.div>
       </section>
 
-      <section className="py-16 px-6">
+      <section className="py-10 md:py-16 px-4 sm:px-6">
         <div className="max-w-[820px] mx-auto">
           {sections.map((section, si) => (
             <ScrollReveal key={section.heading} direction="up" delay={si * 0.06} className="mb-12">

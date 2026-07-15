@@ -28,15 +28,15 @@ export default function Wishlist() {
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
 
-      <section className="pt-20 pb-12 px-6 text-center bg-[#f5ede4]">
+      <section className="pt-16 pb-10 px-4 sm:px-6 text-center bg-[#f5ede4]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <Heart className="w-8 h-8 text-[#c8a951] mx-auto mb-4 fill-[#c8a951]" />
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">Your Wishlist</h1>
-          <p className="text-[#2a1f1a]/50">{wishlistProducts.length} saved items</p>
+          <Heart className="w-7 h-7 text-[#c8a951] mx-auto mb-3 fill-[#c8a951]" />
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-2">Your Wishlist</h1>
+          <p className="text-[#2a1f1a]/50 text-sm">{wishlistProducts.length} saved items</p>
         </motion.div>
       </section>
 
-      <section className="py-16 px-6">
+      <section className="py-10 md:py-16 px-4 sm:px-6">
         <div className="max-w-[1200px] mx-auto">
           <AnimatePresence mode="popLayout">
             {wishlistProducts.length === 0 ? (
@@ -44,7 +44,7 @@ export default function Wishlist() {
                 key="empty"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-24"
+                className="text-center py-16 md:py-24"
               >
                 <Sparkles className="w-10 h-10 text-[#c8a951]/40 mx-auto mb-6" />
                 <h2 className="text-2xl font-serif font-light text-[#2a1f1a] mb-3">Your wishlist is empty</h2>
@@ -82,12 +82,12 @@ export default function Wishlist() {
                         </span>
                       )}
                       <motion.button
-                        className="absolute top-2.5 right-2.5 w-8 h-8 bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity shadow-sm"
                         onClick={e => { e.stopPropagation(); removeFromWishlist(product.id); }}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        <Trash2 className="w-4 h-4 text-red-400" />
+                        <Trash2 className="w-3.5 h-3.5 text-red-400" />
                       </motion.button>
                     </div>
                     <div className="p-4">

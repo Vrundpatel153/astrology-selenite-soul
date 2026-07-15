@@ -26,17 +26,17 @@ export default function Contact() {
       <Header />
 
       {/* Hero */}
-      <section className="pt-20 pb-12 px-6 text-center bg-[#f5ede4]">
+      <section className="pt-16 pb-10 px-4 sm:px-6 text-center bg-[#f5ede4]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-4">Reach Out</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-4">We'd Love to Hear from You</h1>
-          <p className="text-[#2a1f1a]/60 max-w-xl mx-auto">Whether it's a question about your order, crystal advice, or Vedic astrology — our team is here to help.</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Reach Out</p>
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">We'd Love to Hear from You</h1>
+          <p className="text-[#2a1f1a]/60 max-w-xl mx-auto text-sm">Whether it's a question about your order, crystal advice, or Vedic astrology — our team is here to help.</p>
         </motion.div>
       </section>
 
-      <section className="py-16 px-6">
+      <section className="py-10 md:py-16 px-4 sm:px-6">
         <div className="max-w-[1100px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
 
             {/* Contact Info */}
             <ScrollReveal direction="left">
