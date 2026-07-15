@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
@@ -34,6 +34,10 @@ function AnimatedRoutes() {
   const [location] = useLocation();
   useLenis();
 
+  // Scroll to top on every page navigation
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location]);
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div key={location} variants={pageTransition} initial="initial" animate="animate" exit="exit">

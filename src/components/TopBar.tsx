@@ -42,8 +42,14 @@ export default function TopBar() {
 
   return (
     <div className="flex flex-col w-full" data-testid="top-bar">
-      <div className="bg-[#8b2020] text-white py-1.5 px-4 text-center font-bold tracking-wider text-[10px] md:text-xs uppercase">
-        Sale Ends In [{timeLeft.days} DAYS] [{timeLeft.hours.toString().padStart(2, '0')} HRS] [{timeLeft.minutes.toString().padStart(2, '0')} MIN] [{timeLeft.seconds.toString().padStart(2, '0')} SEC] — Get upto 5 free gifts worth ₹2899
+      <div className="bg-[#0e0a1a] border-b border-[#c8a951]/20 text-[#c8a951]/80 py-1 px-4 text-center font-light tracking-[0.18em] text-[9px] md:text-[10px]">
+        <span className="opacity-60">sale ends in</span>
+        {" "}
+        <span className="font-medium text-[#c8a951]">{timeLeft.days}d {timeLeft.hours.toString().padStart(2, '0')}h {timeLeft.minutes.toString().padStart(2, '0')}m {timeLeft.seconds.toString().padStart(2, '0')}s</span>
+        {" "}
+        <span className="opacity-60 mx-1">·</span>
+        {" "}
+        <span className="opacity-70">upto 5 free gifts worth ₹2899</span>
       </div>
       <div className="hidden md:flex bg-[#2a1f1a] text-white h-10 items-center justify-center gap-4 font-mono text-[12px] tracking-wider relative">
         <button onClick={prev} className="hover:opacity-70 transition-opacity absolute left-4" aria-label="Previous announcement">
