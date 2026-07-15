@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Deep cosmic background -->
+  <circle cx="50" cy="50" r="50" fill="#0a0618"/>
+  
+  <!-- Outer glow ring -->
+  <circle cx="50" cy="50" r="42" stroke="#c8a951" stroke-width="1" stroke-opacity="0.3"/>
+  
+  <!-- Sri Yantra / Mandala outer petals -->
+  <circle cx="50" cy="50" r="36" stroke="#c8a951" stroke-width="0.8" stroke-opacity="0.5" stroke-dasharray="4 4"/>
+
+  <!-- Upward triangle (Shiva) -->
+  <polygon points="50,14 76,62 24,62" fill="none" stroke="#c8a951" stroke-width="2" stroke-opacity="0.9"/>
+  
+  <!-- Downward triangle (Shakti) -->
+  <polygon points="50,82 74,36 26,36" fill="none" stroke="#d4af6a" stroke-width="2" stroke-opacity="0.9"/>
+
+  <!-- Centre dot (Bindu) -->
+  <circle cx="50" cy="50" r="5" fill="#c8a951"/>
+
+  <!-- 4 cardinal dots -->
+  <circle cx="50" cy="22" r="2" fill="#c8a951" opacity="0.7"/>
+  <circle cx="50" cy="78" r="2" fill="#c8a951" opacity="0.7"/>
+  <circle cx="22" cy="50" r="2" fill="#c8a951" opacity="0.7"/>
+  <circle cx="78" cy="50" r="2" fill="#c8a951" opacity="0.7"/>
+</svg>
