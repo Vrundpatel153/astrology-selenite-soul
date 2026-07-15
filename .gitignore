@@ -4,6 +4,9 @@ out/
 dist/
 build/
 
+# Lock files (generated fresh by Vercel in clean env — monorepo contaminates locally)
+package-lock.json
+
 # Dependencies
 node_modules/
 
