@@ -69,7 +69,7 @@ export default function Header() {
       setIsScrolled(scrolled);
       if (isHomepage && !scrolled) {
         const isMobile = window.innerWidth < 768;
-        setTopOffset(isMobile ? 28 : 68);
+        setTopOffset(isMobile ? 0 : 40);
       } else {
         setTopOffset(0);
       }

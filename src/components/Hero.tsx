@@ -7,7 +7,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/hero.png"
+          src="/hero.webp"
           alt="Crystals flat lay"
           className="w-full h-full object-cover object-center opacity-90"
           data-testid="img-hero"

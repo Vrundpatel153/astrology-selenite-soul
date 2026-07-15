@@ -1,5 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../index.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0a0618",
+};
 
 export const metadata: Metadata = {
   title: "Selenite Soul — Vedic Kundali & Healing Crystals",
@@ -41,8 +47,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.svg",
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0a0618",
 };
 
 export default function RootLayout({

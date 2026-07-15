@@ -36,7 +36,7 @@ export default function Services() {
             <div className="group block bg-background cursor-pointer overflow-hidden" data-testid="card-book-appointment">
               <div className="aspect-[4/3] w-full overflow-hidden">
                 <img
-                  src="/store.png"
+                  src="/store.webp"
                   alt="Luxury jewelry boutique interior"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   data-testid="img-store"

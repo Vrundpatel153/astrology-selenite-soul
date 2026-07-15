@@ -98,15 +98,15 @@ const DIGNITY: Record<string, { exalt: string; debil: string; own: string[] }> =
 };
 
 const CRYSTAL_MAP: Record<string, { crystal: string; image: string; benefit: string }> = {
-  Sun: { crystal: "Citrine", image: "/product-3.png", benefit: "Boosts confidence, vitality & leadership" },
-  Moon: { crystal: "Moonstone", image: "/product-2.png", benefit: "Calms emotions, enhances intuition" },
-  Mars: { crystal: "Red Jasper", image: "/product-1.png", benefit: "Builds courage & life force energy" },
-  Mercury: { crystal: "Green Aventurine", image: "/product-1.png", benefit: "Sharpens intellect & communication" },
-  Jupiter: { crystal: "Amethyst", image: "/product-2.png", benefit: "Attracts wisdom, growth & abundance" },
-  Venus: { crystal: "Rose Quartz", image: "/product-1.png", benefit: "Opens the heart to love & beauty" },
-  Saturn: { crystal: "Black Tourmaline", image: "/product-1.png", benefit: "Grounds energy & removes obstacles" },
-  Rahu: { crystal: "Lapis Lazuli", image: "/product-2.png", benefit: "Cuts illusion & amplifies ambition" },
-  Ketu: { crystal: "Clear Quartz", image: "/product-4.png", benefit: "Deepens spiritual insight & liberation" },
+  Sun: { crystal: "Citrine", image: "/product-3.webp", benefit: "Boosts confidence, vitality & leadership" },
+  Moon: { crystal: "Moonstone", image: "/product-2.webp", benefit: "Calms emotions, enhances intuition" },
+  Mars: { crystal: "Red Jasper", image: "/product-1.webp", benefit: "Builds courage & life force energy" },
+  Mercury: { crystal: "Green Aventurine", image: "/product-1.webp", benefit: "Sharpens intellect & communication" },
+  Jupiter: { crystal: "Amethyst", image: "/product-2.webp", benefit: "Attracts wisdom, growth & abundance" },
+  Venus: { crystal: "Rose Quartz", image: "/product-1.webp", benefit: "Opens the heart to love & beauty" },
+  Saturn: { crystal: "Black Tourmaline", image: "/product-1.webp", benefit: "Grounds energy & removes obstacles" },
+  Rahu: { crystal: "Lapis Lazuli", image: "/product-2.webp", benefit: "Cuts illusion & amplifies ambition" },
+  Ketu: { crystal: "Clear Quartz", image: "/product-4.webp", benefit: "Deepens spiritual insight & liberation" },
 };
 
 const TITHI_NAMES = [

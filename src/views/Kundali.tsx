@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import leafBranch from "@/assets/leaf-branch.png";
+import leafBranch from "@/assets/leaf-branch.webp";
 import { geocodePlace, RASHIS, type BirthData, INDIAN_CITIES, searchIndianPlaces, reverseGeocode } from "@/lib/kundali";
 import { useGenerateKundali } from "@/lib/api-client/api";
 import type { KundaliChart as KundaliResult, Planet as PlanetInfo } from "@/lib/api-client/api.schemas";

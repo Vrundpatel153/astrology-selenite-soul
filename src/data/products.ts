@@ -18,20 +18,20 @@ export interface Product {
 const CDN = "https://cdn.shopify.com/s/files/1/0720/7813/1509/files/";
 
 export const categories = [
-  { id: "bracelets",  name: "Bracelets",                image: "/cat-bracelets.png",  count: 69 },
-  { id: "pendants",   name: "Pendants",                  image: "/cat-pendants.png",   count: 51 },
-  { id: "rings",      name: "Rings",                     image: "/cat-rings.png",       count: 28 },
-  { id: "necklaces",  name: "Necklaces & Mala",          image: "/cat-necklaces.png",  count: 22 },
-  { id: "ear-studs",  name: "Ear Studs & Anklets",       image: "/cat-ear-studs.png",  count: 18 },
-  { id: "gemstones",  name: "Gemstones & Raw Crystals",  image: "/cat-gemstones.png",  count: 34 },
+  { id: "bracelets",  name: "Bracelets",                image: "/cat-bracelets.webp",  count: 69 },
+  { id: "pendants",   name: "Pendants",                  image: "/cat-pendants.webp",   count: 51 },
+  { id: "rings",      name: "Rings",                     image: "/cat-rings.webp",       count: 28 },
+  { id: "necklaces",  name: "Necklaces & Mala",          image: "/cat-necklaces.webp",  count: 22 },
+  { id: "ear-studs",  name: "Ear Studs & Anklets",       image: "/cat-ear-studs.webp",  count: 18 },
+  { id: "gemstones",  name: "Gemstones & Raw Crystals",  image: "/cat-gemstones.webp",  count: 34 },
 ];
 
 export const concerns = [
-  { id: "love",       name: "Love",       subtitle: "OPEN YOUR HEART",    image: "/concern-love.png",       description: "Rose Quartz, Rhodonite" },
-  { id: "peace",      name: "Peace",      subtitle: "RELIEVE YOUR STRESS", image: "/concern-peace.png",      description: "Amethyst, Blue Lace Agate" },
-  { id: "protection", name: "Protection", subtitle: "SHIELD YOUR ENERGY",  image: "/concern-protection.png", description: "Black Tourmaline, Obsidian" },
-  { id: "money",      name: "Money",      subtitle: "ATTRACT ABUNDANCE",   image: "/concern-money.png",      description: "Citrine, Pyrite" },
-  { id: "health",     name: "Health",     subtitle: "HEAL YOUR BODY",      image: "/concern-health.png",     description: "Clear Quartz, Jade" },
+  { id: "love",       name: "Love",       subtitle: "OPEN YOUR HEART",    image: "/concern-love.webp",       description: "Rose Quartz, Rhodonite" },
+  { id: "peace",      name: "Peace",      subtitle: "RELIEVE YOUR STRESS", image: "/concern-peace.webp",      description: "Amethyst, Blue Lace Agate" },
+  { id: "protection", name: "Protection", subtitle: "SHIELD YOUR ENERGY",  image: "/concern-protection.webp", description: "Black Tourmaline, Obsidian" },
+  { id: "money",      name: "Money",      subtitle: "ATTRACT ABUNDANCE",   image: "/concern-money.webp",      description: "Citrine, Pyrite" },
+  { id: "health",     name: "Health",     subtitle: "HEAL YOUR BODY",      image: "/concern-health.webp",     description: "Clear Quartz, Jade" },
 ];
 
 export const zodiacSigns = [
