@@ -23,10 +23,12 @@ const footerLinks = [
     heading: "Astrology",
     links: [
       { label: "Kundali Calculator",    href: "/kundali" },
+      { label: "Tarot Reading",         href: "/tarot" },
+      { label: "Numerology",            href: "/numerology" },
       { label: "Shop by Zodiac",        href: "/shop" },
       { label: "Shop by Concern",       href: "/shop" },
       { label: "Crystal Healing Guide", href: "/about" },
-      { label: "Book Consultation",     href: "/kundali" },
+      { label: "Book Consultation",     href: "/tarot" },
       { label: "About Selenite Soul",   href: "/about" },
     ],
   },

@@ -21,6 +21,8 @@ import FAQ from "@/views/FAQ";
 import Orders from "@/views/Orders";
 import Shipping from "@/views/Shipping";
 import Wishlist from "@/views/Wishlist";
+import Tarot from "@/views/Tarot";
+import Numerology from "@/views/Numerology";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,8 @@ function AnimatedRoutes() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/payment-success" component={PaymentSuccess} />
           <Route path="/kundali" component={Kundali} />
+          <Route path="/tarot" component={Tarot} />
+          <Route path="/numerology" component={Numerology} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/faq" component={FAQ} />

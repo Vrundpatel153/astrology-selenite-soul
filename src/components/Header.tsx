@@ -32,10 +32,12 @@ const SIDEBAR_SECTIONS = [
     heading: "Astrology",
     links: [
       { label: "Kundali Calculator",    href: "/kundali", gold: true },
+      { label: "Tarot Reading",          href: "/tarot", gold: true },
+      { label: "Numerology",             href: "/numerology", gold: true },
       { label: "Shop by Zodiac",        href: "/shop?filter=astrology" },
       { label: "Shop by Concern",       href: "/shop?filter=concern" },
       { label: "Crystal Healing Guide", href: "/" },
-      { label: "Book a Consultation",   href: "/kundali" },
+      { label: "Book a Consultation",   href: "/tarot" },
     ],
   },
   {
@@ -249,6 +251,38 @@ export default function Header() {
                   <motion.span
                     className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
                     initial={{ scaleX: isActive("/kundali") ? 1 : 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  />
+                </motion.span>
+              </Link>
+
+              {/* Tarot */}
+              <Link href="/tarot">
+                <motion.span
+                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/tarot") ? "text-[#c8a951]" : "text-[#c8a951]/80"}`}
+                  whileHover={{ opacity: 1 }}
+                >
+                  Tarot
+                  <motion.span
+                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
+                    initial={{ scaleX: isActive("/tarot") ? 1 : 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  />
+                </motion.span>
+              </Link>
+
+              {/* Numerology */}
+              <Link href="/numerology">
+                <motion.span
+                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/numerology") ? "text-[#c8a951]" : "text-[#c8a951]/80"}`}
+                  whileHover={{ opacity: 1 }}
+                >
+                  Numerology
+                  <motion.span
+                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
+                    initial={{ scaleX: isActive("/numerology") ? 1 : 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
                   />

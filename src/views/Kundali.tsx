@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -790,6 +790,112 @@ export default function Kundali() {
     >
       <Header />
 
+
+      {/* KUNDALI INTRO */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #2a1f1a 0%, #1e1410 100%)" }}>
+        <SparkleField count={20} />
+        <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-20 md:py-28 text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+            <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-4">Free Vedic Reading</p>
+            <h1 className="text-4xl md:text-6xl font-serif font-light text-white leading-tight mb-6">
+              Your Kundali <br />
+              <span className="italic text-[#c8a951]">The Blueprint of Your Soul</span>
+            </h1>
+            <p className="text-[#fdf8f4]/60 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-8">
+              In Vedic astrology, your Kundali is a precise cosmic map of the sky at the moment you were born. It reveals your dharma, karma, relationships, health, wealth, and spiritual path — all encoded in the positions of nine planets across twelve houses.
+            </p>
+            <a href="#kundali-calc">
+              <motion.span
+                className="inline-flex items-center gap-2 bg-[#c8a951] text-[#2a1f1a] px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest cursor-pointer"
+                whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+              >
+                Generate My Kundali
+              </motion.span>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* WHAT YOU RECEIVE */}
+      <section className="py-20 px-6" style={{ background: "#fdf3ec" }}>
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div className="text-center mb-14"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          >
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Included in Every Reading</p>
+            <h2 className="text-3xl md:text-4xl font-serif font-light text-[#3d2115]">What You Receive</h2>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { sym: "♈", title: "Lagna & Rashi Chart", desc: "Your Ascendant, Moon sign, and complete D1 birth chart showing all 9 planets across 12 houses." },
+              { sym: "✦", title: "Planetary Positions", desc: "Precise sidereal longitudes for all Navagrahas including Rahu & Ketu, with dignity and retrograde states." },
+              { sym: "☽", title: "Nakshatra Reading", desc: "Your Moon Nakshatra, Nakshatra lord, and pada — the 27-star system that adds unmatched depth." },
+              { sym: "⊕", title: "Vimshottari Dasha", desc: "Your full lifetime Dasha sequence, including the current Mahadasha and Antardasha with exact dates." },
+              { sym: "✿", title: "Yogas & Doshas", desc: "Automatic detection of auspicious Yogas (Raj Yoga, Gaja Kesari) and Doshas (Mangal, Kaal Sarp)." },
+              { sym: "◈", title: "Crystal Prescriptions", desc: "Personalised gemstone recommendations based on your planetary placements — add directly to cart." },
+            ].map((item, i) => (
+              <motion.div key={item.title}
+                className="border border-[#e8b98a]/40 p-7 bg-white/60"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.07, duration: 0.55 }}
+                whileHover={{ borderColor: "rgba(200,169,81,0.5)", backgroundColor: "rgba(255,255,255,0.9)", y: -3 }}
+              >
+                <span className="block text-3xl text-[#c8a951] mb-4 font-serif">{item.sym}</span>
+                <h3 className="font-serif text-[#3d2115] text-lg mb-2">{item.title}</h3>
+                <p className="text-sm text-[#3d2115]/55 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-20 px-6" style={{ background: "#3d2115" }}>
+        <div className="max-w-[800px] mx-auto">
+          <motion.div className="text-center mb-14"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          >
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Simple & Free</p>
+            <h2 className="text-3xl md:text-4xl font-serif font-light text-white">How It Works</h2>
+          </motion.div>
+          <div className="space-y-0">
+            {[
+              { n: "01", title: "Enter Your Birth Details", desc: "Provide your name, date of birth, exact birth time, and birth place. The more precise your birth time, the more accurate your Lagna." },
+              { n: "02", title: "Jyotish Engine Calculates", desc: "Our VSOP87-based astronomy engine computes your sidereal planetary positions using Lahiri Ayanamsa — the standard used by Indian Vedic astrology." },
+              { n: "03", title: "Receive Your Full Chart", desc: "Instantly view your complete Kundali — birth chart, planetary positions, Nakshatras, Dasha timeline, Panchang, Yogas, Doshas, and crystal prescriptions." },
+            ].map((step, i) => (
+              <motion.div key={step.n} className="flex gap-8 pb-10 relative"
+                initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.12, duration: 0.6 }}
+              >
+                {i < 2 && <div className="absolute left-[22px] top-12 bottom-0 w-px bg-[#c8a951]/20" />}
+                <div className="shrink-0 w-11 h-11 flex items-center justify-center rounded-full border border-[#c8a951]/40 bg-[#c8a951]/10 z-10">
+                  <span className="text-xs font-bold text-[#c8a951]">{step.n}</span>
+                </div>
+                <div className="pt-2">
+                  <h3 className="text-lg font-serif text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{step.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div className="text-center mt-6"
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+          >
+            <a href="#kundali-calc">
+              <motion.span
+                className="inline-flex items-center gap-2 bg-[#c8a951] text-[#2a1f1a] px-10 py-4 text-[11px] font-bold uppercase tracking-widest cursor-pointer"
+                whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+              >
+                Launch the Kundali App
+              </motion.span>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CALCULATOR ANCHOR */}
+      <div id="kundali-calc" />
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <div ref={heroRef} className="relative overflow-hidden" style={{ minHeight: "min(560px, 70vw)" }}>
         <SparkleField count={26} />
@@ -804,14 +910,14 @@ export default function Kundali() {
           <div className="absolute bottom-0 right-0 opacity-80"><CornerLeaves flip /></div>
           {/* Botanical vine branches flanking the mandala — responsive */}
           <img
-            src={leafBranch}
+            src={leafBranch.src}
             alt=""
             aria-hidden="true"
             className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 h-[70%] md:h-[85%] w-auto opacity-70 md:opacity-80 pointer-events-none select-none -translate-x-4 md:-translate-x-2"
             style={{ maxWidth: "22vw" }}
           />
           <img
-            src={leafBranch}
+            src={leafBranch.src}
             alt=""
             aria-hidden="true"
             className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 h-[70%] md:h-[85%] w-auto opacity-70 md:opacity-80 pointer-events-none select-none translate-x-4 md:translate-x-2 scale-x-[-1]"
@@ -819,13 +925,13 @@ export default function Kundali() {
           />
           {/* Mobile: smaller top-corner accents */}
           <img
-            src={leafBranch}
+            src={leafBranch.src}
             alt=""
             aria-hidden="true"
             className="sm:hidden absolute -left-6 top-4 h-40 w-auto opacity-60 pointer-events-none select-none"
           />
           <img
-            src={leafBranch}
+            src={leafBranch.src}
             alt=""
             aria-hidden="true"
             className="sm:hidden absolute -right-6 bottom-4 h-40 w-auto opacity-60 pointer-events-none select-none scale-x-[-1]"
