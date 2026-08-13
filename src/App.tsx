@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
 import { useLenis } from "@/hooks/useLenis";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import CustomCursor from "@/components/CustomCursor";
+
 import NotFound from "@/views/not-found";
 import Home from "@/views/Home";
 import Shop from "@/views/Shop";
@@ -75,6 +77,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <CartProvider>
+          {/* Custom cursor — desktop only */}
+          <CustomCursor />
           {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
           
           <AnimatePresence>

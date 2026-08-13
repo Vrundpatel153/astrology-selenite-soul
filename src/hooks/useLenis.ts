@@ -1,25 +1,33 @@
+/**
+ * useLenis — upgraded with GSAP ScrollTrigger sync.
+ * Replaces the old hook so the entire app gets smooth scroll + ScrollTrigger working together.
+ */
 import Lenis from "lenis";
 import { useEffect } from "react";
+import { gsap, ScrollTrigger } from "@/lib/gsap-init";
 
 export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.3,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),  // quartic ease-out — silky feel
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.8,
+      infinite: false,
     });
 
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
+    // Sync GSAP ScrollTrigger to Lenis scroll position
+    lenis.on("scroll", () => ScrollTrigger.update());
+
+    // Wire Lenis into GSAP ticker (avoids double RAF)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove((time) => { lenis.raf(time * 1000); });
       lenis.destroy();
     };
   }, []);
