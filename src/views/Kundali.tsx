@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -817,32 +817,41 @@ export default function Kundali() {
       </section>
 
       {/* WHAT YOU RECEIVE */}
-      <section className="py-20 px-6" style={{ background: "#fdf3ec" }}>
-        <div className="max-w-[1100px] mx-auto">
+      <section className="py-20 px-6 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #fdf8f4 0%, #f7ebe1 100%)" }}>
+        <div className="max-w-[1140px] mx-auto relative z-10">
           <motion.div className="text-center mb-14"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Included in Every Reading</p>
-            <h2 className="text-3xl md:text-4xl font-serif font-light text-[#3d2115]">What You Receive</h2>
+            <div className="flex items-center gap-3 justify-center mb-3">
+              <div className="h-px w-8 bg-[#c8a951]/60" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Included in Every Reading</span>
+              <div className="h-px w-8 bg-[#c8a951]/60" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif font-light text-[#2a1f1a]">What You Receive</h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { sym: "♈", title: "Lagna & Rashi Chart", desc: "Your Ascendant, Moon sign, and complete D1 birth chart showing all 9 planets across 12 houses." },
-              { sym: "✦", title: "Planetary Positions", desc: "Precise sidereal longitudes for all Navagrahas including Rahu & Ketu, with dignity and retrograde states." },
-              { sym: "☽", title: "Nakshatra Reading", desc: "Your Moon Nakshatra, Nakshatra lord, and pada — the 27-star system that adds unmatched depth." },
-              { sym: "⊕", title: "Vimshottari Dasha", desc: "Your full lifetime Dasha sequence, including the current Mahadasha and Antardasha with exact dates." },
-              { sym: "✿", title: "Yogas & Doshas", desc: "Automatic detection of auspicious Yogas (Raj Yoga, Gaja Kesari) and Doshas (Mangal, Kaal Sarp)." },
-              { sym: "◈", title: "Crystal Prescriptions", desc: "Personalised gemstone recommendations based on your planetary placements — add directly to cart." },
+              { tag: "Ascendant & Moon", title: "Lagna & Rashi Chart", desc: "Your Ascendant, Moon sign, and complete D1 birth chart showing all 9 planets across 12 houses." },
+              { tag: "Navagraha Sidereal", title: "Planetary Positions", desc: "Precise sidereal longitudes for all Navagrahas including Rahu & Ketu, with dignity and retrograde states." },
+              { tag: "27-Star System", title: "Nakshatra Reading", desc: "Your Moon Nakshatra, Nakshatra lord, and pada — the 27-star system that adds unmatched depth." },
+              { tag: "Lifetime Timeline", title: "Vimshottari Dasha", desc: "Your full lifetime Dasha sequence, including the current Mahadasha and Antardasha with exact dates." },
+              { tag: "Planetary Combos", title: "Yogas & Doshas", desc: "Automatic detection of auspicious Yogas (Raj Yoga, Gaja Kesari) and Doshas (Mangal, Kaal Sarp)." },
+              { tag: "Gemstone Remedies", title: "Crystal Prescriptions", desc: "Personalised gemstone recommendations based on your planetary placements — add directly to cart." },
             ].map((item, i) => (
               <motion.div key={item.title}
-                className="border border-[#e8b98a]/40 p-7 bg-white/60"
+                className="border border-[#c8a951]/30 p-8 bg-white/90 shadow-md backdrop-blur-md rounded-sm flex flex-col justify-between group"
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ delay: i * 0.07, duration: 0.55 }}
-                whileHover={{ borderColor: "rgba(200,169,81,0.5)", backgroundColor: "rgba(255,255,255,0.9)", y: -3 }}
+                transition={{ delay: i * 0.06, duration: 0.55 }}
+                whileHover={{ borderColor: "rgba(200,169,81,0.8)", backgroundColor: "#ffffff", y: -4, boxShadow: "0 20px 40px rgba(42,31,26,0.08)" }}
               >
-                <span className="block text-3xl text-[#c8a951] mb-4 font-serif">{item.sym}</span>
-                <h3 className="font-serif text-[#3d2115] text-lg mb-2">{item.title}</h3>
-                <p className="text-sm text-[#3d2115]/55 leading-relaxed">{item.desc}</p>
+                <div>
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#e8d9cf]">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">{item.tag}</span>
+                    <span className="text-[#c8a951] text-xs group-hover:scale-125 transition-transform">✦</span>
+                  </div>
+                  <h3 className="font-serif text-[#2a1f1a] text-xl font-normal mb-3 group-hover:text-[#a5762a] transition-colors">{item.title}</h3>
+                  <p className="text-xs md:text-sm text-[#4a3020]/80 leading-relaxed font-light">{item.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>

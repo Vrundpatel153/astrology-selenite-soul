@@ -203,10 +203,10 @@ function BrandPhilosophy() {
     const cards = sectionRef.current.querySelectorAll(".pillar-card");
     const ctx = gsap.context(() => {
       gsap.fromTo(cards,
-        { opacity: 0, y: 80, clipPath: "inset(0 0 100% 0)" },
+        { opacity: 0, y: 50 },
         {
-          opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)",
-          duration: 0.9, stagger: 0.15, ease: "power3.out",
+          opacity: 1, y: 0,
+          duration: 0.8, stagger: 0.12, ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "play none none none" },
         }
       );
@@ -215,50 +215,57 @@ function BrandPhilosophy() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-28 overflow-hidden" style={{ background: "#1e1410" }}>
-      <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
+    <section ref={sectionRef} className="relative py-20 md:py-32 overflow-hidden bg-[#1a100b]">
+      {/* Background artwork */}
+      <div className="absolute inset-0 pointer-events-none opacity-25">
+        <img src="/brand-philosophy-bg.webp" alt="" className="w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a100b] via-transparent to-[#1a100b]" />
+      </div>
+
+      <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14 md:mb-20">
           <div>
             <motion.p
-              className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-4"
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+              className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-3"
+              initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
             >
-              Selenite Soul
+              Selenite Soul Philosophy
             </motion.p>
             <motion.h2
-              className="text-4xl md:text-5xl xl:text-6xl font-light text-white leading-[1.05]" style={serif}
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
+              className="text-4xl md:text-5xl xl:text-6xl font-light text-white leading-[1.08]" style={serif}
+              initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
             >
               Where Ancient Wisdom<br />
               <em className="italic text-[#c8a951]">Meets Modern Life</em>
             </motion.h2>
           </div>
           <motion.p
-            className="text-sm text-white/40 leading-[1.9] max-w-sm"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-sm md:text-base text-white/80 leading-relaxed max-w-md font-light"
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
           >
-            We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life.
+            We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life — through crystals, astrology, Tarot, and numbers.
           </motion.p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
-          {pillars.map((p, i) => {
-            const { ref, handleMouseMove, handleMouseLeave } = useTilt(6);
+        {/* Pillar Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {pillars.map((p) => {
+            const { ref, handleMouseMove, handleMouseLeave } = useTilt(5);
             return (
               <div
                 key={p.num}
                 ref={ref}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="pillar-card bg-[#1e1410] px-7 py-10 flex flex-col group cursor-default"
-                style={{ transition: "transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.2s" }}
+                className="pillar-card bg-[#241710]/80 border border-[#c8a951]/25 p-8 flex flex-col group cursor-default backdrop-blur-md hover:border-[#c8a951]/70 hover:bg-[#2e1d15] transition-all duration-300 rounded-sm shadow-xl"
               >
-                <span className="text-[52px] font-light text-white/06 leading-none mb-8 select-none block" style={serif}>{p.num}</span>
-                <motion.div className="w-8 h-px bg-[#c8a951]/50 mb-6" whileHover={{ width: "3.5rem" }} transition={{ duration: 0.3 }} />
-                <h3 className="text-base md:text-lg font-light text-white leading-snug mb-4" style={serif}>{p.title}</h3>
-                <p className="text-sm text-white/38 leading-[1.85] mt-auto">{p.body}</p>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-3xl font-light text-[#c8a951]" style={serif}>{p.num}</span>
+                  <span className="text-[#c8a951]/50 text-xs">✦</span>
+                </div>
+                <h3 className="text-lg md:text-xl font-light text-white leading-snug mb-3" style={serif}>{p.title}</h3>
+                <p className="text-xs md:text-sm text-white/75 leading-relaxed mt-auto font-light">{p.body}</p>
               </div>
             );
           })}
@@ -409,34 +416,50 @@ function NumerologySection() {
           </MagLink>
         </div>
 
-        {/* Visual — Pythagorean table */}
-        <div className="relative overflow-hidden min-h-[300px] order-1 lg:order-2 flex items-center justify-center" style={{ background: "#2a1f1a" }}>
-          <motion.div className="w-full max-w-[400px] mx-auto px-8 py-12"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <div className="grid grid-cols-9 mb-6">
+        {/* Visual — Pythagorean table with artwork backdrop */}
+        <div className="relative overflow-hidden min-h-[420px] lg:min-h-full order-1 lg:order-2 flex items-center justify-center p-6 lg:p-12 bg-[#1c120c]">
+          {/* Background image */}
+          <div className="absolute inset-0 pointer-events-none opacity-40">
+            <img src="/numerology-art.webp" alt="Numerology Celestial" className="w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1c120c] via-transparent to-[#1c120c]" />
+          </div>
+
+          <motion.div
+            className="relative z-10 w-full max-w-[440px] bg-[#2a1b12]/85 border border-[#c8a951]/40 p-8 backdrop-blur-md shadow-2xl rounded-sm"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center justify-between mb-6 border-b border-[#c8a951]/30 pb-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951]">Pythagorean System</span>
+              <span className="text-[#c8a951] text-xs">✦</span>
+            </div>
+
+            <div className="grid grid-cols-9 mb-6 bg-[#160c07]/60 border border-[#c8a951]/20 p-2 rounded-sm">
               {["A","B","C","D","E","F","G","H","I"].map(l => (
-                <motion.div key={l} className="aspect-square flex items-center justify-center border-b border-white/8"
-                  whileHover={{ backgroundColor: "rgba(200,169,81,0.1)" }} transition={{ duration: 0.15 }}>
-                  <span className="text-[9px] font-bold text-white/20 uppercase">{l}</span>
+                <motion.div key={l} className="aspect-square flex items-center justify-center border-b border-[#c8a951]/20"
+                  whileHover={{ backgroundColor: "rgba(200,169,81,0.15)" }} transition={{ duration: 0.15 }}>
+                  <span className="text-[9px] font-bold text-[#c8a951]/70 uppercase">{l}</span>
                 </motion.div>
               ))}
               {[1,2,3,4,5,6,7,8,9].map((n, i) => (
                 <motion.div key={n} className="aspect-square flex items-center justify-center cursor-default"
                   initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.4 }}
+                  viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.3 }}
                   whileHover={{ scale: 1.3, color: "#c8a951" }}>
-                  <span className="text-xl text-white/50" style={serif}>{n}</span>
+                  <span className="text-xl text-white font-medium" style={serif}>{n}</span>
                 </motion.div>
               ))}
             </div>
-            <div className="w-full h-px bg-white/10 mb-6" />
-            <div className="flex gap-8 justify-center">
+
+            <div className="flex gap-8 justify-center pt-2">
               {["11","22","33"].map((n, i) => (
-                <motion.div key={n} className="text-center cursor-default"
-                  animate={{ y: [0, -6, 0] }} transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
-                  whileHover={{ scale: 1.15 }}>
-                  <p className="text-3xl font-light text-[#c8a951]" style={serif}>{n}</p>
-                  <p className="text-[8px] text-white/30 uppercase tracking-wider mt-1">Master</p>
+                <motion.div key={n} className="text-center cursor-default bg-[#160c07]/70 border border-[#c8a951]/30 px-5 py-3 rounded-sm flex-1"
+                  animate={{ y: [0, -4, 0] }} transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
+                  whileHover={{ scale: 1.05, borderColor: "rgba(200,169,81,0.8)" }}>
+                  <p className="text-2xl font-light text-[#c8a951]" style={serif}>{n}</p>
+                  <p className="text-[8px] text-white/60 uppercase tracking-widest mt-0.5">Master</p>
                 </motion.div>
               ))}
             </div>
