@@ -1,10 +1,9 @@
 "use client";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { Link } from "wouter";
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "wouter";
+import { motion, useSpring, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus, ArrowRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
@@ -15,7 +14,7 @@ import ShopByAstrologyCarousel from "@/components/ShopByAstrologyCarousel";
 import TabbedProductCarousel from "@/components/TabbedProductCarousel";
 import { products } from "@/data/products";
 import { useGSAPReveal, useParallax, useSplitReveal, useCounter } from "@/hooks/useGSAP";
-import { gsap, ScrollTrigger } from "@/lib/gsap-init";
+import { gsap } from "@/lib/gsap-init";
 
 // ─── Shared serif style
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
@@ -39,9 +38,10 @@ function useTilt(intensity = 10) {
   return { ref, handleMouseMove, handleMouseLeave };
 }
 
-// ─── Magnetic link wrapper
+// ─── Magnetic link wrapper (Fixes nested <a> hydration error by using useLocation navigate)
 function MagLink({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+  const [, navigate] = useLocation();
+  const ref = useRef<HTMLDivElement>(null);
   const x = useSpring(0, { stiffness: 200, damping: 20 });
   const y = useSpring(0, { stiffness: 200, damping: 20 });
 
@@ -53,18 +53,17 @@ function MagLink({ href, children, className = "" }: { href: string; children: R
   };
 
   return (
-    <Link href={href}>
-      <motion.a
-        ref={ref}
-        style={{ x, y, display: "inline-block" }}
-        className={`cursor-pointer ${className}`}
-        onMouseMove={onMove}
-        onMouseLeave={() => { x.set(0); y.set(0); }}
-        data-cursor="hover"
-      >
-        {children}
-      </motion.a>
-    </Link>
+    <motion.div
+      ref={ref}
+      style={{ x, y, display: "inline-block" }}
+      className={`cursor-pointer ${className}`}
+      onMouseMove={onMove}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+      onClick={() => navigate(href)}
+      data-cursor="hover"
+    >
+      {children}
+    </motion.div>
   );
 }
 
@@ -82,7 +81,7 @@ function TrustStrip() {
       >
         {[...items, ...items, ...items, ...items].map((item, i) => (
           <span key={i} className="inline-flex items-center gap-3 px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-[#1a0e05] whitespace-nowrap">
-            {item}<span className="opacity-40">✦</span>
+            {item}<span className="opacity-40 font-mono">•</span>
           </span>
         ))}
       </motion.div>
@@ -114,7 +113,7 @@ function EktaStory() {
         <div className="relative overflow-hidden min-h-[380px] lg:min-h-0" data-cursor="view">
           <motion.img
             ref={imgRef as any}
-            src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1100&q=85&fit=crop&crop=top"
+            src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1100&q=85&fm=webp&fit=crop&crop=top"
             alt="Ekta — Founder, Selenite Soul"
             className="w-full h-full object-cover object-top scale-110"
           />
@@ -262,7 +261,7 @@ function BrandPhilosophy() {
               >
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-3xl font-light text-[#c8a951]" style={serif}>{p.num}</span>
-                  <span className="text-[#c8a951]/50 text-xs">✦</span>
+                  <span className="text-[#c8a951]/50 text-xs font-mono">•</span>
                 </div>
                 <h3 className="text-lg md:text-xl font-light text-white leading-snug mb-3" style={serif}>{p.title}</h3>
                 <p className="text-xs md:text-sm text-white/75 leading-relaxed mt-auto font-light">{p.body}</p>
@@ -271,15 +270,17 @@ function BrandPhilosophy() {
           })}
         </div>
 
-        {/* Quote */}
+        {/* Pull quote */}
         <motion.div
-          className="mt-16 md:mt-20 border-l border-[#c8a951]/40 pl-8 max-w-3xl"
+          className="mt-16 md:mt-24 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-[#241710]/40 p-6 backdrop-blur-sm"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
         >
-          <p className="text-lg md:text-xl text-white/60 leading-[1.8] mb-5" style={{ ...serif, fontStyle: "italic" }}>
-            "I believe every person carries a cosmic blueprint — encoded in the stars, in numbers, and in the crystals that call to them."
+          <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
+            "I believe every person carries a cosmic blueprint — a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
           </p>
-          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">— Ekta, Founder of Selenite Soul</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">
+            — Ekta, Founder of Selenite Soul
+          </p>
         </motion.div>
       </div>
     </section>
@@ -391,7 +392,7 @@ function NumerologySection() {
               { num: "01", title: "Name Number", desc: "Expression and destiny encoded in your birth name" },
               { num: "02", title: "Life Path", desc: "Your soul's core purpose from your birthdate" },
               { num: "03", title: "Compatibility", desc: "The energetic resonance between two people" },
-            ].map((feat, i) => (
+            ].map((feat) => (
               <motion.div key={feat.num} className="flex gap-5 items-start group cursor-default"
                 whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
                 <span className="shrink-0 text-4xl text-[#e0cdb8] leading-none select-none group-hover:text-[#c8a951]/50 transition-colors" style={serif}>{feat.num}</span>
@@ -433,7 +434,7 @@ function NumerologySection() {
           >
             <div className="flex items-center justify-between mb-6 border-b border-[#c8a951]/30 pb-4">
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951]">Pythagorean System</span>
-              <span className="text-[#c8a951] text-xs">✦</span>
+              <span className="text-[#c8a951]/70 text-xs font-mono">•</span>
             </div>
 
             <div className="grid grid-cols-9 mb-6 bg-[#160c07]/60 border border-[#c8a951]/20 p-2 rounded-sm">
@@ -542,7 +543,7 @@ function YogaSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-y divide-[#e8d9cf] border border-[#e8d9cf]">
-          {yogas.map((yoga, i) => {
+          {yogas.map((yoga) => {
             const { ref, handleMouseMove, handleMouseLeave } = useTilt(5);
             return (
               <div
@@ -594,7 +595,7 @@ function CrystalsSection() {
 
           {/* Animated stats */}
           <div className="cr-reveal flex gap-8 mb-10 pb-10 border-b border-white/10">
-            {[["222+", "Unique Products"], ["100%", "Natural & Tested"], ["✦", "Full Moon Energised"]].map(([num, label]) => (
+            {[["222+", "Unique Products"], ["100%", "Natural & Tested"], ["Full Moon", "Energised"]].map(([num, label]) => (
               <motion.div key={label} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
                 <p className="text-2xl text-[#c8a951] font-light" style={serif}>{num}</p>
                 <p className="text-[9px] text-white/35 uppercase tracking-widest mt-0.5">{label}</p>
@@ -655,7 +656,7 @@ function TarotSection() {
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(20,8,16,0.2) 0%, rgba(20,8,16,0.94) 100%)" }} />
 
           {/* Floating tarot card shapes */}
-          {["♥","★","☽","✦"].map((sym, i) => (
+          {["♥","◈","☽","♦"].map((sym, i) => (
             <motion.div key={i}
               className="absolute pointer-events-none select-none"
               style={{ top: `${15 + i * 18}%`, left: `${10 + i * 5}%` }}

@@ -14,8 +14,8 @@ const ektaPicks = products.filter(p =>
 ).slice(0, 12);
 
 const tabs = [
-  { id: "new",       label: "New Arrivals",      icon: "✦",  products: newArrivals.slice(0, 14)  },
-  { id: "best",      label: "Bestsellers",        icon: "★",  products: bestSellers.slice(0, 14)  },
+  { id: "new",       label: "New Arrivals",      icon: "•",  products: newArrivals.slice(0, 14)  },
+  { id: "best",      label: "Bestsellers",        icon: "◈",  products: bestSellers.slice(0, 14)  },
   { id: "ekta",      label: "Ekta's Picks",       icon: "♥",  products: ektaPicks                 },
 ];
 

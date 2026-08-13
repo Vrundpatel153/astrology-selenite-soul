@@ -132,7 +132,7 @@ export default function HeroCarousel() {
                         className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.35em] mb-3 md:mb-5"
                         style={{ color: slide.accent }}
                       >
-                        ✦ {slide.eyebrow}
+                        — {slide.eyebrow}
                       </motion.p>
                       <motion.h2
                         initial={{ opacity: 0, y: 22 }}

@@ -847,7 +847,7 @@ export default function Kundali() {
                 <div>
                   <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#e8d9cf]">
                     <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">{item.tag}</span>
-                    <span className="text-[#c8a951] text-xs group-hover:scale-125 transition-transform">✦</span>
+                    <span className="text-[#c8a951] text-xs group-hover:scale-125 transition-transform">◈</span>
                   </div>
                   <h3 className="font-serif text-[#2a1f1a] text-xl font-normal mb-3 group-hover:text-[#a5762a] transition-colors">{item.title}</h3>
                   <p className="text-xs md:text-sm text-[#4a3020]/80 leading-relaxed font-light">{item.desc}</p>
