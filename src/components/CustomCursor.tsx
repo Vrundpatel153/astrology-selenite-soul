@@ -1,173 +1,174 @@
 "use client";
 /**
- * Selenite Soul — Celestial Orbit Cursor
- * A bespoke, ultra-luxury mouse cursor featuring a smooth fluid trailing orbit,
- * rotating celestial crescent moon accent, dynamic shape morphing, and magnetic physics.
+ * Selenite Soul — Ultra-Responsive Luxury Cursor
+ * A fast, hardware-accelerated, unified celestial cursor that tracks tightly
+ * with zero lag separation, fluid interactive hover morphs, and subtle gold aura.
  */
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type CursorState = "default" | "hover" | "view" | "drag" | "text";
-
-function lerp(a: number, b: number, n: number) {
-  return (1 - n) * a + n * b;
-}
+type CursorState = "default" | "hover" | "view" | "drag" | "text" | "hidden";
 
 export default function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+
   const [state, setState] = useState<CursorState>("default");
-  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
-  const pos = useRef({ x: -100, y: -100 });
-  const targetPos = useRef({ x: -100, y: -100 });
-  const vel = useRef({ x: 0, y: 0 });
+  // Position state (tight, instantaneous + smooth outer ring)
+  const mouse = useRef({ x: -100, y: -100 });
+  const ringPos = useRef({ x: -100, y: -100 });
   const rafId = useRef<number>(0);
 
   useEffect(() => {
-    // Only run on devices with fine pointer (mouse)
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    // Disable on touch screens
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
     if (isTouch) return;
 
     document.documentElement.style.cursor = "none";
 
     const onMouseMove = (e: MouseEvent) => {
-      targetPos.current = { x: e.clientX, y: e.clientY };
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+      if (!isVisible) setIsVisible(true);
 
+      // Instant inner dot placement
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      }
+
+      // Check hover targets
       const el = document.elementFromPoint(e.clientX, e.clientY);
       if (!el) return;
 
       if (el.closest("[data-cursor='drag']")) {
         setState("drag");
-        setIsHovered(true);
         return;
       }
-      if (el.closest("[data-cursor='view']") || el.closest("img")) {
+      if (el.closest("[data-cursor='view']") || (el.closest("img") && !el.closest("header, nav"))) {
         setState("view");
-        setIsHovered(true);
         return;
       }
       if (el.closest("a, button, [role='button'], [data-cursor='hover'], input[type='submit']")) {
         setState("hover");
-        setIsHovered(true);
         return;
       }
       if (el.closest("input, textarea, [contenteditable]")) {
         setState("text");
-        setIsHovered(false);
         return;
       }
       setState("default");
-      setIsHovered(false);
+    };
+
+    const onMouseLeave = () => {
+      setIsVisible(false);
+      setState("hidden");
+    };
+
+    const onMouseEnter = () => {
+      setIsVisible(true);
+      setState("default");
     };
 
     const onClick = (e: MouseEvent) => {
       const id = Date.now();
-      setRipples(r => [...r, { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => setRipples(r => r.filter(x => x.id !== id)), 800);
+      setRipples(r => [...r.slice(-2), { id, x: e.clientX, y: e.clientY }]);
+      setTimeout(() => setRipples(r => r.filter(x => x.id !== id)), 600);
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mouseenter", onMouseEnter);
     window.addEventListener("click", onClick);
 
-    // Smooth fluid lerp & velocity stretch
-    const animate = () => {
-      const prevX = pos.current.x;
-      const prevY = pos.current.y;
+    // High-performance tight ring follow (lerp = 0.45 for immediate responsiveness)
+    const render = () => {
+      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.45;
+      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.45;
 
-      pos.current.x = lerp(pos.current.x, targetPos.current.x, 0.16);
-      pos.current.y = lerp(pos.current.y, targetPos.current.y, 0.16);
-
-      vel.current.x = pos.current.x - prevX;
-      vel.current.y = pos.current.y - prevY;
-
-      const speed = Math.sqrt(vel.current.x * vel.current.x + vel.current.y * vel.current.y);
-      const angle = Math.atan2(vel.current.y, vel.current.x) * (180 / Math.PI);
-      const stretch = Math.min(speed * 0.015, 0.35);
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${targetPos.current.x}px, ${targetPos.current.y}px) translate(-50%, -50%)`;
-      }
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translate(-50%, -50%) rotate(${angle}deg) scale(${1 + stretch}, ${1 - stretch})`;
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
       }
 
-      rafId.current = requestAnimationFrame(animate);
+      rafId.current = requestAnimationFrame(render);
     };
-    rafId.current = requestAnimationFrame(animate);
+    rafId.current = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("mouseenter", onMouseEnter);
       window.removeEventListener("click", onClick);
       cancelAnimationFrame(rafId.current);
       document.documentElement.style.cursor = "";
     };
-  }, []);
+  }, [isVisible]);
+
+  if (typeof window !== "undefined" && (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window)) {
+    return null;
+  }
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden">
-      {/* Luminous Inner Celestial Dot */}
+    <div
+      ref={cursorRef}
+      className={`pointer-events-none fixed inset-0 z-[999999] transition-opacity duration-200 ${
+        isVisible && state !== "hidden" ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {/* Precision Inner Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 rounded-full transition-all duration-200"
+        className="fixed top-0 left-0 rounded-full transition-[width,height,background-color] duration-150 ease-out"
         style={{
-          width: state === "text" ? 2 : state === "hover" ? 8 : 6,
-          height: state === "text" ? 22 : state === "hover" ? 8 : 6,
-          background: state === "text" ? "#c8a951" : "#d4af37",
-          boxShadow: state === "text" ? "0 0 10px rgba(200,169,81,0.8)" : "0 0 12px rgba(212,175,55,0.6)",
+          width: state === "text" ? 2 : state === "hover" ? 6 : 5,
+          height: state === "text" ? 20 : state === "hover" ? 6 : 5,
+          backgroundColor: state === "text" ? "#c8a951" : "#d4af37",
+          boxShadow: state === "text" ? "0 0 8px rgba(200,169,81,0.9)" : "0 0 10px rgba(212,175,55,0.7)",
           borderRadius: state === "text" ? "1px" : "50%",
+          willChange: "transform",
         }}
       />
 
-      {/* Outer Orbit Ring with Rotating Crescent & Diamond Accents */}
+      {/* Responsive Tight Outer Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 rounded-full flex items-center justify-center transition-all duration-300"
+        className="fixed top-0 left-0 rounded-full flex items-center justify-center transition-[width,height,border-color,background-color] duration-200 ease-out"
         style={{
-          width: state === "view" ? 80 : state === "drag" ? 70 : state === "hover" ? 54 : 38,
-          height: state === "view" ? 80 : state === "drag" ? 70 : state === "hover" ? 54 : 38,
-          border: `1px solid ${state === "hover" ? "rgba(200,169,81,0.85)" : state === "view" ? "rgba(200,169,81,0.9)" : "rgba(200,169,81,0.35)"}`,
-          background: state === "view" ? "rgba(30, 20, 16, 0.85)" : state === "drag" ? "rgba(200,169,81,0.12)" : "transparent",
+          width: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
+          height: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
+          border: state === "text" ? "none" : `1.2px solid ${state === "hover" ? "rgba(200,169,81,0.85)" : state === "view" ? "rgba(200,169,81,0.9)" : "rgba(200,169,81,0.4)"}`,
+          backgroundColor: state === "view" ? "rgba(26,16,11,0.88)" : state === "hover" ? "rgba(200,169,81,0.08)" : state === "drag" ? "rgba(200,169,81,0.14)" : "transparent",
           backdropFilter: state === "view" ? "blur(4px)" : "none",
+          boxShadow: state === "hover" ? "0 0 16px rgba(200,169,81,0.25)" : "none",
+          willChange: "transform",
         }}
       >
-        {/* Rotating Crescent Moon on Orbit Rim */}
-        <motion.div
-          className="absolute inset-0 rounded-full pointer-events-none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-        >
-          {/* Top Orbit Diamond */}
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#c8a951] rotate-45 opacity-80" />
-          {/* Subtle Crescent Arc */}
-          <div className="absolute top-1 right-2 w-2 h-2 rounded-full border-r-2 border-t-2 border-[#c8a951] opacity-70" />
-        </motion.div>
-
-        {/* Dynamic Label for Custom States */}
         {state === "view" && (
-          <span className="text-[9px] font-bold tracking-[0.22em] text-[#c8a951] uppercase">
+          <span className="text-[8px] font-bold tracking-[0.2em] text-[#c8a951] uppercase select-none">
             VIEW
           </span>
         )}
         {state === "drag" && (
-          <span className="text-[10px] font-medium tracking-widest text-[#c8a951]">
+          <span className="text-[9px] font-medium tracking-widest text-[#c8a951] select-none">
             ⟨ DRAG ⟩
           </span>
         )}
       </div>
 
-      {/* Starlight Click Ripples */}
+      {/* Subtle Instant Click Ripple */}
       <AnimatePresence>
         {ripples.map(r => (
           <motion.div
             key={r.id}
-            className="fixed rounded-full border border-[#c8a951]/60 pointer-events-none"
+            className="fixed rounded-full border border-[#c8a951]/70 pointer-events-none"
             style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
-            initial={{ width: 4, height: 4, opacity: 0.9 }}
-            animate={{ width: 90, height: 90, opacity: 0 }}
+            initial={{ width: 6, height: 6, opacity: 0.8 }}
+            animate={{ width: 52, height: 52, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
           />
         ))}
       </AnimatePresence>
