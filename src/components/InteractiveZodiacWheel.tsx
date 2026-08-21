@@ -277,13 +277,11 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
           {/* Left: Concentric 3D Celestial Wheel Illustration */}
           <div className="relative flex items-center justify-center p-4">
             <div className="relative w-[280px] sm:w-[360px] aspect-square rounded-full overflow-hidden border border-[#c8a951]/40 shadow-2xl bg-[#080406]">
-              {/* Rotating Constellation Mandala Wheel */}
-              <motion.img
+              {/* Rotating Constellation Mandala Wheel (Smooth Continuous Vinyl Spin) */}
+              <img
                 src="/zodiac-wheel-artwork.webp"
                 alt="Zodiac Constellations Wheel"
-                className="w-full h-full object-cover"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                className="w-full h-full object-cover celestial-disc-spin"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
             </div>

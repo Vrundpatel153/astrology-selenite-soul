@@ -3,6 +3,16 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+@keyframes celestial-disc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.celestial-disc-spin {
+  animation: celestial-disc-spin 50s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
 @keyframes kundali-spin { to { transform: rotate(360deg); } }
 @keyframes kundali-spin-rev { to { transform: rotate(-360deg); } }
 .kundali-spin { transform-origin: 0px 0px; transform-box: view-box; animation: kundali-spin 120s linear infinite; }

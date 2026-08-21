@@ -218,20 +218,15 @@ function BrandPhilosophy() {
 
   return (
     <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#0c070a]">
-      {/* Background Sacred Geometric Radial Ambience */}
+      {/* High-Resolution Luxury Sacred Geometry Artwork Backdrop */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px] bg-[#c8a951]/10" />
-      </div>
-
-      {/* Crisp Mathematical Sacred Geometry SVG Mandala Rings */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-15 hidden lg:block">
-        <svg width="600" height="600" viewBox="0 0 600 600" fill="none">
-          <circle cx="300" cy="300" r="280" stroke="#c8a951" strokeWidth="0.8" strokeDasharray="4 8" className="kundali-spin-slow" />
-          <circle cx="300" cy="300" r="220" stroke="#c8a951" strokeWidth="0.8" className="kundali-spin-slow-rev" />
-          <circle cx="300" cy="300" r="160" stroke="#c8a951" strokeWidth="1" strokeDasharray="3 6" className="kundali-spin-med" />
-          <polygon points="300,140 438,380 162,380" stroke="#c8a951" strokeWidth="0.8" opacity="0.6" />
-          <polygon points="300,460 438,220 162,220" stroke="#c8a951" strokeWidth="0.8" opacity="0.6" />
-        </svg>
+        <img
+          src="/brand-philosophy-luxury.webp"
+          alt="Sacred Geometry Sri Yantra"
+          className="w-full h-full object-cover object-center opacity-40 scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0c070a] via-transparent to-[#0c070a]" />
+        <div className="absolute inset-0 bg-[#0c070a]/50" />
       </div>
 
       <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
@@ -301,32 +296,25 @@ function BrandPhilosophy() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. KUNDALI — Crisp Celestial Midnight with Golden SVG Mandala
+// 4. KUNDALI — Luxury Vedic Birth Chart & Astrological Mandala
 // ─────────────────────────────────────────────────────────────────────────────
 function KundaliSection() {
+  const bgRef = useParallax(0.12);
   const sectionRef = useGSAPReveal({ staggerSelector: ".k-reveal", staggerDelay: 0.12, start: "top 80%" });
   const headRef = useSplitReveal();
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[580px] lg:min-h-[700px] flex items-center bg-[#090407]">
-      {/* Background Ambient Celestial Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-[160px] bg-[#c8a951]/15" />
-      </div>
-
-      {/* Crisp Mathematical Mandala SVG rings */}
-      <div className="absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 pointer-events-none opacity-25">
-        <svg width="460" height="460" viewBox="0 0 460 460" fill="none">
-          <circle cx="230" cy="230" r="220" stroke="#c8a951" strokeWidth="0.8" strokeDasharray="4 10" className="kundali-spin-slow" />
-          <circle cx="230" cy="230" r="180" stroke="#c8a951" strokeWidth="0.8" className="kundali-spin-slow-rev" />
-          <circle cx="230" cy="230" r="140" stroke="#c8a951" strokeWidth="0.8" strokeDasharray="3 8" className="kundali-spin-med" />
-          <circle cx="230" cy="230" r="90" stroke="#c8a951" strokeWidth="1.2" className="kundali-spin-med-rev" />
-          <circle cx="230" cy="230" r="6" fill="#c8a951" />
-          {Array.from({ length: 12 }).map((_, i) => {
-            const a = (i * 30 * Math.PI) / 180;
-            return <line key={i} x1={230 + 95 * Math.cos(a)} y1={230 + 95 * Math.sin(a)} x2={230 + 215 * Math.cos(a)} y2={230 + 215 * Math.sin(a)} stroke="#c8a951" strokeWidth="0.6" opacity="0.5" />;
-          })}
-        </svg>
+    <section ref={sectionRef} className="relative overflow-hidden min-h-[600px] lg:min-h-[720px] flex items-center bg-[#090407]">
+      {/* High-Resolution Luxury Vedic Astrology Mandala Artwork Backdrop */}
+      <div className="absolute inset-0 scale-105 pointer-events-none">
+        <img
+          ref={bgRef as any}
+          src="/kundali-blueprint-luxury.webp"
+          alt="Vedic Kundali Celestial Mandala"
+          className="w-full h-full object-cover object-right lg:object-center opacity-55"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#090407] via-[#090407]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#090407] via-transparent to-[#090407]/60" />
       </div>
 
       <div className="relative z-10 px-6 md:px-14 lg:px-20 py-16 md:py-24 max-w-[860px]">
