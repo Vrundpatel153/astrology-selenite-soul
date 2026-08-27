@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Compass, Shield, Heart, Sparkles, Orbit } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { ZodiacGlyph } from "./ZodiacGlyphs";
 
@@ -34,31 +34,31 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Mars",
     symbol: "♈",
     color: "#e07a52",
-    bgRgba: "rgba(224,122,82,0.14)",
-    keywords: ["Pioneer", "Courage", "Drive", "Passion"],
+    bgRgba: "rgba(224,122,82,0.12)",
+    keywords: ["Initiation", "Courage", "Vitality", "Passion"],
     crystal: "Red Carnelian & Bloodstone",
-    crystalDesc: "Channels fiery passion into grounded willpower and protects vital life force.",
-    lightTraits: ["Fearless initiative", "Natural leadership", "Authentic enthusiasm"],
-    shadowTraits: ["Impatience", "Impulsiveness", "Burnout risk"],
-    summary: "The fiery pioneer of the zodiac, Aries initiates action with unstoppable vitality and bold spiritual courage.",
+    crystalDesc: "Channels fierce creative willpower, removes hesitation, and protects personal energy.",
+    lightTraits: ["Fearless initiative", "Unyielding optimism", "Authentic leadership"],
+    shadowTraits: ["Impatience", "Impulsive anger", "Burnout from over-assertion"],
+    summary: "As the first sign of the zodiac wheel, Aries carries the raw spark of universal creation. You are born to break frontiers and initiate bold spiritual beginnings.",
     compatibleSigns: ["Leo", "Sagittarius", "Gemini", "Aquarius"],
   },
   {
     sign: "Taurus",
-    archetype: "The Celestial Bull",
+    archetype: "The Sacred Earth Anchor",
     dates: "Apr 20 – May 20",
     element: "Earth",
     modality: "Fixed",
     ruler: "Venus",
     symbol: "♉",
     color: "#7aad78",
-    bgRgba: "rgba(122,173,120,0.14)",
-    keywords: ["Grounded", "Sensual", "Steadfast", "Abundant"],
+    bgRgba: "rgba(122,173,120,0.12)",
+    keywords: ["Abundance", "Devotion", "Stability", "Sensuality"],
     crystal: "Rose Quartz & Emerald",
-    crystalDesc: "Opens the heart chakra to unconditional love and attracts grounded prosperity.",
-    lightTraits: ["Unshakable loyalty", "Artistic appreciation", "Manifestation mastery"],
-    shadowTraits: ["Resistance to change", "Stubbornness", "Over-attachment"],
-    summary: "Rooted in the fertile earth, Taurus cultivates enduring beauty, material abundance, and sacred loyalty.",
+    crystalDesc: "Deepens heart-chakra grounding, invites material luxury, and fosters unconditional self-love.",
+    lightTraits: ["Steadfast loyalty", "Appreciation for beauty", "Granite resilience"],
+    shadowTraits: ["Possessiveness", "Resistance to change", "Material overindulgence"],
+    summary: "Rooted deeply in the sanctuary of Mother Earth, Taurus cultivates tangible abundance, sensory refinement, and unshakeable inner peace.",
     compatibleSigns: ["Virgo", "Capricorn", "Cancer", "Pisces"],
   },
   {
@@ -70,31 +70,31 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Mercury",
     symbol: "♊",
     color: "#c8a951",
-    bgRgba: "rgba(200,169,81,0.14)",
-    keywords: ["Curious", "Brilliant", "Adaptable", "Communicative"],
-    crystal: "Citrine & Clear Quartz",
-    crystalDesc: "Clarifies mental chatter and activates witty, magnetic expression.",
-    lightTraits: ["Mental agility", "Infectious curiosity", "Bridging polarities"],
+    bgRgba: "rgba(200,169,81,0.12)",
+    keywords: ["Intellect", "Curiosity", "Duality", "Transmission"],
+    crystal: "Tiger Eye & Citrine",
+    crystalDesc: "Synthesizes rapid intellectual streams, balances dual perspectives, and clarifies nervous system chatter.",
+    lightTraits: ["Quick-witted brilliance", "Charming adaptability", "Insatiable thirst for learning"],
     shadowTraits: ["Scattered focus", "Superficiality", "Overthinking"],
-    summary: "The cosmic messenger bridging dimensions, Gemini weaves curiosity, sparkling wit, and multifaceted ideas.",
+    summary: "The cosmic messenger bridging dimensions, Gemini weaves curiosity, sparkling wit, and multifaceted wisdom to connect disparate ideas.",
     compatibleSigns: ["Libra", "Aquarius", "Aries", "Leo"],
   },
   {
     sign: "Cancer",
-    archetype: "The Sacred Crab",
+    archetype: "The Lunar Guardian",
     dates: "Jun 21 – Jul 22",
     element: "Water",
     modality: "Cardinal",
     ruler: "Moon",
     symbol: "♋",
     color: "#8fa8d0",
-    bgRgba: "rgba(143,168,208,0.14)",
-    keywords: ["Nurturing", "Intuitive", "Empathic", "Sanctuary"],
+    bgRgba: "rgba(143,168,208,0.12)",
+    keywords: ["Intuition", "Sanctuary", "Empathy", "Nourishment"],
     crystal: "Rainbow Moonstone & Selenite",
-    crystalDesc: "Harmonizes emotional tides and shields sensitive psychic boundaries.",
-    lightTraits: ["Profound empathy", "Sacred devotion", "Psychic receptivity"],
-    shadowTraits: ["Emotional defensiveness", "Clinging to past", "Moody withdrawal"],
-    summary: "Guided by the tides of the Moon, Cancer creates sanctuary, protective emotional depth, and unconditional care.",
+    crystalDesc: "Calms psychic tides, cleanses ancestral memory, and creates an energetic shield around sensitive empathic hearts.",
+    lightTraits: ["Profound psychic intuition", "Unconditional nurturing", "Emotional depth"],
+    shadowTraits: ["Defensive moodiness", "Clinging to past wounds", "Martyr complex"],
+    summary: "Guided by the luminous phases of the Moon, Cancer holds the sacred chalice of ancestral memory, emotional healing, and maternal devotion.",
     compatibleSigns: ["Scorpio", "Pisces", "Taurus", "Virgo"],
   },
   {
@@ -106,13 +106,13 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Sun",
     symbol: "♌",
     color: "#e07a52",
-    bgRgba: "rgba(224,122,82,0.14)",
-    keywords: ["Radiant", "Generous", "Magnetic", "Creative"],
-    crystal: "Sunstone & Tiger Eye",
-    crystalDesc: "Ignites sovereign self-expression, creative radiance, and golden abundance.",
-    lightTraits: ["Warm generosity", "Magnetic charisma", "Noble authenticity"],
-    shadowTraits: ["Pride", "Craving external validation", "Domineering"],
-    summary: "Radiating the pure golden warmth of the Sun, Leo leads with expansive generosity, artistic flair, and genuine royalty.",
+    bgRgba: "rgba(224,122,82,0.12)",
+    keywords: ["Radiance", "Sovereignty", "Generosity", "Artistry"],
+    crystal: "Sunstone & Pyrite",
+    crystalDesc: "Amplifies magnetic solar charisma, banishes imposter feelings, and radiates golden abundance.",
+    lightTraits: ["Magnanimous heart", "Inspiring creative vitality", "Unwavering nobility"],
+    shadowTraits: ["Need for validation", "Prideful arrogance", "Dramatic overreaction"],
+    summary: "Radiating the golden center of our solar system, Leo reminds humanity of our divine inner child, artistic fire, and open-hearted sovereignty.",
     compatibleSigns: ["Aries", "Sagittarius", "Gemini", "Libra"],
   },
   {
@@ -124,67 +124,67 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Mercury",
     symbol: "♍",
     color: "#7aad78",
-    bgRgba: "rgba(122,173,120,0.14)",
-    keywords: ["Devoted", "Discerning", "Pure", "Healing"],
-    crystal: "Amazonite & Green Aventurine",
-    crystalDesc: "Calms perfectionist tension and channels divine service with effortless ease.",
-    lightTraits: ["Sacred precision", "Practical healing wisdom", "Selfless devotion"],
-    shadowTraits: ["Harsh self-criticism", "Perfectionist paralysis", "Micro-managing"],
-    summary: "Virgo refines matter into spirit through devoted craftsmanship, holistic discernment, and pure healing service.",
+    bgRgba: "rgba(122,173,120,0.12)",
+    keywords: ["Discernment", "Purity", "Service", "Mastery"],
+    crystal: "Amazonite & Green Jade",
+    crystalDesc: "Soothes mental tension, aligns high standards with self-compassion, and activates sacred earth healing.",
+    lightTraits: ["Impeccable discernment", "Devoted selfless service", "Analytical precision"],
+    shadowTraits: ["Chronic self-criticism", "Perfectionist paralysis", "Worry addiction"],
+    summary: "Dedicated to refining raw matter into spiritual gold, Virgo embodies the sacred priestess of harvest, bodily healing, and daily devotional craft.",
     compatibleSigns: ["Taurus", "Capricorn", "Cancer", "Scorpio"],
   },
   {
     sign: "Libra",
-    archetype: "The Cosmic Balancer",
+    archetype: "The Cosmic Scale",
     dates: "Sep 23 – Oct 22",
     element: "Air",
     modality: "Cardinal",
     ruler: "Venus",
     symbol: "♎",
     color: "#c8a951",
-    bgRgba: "rgba(200,169,81,0.14)",
-    keywords: ["Harmony", "Grace", "Diplomacy", "Beauty"],
-    crystal: "Lapis Lazuli & Rose Quartz",
-    crystalDesc: "Restores inner equilibrium, clears hesitation, and attracts harmonious soul connections.",
-    lightTraits: ["Aesthetic mastery", "Diplomatic justice", "Radiant elegance"],
-    shadowTraits: ["Indecision", "People-pleasing", "Conflict avoidance"],
-    summary: "The architect of peace and beauty, Libra seeks divine equilibrium, refined aesthetics, and conscious relationship.",
+    bgRgba: "rgba(200,169,81,0.12)",
+    keywords: ["Harmonic Balance", "Beauty", "Diplomacy", "Sacred Union"],
+    crystal: "Lapis Lazuli & Opal",
+    crystalDesc: "Empowers clear boundary communication, enhances aesthetic intuition, and balances relationship dynamics.",
+    lightTraits: ["Exquisite aesthetic eye", "Graceful mediator", "Commitment to justice"],
+    shadowTraits: ["Indecisiveness", "Conflict avoidance", "Losing identity in partners"],
+    summary: "Seeking the divine mathematics of harmony, Libra weighs all perspectives to restore universal balance, refined beauty, and ethical peace.",
     compatibleSigns: ["Gemini", "Aquarius", "Leo", "Sagittarius"],
   },
   {
     sign: "Scorpio",
-    archetype: "The Alchemical Phoenix",
+    archetype: "The Mystic Phoenix",
     dates: "Oct 23 – Nov 21",
     element: "Water",
     modality: "Fixed",
     ruler: "Mars / Pluto",
     symbol: "♏",
     color: "#8fa8d0",
-    bgRgba: "rgba(143,168,208,0.14)",
-    keywords: ["Transformative", "Mystic", "Fierce", "Rebirth"],
-    crystal: "Black Obsidian & Labradorite",
-    crystalDesc: "Transmutes deep shadow into spiritual gold and grants psychic protection.",
-    lightTraits: ["Unflinching truth-seeking", "Karmic regeneration", "Profound loyalty"],
-    shadowTraits: ["Secretiveness", "Control instincts", "Obsession"],
-    summary: "Plunging fearlessly into the occult depths, Scorpio masters death and rebirth to rise like the transcendent Phoenix.",
+    bgRgba: "rgba(143,168,208,0.12)",
+    keywords: ["Alchemy", "Rebirth", "Depth", "Kundalini"],
+    crystal: "Black Obsidian & Malachite",
+    crystalDesc: "Facilitates deep shadow integration, psychic cord-cutting, and powerful kundalini awakening.",
+    lightTraits: ["Fearless shadow alchemy", "Unshakeable loyalty", "Profound magnetism"],
+    shadowTraits: ["Paranoid secrecy", "Obsessive control", "Vindictive holding of grudges"],
+    summary: "Diving fearlessly into the unseen depths of the psyche, Scorpio transforms dense emotional lead into transcendent spiritual gold through cyclic rebirth.",
     compatibleSigns: ["Cancer", "Pisces", "Virgo", "Capricorn"],
   },
   {
     sign: "Sagittarius",
-    archetype: "The Cosmic Seeker",
+    archetype: "The Cosmic Archer",
     dates: "Nov 22 – Dec 21",
     element: "Fire",
     modality: "Mutable",
     ruler: "Jupiter",
     symbol: "♐",
     color: "#e07a52",
-    bgRgba: "rgba(224,122,82,0.14)",
-    keywords: ["Expansive", "Philosophical", "Free", "Visionary"],
+    bgRgba: "rgba(224,122,82,0.12)",
+    keywords: ["Truth", "Expansion", "Philosophy", "Adventure"],
     crystal: "Turquoise & Sodalite",
-    crystalDesc: "Expands higher consciousness, protects on sacred travels, and anchors philosophical truth.",
-    lightTraits: ["Boundless optimism", "Spiritual questing", "Philosophical wisdom"],
-    shadowTraits: ["Restlessness", "Dogmatism", "Tactless bluntness"],
-    summary: "Aiming its golden arrow at the infinite horizon, Sagittarius seeks truth across foreign philosophies, cosmology, and freedom.",
+    crystalDesc: "Inspires expansive philosophical wisdom, attracts lucky synchronicities, and protects spiritual wanderers.",
+    lightTraits: ["Boundless optimism", "Visionary philosophy", "Joyous thirst for freedom"],
+    shadowTraits: ["Preachiness", "Reckless escapism", "Blunt insensitivity"],
+    summary: "Aiming its golden arrow at the galactic core, Sagittarius searches across continents and spiritual doctrines for universal, unifying truth.",
     compatibleSigns: ["Aries", "Leo", "Libra", "Aquarius"],
   },
   {
@@ -196,7 +196,7 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Saturn",
     symbol: "♑",
     color: "#7aad78",
-    bgRgba: "rgba(122,173,120,0.14)",
+    bgRgba: "rgba(122,173,120,0.12)",
     keywords: ["Mastery", "Legacy", "Disciplined", "Sovereign"],
     crystal: "Garnet & Smoky Quartz",
     crystalDesc: "Grounds ambitious milestones and dissolves fatigue during monumental endeavors.",
@@ -214,7 +214,7 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Saturn / Uranus",
     symbol: "♒",
     color: "#c8a951",
-    bgRgba: "rgba(200,169,81,0.14)",
+    bgRgba: "rgba(200,169,81,0.12)",
     keywords: ["Visionary", "Liberating", "Innovative", "Cosmic"],
     crystal: "Amethyst & Fluorite",
     crystalDesc: "Channelling future-oriented blueprints, expanding mental bandwidth, and dispelling stagnation.",
@@ -232,7 +232,7 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
     ruler: "Jupiter / Neptune",
     symbol: "♓",
     color: "#8fa8d0",
-    bgRgba: "rgba(143,168,208,0.14)",
+    bgRgba: "rgba(143,168,208,0.12)",
     keywords: ["Transcendent", "Compassionate", "Dreamer", "Mystic"],
     crystal: "Aquamarine & Lepidolite",
     crystalDesc: "Anchors gentle emotional peace, amplifies spiritual dreams, and heals psychic fatigue.",
@@ -260,7 +260,7 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
               className={`flex items-center gap-1.5 px-3 py-2 text-[10px] uppercase font-bold tracking-[0.18em] transition-all whitespace-nowrap rounded-sm border ${
                 isActive
                   ? "bg-[#c8a951] text-[#0a0508] border-[#c8a951] shadow-lg shadow-[#c8a951]/20 scale-105"
-                  : "bg-[#140c12]/80 text-white/70 border-[#c8a951]/20 hover:border-[#c8a951]/60 hover:text-white"
+                  : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951] hover:text-[#a5762a]"
               }`}
               data-cursor="hover"
             >
@@ -271,28 +271,28 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
         })}
       </div>
 
-      {/* Main Celestial Wheel Stage - Deep Obsidian Glass */}
-      <div className="bg-[#10090e]/95 border border-[#c8a951]/35 p-6 md:p-12 rounded-sm shadow-2xl backdrop-blur-md">
-        <div className="grid grid-cols-1 lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center">
+      {/* Main Celestial Wheel Stage - Luxury Light Alabaster Glass */}
+      <div className="bg-white/95 border border-[#c8a951]/35 p-5 sm:p-8 md:p-12 rounded-sm shadow-2xl backdrop-blur-md">
+        <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] xl:grid-cols-[440px_1fr] gap-8 sm:gap-10 lg:gap-14 items-center">
           {/* Left: Concentric 3D Celestial Wheel Illustration */}
-          <div className="relative flex items-center justify-center p-4">
-            <div className="relative w-[280px] sm:w-[360px] aspect-square rounded-full overflow-hidden border border-[#c8a951]/40 shadow-2xl bg-[#080406]">
+          <div className="relative flex items-center justify-center p-2 sm:p-4">
+            <div className="relative w-[230px] sm:w-[300px] md:w-[360px] aspect-square rounded-full overflow-hidden border border-[#c8a951]/40 shadow-2xl bg-[#fcf8f4]">
               {/* Rotating Constellation Mandala Wheel (Smooth Continuous Vinyl Spin) */}
               <img
                 src="/zodiac-wheel-artwork.webp"
                 alt="Zodiac Constellations Wheel"
                 className="w-full h-full object-cover celestial-disc-spin"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-white/20 pointer-events-none" />
             </div>
 
             {/* Glowing Center Badge */}
             <div
-              className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#0e070c]/95 border-2 border-[#c8a951] flex flex-col items-center justify-center shadow-2xl backdrop-blur-md"
-              style={{ boxShadow: `0 0 35px ${activeSign.color}60` }}
+              className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-[#fdf8f4]/95 border-2 border-[#c8a951] flex flex-col items-center justify-center shadow-xl backdrop-blur-md"
+              style={{ boxShadow: `0 0 25px ${activeSign.color}40` }}
             >
-              <ZodiacGlyph sign={activeSign.sign} size={36} strokeWidth={2} />
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mt-0.5">
+              <ZodiacGlyph sign={activeSign.sign} size={28} strokeWidth={2} className="sm:w-8 sm:h-8" />
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mt-0.5">
                 {activeSign.sign}
               </span>
             </div>
@@ -301,78 +301,78 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
           {/* Right: Detailed Cosmological Dossier */}
           <div>
             {/* Metadata Pills */}
-            <div className="flex flex-wrap items-center gap-2 mb-4">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-4">
               <span
-                className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 border"
+                className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1 border rounded-full font-semibold"
                 style={{ borderColor: activeSign.color, color: activeSign.color, background: activeSign.bgRgba }}
               >
                 {activeSign.element} Element
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-white/5 border border-white/10 text-white/80">
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1 bg-[#f5ede4] border border-[#e8d9cf] text-[#4a382e] rounded-full">
                 {activeSign.modality} Modality
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-white/5 border border-white/10 text-white/80">
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1 bg-[#f5ede4] border border-[#e8d9cf] text-[#4a382e] rounded-full">
                 Ruler: {activeSign.ruler}
               </span>
             </div>
 
             <h3
-              className="text-4xl sm:text-5xl font-light text-white mb-1"
+              className="text-2xl sm:text-4xl md:text-5xl font-light text-[#2a1f1a] mb-1"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
-              {activeSign.sign} · <em className="italic text-[#c8a951]">{activeSign.archetype}</em>
+              {activeSign.sign} · <em className="italic text-[#a5762a]">{activeSign.archetype}</em>
             </h3>
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-6">
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-4 sm:mb-6">
               {activeSign.dates}
             </p>
 
-            <p className="text-sm md:text-base text-white/80 leading-relaxed mb-6 font-light">
+            <p className="text-xs sm:text-sm md:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
               {activeSign.summary}
             </p>
 
             {/* Light vs Shadow Dual Nature */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="p-4 bg-[#0a0508]/80 border border-[#c8a951]/20 rounded-sm">
-                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#7aad78] mb-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+              <div className="p-3.5 sm:p-4 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm shadow-sm">
+                <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-[#558253] mb-2 font-semibold">
                   ◈ Radiant Light Archetype
                 </p>
-                <ul className="text-xs text-white/75 space-y-1 font-light">
+                <ul className="text-xs text-[#2a1f1a]/85 space-y-1 font-light">
                   {activeSign.lightTraits.map(t => <li key={t}>• {t}</li>)}
                 </ul>
               </div>
 
-              <div className="p-4 bg-[#0a0508]/80 border border-[#c8a951]/20 rounded-sm">
-                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#e07a52] mb-2">
+              <div className="p-3.5 sm:p-4 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm shadow-sm">
+                <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-[#c05934] mb-2 font-semibold">
                   ◈ Shadow Growth Edge
                 </p>
-                <ul className="text-xs text-white/75 space-y-1 font-light">
+                <ul className="text-xs text-[#2a1f1a]/85 space-y-1 font-light">
                   {activeSign.shadowTraits.map(t => <li key={t}>• {t}</li>)}
                 </ul>
               </div>
             </div>
 
             {/* Prescribed Crystal Ally */}
-            <div className="p-5 bg-[#0a0508]/80 border-l-2 border-[#c8a951] rounded-sm mb-6">
-              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">
+            <div className="p-4 sm:p-5 bg-[#fcf8f4] border-l-2 border-[#c8a951] rounded-sm mb-6 shadow-sm">
+              <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
                 Prescribed Crystal Ally
               </p>
-              <h5 className="text-sm font-semibold text-white mb-1">
+              <h5 className="text-xs sm:text-sm font-semibold text-[#2a1f1a] mb-0.5 sm:mb-1">
                 {activeSign.crystal}
               </h5>
-              <p className="text-xs text-white/70 font-light">
+              <p className="text-xs text-[#4a382e] font-light">
                 {activeSign.crystalDesc}
               </p>
             </div>
 
             {/* Action CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <Link href={`/shop?zodiac=${activeSign.sign.toLowerCase()}`}>
-                <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#0a0508] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Link href={`/shop?zodiac=${activeSign.sign.toLowerCase()}`} className="w-full sm:w-auto">
+                <span className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c8a951] text-[#0a0508] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-md hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
                   Shop {activeSign.sign} Crystals <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </Link>
-              <Link href="/kundali">
-                <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#c8a951] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
+              <Link href="/kundali" className="w-full sm:w-auto">
+                <span className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
                   Calculate Full Kundali Chart
                 </span>
               </Link>

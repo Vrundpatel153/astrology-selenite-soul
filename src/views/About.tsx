@@ -37,12 +37,11 @@ export default function About() {
       <Header />
 
       {/* ── HERO ────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-[#1a0e08]">
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{ backgroundImage: "url(/brand-philosophy-bg.webp)", backgroundSize: "cover", backgroundPosition: "center" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a0e08]/60 via-[#1a0e08]/80 to-[#1a0e08]" />
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
+        {/* Background Ambient Glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[160px] bg-[#c8a951]/15" />
+        </div>
 
         <motion.div
           className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
@@ -52,14 +51,14 @@ export default function About() {
         >
           <div className="flex items-center gap-3 justify-center mb-5">
             <div className="h-px w-10 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951]">The Selenite Soul Sanctuary</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a]">The Selenite Soul Sanctuary</span>
             <div className="h-px w-10 bg-[#c8a951]/60" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-white leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+          <h1 className="text-5xl md:text-7xl font-light text-[#2a1f1a] leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Where Ancient Wisdom<br />
-            <span className="italic text-[#c8a951]">Meets the Modern Soul</span>
+            <span className="italic text-[#a5762a]">Meets the Modern Soul</span>
           </h1>
-          <p className="text-[#fdf8f4]/75 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
+          <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
             Selenite Soul is Ekta's life's devotion — a sacred bridge between Vedic astrology, intuitive Tarot, Pythagorean numerology, and the healing intelligence of crystals.
           </p>
         </motion.div>

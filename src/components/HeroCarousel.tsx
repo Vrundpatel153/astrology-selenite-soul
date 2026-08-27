@@ -24,7 +24,7 @@ const slides = [
     subheading: "Book a one-on-one Tarot session with Ekta — clarity for love, career, and soul.",
     cta: { label: "Book a Reading", href: "/tarot" },
     ctaSecondary: { label: "About Tarot", href: "/tarot#guidance" },
-    overlay: "from-[#1e0a15]/80 via-[#2a1020]/30 to-transparent",
+    overlay: "from-[#2a0e3d]/80 via-[#3d1550]/30 to-transparent",
     accent: "#b07ec8",
   },
   {
@@ -93,7 +93,7 @@ export default function HeroCarousel() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#1e1410]"
+      className="relative w-full overflow-hidden bg-[#fcf8f0]"
       style={{ height: "min(92vh, 860px)", minHeight: "500px" }}
       data-testid="section-hero-carousel"
     >

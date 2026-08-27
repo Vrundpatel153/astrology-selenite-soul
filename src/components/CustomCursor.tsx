@@ -140,19 +140,19 @@ export default function CustomCursor() {
           width: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
           height: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
           border: state === "text" ? "none" : `1.2px solid ${state === "hover" ? "rgba(200,169,81,0.85)" : state === "view" ? "rgba(200,169,81,0.9)" : "rgba(200,169,81,0.4)"}`,
-          backgroundColor: state === "view" ? "rgba(26,16,11,0.88)" : state === "hover" ? "rgba(200,169,81,0.08)" : state === "drag" ? "rgba(200,169,81,0.14)" : "transparent",
-          backdropFilter: state === "view" ? "blur(4px)" : "none",
-          boxShadow: state === "hover" ? "0 0 16px rgba(200,169,81,0.25)" : "none",
+          backgroundColor: state === "view" ? "rgba(253,248,244,0.92)" : state === "hover" ? "rgba(200,169,81,0.12)" : state === "drag" ? "rgba(200,169,81,0.16)" : "transparent",
+          backdropFilter: state === "view" ? "blur(6px)" : "none",
+          boxShadow: state === "hover" ? "0 0 16px rgba(200,169,81,0.3)" : state === "view" ? "0 4px 20px rgba(165,118,42,0.25)" : "none",
           willChange: "transform",
         }}
       >
         {state === "view" && (
-          <span className="text-[8px] font-bold tracking-[0.2em] text-[#c8a951] uppercase select-none">
+          <span className="text-[8px] font-bold tracking-[0.2em] text-[#a5762a] uppercase select-none">
             VIEW
           </span>
         )}
         {state === "drag" && (
-          <span className="text-[9px] font-medium tracking-widest text-[#c8a951] select-none">
+          <span className="text-[9px] font-bold tracking-widest text-[#a5762a] select-none">
             ⟨ DRAG ⟩
           </span>
         )}

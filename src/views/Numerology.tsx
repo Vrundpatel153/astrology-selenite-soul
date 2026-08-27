@@ -6,16 +6,10 @@ import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import InteractiveNumerologyMatrix, { NUMEROLOGY_ARCHETYPES } from "@/components/InteractiveNumerologyMatrix";
 import { toast } from "sonner";
-import { ArrowRight, RefreshCw, Heart, Compass, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 // ─── Pythagorean Numerology Engine ─────────────────────────────────────────────
-const LETTER_MAP: Record<string, number> = {
-  a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,
-  j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,
-  s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8,
-};
-
 function reduceToMasterOrSingle(n: number): number {
   if (n === 11 || n === 22 || n === 33) return n;
   while (n > 9) {
@@ -64,57 +58,57 @@ function CompatibilityCalculator() {
   }
 
   return (
-    <div className="bg-[#10080d]/95 border border-[#c8a951]/35 p-8 md:p-12 shadow-2xl backdrop-blur-md rounded-sm">
+    <div className="bg-white/95 border border-[#c8a951]/40 p-8 md:p-12 shadow-2xl backdrop-blur-md rounded-sm">
       <div className="text-center max-w-xl mx-auto mb-10">
-        <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-2">Vibrational Synergy</p>
-        <h3 className="text-3xl font-light text-white" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+        <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-2">Vibrational Synergy</p>
+        <h3 className="text-3xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
           Numerology Compatibility Matcher
         </h3>
-        <p className="text-xs text-white/60 mt-2 font-light">
+        <p className="text-xs text-[#4a382e]/80 mt-2 font-light">
           Compare two birth dates to calculate the resonance score and energetic dynamic between your life path numbers.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/* Person A */}
-        <div className="p-6 bg-[#080406] border border-[#c8a951]/25 rounded-sm">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-4">First Person's Details</p>
+        <div className="p-6 bg-[#fdf8f4] border border-[#e8d9cf] rounded-sm">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-4">First Person's Details</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Name</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name</label>
               <input
                 value={a.name} onChange={e => setA(p => ({ ...p, name: e.target.value }))}
                 placeholder="e.g. Maya"
-                className="w-full bg-[#140b11] border border-[#c8a951]/30 text-white px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-white/20"
+                className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-[#2a1f1a]/30"
               />
             </div>
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Date of Birth</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Date of Birth</label>
               <input
                 type="date" value={a.date} onChange={e => setA(p => ({ ...p, date: e.target.value }))}
-                className="w-full bg-[#140b11] border border-[#c8a951]/30 text-white px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:dark]"
+                className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:light]"
               />
             </div>
           </div>
         </div>
 
         {/* Person B */}
-        <div className="p-6 bg-[#080406] border border-[#c8a951]/25 rounded-sm">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-4">Second Person's Details</p>
+        <div className="p-6 bg-[#fdf8f4] border border-[#e8d9cf] rounded-sm">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-4">Second Person's Details</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Name</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name</label>
               <input
                 value={b.name} onChange={e => setB(p => ({ ...p, name: e.target.value }))}
                 placeholder="e.g. Rohan"
-                className="w-full bg-[#140b11] border border-[#c8a951]/30 text-white px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-white/20"
+                className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-[#2a1f1a]/30"
               />
             </div>
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Date of Birth</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Date of Birth</label>
               <input
                 type="date" value={b.date} onChange={e => setB(p => ({ ...p, date: e.target.value }))}
-                className="w-full bg-[#140b11] border border-[#c8a951]/30 text-white px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:dark]"
+                className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:light]"
               />
             </div>
           </div>
@@ -124,7 +118,7 @@ function CompatibilityCalculator() {
       <div className="text-center mb-8">
         <motion.button
           onClick={calculate}
-          className="bg-[#c8a951] text-[#0a0508] px-10 py-3.5 text-[11px] font-bold uppercase tracking-[0.24em] shadow-xl hover:shadow-[#c8a951]/30 rounded-sm cursor-pointer"
+          className="bg-[#c8a951] text-[#1a0e05] px-10 py-3.5 text-[11px] font-bold uppercase tracking-[0.24em] shadow-xl hover:shadow-[#c8a951]/30 rounded-sm cursor-pointer"
           whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
         >
           Analyze Compatibility
@@ -136,30 +130,30 @@ function CompatibilityCalculator() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-8 bg-[#080406] border border-[#c8a951] rounded-sm text-center"
+            className="p-8 bg-[#fdf8f4] border border-[#c8a951] rounded-sm text-center shadow-md"
           >
             <div className="flex items-center justify-center gap-6 mb-6">
               <div className="text-center">
-                <span className="text-4xl font-light text-[#c8a951]" style={{ fontFamily: "'Playfair Display', serif" }}>{result.numA}</span>
-                <p className="text-[9px] uppercase tracking-wider text-white/60 mt-1">{a.name || "Person A"} Life Path</p>
+                <span className="text-4xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>{result.numA}</span>
+                <p className="text-[9px] uppercase tracking-wider text-[#4a382e] mt-1">{a.name || "Person A"} Life Path</p>
               </div>
-              <span className="text-2xl text-[#c8a951]/60 font-light">+</span>
+              <span className="text-2xl text-[#a5762a] font-light">+</span>
               <div className="text-center">
-                <span className="text-4xl font-light text-[#c8a951]" style={{ fontFamily: "'Playfair Display', serif" }}>{result.numB}</span>
-                <p className="text-[9px] uppercase tracking-wider text-white/60 mt-1">{b.name || "Person B"} Life Path</p>
+                <span className="text-4xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>{result.numB}</span>
+                <p className="text-[9px] uppercase tracking-wider text-[#4a382e] mt-1">{b.name || "Person B"} Life Path</p>
               </div>
             </div>
 
             <div className="inline-block px-6 py-2 bg-[#c8a951]/15 border border-[#c8a951]/40 rounded-full mb-4">
-              <span className="text-xl font-bold text-[#c8a951]">{result.score}% Harmonic Resonance</span>
+              <span className="text-xl font-bold text-[#a5762a]">{result.score}% Harmonic Resonance</span>
             </div>
 
-            <p className="text-sm text-white/80 max-w-lg mx-auto leading-relaxed font-light mb-6">
+            <p className="text-sm text-[#4a382e] max-w-lg mx-auto leading-relaxed font-light mb-6">
               {compatDesc(result.score)}
             </p>
 
             <Link href="/tarot#book">
-              <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] hover:text-white border-b border-[#c8a951]/40 pb-0.5 cursor-pointer">
+              <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] hover:text-[#2a1f1a] border-b border-[#c8a951]/40 pb-0.5 cursor-pointer">
                 Book Full Relationship Reading <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </Link>
@@ -179,10 +173,10 @@ export default function Numerology() {
       <Header />
 
       {/* ── HERO ────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#0c070a]">
+      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
         {/* Background Ambient Glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[160px] bg-[#c8a951]/10" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[160px] bg-[#c8a951]/15" />
         </div>
 
         <motion.div
@@ -193,20 +187,20 @@ export default function Numerology() {
         >
           <div className="flex items-center gap-3 justify-center mb-5">
             <div className="h-px w-10 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951]">Pythagorean Sacred Matrix</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a]">Pythagorean Sacred Matrix</span>
             <div className="h-px w-10 bg-[#c8a951]/60" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-light text-white leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+          <h1 className="text-5xl md:text-7xl font-light text-[#2a1f1a] leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             The Secret Language<br />
-            <span className="italic text-[#c8a951]">of Numbers</span>
+            <span className="italic text-[#a5762a]">of Numbers</span>
           </h1>
-          <p className="text-[#fdf8f4]/70 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-10">
+          <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-10">
             From the moment of your birth, numbers encoded the energetic geometry of your soul. Calculate your Life Path, Name Destiny, and sacred Master Numbers below.
           </p>
           <div className="flex justify-center gap-4">
             <a href="#interactive-matrix">
               <motion.span
-                className="inline-flex items-center gap-2 bg-[#c8a951] text-[#0a0508] px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest cursor-pointer shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest cursor-pointer shadow-lg"
                 whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
               >
                 Launch Live Matrix <ArrowRight className="w-4 h-4" />
@@ -217,14 +211,14 @@ export default function Numerology() {
       </section>
 
       {/* ── LIVE INTERACTIVE NUMEROLOGY MATRIX ─────────────────────────────────── */}
-      <section id="interactive-matrix" className="py-20 md:py-28 px-6 bg-[#090407] border-t border-b border-[#c8a951]/20">
+      <section id="interactive-matrix" className="py-20 md:py-28 px-6 bg-[#f9f4ee] border-t border-b border-[#e8d9cf]">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-2">Live Engine</p>
-            <h2 className="text-3xl md:text-5xl font-light text-white mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-              Calculate Your <em className="italic text-[#c8a951]">Core Vibration</em>
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2">Live Engine</p>
+            <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+              Calculate Your <em className="italic text-[#a5762a]">Core Vibration</em>
             </h2>
-            <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">
+            <p className="text-xs md:text-sm text-[#4a382e]/80 font-light leading-relaxed">
               Toggle between your birthdate for soul purpose or your full birth name for outer expression.
             </p>
           </div>
@@ -245,7 +239,7 @@ export default function Numerology() {
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               The Master Numbers: 11, 22 & 33
             </h2>
-            <p className="text-[#4a3020]/75 max-w-xl mx-auto text-sm leading-relaxed font-light">
+            <p className="text-[#4a382e]/75 max-w-xl mx-auto text-sm leading-relaxed font-light">
               Master numbers are never reduced to a single digit because they carry an intense energetic charge and a heavy spiritual responsibility.
             </p>
           </ScrollReveal>
@@ -254,14 +248,14 @@ export default function Numerology() {
             {masterNumbers.map((m) => {
               const details = NUMEROLOGY_ARCHETYPES[m];
               return (
-                <div key={m} className="bg-white/90 border border-[#c8a951]/35 p-8 rounded-sm shadow-xl flex flex-col justify-between group hover:border-[#c8a951] transition-all">
+                <div key={m} className="bg-white/95 border border-[#c8a951]/35 p-8 rounded-sm shadow-md flex flex-col justify-between group hover:border-[#c8a951] hover:shadow-xl transition-all">
                   <div>
                     <div className="flex items-baseline justify-between mb-4 pb-3 border-b border-[#e8d9cf]">
                       <span className="text-5xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>{m}</span>
                       <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">Master Vibration</span>
                     </div>
                     <h3 className="text-xl font-light text-[#2a1f1a] mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>{details.title}</h3>
-                    <p className="text-xs md:text-sm text-[#4a3020]/75 leading-relaxed font-light mb-6">{details.description}</p>
+                    <p className="text-xs md:text-sm text-[#4a382e]/80 leading-relaxed font-light mb-6">{details.description}</p>
                   </div>
                   <div className="pt-4 border-t border-[#e8d9cf]/60">
                     <p className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] mb-1">Crystal Ally</p>
@@ -275,7 +269,7 @@ export default function Numerology() {
       </section>
 
       {/* ── COMPATIBILITY MATCHER ───────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-[#0c070a] text-white">
+      <section className="py-20 md:py-28 px-6 bg-[#f7efe6] border-t border-[#e8d9cf]">
         <div className="max-w-[1000px] mx-auto">
           <CompatibilityCalculator />
         </div>

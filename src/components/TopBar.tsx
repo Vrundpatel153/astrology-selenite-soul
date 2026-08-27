@@ -14,7 +14,7 @@ export default function TopBar() {
 
   return (
     <div className="flex flex-col w-full" data-testid="top-bar">
-      <div className="hidden md:flex bg-[#2a1f1a] text-white h-10 items-center justify-center gap-4 font-mono text-[12px] tracking-wider relative">
+      <div className="hidden md:flex h-10 items-center justify-center gap-4 font-mono text-[12px] tracking-wider relative text-white" style={{ background: "linear-gradient(90deg, #c8517a 0%, #a3336b 35%, #7b2d8b 65%, #c8517a 100%)" }}>
         <button onClick={prev} className="hover:opacity-70 transition-opacity absolute left-4" aria-label="Previous announcement">
           <ChevronLeft className="w-4 h-4" />
         </button>

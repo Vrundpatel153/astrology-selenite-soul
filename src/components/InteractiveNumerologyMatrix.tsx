@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, RotateCcw, Heart, Shield, Sparkles, Hash } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 const PYTHAGOREAN_TABLE: Record<string, number> = {
@@ -186,23 +186,23 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
   return (
     <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
       {/* Tabs */}
-      <div className="flex justify-center gap-3 mb-10">
+      <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 w-full max-w-xl mx-auto">
         <button
           onClick={() => setActiveTab("lifepath")}
-          className={`px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border ${
+          className={`w-full sm:w-auto px-5 sm:px-6 py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center ${
             activeTab === "lifepath"
-              ? "bg-[#c8a951] text-[#0a0508] border-[#c8a951] shadow-lg shadow-[#c8a951]/25"
-              : "bg-[#140b11]/80 text-[#c8a951] border-[#c8a951]/30 hover:border-[#c8a951]"
+              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+              : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
           }`}
         >
           Life Path Number (Birthdate)
         </button>
         <button
           onClick={() => setActiveTab("name")}
-          className={`px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border ${
+          className={`w-full sm:w-auto px-5 sm:px-6 py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center ${
             activeTab === "name"
-              ? "bg-[#c8a951] text-[#0a0508] border-[#c8a951] shadow-lg shadow-[#c8a951]/25"
-              : "bg-[#140b11]/80 text-[#c8a951] border-[#c8a951]/30 hover:border-[#c8a951]"
+              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+              : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
           }`}
         >
           Name Destiny Number (Pythagorean)
@@ -210,28 +210,28 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
       </div>
 
       {/* Inputs & Calculation Engine Display */}
-      <div className="bg-[#10080d]/95 border border-[#c8a951]/35 p-6 md:p-10 rounded-sm shadow-2xl backdrop-blur-md mb-10">
+      <div className="bg-white/95 border border-[#c8a951]/35 p-5 sm:p-7 md:p-10 rounded-sm shadow-xl backdrop-blur-md mb-10">
         <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 items-center">
           {/* Input control */}
           <div>
             {activeTab === "lifepath" ? (
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-2">
+                <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-2">
                   Select Your Date of Birth
                 </label>
                 <input
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
-                  className="w-full bg-[#080406] border border-[#c8a951]/40 text-white px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm [color-scheme:dark]"
+                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm [color-scheme:light]"
                 />
-                <p className="text-[11px] text-white/50 mt-2 font-light">
+                <p className="text-[11px] text-[#665242] mt-2 font-light">
                   Decodes the core vibrational blueprint you brought into this lifetime.
                 </p>
               </div>
             ) : (
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-2">
+                <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-2">
                   Enter Your Full Birth Name
                 </label>
                 <input
@@ -239,9 +239,9 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
                   value={nameInput}
                   onChange={(e) => setNameInput(e.target.value)}
                   placeholder="e.g. Priya Sharma"
-                  className="w-full bg-[#080406] border border-[#c8a951]/40 text-white px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm placeholder:text-white/30"
+                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm placeholder:text-[#2a1f1a]/30"
                 />
-                <p className="text-[11px] text-white/50 mt-2 font-light">
+                <p className="text-[11px] text-[#665242] mt-2 font-light">
                   Pythagorean alphabetic reduction reveals your outer destiny and expression.
                 </p>
               </div>
@@ -249,16 +249,16 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
           </div>
 
           {/* Interactive Live Formula Visualization */}
-          <div className="p-6 bg-[#080406]/90 border border-[#c8a951]/25 rounded-sm">
-            <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-3">
+          <div className="p-6 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm">
+            <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-3">
               Mathematical Reduction Process
             </p>
             {activeTab === "lifepath" ? (
               <div className="space-y-2">
-                <p className="text-sm font-mono text-white/90">
+                <p className="text-sm font-mono text-[#2a1f1a]">
                   {lifePathResult.breakdown}
                 </p>
-                <p className="text-xs text-white/50 font-light">
+                <p className="text-xs text-[#665242] font-light">
                   The day, month, and year are reduced to single digits or sacred Master Numbers (11, 22, 33), then summed.
                 </p>
               </div>
@@ -266,14 +266,14 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
               <div>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {nameResult.letters.map((item, i) => (
-                    <div key={i} className="flex flex-col items-center bg-[#140b11] border border-[#c8a951]/30 px-2 py-1 rounded-sm">
-                      <span className="text-xs font-bold text-white">{item.char}</span>
-                      <span className="text-[9px] text-[#c8a951] font-mono">{item.val}</span>
+                    <div key={i} className="flex flex-col items-center bg-white border border-[#c8a951]/40 px-2 py-1 rounded-sm shadow-sm">
+                      <span className="text-xs font-bold text-[#2a1f1a]">{item.char}</span>
+                      <span className="text-[9px] text-[#a5762a] font-mono">{item.val}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs font-mono text-white/80">
-                  Sum: {nameResult.sum} → Reduced Destiny Number: <strong className="text-[#c8a951] font-bold">{nameResult.number}</strong>
+                <p className="text-xs font-mono text-[#2a1f1a]">
+                  Sum: {nameResult.sum} → Reduced Destiny Number: <strong className="text-[#a5762a] font-bold">{nameResult.number}</strong>
                 </p>
               </div>
             )}
@@ -289,18 +289,18 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5 }}
-          className="bg-[#10080d]/95 border border-[#c8a951]/40 p-8 md:p-12 rounded-sm shadow-2xl backdrop-blur-md"
+          className="bg-white/95 border border-[#c8a951]/40 p-8 md:p-12 rounded-sm shadow-2xl backdrop-blur-md"
         >
           <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 items-start">
             {/* Massive Golden Number Emblem */}
-            <div className="flex flex-col items-center justify-center p-8 bg-[#080406] border-2 border-[#c8a951]/60 rounded-sm text-center shadow-xl">
+            <div className="flex flex-col items-center justify-center p-8 bg-[#fdf8f4] border-2 border-[#c8a951]/60 rounded-sm text-center shadow-lg">
               <span
-                className="text-7xl md:text-8xl font-light text-[#c8a951] leading-none mb-3"
+                className="text-7xl md:text-8xl font-light text-[#a5762a] leading-none mb-3"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 {activeNumber}
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951] border-t border-[#c8a951]/30 pt-3 w-full">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] border-t border-[#c8a951]/30 pt-3 w-full">
                 {activeDetails.isMaster ? "Sacred Master Number" : `${activeTab === "lifepath" ? "Life Path" : "Expression"} Archetype`}
               </span>
             </div>
@@ -308,16 +308,16 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
             {/* In-depth Archetype breakdown */}
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-2">
-                <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-[#c8a951]/15 text-[#c8a951] border border-[#c8a951]/30">
+                <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-[#c8a951]/15 text-[#a5762a] border border-[#c8a951]/30 rounded-full font-semibold">
                   Archetype: {activeDetails.archetype}
                 </span>
-                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/70">
+                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#665242]">
                   Ruling Planet: {activeDetails.planet}
                 </span>
               </div>
 
               <h3
-                className="text-3xl md:text-4xl font-light text-white mb-4"
+                className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 {activeDetails.title}
@@ -325,30 +325,30 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
 
               <div className="flex flex-wrap gap-2 mb-6">
                 {activeDetails.keywords.map((kw) => (
-                  <span key={kw} className="text-[9px] font-bold uppercase tracking-wider text-white/80 bg-white/5 border border-white/10 px-2.5 py-1">
+                  <span key={kw} className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2.5 py-1">
                     {kw}
                   </span>
                 ))}
               </div>
 
-              <p className="text-sm md:text-base text-white/85 leading-relaxed mb-6 font-light">
+              <p className="text-sm md:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
                 {activeDetails.description}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-[#080406]/80 border-l-2 border-[#c8a951] mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-[#fdf8f4] border-l-2 border-[#c8a951] mb-6 shadow-sm">
                 <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
                     Soul Mission & Highest Potential
                   </p>
-                  <p className="text-xs text-white/90 leading-relaxed font-light">
+                  <p className="text-xs text-[#2a1f1a] leading-relaxed font-light">
                     {activeDetails.mission}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
                     Harmonizing Crystal Remedy
                   </p>
-                  <p className="text-xs text-white/90 font-medium mb-1">
+                  <p className="text-xs text-[#2a1f1a] font-medium mb-1">
                     {activeDetails.crystal}
                   </p>
                 </div>
@@ -356,12 +356,12 @@ export default function InteractiveNumerologyMatrix({ className = "" }: { classN
 
               <div className="flex flex-wrap gap-4">
                 <Link href="/shop">
-                  <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#0a0508] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
+                  <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
                     Shop Number {activeNumber} Crystals <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
                 <Link href="/tarot">
-                  <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#c8a951] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
+                  <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
                     Book Numerology Reading
                   </span>
                 </Link>

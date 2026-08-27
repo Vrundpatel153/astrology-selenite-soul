@@ -83,7 +83,7 @@ function TrustStrip() {
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
       >
         {[...items, ...items, ...items, ...items].map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-3 px-8 text-[10px] font-bold uppercase tracking-[0.24em] text-[#0a0508] whitespace-nowrap">
+          <span key={i} className="inline-flex items-center gap-3 px-8 text-[10px] font-bold uppercase tracking-[0.24em] text-[#1a0e05] whitespace-nowrap">
             {item}<span className="opacity-40 font-mono">•</span>
           </span>
         ))}
@@ -124,13 +124,13 @@ function EktaStory() {
 
           {/* Animated credential badge */}
           <motion.div
-            className="ekta-reveal absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-[#0d070b]/90 backdrop-blur-md px-5 py-4 border-l-2 border-[#c8a951] shadow-2xl"
+            className="ekta-reveal absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/95 backdrop-blur-md px-5 py-4 border-l-2 border-[#c8a951] shadow-2xl"
             whileHover={{ x: 4, borderLeftWidth: "4px" }}
             transition={{ duration: 0.2 }}
           >
-            <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#c8a951] mb-1">Founder · Selenite Soul</p>
-            <p className="text-lg text-white leading-snug" style={serif}>Ekta</p>
-            <p className="text-[10px] text-white/50 mt-0.5">Jyotish · Tarot · Numerology · Crystal Healing</p>
+            <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-1">Founder · Selenite Soul</p>
+            <p className="text-lg text-[#2a1f1a] leading-snug" style={serif}>Ekta</p>
+            <p className="text-[10px] text-[#4a3020]/60 mt-0.5">Jyotish · Tarot · Numerology · Crystal Healing</p>
           </motion.div>
         </div>
 
@@ -188,7 +188,7 @@ function EktaStory() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. BRAND PHILOSOPHY — Crisp Sacred Geometry & Deep Obsidian Velvet
+// 3. BRAND PHILOSOPHY — Light Silk Parchment & Embossed Gold Sri Yantra
 // ─────────────────────────────────────────────────────────────────────────────
 const pillars = [
   { num: "01", title: "Ancient Vedic Wisdom", body: "Jyotish, Tarot, and Numerology — three sacred systems that have guided humanity for millennia, now decoded for your modern path." },
@@ -217,16 +217,16 @@ function BrandPhilosophy() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#0c070a]">
+    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#fcf8f4]">
       {/* High-Resolution Luxury Sacred Geometry Artwork Backdrop */}
       <div className="absolute inset-0 pointer-events-none">
         <img
           src="/brand-philosophy-luxury.webp"
           alt="Sacred Geometry Sri Yantra"
-          className="w-full h-full object-cover object-center opacity-40 scale-105"
+          className="w-full h-full object-cover object-center opacity-60 scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c070a] via-transparent to-[#0c070a]" />
-        <div className="absolute inset-0 bg-[#0c070a]/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fcf8f4] via-transparent to-[#fcf8f4]" />
+        <div className="absolute inset-0 bg-[#fcf8f4]/40" />
       </div>
 
       <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
@@ -234,28 +234,28 @@ function BrandPhilosophy() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14 md:mb-20">
           <div>
             <motion.p
-              className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-3"
+              className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a] mb-3"
               initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
             >
               Selenite Soul Philosophy
             </motion.p>
             <motion.h2
-              className="text-4xl md:text-5xl xl:text-6xl font-light text-white leading-[1.08]" style={serif}
+              className="text-4xl md:text-5xl xl:text-6xl font-light text-[#2a1f1a] leading-[1.08]" style={serif}
               initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
             >
               Where Ancient Wisdom<br />
-              <em className="italic text-[#c8a951]">Meets Modern Life</em>
+              <em className="italic text-[#a5762a]">Meets Modern Life</em>
             </motion.h2>
           </div>
           <motion.p
-            className="text-sm md:text-base text-white/75 leading-relaxed max-w-md font-light"
+            className="text-sm md:text-base text-[#4a382e]/80 leading-relaxed max-w-md font-light"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
           >
             We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life — through crystals, astrology, Tarot, and numbers.
           </motion.p>
         </div>
 
-        {/* Pillar Cards in Deep Obsidian Glass */}
+        {/* Pillar Cards in Luxury Ivory Glass */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {pillars.map((p) => {
             const { ref, handleMouseMove, handleMouseLeave } = useTilt(5);
@@ -265,14 +265,14 @@ function BrandPhilosophy() {
                 ref={ref}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="pillar-card bg-[#140b11]/85 border border-[#c8a951]/30 p-8 flex flex-col group cursor-default backdrop-blur-md hover:border-[#c8a951]/80 hover:bg-[#1a0f16] transition-all duration-300 rounded-sm shadow-2xl"
+                className="pillar-card bg-white/90 border border-[#c8a951]/40 p-8 flex flex-col group cursor-default backdrop-blur-md hover:border-[#c8a951] hover:shadow-xl transition-all duration-300 rounded-sm shadow-md"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl font-light text-[#c8a951]" style={serif}>{p.num}</span>
-                  <span className="text-[#c8a951]/50 text-xs font-mono">•</span>
+                  <span className="text-3xl font-light text-[#a5762a]" style={serif}>{p.num}</span>
+                  <span className="text-[#a5762a]/50 text-xs font-mono">•</span>
                 </div>
-                <h3 className="text-lg md:text-xl font-light text-white leading-snug mb-3" style={serif}>{p.title}</h3>
-                <p className="text-xs md:text-sm text-white/70 leading-relaxed mt-auto font-light">{p.body}</p>
+                <h3 className="text-lg md:text-xl font-light text-[#2a1f1a] leading-snug mb-3" style={serif}>{p.title}</h3>
+                <p className="text-xs md:text-sm text-[#4a382e]/80 leading-relaxed mt-auto font-light">{p.body}</p>
               </div>
             );
           })}
@@ -280,13 +280,13 @@ function BrandPhilosophy() {
 
         {/* Pull quote */}
         <motion.div
-          className="mt-16 md:mt-24 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-[#140b11]/70 border border-y-0 border-r-0 border-l-[#c8a951] p-6 backdrop-blur-md shadow-xl"
+          className="mt-16 md:mt-24 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-white/80 border border-y-0 border-r-0 border-l-[#c8a951] p-6 backdrop-blur-md shadow-md"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
         >
-          <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
+          <p className="text-lg md:text-xl text-[#2a1f1a]/95 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
             "I believe every person carries a cosmic blueprint — a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
           </p>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">
             — Ekta, Founder of Selenite Soul
           </p>
         </motion.div>
@@ -296,7 +296,7 @@ function BrandPhilosophy() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. KUNDALI — Luxury Vedic Birth Chart & Astrological Mandala
+// 4. KUNDALI — Luxury Vedic Birth Chart & Astrological Mandala (Light)
 // ─────────────────────────────────────────────────────────────────────────────
 function KundaliSection() {
   const bgRef = useParallax(0.12);
@@ -304,38 +304,38 @@ function KundaliSection() {
   const headRef = useSplitReveal();
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[600px] lg:min-h-[720px] flex items-center bg-[#090407]">
+    <section ref={sectionRef} className="relative overflow-hidden min-h-[600px] lg:min-h-[720px] flex items-center bg-[#fdf8f4]">
       {/* High-Resolution Luxury Vedic Astrology Mandala Artwork Backdrop */}
       <div className="absolute inset-0 scale-105 pointer-events-none">
         <img
           ref={bgRef as any}
           src="/kundali-blueprint-luxury.webp"
           alt="Vedic Kundali Celestial Mandala"
-          className="w-full h-full object-cover object-right lg:object-center opacity-55"
+          className="w-full h-full object-cover object-right lg:object-center opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#090407] via-[#090407]/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090407] via-transparent to-[#090407]/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fdf8f4] via-[#fdf8f4]/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#fdf8f4] via-transparent to-[#fdf8f4]/60" />
       </div>
 
       <div className="relative z-10 px-6 md:px-14 lg:px-20 py-16 md:py-24 max-w-[860px]">
         <div>
           <div className="k-reveal flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#c8a951]">Free Vedic Reading</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Free Vedic Reading</span>
           </div>
           <h2 ref={headRef as any}
-            className="k-reveal text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.04] mb-6"
+            className="k-reveal text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-[#2a1f1a] leading-[1.04] mb-6"
             style={serif}
           >
             Your Kundali — The Blueprint of Your Soul
           </h2>
-          <p className="k-reveal text-sm md:text-base text-white/70 leading-[1.85] mb-8 max-w-[520px] font-light">
+          <p className="k-reveal text-sm md:text-base text-[#4a382e]/85 leading-[1.85] mb-8 max-w-[520px] font-light">
             Your birth chart is a precise cosmic map — revealing dharma, karma, relationships, health, wealth, and spiritual path. Computed free, instantly.
           </p>
-          <div className="k-reveal flex flex-wrap gap-y-2 gap-x-6 mb-10 text-white/40 text-[10px] uppercase tracking-widest font-bold">
+          <div className="k-reveal flex flex-wrap gap-y-2 gap-x-6 mb-10 text-[#4a382e]/70 text-[10px] uppercase tracking-widest font-bold">
             {["Lahiri Ayanamsa", "9 Grahas", "27 Nakshatras", "Dasha Timeline", "Crystal Remedies"].map(f => (
               <span key={f} className="flex items-center gap-1.5">
-                <motion.span className="w-1.5 h-1.5 rounded-full bg-[#c8a951]"
+                <motion.span className="w-1.5 h-1.5 rounded-full bg-[#a5762a]"
                   animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 2, repeat: Infinity, delay: Math.random() * 2 }}
                 />
@@ -345,7 +345,7 @@ function KundaliSection() {
           </div>
           <MagLink href="/kundali" className="k-reveal">
             <motion.span
-              className="inline-flex items-center gap-3 bg-[#c8a951] text-[#0a0508] px-8 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.24em] relative overflow-hidden shadow-2xl hover:shadow-[#c8a951]/40 transition-shadow"
+              className="inline-flex items-center gap-3 bg-[#c8a951] text-[#1a0e05] px-8 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.24em] relative overflow-hidden shadow-xl hover:shadow-[#c8a951]/40 transition-shadow"
               whileTap={{ scale: 0.97 }}
             >
               Generate My Free Kundali <ArrowRight className="w-4 h-4" />
@@ -358,24 +358,24 @@ function KundaliSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. NUMEROLOGY — with Interactive Live Decoder
+// 5. NUMEROLOGY — with Interactive Live Decoder (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function NumerologySection() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".num-reveal", staggerDelay: 0.1, start: "top 80%" });
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 overflow-hidden bg-[#0c070a]">
+    <section ref={sectionRef} className="py-20 md:py-28 overflow-hidden bg-[#f9f4ee]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">Pythagorean Numerology</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Pythagorean Numerology</span>
             <div className="h-px w-8 bg-[#c8a951]/60" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-4" style={serif}>
-            Numbers Are the <em className="italic text-[#c8a951]">Language of the Universe</em>
+          <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={serif}>
+            Numbers Are the <em className="italic text-[#a5762a]">Language of the Universe</em>
           </h2>
-          <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">
+          <p className="text-xs md:text-sm text-[#4a382e]/80 font-light leading-relaxed">
             Every number carries a precise vibrational frequency. Enter your details below to reveal your life path and expression archetype.
           </p>
         </div>
@@ -388,22 +388,22 @@ function NumerologySection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 6. ASTROLOGY & ZODIAC — with Interactive Celestial Wheel
+// 6. ASTROLOGY & ZODIAC — with Interactive Celestial Wheel (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function AstrologyZodiacSection() {
   return (
-    <section className="py-20 md:py-28 overflow-hidden bg-[#090407]">
+    <section className="py-20 md:py-28 overflow-hidden bg-[#fcf8f4]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">Cosmic Alignment</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Cosmic Alignment</span>
             <div className="h-px w-8 bg-[#c8a951]/60" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-4" style={serif}>
-            Interactive <em className="italic text-[#c8a951]">Zodiac & Astrology</em> Explorer
+          <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={serif}>
+            Interactive <em className="italic text-[#a5762a]">Zodiac & Astrology</em> Explorer
           </h2>
-          <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">
+          <p className="text-xs md:text-sm text-[#4a382e]/80 font-light leading-relaxed">
             Select any sign along the cosmic wheel to uncover its elemental frequency, ruling planet, shadow archetype, and prescribed healing crystals.
           </p>
         </div>
@@ -416,39 +416,39 @@ function AstrologyZodiacSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 7. CRYSTALS — full bleed, generated image
+// 7. CRYSTALS — full bleed with Light Parallax
 // ─────────────────────────────────────────────────────────────────────────────
 function CrystalsSection() {
   const bgRef = useParallax(0.15);
   const sectionRef = useGSAPReveal({ staggerSelector: ".cr-reveal", staggerDelay: 0.12, start: "top 80%" });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[580px] lg:min-h-[700px] flex items-stretch">
+    <section ref={sectionRef} className="relative overflow-hidden min-h-[580px] lg:min-h-[700px] flex items-stretch bg-[#f5ede4]">
       <div className="absolute inset-0 scale-110">
         <img ref={bgRef as any} src="/crystal-collection.webp" alt="Healing Crystals"
           className="w-full h-full object-cover object-center" data-cursor="view" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(10,5,8,0.95) 0%, rgba(10,5,8,0.80) 48%, rgba(10,5,8,0.40) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(253,248,244,0.95) 0%, rgba(253,248,244,0.85) 48%, rgba(253,248,244,0.40) 100%)" }} />
       </div>
 
       <div className="relative z-10 flex items-center px-6 md:px-14 lg:px-20 py-16 md:py-24 max-w-[780px]">
         <div className="w-full">
           <div className="cr-reveal flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#c8a951]">Healing Crystals</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Healing Crystals</span>
           </div>
-          <h2 className="cr-reveal text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.04] mb-6" style={serif}>
-            Discover Your<br /><em className="italic text-[#c8a951]">Healing Crystal</em>
+          <h2 className="cr-reveal text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-[#2a1f1a] leading-[1.04] mb-6" style={serif}>
+            Discover Your<br /><em className="italic text-[#a5762a]">Healing Crystal</em>
           </h2>
-          <p className="cr-reveal text-sm md:text-base text-white/60 leading-[1.85] mb-8 max-w-[480px] font-light">
+          <p className="cr-reveal text-sm md:text-base text-[#4a382e]/85 leading-[1.85] mb-8 max-w-[480px] font-light">
             Every crystal at Selenite Soul is personally selected by Ekta, ethically sourced, lab-tested, and energised under the full moon.
           </p>
 
           {/* Animated stats */}
-          <div className="cr-reveal flex gap-8 mb-10 pb-10 border-b border-white/10">
+          <div className="cr-reveal flex gap-8 mb-10 pb-10 border-b border-[#e8d9cf]">
             {[["222+", "Unique Products"], ["100%", "Natural & Tested"], ["Full Moon", "Energised"]].map(([num, label]) => (
               <motion.div key={label} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
-                <p className="text-2xl text-[#c8a951] font-light" style={serif}>{num}</p>
-                <p className="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">{label}</p>
+                <p className="text-2xl text-[#a5762a] font-light" style={serif}>{num}</p>
+                <p className="text-[9px] text-[#4a382e]/70 uppercase tracking-widest mt-0.5">{label}</p>
               </motion.div>
             ))}
           </div>
@@ -456,8 +456,8 @@ function CrystalsSection() {
           <div className="cr-reveal flex flex-wrap gap-4">
             <MagLink href="/kundali">
               <motion.span
-                className="inline-flex items-center gap-2.5 border border-[#c8a951]/70 text-[#c8a951] px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.22em]"
-                whileHover={{ backgroundColor: "rgba(200,169,81,0.12)", borderColor: "#c8a951" }}
+                className="inline-flex items-center gap-2.5 border border-[#c8a951] text-[#a5762a] px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.22em] bg-white/80 shadow-sm"
+                whileHover={{ backgroundColor: "rgba(200,169,81,0.12)", borderColor: "#a5762a" }}
                 transition={{ duration: 0.18 }}
               >
                 Know Your Crystal
@@ -465,7 +465,7 @@ function CrystalsSection() {
             </MagLink>
             <MagLink href="/shop">
               <motion.span
-                className="inline-flex items-center gap-2.5 bg-[#c8a951] text-[#0a0508] px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.22em] relative overflow-hidden shadow-xl"
+                className="inline-flex items-center gap-2.5 bg-[#c8a951] text-[#1a0e05] px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.22em] relative overflow-hidden shadow-xl"
                 whileHover={{ boxShadow: "0 12px 40px rgba(200,169,81,0.4)" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.18 }}
@@ -481,22 +481,22 @@ function CrystalsSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 8. TAROT — with 3D Interactive Oracle Deck
+// 8. TAROT — with 3D Interactive Oracle Deck (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function TarotSection() {
   return (
-    <section className="py-20 md:py-28 overflow-hidden bg-[#0e070c]">
+    <section className="py-20 md:py-28 overflow-hidden bg-[#f9f4ee]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951]">Intuitive Oracle</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Intuitive Oracle</span>
             <div className="h-px w-8 bg-[#c8a951]/60" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-4" style={serif}>
-            Interactive <em className="italic text-[#c8a951]">Tarot Reading</em> Suite
+          <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={serif}>
+            Interactive <em className="italic text-[#a5762a]">Tarot Reading</em> Suite
           </h2>
-          <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">
+          <p className="text-xs md:text-sm text-[#4a382e]/80 font-light leading-relaxed">
             Draw a daily oracle card or lay a sacred 3-card spread to receive intuitive clarity for love, career, and spiritual evolution.
           </p>
         </div>
@@ -554,7 +554,7 @@ function ShopByProductCarousel() {
           {[{ icon: ChevronLeft, fn: () => emblaApi?.scrollPrev(), disabled: !canPrev },
             { icon: ChevronRight, fn: () => emblaApi?.scrollNext(), disabled: !canNext }].map(({ icon: Icon, fn, disabled }, i) => (
             <motion.button key={i} onClick={fn} disabled={disabled}
-              className="w-11 h-11 border border-[#e0cdb8] flex items-center justify-center text-[#4a3020] disabled:opacity-20"
+              className="w-11 h-11 border border-[#e0cdb8] flex items-center justify-center text-[#4a3020] disabled:opacity-20 bg-white shadow-sm"
               whileHover={{ borderColor: "#c8a951", backgroundColor: "rgba(200,169,81,0.06)" }}
               whileTap={{ scale: 0.93 }}
               data-cursor="hover"

@@ -1,12 +1,13 @@
 "use client";
 /**
- * Selenite Soul — Astrala-Inspired 3D Interactive Tarot Deck
- * Features an interactive 3D fanned arc deck, pick-and-place dealing animations,
- * smooth 3D card flips with gold foil backing, and in-depth crystal remedy correlations.
+ * Selenite Soul — Astrala-Inspired 3D Interactive Tarot Deck (Light Luxury Edition)
+ * Features an interactive 3D fanned arc deck on warm ivory silk parchment, pick-and-place dealing animations,
+ * smooth 3D card flips with embossed gold foil backing, and in-depth crystal remedy correlations.
+ * Fully responsive and optimized for all viewports.
  */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, RotateCcw, Compass, Moon, Sparkles, Eye, Check } from "lucide-react";
+import { ArrowRight, RotateCcw, Moon } from "lucide-react";
 import { Link } from "wouter";
 
 export interface TarotCardData {
@@ -228,29 +229,27 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     setSelectedDetails(slots[index].card);
   };
 
-  const allDealt = slots.every((s) => s.card !== null);
-
   return (
     <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
       {/* Control bar: Spread Mode Selection & Shuffle */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-[#c8a951]/25">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 pb-6 border-b border-[#e8d9cf]">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => handleModeChange("three")}
-            className={`px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border ${
+            className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
               spreadMode === "three"
-                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-lg shadow-[#c8a951]/25"
-                : "bg-transparent text-[#c8a951] border-[#c8a951]/30 hover:border-[#c8a951]"
+                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+                : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
             }`}
           >
             3-Card Spread (Past · Present · Future)
           </button>
           <button
             onClick={() => handleModeChange("single")}
-            className={`px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border ${
+            className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
               spreadMode === "single"
-                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-lg shadow-[#c8a951]/25"
-                : "bg-transparent text-[#c8a951] border-[#c8a951]/30 hover:border-[#c8a951]"
+                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+                : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
             }`}
           >
             Single Daily Oracle
@@ -259,20 +258,20 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
         <button
           onClick={handleReshuffle}
-          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#c8a951] hover:text-white transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#a5762a] hover:text-[#2a1f1a] transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           Reshuffle Deck
         </button>
       </div>
 
-      {/* ── 3D FANNED ARC DECK (ASTRALA-STYLE INTERACTIVE FAN) ── */}
-      <div className="relative py-12 px-4 mb-14 overflow-hidden rounded-sm bg-gradient-to-b from-[#1c0d16]/80 via-[#26131f]/60 to-[#140810] border border-[#c8a951]/25 shadow-2xl backdrop-blur-md">
-        <div className="text-center mb-8">
-          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-1">
+      {/* ── 3D FANNED ARC DECK (GENEROUS PADDING SO CARDS NEVER GET CLIPPED) ── */}
+      <div className="relative pt-10 sm:pt-14 pb-8 sm:pb-12 px-3 sm:px-6 mb-12 sm:mb-16 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
+        <div className="text-center mb-6 sm:mb-8">
+          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-1.5">
             Interactive Deck Fan
           </p>
-          <p className="text-xs text-white/70 font-light">
+          <p className="text-xs sm:text-sm text-[#4a382e] font-light max-w-md mx-auto">
             {pickedCardIds.size < maxPicks ? (
               <>Choose <strong>{maxPicks - pickedCardIds.size}</strong> more card{maxPicks - pickedCardIds.size > 1 ? "s" : ""} from the fanned deck below:</>
             ) : (
@@ -281,23 +280,23 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
           </p>
         </div>
 
-        {/* 3D Curved Fan Spread Container */}
-        <div className="relative h-[220px] sm:h-[260px] flex items-center justify-center select-none overflow-x-auto overflow-y-visible py-4">
+        {/* 3D Curved Fan Spread Container - Height enlarged to 280px-340px with ample headroom */}
+        <div className="relative h-[270px] sm:h-[320px] flex items-center justify-center select-none overflow-visible">
           <div className="relative w-full max-w-[860px] h-full flex items-center justify-center">
             {deck.map((card, idx) => {
               const total = deck.length;
               const mid = (total - 1) / 2;
               const offset = idx - mid; // e.g. -4 to +4
-              const rot = offset * 4.5; // -18deg to +18deg
-              const transX = offset * 38; // spread across x
-              const transY = Math.abs(offset) * 6; // curved arc
+              const rot = offset * 4.2; // -17deg to +17deg
+              const transX = offset * 28; // compact on mobile, smooth overlap
+              const transY = Math.abs(offset) * 5; // gentle curved arc
               const isPicked = pickedCardIds.has(card.id);
 
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute w-[110px] sm:w-[130px] h-[170px] sm:h-[200px] rounded-md border-2 border-[#c8a951]/70 overflow-hidden shadow-2xl transition-shadow ${
-                    isPicked ? "opacity-20 pointer-events-none scale-90" : "cursor-pointer hover:border-[#c8a951] hover:shadow-[#c8a951]/40"
+                  className={`absolute w-[100px] sm:w-[130px] h-[155px] sm:h-[200px] rounded-md border border-[#c8a951]/70 overflow-hidden shadow-xl transition-shadow ${
+                    isPicked ? "opacity-20 pointer-events-none scale-90" : "cursor-pointer hover:border-[#c8a951] hover:shadow-2xl hover:shadow-[#c8a951]/40"
                   }`}
                   style={{
                     transformOrigin: "bottom center",
@@ -305,15 +304,15 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   }}
                   animate={{
                     x: transX,
-                    y: isPicked ? -50 : transY,
+                    y: isPicked ? -40 : transY,
                     rotate: rot,
                   }}
                   whileHover={
                     !isPicked
                       ? {
-                          y: transY - 32,
+                          y: transY - 30,
                           scale: 1.12,
-                          zIndex: 50,
+                          zIndex: 60,
                           transition: { duration: 0.2, ease: "easeOut" },
                         }
                       : {}
@@ -324,9 +323,9 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   <img
                     src="/tarot-card-back.webp"
                     alt="Tarot Card Back"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#c8a951]/15 via-transparent to-transparent pointer-events-none" />
                 </motion.div>
               );
             })}
@@ -337,28 +336,28 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
       {/* ── DEALING SPREAD SLOTS (DEALT CARDS) ── */}
       <div className="mb-14">
         <div className="text-center mb-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-1">
             Your Sacred Reading Spread
           </p>
-          <p className="text-xs text-white/60 font-light">
+          <p className="text-xs sm:text-sm text-[#665242] font-light">
             Click any face-down card to flip and unveil its divine archetype.
           </p>
         </div>
 
         <div
-          className={`grid gap-8 justify-center items-center ${
-            spreadMode === "single" ? "grid-cols-1 max-w-[320px] mx-auto" : "grid-cols-1 md:grid-cols-3"
+          className={`grid gap-6 sm:gap-8 justify-center items-center ${
+            spreadMode === "single" ? "grid-cols-1 max-w-[300px] mx-auto" : "grid-cols-1 md:grid-cols-3"
           }`}
         >
           {slots.map((slot, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-3 text-center">
+            <div key={index} className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-3 text-center">
                 {slot.position}
               </span>
 
               {/* Slot Box with 3D Perspective */}
               <div
-                className="relative w-[230px] sm:w-[260px] h-[350px] sm:h-[390px] cursor-pointer"
+                className="relative w-full max-w-[250px] aspect-[2/3] cursor-pointer"
                 style={{ perspective: 1200 }}
                 onClick={() => handleFlipCard(index)}
                 data-cursor="hover"
@@ -373,7 +372,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   >
                     {/* Face Down Back */}
                     <div
-                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border-2 border-[#c8a951]/70 shadow-2xl bg-[#1a0e05]"
+                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-xl bg-[#fdf8f4]"
                       style={{ backfaceVisibility: "hidden" }}
                     >
                       <img
@@ -381,8 +380,8 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                         alt="Tarot Back"
                         className="w-full h-full object-cover object-center"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-6">
-                        <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#c8a951] bg-[#1a0e05]/90 px-4 py-1.5 border border-[#c8a951]/50 rounded-full shadow-lg">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end justify-center pb-6">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#2a1f1a] bg-[#fcf8f4]/95 px-4 py-1.5 border border-[#c8a951]/70 rounded-full shadow-lg">
                           Click to Reveal
                         </span>
                       </div>
@@ -390,7 +389,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
                     {/* Face Up Front */}
                     <div
-                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border-2 border-[#c8a951] shadow-2xl bg-[#140810]"
+                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-2xl bg-white"
                       style={{
                         backfaceVisibility: "hidden",
                         transform: "rotateY(180deg)",
@@ -401,12 +400,12 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                         alt={slot.card.name}
                         className="w-full h-full object-cover object-center"
                       />
-                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#140810] via-[#140810]/85 to-transparent pt-8 pb-4 px-4 text-center">
-                        <p className="text-[9px] font-mono tracking-widest text-[#c8a951]/80 mb-0.5">
+                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-white via-white/85 to-transparent pt-8 pb-4 px-4 text-center">
+                        <p className="text-[9px] font-mono tracking-widest text-[#a5762a] mb-0.5">
                           {slot.card.number}
                         </p>
                         <h4
-                          className="text-lg font-light text-white"
+                          className="text-base sm:text-lg font-light text-[#2a1f1a]"
                           style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                         >
                           {slot.card.name}
@@ -416,12 +415,12 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   </motion.div>
                 ) : (
                   /* Empty Dealt Slot Placeholder */
-                  <div className="w-full h-full rounded-md border-2 border-dashed border-[#c8a951]/30 bg-[#1e1019]/40 flex flex-col items-center justify-center p-6 text-center">
-                    <Moon className="w-8 h-8 text-[#c8a951]/40 mb-3" />
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951]/60">
+                  <div className="w-full h-full rounded-md border-2 border-dashed border-[#c8a951]/40 bg-[#fbf6f0]/80 flex flex-col items-center justify-center p-6 text-center shadow-inner">
+                    <Moon className="w-8 h-8 text-[#c8a951]/50 mb-3" />
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">
                       Empty Slot
                     </p>
-                    <p className="text-[11px] text-white/40 mt-1 font-light">
+                    <p className="text-[11px] text-[#4a382e]/60 mt-1 font-light">
                       Click a card in the fanned deck above to place here.
                     </p>
                   </div>
@@ -440,10 +439,10 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6 }}
-            className="bg-[#241710]/95 border border-[#c8a951]/40 p-6 md:p-10 rounded-sm shadow-2xl backdrop-blur-md"
+            className="bg-white/95 border border-[#c8a951]/45 p-6 sm:p-10 rounded-sm shadow-2xl backdrop-blur-md"
           >
             <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 items-start">
-              <div className="w-full max-w-[220px] mx-auto aspect-[2/3] rounded-sm overflow-hidden border border-[#c8a951]/50 shadow-xl">
+              <div className="w-full max-w-[220px] mx-auto aspect-[2/3] rounded-sm overflow-hidden border border-[#c8a951]/50 shadow-xl bg-[#fdf8f4]">
                 <img
                   src={selectedDetails.image}
                   alt={selectedDetails.name}
@@ -453,16 +452,16 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
               <div>
                 <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#c8a951] border border-[#c8a951]/30 px-3 py-1 bg-[#c8a951]/10">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] border border-[#c8a951]/40 px-3 py-1 bg-[#c8a951]/10 rounded-full">
                     {selectedDetails.arcana} Arcana · {selectedDetails.number}
                   </span>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-white/60">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#4a382e]/70">
                     Element: {selectedDetails.element}
                   </span>
                 </div>
 
                 <h3
-                  className="text-3xl md:text-4xl font-light text-white mb-4"
+                  className="text-2xl sm:text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4"
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   {selectedDetails.name}
@@ -472,31 +471,31 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   {selectedDetails.uprightKeywords.map((kw) => (
                     <span
                       key={kw}
-                      className="text-[9px] font-bold uppercase tracking-wider text-white/80 bg-white/5 border border-white/10 px-2.5 py-1"
+                      className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2.5 py-1 rounded-sm"
                     >
                       {kw}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-sm md:text-base text-white/85 leading-relaxed mb-6 font-light">
+                <p className="text-sm sm:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
                   {selectedDetails.summary}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-[#1a0e05]/70 border border-[#c8a951]/20 rounded-sm mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-[#fdf8f4] border-l-2 border-[#c8a951] rounded-sm mb-6 shadow-sm">
                   <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
                       Sacred Affirmation
                     </p>
-                    <p className="text-xs text-white/90 italic font-light">
+                    <p className="text-xs text-[#2a1f1a] italic font-light">
                       "{selectedDetails.affirmation}"
                     </p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
                       Aligned Crystal Ally
                     </p>
-                    <p className="text-xs text-white/90 font-medium">
+                    <p className="text-xs text-[#2a1f1a] font-medium">
                       {selectedDetails.crystalRemedy}
                     </p>
                   </div>
@@ -504,12 +503,12 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
                 <div className="flex flex-wrap gap-4">
                   <Link href="/tarot#book">
-                    <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/40 transition-all cursor-pointer">
-                      Book Deep Consultation with Ekta <ArrowRight className="w-3.5 h-3.5" />
+                    <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/40 transition-all cursor-pointer">
+                      Book Consultation with Ekta <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </Link>
                   <Link href="/shop">
-                    <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#c8a951] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
+                    <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
                       Shop Aligned Crystals
                     </span>
                   </Link>
