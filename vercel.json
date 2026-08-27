@@ -5,6 +5,12 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "regions": ["bom1"],
+  "crons": [
+    {
+      "path": "/api/cron/ping",
+      "schedule": "0 */3 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

@@ -5,9 +5,12 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import { useLenis } from "@/hooks/useLenis";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
+import ChatWidget from "@/components/ChatWidget";
+import AuthModal from "@/components/AuthModal";
 
 import NotFound from "@/views/not-found";
 import Home from "@/views/Home";
@@ -25,6 +28,8 @@ import Shipping from "@/views/Shipping";
 import Wishlist from "@/views/Wishlist";
 import Tarot from "@/views/Tarot";
 import Numerology from "@/views/Numerology";
+import Account from "@/views/Account";
+import Offers from "@/views/Offers";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +47,7 @@ function AnimatedRoutes() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div key={location} variants={pageTransition} initial="initial" animate="animate" exit="exit">
@@ -60,6 +66,10 @@ function AnimatedRoutes() {
           <Route path="/contact" component={Contact} />
           <Route path="/faq" component={FAQ} />
           <Route path="/orders" component={Orders} />
+          <Route path="/track-order" component={Orders} />
+          <Route path="/account" component={Account} />
+          <Route path="/profile" component={Account} />
+          <Route path="/offers" component={Offers} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/returns" component={Shipping} />
           <Route path="/wishlist" component={Wishlist} />
@@ -76,27 +86,31 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CartProvider>
-          {/* Custom cursor — desktop only */}
-          <CustomCursor />
-          {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-          
-          <AnimatePresence>
-            {!isLoading && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8 }}
-                className="w-full min-h-screen"
-              >
-                <WouterRouter base="">
-                  <AnimatedRoutes />
-                </WouterRouter>
-                <Toaster />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            {/* Custom cursor — desktop only */}
+            <CustomCursor />
+            {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+            
+            <AnimatePresence>
+              {!isLoading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                  className="w-full min-h-screen"
+                >
+                  <WouterRouter base="">
+                    <AnimatedRoutes />
+                  </WouterRouter>
+                  <AuthModal />
+                  <ChatWidget />
+                  <Toaster />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </CartProvider>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

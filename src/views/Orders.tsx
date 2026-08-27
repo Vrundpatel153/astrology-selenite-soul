@@ -1,163 +1,231 @@
+"use client";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Package, Search, Truck, CheckCircle, Clock, MapPin } from "lucide-react";
+import { Package, Search, Truck, CheckCircle, Clock, MapPin, Sparkles, AlertCircle, ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { Order } from "@/lib/db/types";
 import { Link } from "wouter";
 
-const sampleOrders = [
-  {
-    id: "SS-2024-0847",
-    date: "June 22, 2026",
-    status: "Delivered",
-    items: [
-      { name: "Pyrite Bracelet", image: "https://cdn.shopify.com/s/files/1/0720/7813/1509/files/pyrite-bracelet-5264057.webp", price: 1199 },
-      { name: "Amethyst Pendant", image: "https://cdn.shopify.com/s/files/1/0720/7813/1509/files/amethyst-pendant-4882688.webp", price: 1499 },
-    ],
-    total: 2698,
-    tracking: "DTDC123456789",
-  },
-  {
-    id: "SS-2024-0831",
-    date: "June 10, 2026",
-    status: "In Transit",
-    items: [
-      { name: "7 Chakra Crystal Tree", image: "https://cdn.shopify.com/s/files/1/0720/7813/1509/files/7-chakra-crystal-tree-1684722.jpg", price: 1799 },
-    ],
-    total: 1799,
-    tracking: "BLUEDART987654",
-  },
+const TRACKING_STAGES = [
+  { stage: "Order Confirmed", desc: "Order placed & sacred invoice generated" },
+  { stage: "Full Moon Consecration", desc: "Cleansed with singing bowls & moonlight" },
+  { stage: "Lab Tested & Certified", desc: "Mineral authentication verified" },
+  { stage: "Dispatched", desc: "Picked up by BlueDart Express / DTDC" },
+  { stage: "In Transit", desc: "On the way to your destination city" },
+  { stage: "Delivered", desc: "Received at your sacred doorstep" },
 ];
 
-const statusConfig: Record<string, { icon: typeof CheckCircle; color: string; bg: string }> = {
-  "Delivered":   { icon: CheckCircle, color: "text-green-600",  bg: "bg-green-50" },
-  "In Transit":  { icon: Truck,       color: "text-blue-600",   bg: "bg-blue-50" },
-  "Processing":  { icon: Clock,       color: "text-amber-600",  bg: "bg-amber-50" },
-  "Out for Delivery": { icon: MapPin, color: "text-purple-600", bg: "bg-purple-50" },
-};
-
 export default function Orders() {
+  const { user, userOrders } = useAuth();
   const [trackId, setTrackId] = useState("");
-  const [tracked, setTracked] = useState(false);
+  const [trackedOrder, setTrackedOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+
+  const handleTrack = async (idToTrack?: string) => {
+    const searchId = (idToTrack || trackId).trim();
+    if (!searchId) return;
+    setLoading(true);
+    setNotFound(false);
+    setTrackedOrder(null);
+
+    try {
+      const res = await fetch(`/api/orders/${encodeURIComponent(searchId)}`);
+      const data = await res.json();
+      if (data.success && data.order) {
+        setTrackedOrder(data.order);
+      } else {
+        setNotFound(true);
+      }
+    } catch {
+      setNotFound(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getStageIndex = (status: string) => {
+    switch (status) {
+      case "Order Confirmed": return 0;
+      case "Full Moon Consecration": return 1;
+      case "Lab Tested & Certified": return 2;
+      case "Dispatched": return 3;
+      case "In Transit": return 4;
+      case "Delivered": return 5;
+      default: return 0;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
 
-      <section className="pt-16 pb-10 px-4 sm:px-6 text-center bg-[#f5ede4]">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">My Account</p>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">Track Your Orders</h1>
-          <p className="text-[#2a1f1a]/60 max-w-lg mx-auto text-sm">Follow your crystal journey from our studio to your doorstep.</p>
+      {/* Header Banner */}
+      <section className="pt-20 pb-12 px-4 sm:px-6 text-center bg-[#f7efe6] border-b border-[#e8d9cf]">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
+          <div className="flex items-center gap-2 justify-center text-[#a5762a] mb-2">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Sacred Logistics</span>
+            <Sparkles className="w-4 h-4" />
+          </div>
+          <h1
+            className="text-3xl sm:text-5xl font-light text-[#2a1f1a] mb-3"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Track Your Sacred Order
+          </h1>
+          <p className="text-sm text-[#4a382e]/80 font-light">
+            Enter your Order ID (e.g. SS-2026-XXXX), tracking number, or mobile phone to track your package live.
+          </p>
         </motion.div>
       </section>
 
-      <section className="py-10 md:py-16 px-4 sm:px-6">
-        <div className="max-w-[900px] mx-auto">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 max-w-[1000px] mx-auto">
+        {/* Track Form Box */}
+        <div className="bg-white border border-[#c8a951]/40 p-6 sm:p-10 rounded-sm shadow-md mb-12">
+          <h2 className="text-xl font-serif font-light text-[#2a1f1a] mb-4">Live Order Tracker</h2>
+          <form onSubmit={(e) => { e.preventDefault(); handleTrack(); }} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="e.g. SS-2026-4821 or 9876543210"
+              value={trackId}
+              onChange={(e) => setTrackId(e.target.value)}
+              className="flex-1 bg-[#fdf8f4] border border-[#e8d9cf] px-4 py-3 text-sm text-[#2a1f1a] outline-none focus:border-[#c8a951] rounded-sm"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-[#c8a951] text-[#1a0e05] px-8 py-3 text-[10px] font-bold uppercase tracking-[0.22em] rounded-sm shadow-sm hover:shadow-[#c8a951]/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              {loading ? "Locating..." : <><Search className="w-4 h-4" /> Track Package</>}
+            </button>
+          </form>
 
-          {/* Track form */}
-          <ScrollReveal direction="up" className="mb-10 md:mb-14">
-            <div className="bg-white border border-[#e8d9cf] p-5 md:p-8">
-              <h2 className="text-lg md:text-xl font-serif font-light mb-4 md:mb-6">Track an Order</h2>
-              <div className="flex flex-col sm:flex-row gap-0">
-                <input
-                  type="text"
-                  placeholder="Order ID or tracking number"
-                  value={trackId}
-                  onChange={e => setTrackId(e.target.value)}
-                  className="flex-1 border border-[#e8d9cf] px-4 py-3 text-sm outline-none focus:border-[#c8a951] transition-colors"
-                />
-                <motion.button
-                  onClick={() => setTracked(true)}
-                  className="bg-[#c8a951] text-[#2a1f1a] px-6 py-3 text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 w-full sm:w-auto"
-                  whileHover={{ backgroundColor: "#d4b565" }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Search className="w-4 h-4" /> Track
-                </motion.button>
-              </div>
-              {tracked && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 p-5 bg-[#f5ede4] border border-[#c8a951]/30"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <Package className="w-5 h-5 text-[#c8a951]" />
-                    <span className="font-medium">Order {trackId || "SS-2024-0847"}</span>
-                    <span className="text-xs bg-green-50 text-green-600 px-2 py-0.5 font-medium">Delivered</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-[#2a1f1a]/60">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    Delivered on June 25, 2026 at 2:34 PM — Hauz Khas, New Delhi
-                  </div>
-                </motion.div>
-              )}
+          {/* Not found notice */}
+          {notFound && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2 rounded-sm">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>No order found matching "{trackId}". Please double-check your Order ID or contact support.</span>
             </div>
-          </ScrollReveal>
+          )}
 
-          {/* Recent orders */}
-          <ScrollReveal direction="up">
-            <h2 className="text-xl font-serif font-light mb-6">Recent Orders</h2>
-            <div className="flex flex-col gap-5">
-              {sampleOrders.map((order, i) => {
-                const sc = statusConfig[order.status] || statusConfig["Processing"];
-                const StatusIcon = sc.icon;
-                return (
-                  <motion.div
-                    key={order.id}
-                    className="bg-white border border-[#e8d9cf] p-6"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
-                      <div>
-                        <p className="font-medium text-[#2a1f1a]">{order.id}</p>
-                        <p className="text-xs text-[#2a1f1a]/50">{order.date}</p>
-                      </div>
-                      <div className={`flex items-center gap-2 ${sc.bg} px-3 py-1.5 w-fit`}>
-                        <StatusIcon className={`w-4 h-4 ${sc.color}`} />
-                        <span className={`text-xs font-bold ${sc.color}`}>{order.status}</span>
-                      </div>
-                    </div>
-                    <div className="flex gap-3 mb-5">
-                      {order.items.map(item => (
-                        <div key={item.name} className="flex items-center gap-3 flex-1 min-w-0">
-                          <img src={item.image} alt={item.name} className="w-14 h-14 object-cover flex-shrink-0" />
-                          <div className="min-w-0">
-                            <p className="text-sm font-medium text-[#2a1f1a] truncate">{item.name}</p>
-                            <p className="text-sm text-[#2a1f1a]/60">₹{item.price.toLocaleString()}</p>
+          {/* Tracked Result Details */}
+          <AnimatePresence>
+            {trackedOrder && (
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 pt-8 border-t border-[#e8d9cf]"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-[#e8d9cf]">
+                  <div>
+                    <span className="text-xs font-bold text-[#a5762a] uppercase tracking-widest">
+                      Order #{trackedOrder.id}
+                    </span>
+                    <h3 className="text-2xl font-serif font-light text-[#2a1f1a] mt-0.5">
+                      Status: {trackedOrder.orderStatus}
+                    </h3>
+                    <p className="text-xs text-[#4a382e]/70 mt-1">
+                      Courier: <strong>{trackedOrder.courier}</strong> (AWB: {trackedOrder.trackingNumber})
+                    </p>
+                  </div>
+
+                  <div className="text-right">
+                    <p className="text-[10px] uppercase tracking-widest text-[#a5762a] font-bold">Estimated Delivery</p>
+                    <p className="text-base font-bold text-[#2a1f1a]">{trackedOrder.estimatedDelivery}</p>
+                  </div>
+                </div>
+
+                {/* Visual 6-Stage Progress Stepper */}
+                <div className="space-y-6 mb-8">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a]">
+                    Cosmic Journey Timeline
+                  </p>
+                  <div className="relative pl-6 sm:pl-8 space-y-6 border-l-2 border-[#c8a951]/40">
+                    {TRACKING_STAGES.map((s, idx) => {
+                      const currentIdx = getStageIndex(trackedOrder.orderStatus);
+                      const isComplete = idx <= currentIdx;
+                      const isCurrent = idx === currentIdx;
+
+                      return (
+                        <div key={s.stage} className="relative">
+                          {/* Dot Badge */}
+                          <div
+                            className={`absolute -left-[31px] sm:-left-[39px] top-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                              isComplete
+                                ? "bg-[#c8a951] text-[#1a0e05] shadow-sm"
+                                : "bg-[#fdf8f4] border border-[#e8d9cf] text-[#4a382e]/40"
+                            }`}
+                          >
+                            {isComplete ? "✓" : idx + 1}
+                          </div>
+
+                          <div>
+                            <h4
+                              className={`text-sm font-semibold ${
+                                isCurrent ? "text-[#a5762a]" : isComplete ? "text-[#2a1f1a]" : "text-[#4a382e]/40"
+                              }`}
+                            >
+                              {s.stage}
+                            </h4>
+                            <p className="text-xs text-[#4a382e]/70 font-light mt-0.5">{s.desc}</p>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between pt-4 border-t border-[#e8d9cf]">
-                      <p className="text-sm font-bold text-[#2a1f1a]">Total: ₹{order.total.toLocaleString()}</p>
-                      <motion.span
-                        className="text-[11px] font-bold uppercase tracking-wider text-[#c8a951] border border-[#c8a951] px-4 py-2 cursor-pointer"
-                        whileHover={{ backgroundColor: "#c8a951", color: "#2a1f1a" }}
-                        transition={{ duration: 0.18 }}
-                      >
-                        View Details
-                      </motion.span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </ScrollReveal>
+                      );
+                    })}
+                  </div>
+                </div>
 
-          <ScrollReveal direction="up" className="mt-14 text-center">
-            <p className="text-[#2a1f1a]/50 text-sm mb-5">Not finding your order? Contact us and we'll look it up for you.</p>
-            <Link href="/contact">
-              <motion.span className="inline-block bg-[#2a1f1a] text-[#fdf8f4] px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest cursor-pointer" whileHover={{ backgroundColor: "#3d2f28" }} transition={{ duration: 0.18 }}>
-                Contact Support
-              </motion.span>
-            </Link>
-          </ScrollReveal>
+                {/* Items in this Order */}
+                <div className="p-4 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#a5762a] mb-3">
+                    Items in this Package
+                  </p>
+                  <div className="space-y-2">
+                    {trackedOrder.items.map((it, i) => (
+                      <div key={i} className="flex items-center justify-between text-xs">
+                        <span className="font-medium text-[#2a1f1a]">• {it.name} (Qty: {it.quantity})</span>
+                        <span className="font-bold text-[#2a1f1a]">₹{it.price * it.quantity}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+
+        {/* Authenticated User's Orders Section */}
+        {user && userOrders.length > 0 && (
+          <div>
+            <h3 className="text-xl font-serif font-light text-[#2a1f1a] mb-6">Your Recent Sanctuary Orders</h3>
+            <div className="space-y-4">
+              {userOrders.map((order) => (
+                <div
+                  key={order.id}
+                  className="bg-white border border-[#e8d9cf] p-5 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs"
+                >
+                  <div>
+                    <span className="text-xs font-bold text-[#2a1f1a]">Order #{order.id}</span>
+                    <p className="text-xs text-[#4a382e]/60">
+                      {order.items.length} item{order.items.length > 1 ? "s" : ""} · Total: ₹{order.total} · Placed on {new Date(order.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => { setTrackId(order.id); handleTrack(order.id); }}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#a5762a] hover:text-[#2a1f1a] underline cursor-pointer self-start sm:self-auto"
+                  >
+                    View Live Tracking →
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <Footer />

@@ -1,24 +1,53 @@
+"use client";
+import { useState } from "react";
 import { useLocation } from "wouter";
-import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag, Sparkles, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { useCart } from "@/context/CartContext";
-import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
+import { Link } from "wouter";
 
 export default function Cart() {
   const [, navigate] = useLocation();
   const { items, removeFromCart, updateQuantity, totalItems, totalPrice } = useCart();
+  const { isAuthenticated, setLoginModalOpen } = useAuth();
+
   const [promo, setPromo] = useState("");
-  const [promoApplied, setPromoApplied] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [promoLoading, setPromoLoading] = useState(false);
 
-  const shipping = totalPrice >= 999 ? 0 : 99;
-  const discount = promoApplied ? Math.round(totalPrice * 0.1) : 0;
-  const total = totalPrice + shipping - discount;
+  const discount = appliedCoupon?.discount || 0;
+  const shipping = totalPrice - discount >= 999 ? 0 : 99;
+  const total = Math.max(0, totalPrice - discount + shipping);
 
-  const handlePromo = () => {
-    if (promo.trim().toUpperCase() === "SOUL10") setPromoApplied(true);
+  const handleApplyPromo = async () => {
+    if (!promo.trim()) return;
+    setPromoLoading(true);
+    try {
+      const res = await fetch(`/api/coupons/validate?code=${encodeURIComponent(promo)}&subtotal=${totalPrice}`);
+      const data = await res.json();
+      if (data.valid) {
+        setAppliedCoupon({ code: data.coupon.code, discount: data.discount });
+        toast.success(data.message);
+      } else {
+        toast.error(data.message || "Invalid promo code");
+      }
+    } catch {
+      toast.error("Failed to validate promo code");
+    } finally {
+      setPromoLoading(false);
+    }
+  };
+
+  const handleProceedCheckout = () => {
+    if (!isAuthenticated) {
+      setLoginModalOpen(true);
+    }
+    navigate("/checkout");
   };
 
   return (
@@ -29,7 +58,7 @@ export default function Cart() {
         {/* Title */}
         <ScrollReveal direction="up" className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-serif font-light tracking-wide">
-            Your Bag
+            Your Sacred Bag
             {totalItems > 0 && (
               <span className="text-sm text-[#2a1f1a]/50 ml-2 font-sans">
                 ({totalItems} item{totalItems !== 1 ? "s" : ""})
@@ -38,7 +67,7 @@ export default function Cart() {
           </h1>
           <motion.button
             onClick={() => navigate("/shop")}
-            className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#2a1f1a]/60"
+            className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#a5762a]"
             whileHover={{ x: -3, color: "#2a1f1a" }}
             transition={{ duration: 0.18 }}
           >
@@ -51,12 +80,12 @@ export default function Cart() {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 bg-white border border-[#e8d9cf] p-4"
+            className="mb-6 bg-white border border-[#e8d9cf] p-4 rounded-sm"
           >
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[#2a1f1a]/60 mb-2">
-              Add ₹{(999 - totalPrice).toLocaleString()} more for FREE shipping
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#a5762a] mb-2">
+              Add ₹{(999 - totalPrice).toLocaleString()} more for FREE Pan-India Express Delivery
             </p>
-            <div className="h-1 bg-[#e8d9cf] overflow-hidden">
+            <div className="h-1.5 bg-[#e8d9cf] overflow-hidden rounded-full">
               <motion.div
                 className="h-full bg-[#c8a951]"
                 initial={{ width: 0 }}
@@ -70,9 +99,11 @@ export default function Cart() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-6 bg-green-50 border border-green-200 p-3 text-center"
+            className="mb-6 bg-green-50 border border-green-200 p-3 text-center rounded-sm"
           >
-            <p className="text-xs font-bold text-green-700 uppercase tracking-widest">🎉 You've unlocked FREE shipping!</p>
+            <p className="text-xs font-bold text-green-700 uppercase tracking-widest">
+              🎉 You've unlocked FREE Sacred Express Shipping!
+            </p>
           </motion.div>
         )}
 
@@ -82,244 +113,216 @@ export default function Cart() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center py-28 text-center"
           >
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ShoppingBag className="w-16 h-16 text-[#e8d9cf] mb-6" />
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+              <ShoppingBag className="w-16 h-16 text-[#c8a951]/40 mb-6" />
             </motion.div>
-            <h2 className="text-xl font-serif font-light text-[#2a1f1a] mb-2">Your bag is empty</h2>
-            <p className="text-sm text-[#2a1f1a]/60 mb-8">Add crystals and gemstones to begin your journey</p>
+            <h2 className="text-2xl font-serif font-light text-[#2a1f1a] mb-2">Your Sacred Bag is Empty</h2>
+            <p className="text-sm text-[#4a382e]/70 mb-8 font-light">
+              Invite moon-energized crystals, mala beads, and astrology remedies into your aura.
+            </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <motion.button
                 onClick={() => navigate("/shop")}
-                className="bg-[#2a1f1a] text-white px-10 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]"
-                whileHover={{ backgroundColor: "#3d2d25", scale: 1.02 }}
+                className="bg-[#c8a951] text-[#1a0e05] px-10 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm shadow-sm"
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.18 }}
               >
-                Shop Now
+                Explore Crystals
               </motion.button>
               <motion.button
                 onClick={() => navigate("/kundali")}
-                className="border border-[#c8a951] text-[#c8a951] px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em]"
-                whileHover={{ backgroundColor: "#c8a951", color: "#2a1f1a", scale: 1.02 }}
+                className="border border-[#c8a951] text-[#a5762a] px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm"
+                whileHover={{ backgroundColor: "#c8a951", color: "#1a0e05" }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.18 }}
               >
-                ✨ Get Kundali Recommendations
+                ✨ Free Kundali Recommendation
               </motion.button>
             </div>
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
-            {/* Cart Items */}
+            {/* Cart Items List */}
             <div>
               <div className="hidden md:grid grid-cols-[1fr_120px_100px_40px] gap-4 pb-3 border-b border-[#e8d9cf] mb-2">
-                {["Product", "Quantity", "Price", ""].map(h => (
-                  <span key={h} className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#2a1f1a]/50">{h}</span>
+                {["Product", "Quantity", "Price", ""].map((h) => (
+                  <span key={h} className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#a5762a]">
+                    {h}
+                  </span>
                 ))}
               </div>
 
               <AnimatePresence initial={false}>
-                {items.map(item => (
+                {items.map((item) => (
                   <motion.div
                     key={item.product.id}
                     layout
-                    initial={{ opacity: 0, x: -20, height: 0 }}
-                    animate={{ opacity: 1, x: 0, height: "auto" }}
-                    exit={{ opacity: 0, x: 40, height: 0, marginBottom: 0 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 40 }}
                     className="grid grid-cols-1 md:grid-cols-[1fr_120px_100px_40px] gap-4 items-center py-5 border-b border-[#e8d9cf]"
                   >
                     {/* Product info */}
                     <div className="flex gap-4 items-start">
                       <motion.button
                         onClick={() => navigate(`/product/${item.product.id}`)}
-                        className="w-20 h-20 md:w-24 md:h-24 bg-[#f7f1ec] overflow-hidden shrink-0"
+                        className="w-20 h-20 md:w-24 md:h-24 bg-[#fdf8f4] overflow-hidden shrink-0 border border-[#e8d9cf] p-1"
                         whileHover={{ scale: 1.04 }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ duration: 0.2 }}
                       >
-                        <img src={item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
+                        <img src={item.product.image} alt={item.product.name} className="w-full h-full object-contain" />
                       </motion.button>
                       <div className="flex-1 min-w-0">
                         <button onClick={() => navigate(`/product/${item.product.id}`)} className="text-left group">
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#2a1f1a]/50 mb-0.5">
-                            {item.product.category.replace("-", " & ")}
+                          <p className="text-[9px] font-bold uppercase tracking-widest text-[#a5762a] mb-0.5">
+                            {item.product.category}
                           </p>
                           <p className="text-sm font-medium text-[#2a1f1a] leading-tight group-hover:underline">
                             {item.product.name}
                           </p>
                         </button>
-                        <p className="text-xs text-[#2a1f1a]/60 mt-1">{item.product.material}</p>
+                        <p className="text-xs text-[#4a382e]/70 mt-1">{item.product.material}</p>
                         <p className="md:hidden text-sm font-medium mt-2">₹{(item.product.price * item.quantity).toLocaleString()}</p>
+                        
+                        {/* Mobile Qty */}
                         <div className="md:hidden flex items-center gap-2 mt-2">
-                          <div className="flex items-center border border-[#e8d9cf]">
-                            <motion.button
+                          <div className="flex items-center border border-[#e8d9cf] bg-white">
+                            <button
                               onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-[#f7f1ec]"
-                              whileTap={{ scale: 0.85 }}
+                              className="w-8 h-8 flex items-center justify-center"
                             >
                               <Minus className="w-3 h-3" />
-                            </motion.button>
+                            </button>
                             <span className="w-8 text-center text-xs font-medium">{item.quantity}</span>
-                            <motion.button
+                            <button
                               onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-[#f7f1ec]"
-                              whileTap={{ scale: 0.85 }}
+                              className="w-8 h-8 flex items-center justify-center"
                             >
                               <Plus className="w-3 h-3" />
-                            </motion.button>
+                            </button>
                           </div>
-                          <motion.button
+                          <button
                             onClick={() => removeFromCart(item.product.id)}
-                            className="text-[#2a1f1a]/40 ml-1"
-                            whileHover={{ color: "#c84b31", scale: 1.1 }}
-                            whileTap={{ scale: 0.85 }}
+                            className="text-red-500/70 hover:text-red-600 ml-2"
                           >
                             <Trash2 className="w-4 h-4" />
-                          </motion.button>
+                          </button>
                         </div>
                       </div>
                     </div>
 
                     {/* Desktop Qty */}
-                    <div className="hidden md:flex items-center border border-[#e8d9cf] w-fit">
-                      <motion.button
+                    <div className="hidden md:flex items-center border border-[#e8d9cf] bg-white w-fit rounded-sm">
+                      <button
                         onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                        className="w-9 h-9 flex items-center justify-center hover:bg-[#f7f1ec]"
-                        whileTap={{ scale: 0.85 }}
+                        className="w-9 h-9 flex items-center justify-center hover:bg-[#fdf8f4]"
                       >
                         <Minus className="w-3 h-3" />
-                      </motion.button>
-                      <motion.span
-                        key={item.quantity}
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="w-9 text-center text-sm font-medium"
-                      >
-                        {item.quantity}
-                      </motion.span>
-                      <motion.button
+                      </button>
+                      <span className="w-9 text-center text-sm font-medium">{item.quantity}</span>
+                      <button
                         onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                        className="w-9 h-9 flex items-center justify-center hover:bg-[#f7f1ec]"
-                        whileTap={{ scale: 0.85 }}
+                        className="w-9 h-9 flex items-center justify-center hover:bg-[#fdf8f4]"
                       >
                         <Plus className="w-3 h-3" />
-                      </motion.button>
+                      </button>
                     </div>
 
                     {/* Desktop Price */}
                     <div className="hidden md:block">
-                      <motion.p
-                        key={item.quantity}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="text-sm font-medium"
-                      >
+                      <p className="text-sm font-bold text-[#2a1f1a]">
                         ₹{(item.product.price * item.quantity).toLocaleString()}
-                      </motion.p>
-                      {item.quantity > 1 && (
-                        <p className="text-[10px] text-[#2a1f1a]/50">₹{item.product.price.toLocaleString()} each</p>
-                      )}
+                      </p>
                     </div>
 
                     {/* Desktop Remove */}
-                    <motion.button
+                    <button
                       onClick={() => removeFromCart(item.product.id)}
-                      className="hidden md:flex text-[#2a1f1a]/30"
-                      whileHover={{ color: "#c84b31", scale: 1.15 }}
-                      whileTap={{ scale: 0.85 }}
-                      transition={{ duration: 0.15 }}
+                      className="hidden md:flex text-[#4a382e]/40 hover:text-red-600 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </motion.button>
+                    </button>
                   </motion.div>
                 ))}
               </AnimatePresence>
             </div>
 
-            {/* Order Summary */}
+            {/* Order Summary & Coupons */}
             <ScrollReveal direction="right" delay={0.1}>
-              <div className="bg-[#f7f1ec] p-6 sticky top-24">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-[#2a1f1a] mb-5">Order Summary</h2>
+              <div className="bg-white border border-[#e8d9cf] p-6 rounded-sm sticky top-24 shadow-sm">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-[#a5762a] mb-5">
+                  Order Summary
+                </h2>
 
                 <div className="space-y-3 mb-5 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-[#2a1f1a]/70">Subtotal</span>
-                    <span className="font-medium">₹{totalPrice.toLocaleString()}</span>
+                  <div className="flex justify-between text-[#4a382e]">
+                    <span>Subtotal</span>
+                    <span className="font-medium text-[#2a1f1a]">₹{totalPrice.toLocaleString()}</span>
                   </div>
                   {discount > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="flex justify-between text-green-700"
-                    >
-                      <span className="flex items-center gap-1"><Tag className="w-3 h-3" /> Promo (SOUL10)</span>
-                      <span className="font-medium">–₹{discount}</span>
-                    </motion.div>
+                    <div className="flex justify-between text-[#558253] font-semibold">
+                      <span className="flex items-center gap-1">
+                        <Tag className="w-3 h-3" /> Coupon ({appliedCoupon?.code})
+                      </span>
+                      <span>–₹{discount}</span>
+                    </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-[#2a1f1a]/70">Shipping</span>
-                    <span className={shipping === 0 ? "text-[#2a855d] font-medium" : "font-medium"}>
-                      {shipping === 0 ? "FREE" : `₹${shipping}`}
-                    </span>
+                  <div className="flex justify-between text-[#4a382e]">
+                    <span>Shipping</span>
+                    <span>{shipping === 0 ? <strong className="text-[#558253]">FREE</strong> : `₹${shipping}`}</span>
                   </div>
                 </div>
 
-                {/* Promo code */}
-                <div className="flex gap-2 mb-5">
-                  <input
-                    type="text"
-                    placeholder="Promo code (try SOUL10)"
-                    value={promo}
-                    onChange={e => setPromo(e.target.value)}
-                    disabled={promoApplied}
-                    className="flex-1 border border-[#e8d9cf] bg-white px-3 py-2.5 text-xs outline-none focus:border-[#2a1f1a] placeholder:text-[#2a1f1a]/40 transition-colors disabled:opacity-50"
-                  />
-                  <motion.button
-                    onClick={handlePromo}
-                    disabled={promoApplied}
-                    className="px-4 py-2.5 border border-[#2a1f1a] text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
-                    whileHover={!promoApplied ? { backgroundColor: "#2a1f1a", color: "white" } : {}}
-                    whileTap={!promoApplied ? { scale: 0.95 } : {}}
-                    transition={{ duration: 0.18 }}
-                  >
-                    {promoApplied ? "✓" : "Apply"}
-                  </motion.button>
-                </div>
-
-                <div className="border-t border-[#e8d9cf] pt-4 mb-5">
-                  <div className="flex justify-between text-sm font-bold">
-                    <span>Total</span>
-                    <motion.span
-                      key={total}
-                      initial={{ scale: 1.08, color: "#c8a951" }}
-                      animate={{ scale: 1, color: "#2a1f1a" }}
-                      transition={{ duration: 0.3 }}
+                {/* Promo Code Input */}
+                <div className="mb-5">
+                  <div className="flex justify-between items-center mb-1.5">
+                    <label className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a]">
+                      Promo Code
+                    </label>
+                    <Link href="/offers">
+                      <span className="text-[9px] font-bold text-[#a5762a] underline cursor-pointer">
+                        View Active Offers →
+                      </span>
+                    </Link>
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="e.g. SELENITE10"
+                      value={promo}
+                      onChange={(e) => setPromo(e.target.value.toUpperCase())}
+                      className="flex-1 border border-[#e8d9cf] bg-[#fdf8f4] px-3 py-2 text-xs outline-none focus:border-[#c8a951] uppercase font-mono rounded-sm"
+                    />
+                    <button
+                      onClick={handleApplyPromo}
+                      disabled={promoLoading || !promo.trim()}
+                      className="px-4 py-2 bg-[#2a1f1a] text-white text-[10px] font-bold uppercase tracking-wider rounded-sm disabled:opacity-40"
                     >
-                      ₹{total.toLocaleString()}
-                    </motion.span>
+                      {promoLoading ? "..." : "Apply"}
+                    </button>
                   </div>
-                  <p className="text-[10px] text-[#2a1f1a]/50 mt-1">Including all taxes</p>
+
+                  {appliedCoupon && (
+                    <p className="text-[10px] text-[#558253] font-semibold mt-2 flex items-center gap-1">
+                      <CheckCircle className="w-3.5 h-3.5" /> Code {appliedCoupon.code} applied (-₹{appliedCoupon.discount})
+                    </p>
+                  )}
+                </div>
+
+                <div className="border-t border-[#e8d9cf] pt-4 mb-6">
+                  <div className="flex justify-between text-base font-bold text-[#2a1f1a]">
+                    <span>Total Amount</span>
+                    <span>₹{total.toLocaleString()}</span>
+                  </div>
+                  <p className="text-[10px] text-[#4a382e]/60 mt-0.5">Inclusive of GST & Energization Ritual</p>
                 </div>
 
                 <motion.button
-                  onClick={() => navigate("/checkout")}
-                  className="w-full bg-[#2a1f1a] text-white py-4 flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em]"
-                  whileHover={{ backgroundColor: "#3d2d25", scale: 1.01 }}
+                  onClick={handleProceedCheckout}
+                  className="w-full bg-[#c8a951] text-[#1a0e05] py-4 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] rounded-sm shadow-md hover:shadow-[#c8a951]/30 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.18 }}
                 >
                   Proceed to Checkout <ArrowRight className="w-4 h-4" />
                 </motion.button>
-
-                <div className="mt-4 flex items-center justify-center gap-4 text-[9px] text-[#2a1f1a]/50 uppercase tracking-widest">
-                  <span>🔒 Secure Payment</span>
-                  <span>·</span>
-                  <span>Easy Returns</span>
-                </div>
               </div>
             </ScrollReveal>
           </div>
