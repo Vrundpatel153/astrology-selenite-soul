@@ -2,12 +2,13 @@
 /**
  * Selenite Soul — Ultra-Responsive Luxury Cursor
  * A fast, hardware-accelerated, unified celestial cursor that tracks tightly
- * with zero lag separation, fluid interactive hover morphs, and subtle gold aura.
+ * with zero lag, sleek interactive states, and a dedicated gold pointing finger
+ * for card selection.
  */
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type CursorState = "default" | "hover" | "view" | "drag" | "text" | "hidden";
+type CursorState = "default" | "hover" | "card" | "drag" | "text" | "hidden";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,7 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
-  // Position state (tight, instantaneous + smooth outer ring)
+  // Position state (instantaneous dot + smooth outer ring)
   const mouse = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
   const rafId = useRef<number>(0);
@@ -44,12 +45,12 @@ export default function CustomCursor() {
       const el = document.elementFromPoint(e.clientX, e.clientY);
       if (!el) return;
 
-      if (el.closest("[data-cursor='drag']")) {
-        setState("drag");
+      if (el.closest("[data-cursor='card']") || el.closest("[data-cursor='pick']")) {
+        setState("card");
         return;
       }
-      if (el.closest("[data-cursor='view']") || (el.closest("img") && !el.closest("header, nav"))) {
-        setState("view");
+      if (el.closest("[data-cursor='drag']")) {
+        setState("drag");
         return;
       }
       if (el.closest("a, button, [role='button'], [data-cursor='hover'], input[type='submit']")) {
@@ -75,8 +76,8 @@ export default function CustomCursor() {
 
     const onClick = (e: MouseEvent) => {
       const id = Date.now();
-      setRipples(r => [...r.slice(-2), { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => setRipples(r => r.filter(x => x.id !== id)), 600);
+      setRipples((r) => [...r.slice(-2), { id, x: e.clientX, y: e.clientY }]);
+      setTimeout(() => setRipples((r) => r.filter((x) => x.id !== id)), 500);
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
@@ -84,10 +85,10 @@ export default function CustomCursor() {
     window.addEventListener("mouseenter", onMouseEnter);
     window.addEventListener("click", onClick);
 
-    // High-performance tight ring follow (lerp = 0.45 for immediate responsiveness)
+    // High-performance tight ring follow (lerp = 0.55 for immediate response)
     const render = () => {
-      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.45;
-      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.45;
+      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.55;
+      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.55;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
@@ -114,45 +115,73 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`pointer-events-none fixed inset-0 z-[999999] transition-opacity duration-200 ${
+      className={`pointer-events-none fixed inset-0 z-[999999] transition-opacity duration-150 ${
         isVisible && state !== "hidden" ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Precision Inner Dot */}
+      {/* Precision Inner Dot (hidden when pointing finger is active) */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 rounded-full transition-[width,height,background-color] duration-150 ease-out"
+        className="fixed top-0 left-0 rounded-full transition-[width,height,opacity,background-color] duration-150 ease-out"
         style={{
-          width: state === "text" ? 2 : state === "hover" ? 6 : 5,
-          height: state === "text" ? 20 : state === "hover" ? 6 : 5,
-          backgroundColor: state === "text" ? "#c8a951" : "#d4af37",
-          boxShadow: state === "text" ? "0 0 8px rgba(200,169,81,0.9)" : "0 0 10px rgba(212,175,55,0.7)",
+          width: state === "text" ? 2 : state === "card" ? 0 : state === "hover" ? 5 : 4,
+          height: state === "text" ? 18 : state === "card" ? 0 : state === "hover" ? 5 : 4,
+          opacity: state === "card" ? 0 : 1,
+          backgroundColor: state === "text" ? "#c8a951" : "#c8a951",
+          boxShadow: state === "text" ? "0 0 6px rgba(200,169,81,0.8)" : "0 0 8px rgba(200,169,81,0.6)",
           borderRadius: state === "text" ? "1px" : "50%",
           willChange: "transform",
         }}
       />
 
-      {/* Responsive Tight Outer Ring */}
+      {/* Responsive Tight Outer Element */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 rounded-full flex items-center justify-center transition-[width,height,border-color,background-color] duration-200 ease-out"
+        className="fixed top-0 left-0 flex items-center justify-center transition-[width,height,border-color,background-color] duration-150 ease-out"
         style={{
-          width: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
-          height: state === "view" ? 68 : state === "drag" ? 64 : state === "hover" ? 44 : state === "text" ? 0 : 28,
-          border: state === "text" ? "none" : `1.2px solid ${state === "hover" ? "rgba(200,169,81,0.85)" : state === "view" ? "rgba(200,169,81,0.9)" : "rgba(200,169,81,0.4)"}`,
-          backgroundColor: state === "view" ? "rgba(253,248,244,0.92)" : state === "hover" ? "rgba(200,169,81,0.12)" : state === "drag" ? "rgba(200,169,81,0.16)" : "transparent",
-          backdropFilter: state === "view" ? "blur(6px)" : "none",
-          boxShadow: state === "hover" ? "0 0 16px rgba(200,169,81,0.3)" : state === "view" ? "0 4px 20px rgba(165,118,42,0.25)" : "none",
+          width: state === "card" ? 36 : state === "drag" ? 54 : state === "hover" ? 34 : state === "text" ? 0 : 22,
+          height: state === "card" ? 36 : state === "drag" ? 54 : state === "hover" ? 34 : state === "text" ? 0 : 22,
+          border:
+            state === "text" || state === "card"
+              ? "none"
+              : `1.2px solid ${state === "hover" ? "rgba(200,169,81,0.9)" : "rgba(200,169,81,0.4)"}`,
+          borderRadius: "50%",
+          backgroundColor:
+            state === "drag"
+              ? "rgba(200,169,81,0.12)"
+              : state === "hover"
+              ? "rgba(200,169,81,0.06)"
+              : "transparent",
+          boxShadow: state === "hover" ? "0 0 14px rgba(200,169,81,0.25)" : "none",
           willChange: "transform",
         }}
       >
-        {state === "view" && (
-          <span className="text-[8px] font-bold tracking-[0.2em] text-[#a5762a] uppercase select-none">
-            VIEW
-          </span>
+        {/* Sleek Golden Pointing Finger for Card Selection */}
+        {state === "card" && (
+          <div className="flex flex-col items-center pointer-events-none -mt-4 animate-bounce" style={{ animationDuration: "1.2s" }}>
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="#fffdf9"
+              stroke="#a5762a"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="filter drop-shadow-[0_2px_8px_rgba(165,118,42,0.5)]"
+            >
+              <path d="M10 13V3a2 2 0 0 1 4 0v7" />
+              <path d="M14 10a2 2 0 0 1 4 0v3" />
+              <path d="M18 12a2 2 0 0 1 4 0v4a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8v-3a2 2 0 0 1 3.4-1.4L10 14" />
+            </svg>
+            <span className="text-[7.5px] font-bold tracking-[0.16em] text-[#a5762a] uppercase bg-[#fffdf9] border border-[#c8a951]/50 px-1.5 py-0.2 rounded-xs mt-0.5 shadow-sm">
+              Pick
+            </span>
+          </div>
         )}
+
         {state === "drag" && (
-          <span className="text-[9px] font-bold tracking-widest text-[#a5762a] select-none">
+          <span className="text-[8px] font-bold tracking-widest text-[#a5762a] select-none">
             ⟨ DRAG ⟩
           </span>
         )}
@@ -160,15 +189,15 @@ export default function CustomCursor() {
 
       {/* Subtle Instant Click Ripple */}
       <AnimatePresence>
-        {ripples.map(r => (
+        {ripples.map((r) => (
           <motion.div
             key={r.id}
             className="fixed rounded-full border border-[#c8a951]/70 pointer-events-none"
             style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
-            initial={{ width: 6, height: 6, opacity: 0.8 }}
-            animate={{ width: 52, height: 52, opacity: 0 }}
+            initial={{ width: 4, height: 4, opacity: 0.7 }}
+            animate={{ width: 38, height: 38, opacity: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           />
         ))}
       </AnimatePresence>

@@ -222,26 +222,26 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
               {/* Category Dropdown */}
-              <div className="relative group py-2">
+              <div className="relative group flex items-center h-9">
                 <Link href="/shop">
-                  <motion.span
-                    className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/shop") ? "text-[#2a1f1a]" : "text-[#2a1f1a]/70"}`}
-                    whileHover={{ opacity: 1 }}
+                  <span
+                    className={`px-3 py-1.5 text-[11px] font-medium tracking-[0.16em] uppercase relative cursor-pointer whitespace-nowrap transition-colors duration-200 ${
+                      isActive("/shop")
+                        ? "text-[#a5762a] font-semibold"
+                        : "text-[#2a1f1a]/80 hover:text-[#a5762a]"
+                    }`}
                   >
                     Shop
-                    <motion.span
-                      className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
-                      initial={{ scaleX: isActive("/shop") ? 1 : 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                    />
-                  </motion.span>
+                    {isActive("/shop") && (
+                      <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#a5762a] rounded-full" />
+                    )}
+                  </span>
                 </Link>
 
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200">
-                  <div className="bg-white border border-[#e8d9cf] shadow-xl p-3 w-48 flex flex-col gap-1 rounded-sm">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                  <div className="bg-white border border-[#e8d9cf] shadow-xl p-2.5 w-48 flex flex-col gap-0.5 rounded-sm">
                     {DROPDOWN_ITEMS.map((item) => (
                       <Link key={item.label} href={item.href}>
                         <span className="text-[11px] font-medium text-[#2a1f1a]/80 hover:text-[#a5762a] hover:bg-[#fdf8f4] px-3 py-2 block rounded-sm transition-colors">
@@ -254,68 +254,76 @@ export default function Header() {
               </div>
 
               {/* Offers */}
-              <Link href="/offers">
-                <motion.span
-                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 flex items-center gap-1 ${isActive("/offers") ? "text-[#a5762a]" : "text-[#a5762a]/80"}`}
-                  whileHover={{ opacity: 1 }}
-                >
-                  <Tag className="w-3 h-3" /> Offers
-                  <motion.span
-                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
-                    initial={{ scaleX: isActive("/offers") ? 1 : 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  />
-                </motion.span>
-              </Link>
+              <div className="relative flex items-center h-9">
+                <Link href="/offers">
+                  <span
+                    className={`px-3 py-1.5 text-[11px] font-medium tracking-[0.16em] uppercase relative cursor-pointer whitespace-nowrap transition-colors duration-200 ${
+                      isActive("/offers")
+                        ? "text-[#a5762a] font-semibold"
+                        : "text-[#2a1f1a]/80 hover:text-[#a5762a]"
+                    }`}
+                  >
+                    Offers
+                    {isActive("/offers") && (
+                      <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#a5762a] rounded-full" />
+                    )}
+                  </span>
+                </Link>
+              </div>
 
               {/* Kundali */}
-              <Link href="/kundali">
-                <motion.span
-                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/kundali") ? "text-[#a5762a]" : "text-[#a5762a]/80"}`}
-                  whileHover={{ opacity: 1 }}
-                >
-                  Kundali
-                  <motion.span
-                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
-                    initial={{ scaleX: isActive("/kundali") ? 1 : 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  />
-                </motion.span>
-              </Link>
+              <div className="relative flex items-center h-9">
+                <Link href="/kundali">
+                  <span
+                    className={`px-3 py-1.5 text-[11px] font-medium tracking-[0.16em] uppercase relative cursor-pointer whitespace-nowrap transition-colors duration-200 ${
+                      isActive("/kundali")
+                        ? "text-[#a5762a] font-semibold"
+                        : "text-[#2a1f1a]/80 hover:text-[#a5762a]"
+                    }`}
+                  >
+                    Kundali
+                    {isActive("/kundali") && (
+                      <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#a5762a] rounded-full" />
+                    )}
+                  </span>
+                </Link>
+              </div>
 
               {/* Tarot */}
-              <Link href="/tarot">
-                <motion.span
-                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/tarot") ? "text-[#a5762a]" : "text-[#a5762a]/80"}`}
-                  whileHover={{ opacity: 1 }}
-                >
-                  Tarot
-                  <motion.span
-                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
-                    initial={{ scaleX: isActive("/tarot") ? 1 : 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  />
-                </motion.span>
-              </Link>
+              <div className="relative flex items-center h-9">
+                <Link href="/tarot">
+                  <span
+                    className={`px-3 py-1.5 text-[11px] font-medium tracking-[0.16em] uppercase relative cursor-pointer whitespace-nowrap transition-colors duration-200 ${
+                      isActive("/tarot")
+                        ? "text-[#a5762a] font-semibold"
+                        : "text-[#2a1f1a]/80 hover:text-[#a5762a]"
+                    }`}
+                  >
+                    Tarot
+                    {isActive("/tarot") && (
+                      <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#a5762a] rounded-full" />
+                    )}
+                  </span>
+                </Link>
+              </div>
 
               {/* Numerology */}
-              <Link href="/numerology">
-                <motion.span
-                  className={`text-[10px] font-semibold tracking-[0.12em] uppercase relative cursor-pointer pb-1 whitespace-nowrap transition-colors duration-300 ${isActive("/numerology") ? "text-[#a5762a]" : "text-[#a5762a]/80"}`}
-                  whileHover={{ opacity: 1 }}
-                >
-                  Numerology
-                  <motion.span
-                    className="absolute left-0 bottom-0 w-full h-[1px] bg-current origin-left"
-                    initial={{ scaleX: isActive("/numerology") ? 1 : 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  />
-                </motion.span>
-              </Link>
+              <div className="relative flex items-center h-9">
+                <Link href="/numerology">
+                  <span
+                    className={`px-3 py-1.5 text-[11px] font-medium tracking-[0.16em] uppercase relative cursor-pointer whitespace-nowrap transition-colors duration-200 ${
+                      isActive("/numerology")
+                        ? "text-[#a5762a] font-semibold"
+                        : "text-[#2a1f1a]/80 hover:text-[#a5762a]"
+                    }`}
+                  >
+                    Numerology
+                    {isActive("/numerology") && (
+                      <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-[#a5762a] rounded-full" />
+                    )}
+                  </span>
+                </Link>
+              </div>
             </nav>
           </div>
 

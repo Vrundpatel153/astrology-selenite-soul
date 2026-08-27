@@ -318,7 +318,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                       : {}
                   }
                   onClick={() => handlePickFromFan(card)}
-                  data-cursor="hover"
+                  data-cursor="card"
                 >
                   <img
                     src="/tarot-card-back.webp"
@@ -360,7 +360,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                 className="relative w-full max-w-[250px] aspect-[2/3] cursor-pointer"
                 style={{ perspective: 1200 }}
                 onClick={() => handleFlipCard(index)}
-                data-cursor="hover"
+                data-cursor="card"
               >
                 {slot.card ? (
                   <motion.div
