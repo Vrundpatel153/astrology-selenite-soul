@@ -2,12 +2,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { ChevronLeft, CreditCard, Smartphone, Landmark, Banknote, ShieldCheck, Tag, CheckCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import AuthModal from "@/components/AuthModal";
 import { toast } from "sonner";
 
 type PayMethod = "card" | "upi" | "netbanking" | "cod";
@@ -43,6 +42,13 @@ export default function Checkout() {
   const [couponInput, setCouponInput] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number; message: string } | null>(null);
   const [couponLoading, setCouponLoading] = useState(false);
+
+  // Redirect to cart if empty
+  useEffect(() => {
+    if (items.length === 0 && !processing) {
+      navigate("/cart");
+    }
+  }, [items.length, processing, navigate]);
 
   // Auto-fill from user profile
   useEffect(() => {
@@ -97,36 +103,37 @@ export default function Checkout() {
 
     setProcessing(true);
     try {
+      const orderPayload = {
+        userEmail: form.email,
+        userName: form.name,
+        userPhone: form.phone,
+        items: items.map((it) => ({
+          id: it.product.id,
+          name: it.product.name,
+          price: it.product.price,
+          quantity: it.quantity,
+          image: it.product.image,
+        })),
+        subtotal: totalPrice,
+        discount,
+        couponCode: appliedCoupon?.code || "",
+        shipping,
+        total,
+        paymentMethod: payMethod,
+        shippingAddress: {
+          fullName: form.name,
+          phone: form.phone,
+          addressLine: form.address,
+          city: form.city,
+          state: form.state,
+          pincode: form.pincode,
+        },
+      };
+
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userEmail: form.email,
-          userName: form.name,
-          userPhone: form.phone,
-          items: items.map((it) => ({
-            id: it.id,
-            name: it.name,
-            price: it.price,
-            quantity: it.quantity,
-            image: it.image,
-            selectedColor: it.selectedColor,
-          })),
-          subtotal: totalPrice,
-          discount,
-          couponCode: appliedCoupon?.code || "",
-          shipping,
-          total,
-          paymentMethod: payMethod,
-          shippingAddress: {
-            fullName: form.name,
-            phone: form.phone,
-            addressLine: form.address,
-            city: form.city,
-            state: form.state,
-            pincode: form.pincode,
-          },
-        }),
+        body: JSON.stringify(orderPayload),
       });
 
       const data = await res.json();
@@ -145,14 +152,12 @@ export default function Checkout() {
   };
 
   if (items.length === 0 && !processing) {
-    navigate("/cart");
     return null;
   }
 
   return (
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
-      <AuthModal onGuestContinue={() => setGuestProceeded(true)} />
 
       {/* Progress Header */}
       <div className="bg-white border-b border-[#e8d9cf] px-4 py-4">
@@ -398,15 +403,19 @@ export default function Checkout() {
               {/* Items List */}
               <div className="divide-y divide-[#f7f1ec] max-h-60 overflow-y-auto mb-4 pr-1">
                 {items.map((it) => (
-                  <div key={it.id} className="py-3 flex items-center justify-between text-xs">
+                  <div key={it.product.id} className="py-3 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-3">
-                      <img src={it.image} alt={it.name} className="w-10 h-10 object-contain bg-[#fdf8f4] p-1 border border-[#e8d9cf]" />
+                      <img
+                        src={it.product.image}
+                        alt={it.product.name}
+                        className="w-10 h-10 object-contain bg-[#fdf8f4] p-1 border border-[#e8d9cf]"
+                      />
                       <div>
-                        <p className="font-medium text-[#2a1f1a] line-clamp-1">{it.name}</p>
+                        <p className="font-medium text-[#2a1f1a] line-clamp-1">{it.product.name}</p>
                         <p className="text-[10px] text-[#4a382e]/60">Qty: {it.quantity}</p>
                       </div>
                     </div>
-                    <span className="font-bold text-[#2a1f1a]">₹{it.price * it.quantity}</span>
+                    <span className="font-bold text-[#2a1f1a]">₹{it.product.price * it.quantity}</span>
                   </div>
                 ))}
               </div>
