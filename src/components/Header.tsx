@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, MapPin, ShoppingBag, Menu, X, Heart, Sparkles, ChevronRight, Star, User as UserIcon, Tag } from "lucide-react";
+import { Search, MapPin, ShoppingBag, Menu, X, Heart, ChevronRight, Star, User as UserIcon, Tag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";

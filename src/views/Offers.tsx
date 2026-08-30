@@ -1,33 +1,64 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Copy, Check, Tag, ArrowRight, ShieldCheck, Gift, Gem, Moon } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Coupon } from "@/lib/db/types";
-import { Sparkles, Copy, Check, Tag, ArrowRight, ShieldCheck, Gift } from "lucide-react";
-import { Link } from "wouter";
 import { toast } from "sonner";
+import { Link } from "wouter";
+
+interface PromoOffer {
+  code: string;
+  title: string;
+  discountBadge: string;
+  description: string;
+  minOrder: string;
+  terms: string;
+}
+
+const OFFERS: PromoOffer[] = [
+  {
+    code: "SELENITE10",
+    title: "Sanctuary Welcoming Grace",
+    discountBadge: "10% OFF",
+    description: "Enjoy 10% off your entire sacred crystal collection order. Valid on all raw stones, bracelets, and spiritual jewelry.",
+    minOrder: "No minimum purchase",
+    terms: "Single use per seeker · Instant checkout apply",
+  },
+  {
+    code: "FULLMOON",
+    title: "Full Moon Consecration",
+    discountBadge: "₹500 OFF",
+    description: "Save flat ₹500 on energizing crystal orders above ₹2,999. Includes ceremonial sage purification and velvet storage pouch.",
+    minOrder: "Min order ₹2,999",
+    terms: "Valid on handcrafted crystal jewels and raw geodes",
+  },
+  {
+    code: "VEDIC15",
+    title: "Planetary Alignment Discount",
+    discountBadge: "15% OFF",
+    description: "Receive 15% discount when ordering any personalized astrological gemstone recommended in your Vedic birth chart.",
+    minOrder: "Min order ₹1,499",
+    terms: "Max discount ₹600 · Applicable storewide",
+  },
+  {
+    code: "SHIVAY20",
+    title: "Maha Shivaratri Special",
+    discountBadge: "20% OFF",
+    description: "Receive 20% off on all Rudraksha malas, pyramid crystals, and Shiva-Shakti balancing gemstones for inner stillness.",
+    minOrder: "Min order ₹3,999",
+    terms: "Valid for all seekers · Limited period blessing",
+  },
+];
 
 export default function Offers() {
-  const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/coupons/validate")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && Array.isArray(data.coupons)) {
-          setCoupons(data.coupons);
-        }
-      })
-      .catch(() => {});
-  }, []);
 
   const handleCopy = (code: string) => {
     navigator.clipboard.writeText(code);
     setCopiedCode(code);
-    toast.success(`Coupon "${code}" copied! Apply it at checkout.`);
+    toast.success(`Coupon code ${code} copied to clipboard!`);
     setTimeout(() => setCopiedCode(null), 2500);
   };
 
@@ -35,19 +66,17 @@ export default function Offers() {
     <div className="min-h-screen bg-[#fdf8f4] text-[#2a1f1a]">
       <Header />
 
-      {/* Hero Banner */}
-      <section className="pt-20 pb-12 px-4 sm:px-6 bg-[#f7efe6] border-b border-[#e8d9cf] text-center">
+      {/* Hero Strip */}
+      <section className="pt-24 pb-12 px-4 sm:px-6 bg-[#f7efe6] border-b border-[#e8d9cf] text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto"
         >
-          <div className="flex items-center gap-2 justify-center text-[#a5762a] mb-2">
-            <Sparkles className="w-4 h-4" />
+          <div className="flex items-center justify-center text-[#a5762a] mb-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
               Sacred Abundance & Promo Codes
             </span>
-            <Sparkles className="w-4 h-4" />
           </div>
           <h1
             className="text-3xl sm:text-5xl font-light text-[#2a1f1a] mb-4"
@@ -143,7 +172,7 @@ export default function Offers() {
             <p className="text-xs text-[#4a382e]/70 mt-0.5">Government lab-tested and verified for authentic mineral frequency.</p>
           </div>
           <div className="flex flex-col items-center">
-            <Sparkles className="w-6 h-6 text-[#a5762a] mb-2" />
+            <Moon className="w-6 h-6 text-[#a5762a] mb-2" />
             <h4 className="text-sm font-bold text-[#2a1f1a]">Full Moon Energized</h4>
             <p className="text-xs text-[#4a382e]/70 mt-0.5">Cleansed with Himalayan singing bowls and charged under lunar cycles.</p>
           </div>

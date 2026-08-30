@@ -7,7 +7,6 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import InteractiveTarotDeck from "@/components/InteractiveTarotDeck";
 import { toast } from "sonner";
 import {
-  Sparkles,
   ArrowRight,
   Clock,
   Calendar,
@@ -16,8 +15,8 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-// ─── Floating Gold Sparkle Canvas ─────────────────────────────────────────────
-function TarotSparkles({ count = 20 }: { count?: number }) {
+// ─── Floating Gold Ambient Dust Canvas ─────────────────────────────────────────
+function TarotAmbientDust({ count = 20 }: { count?: number }) {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {Array.from({ length: count }).map((_, i) => (
@@ -306,7 +305,7 @@ export default function Tarot() {
 
       {/* ── HERO ────────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
-        <TarotSparkles count={28} />
+        <TarotAmbientDust count={28} />
         {/* Radial glows */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/3 w-96 h-96 rounded-full blur-[120px]"

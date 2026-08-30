@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag, Sparkles, CheckCircle } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -135,7 +135,7 @@ export default function Cart() {
                 whileHover={{ backgroundColor: "#c8a951", color: "#1a0e05" }}
                 whileTap={{ scale: 0.97 }}
               >
-                ✨ Free Kundali Recommendation
+                Free Kundali Recommendation
               </motion.button>
             </div>
           </motion.div>

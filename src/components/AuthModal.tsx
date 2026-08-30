@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Sparkles, User, Mail, Phone, Lock, ArrowRight, Star } from "lucide-react";
+import { X, User, Mail, Phone, Lock, ArrowRight } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function AuthModal({ onGuestContinue }: { onGuestContinue?: () => void }) {
@@ -76,17 +76,15 @@ export default function AuthModal({ onGuestContinue }: { onGuestContinue?: () =>
           <div className="bg-[#fcf8f4] border-b border-[#e8d9cf] p-6 text-center relative">
             <button
               onClick={() => setLoginModalOpen(false)}
-              className="absolute top-4 right-4 text-[#4a382e]/60 hover:text-[#2a1f1a] p-1"
+              className="absolute top-4 right-4 text-[#4a382e]/60 hover:text-[#2a1f1a] p-1 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center justify-center gap-1.5 mb-1 text-[#a5762a]">
-              <Sparkles className="w-4 h-4" />
+            <div className="flex items-center justify-center mb-1 text-[#a5762a]">
               <span className="text-[9px] font-bold uppercase tracking-[0.25em]">
                 Selenite Soul Sanctuary
               </span>
-              <Sparkles className="w-4 h-4" />
             </div>
             <h3
               className="text-2xl font-light text-[#2a1f1a]"

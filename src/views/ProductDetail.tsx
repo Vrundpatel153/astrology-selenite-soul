@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
-import { Heart, ShoppingBag, ChevronLeft, Star, Shield, Truck, RotateCcw, Plus, Minus, Sparkles } from "lucide-react";
+import { Heart, ShoppingBag, ChevronLeft, Star, Shield, Truck, RotateCcw, Plus, Minus, Compass } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -375,7 +375,7 @@ export default function ProductDetail() {
             transition={{ duration: 0.2 }}
           >
             <div className="shrink-0 w-12 h-12 rounded-full bg-[#c8a951]/10 border border-[#c8a951]/40 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-[#c8a951]" />
+              <Compass className="w-5 h-5 text-[#c8a951]" />
             </div>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">Not sure this is right for you?</p>

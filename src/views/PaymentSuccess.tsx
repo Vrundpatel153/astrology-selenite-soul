@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { CheckCircle, Sparkles, Truck, ArrowRight } from "lucide-react";
+import { CheckCircle, Truck, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 const PARTICLES = Array.from({ length: 24 }, (_, i) => ({
@@ -82,10 +82,8 @@ export default function PaymentSuccess() {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-          <div className="flex items-center justify-center gap-1.5 mb-2 text-[#a5762a]">
-            <Sparkles className="w-4 h-4" />
+          <div className="flex items-center justify-center mb-2 text-[#a5762a]">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em]">Sacred Order Placed</p>
-            <Sparkles className="w-4 h-4" />
           </div>
 
           <h1

@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLocation, useSearch } from "wouter";
-import { Heart, Plus, SlidersHorizontal, X, ShoppingBag, Sparkles } from "lucide-react";
+import { Heart, Plus, SlidersHorizontal, X, ShoppingBag, Compass } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -241,7 +241,7 @@ export default function Shop() {
             whileHover={{ backgroundColor: "rgba(200,169,81,0.12)", borderColor: "rgba(200,169,81,0.7)" }}
             onClick={() => navigate("/kundali")}
           >
-            <Sparkles className="w-4 h-4 text-[#c8a951] mb-2" />
+            <Compass className="w-4 h-4 text-[#c8a951] mb-2" />
             <p className="text-[9px] font-bold uppercase tracking-widest text-[#c8a951] mb-1">Find Your Crystal</p>
             <p className="text-[11px] text-[#2a1f1a]/60 leading-relaxed">Get personalized recommendations from your Kundali</p>
           </motion.div>

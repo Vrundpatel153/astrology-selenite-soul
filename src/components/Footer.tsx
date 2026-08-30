@@ -1,5 +1,4 @@
-import { Link } from "wouter";
-import { Instagram, Twitter, Facebook, Youtube, Sparkles, ArrowRight } from "lucide-react";
+import { Instagram, Twitter, Facebook, Youtube, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -77,7 +76,6 @@ export default function Footer() {
         <ScrollReveal direction="up" className="bg-white/85 border border-[#c8a951]/35 p-6 md:p-8 mb-14 flex flex-col md:flex-row items-center justify-between gap-6 rounded-sm shadow-sm">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Sparkles className="w-4 h-4 text-[#a5762a]" />
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">Free Kundali Reading</span>
             </div>
             <p className="text-lg md:text-xl font-serif font-light text-[#2a1f1a]">Discover your cosmic crystal prescription</p>

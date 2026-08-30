@@ -87,9 +87,9 @@ export default function Contact() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                 >
-                  <div className="text-4xl mb-4">✨</div>
-                  <h3 className="text-2xl font-serif font-light text-[#2a1f1a] mb-3">Message Received!</h3>
-                  <p className="text-[#2a1f1a]/60 text-sm max-w-xs">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                  <div className="w-12 h-12 rounded-full bg-[#c8a951]/20 border border-[#c8a951] flex items-center justify-center text-[#a5762a] mx-auto mb-4 font-bold text-xl">✓</div>
+                  <h3 className="text-2xl font-serif font-light text-[#2a1f1a] mb-3">Message Received</h3>
+                  <p className="text-[#2a1f1a]/60 text-sm max-w-xs">Thank you for reaching out. We will get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -122,12 +122,12 @@ export default function Contact() {
                   </div>
                   <motion.button
                     type="submit"
-                    className="bg-[#c8a951] text-[#2a1f1a] py-4 text-[11px] font-bold uppercase tracking-widest"
+                    className="bg-[#c8a951] text-[#2a1f1a] py-4 text-[11px] font-bold uppercase tracking-widest cursor-pointer"
                     whileHover={{ scale: 1.02, backgroundColor: "#d4b565" }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.18 }}
                   >
-                    Send Message ✨
+                    Send Message
                   </motion.button>
                 </form>
               )}

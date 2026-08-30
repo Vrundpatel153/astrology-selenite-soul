@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, MessageSquare, X, Send, User, Bot, ArrowRight, Package, Shield, Star } from "lucide-react";
+import { MessageSquare, X, Send, User, Bot, ArrowRight, Package, Shield } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 interface Message {
@@ -27,7 +27,7 @@ export default function ChatWidget() {
     {
       id: "welcome",
       sender: "bot",
-      text: "Namaste & Welcome to Selenite Soul Sanctuary. ✨ I am your Spiritual Assistant. How may I guide your crystal or astrological journey today?",
+      text: "Namaste & Welcome to Selenite Soul Sanctuary. I am your Spiritual Advisor. How may I guide your crystal or astrological journey today?",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
   ]);
@@ -104,7 +104,7 @@ export default function ChatWidget() {
             <X className="w-6 h-6" />
           ) : (
             <>
-              <Sparkles className="w-6 h-6 text-[#1a0e05]" />
+              <MessageSquare className="w-6 h-6 text-[#1a0e05]" strokeWidth={1.8} />
               <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#2a1f1a] rounded-full border border-white flex items-center justify-center">
                 <span className="w-1.5 h-1.5 bg-[#c8a951] rounded-full animate-ping" />
               </span>
@@ -127,10 +127,10 @@ export default function ChatWidget() {
             <div className="bg-[#fcf8f4] border-b border-[#e8d9cf] p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-[#c8a951]/20 border border-[#c8a951] flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-[#a5762a]" />
+                  <Bot className="w-4 h-4 text-[#a5762a]" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-[#2a1f1a]">Spiritual AI Advisor</h4>
+                  <h4 className="text-sm font-semibold text-[#2a1f1a]">Spiritual Advisor</h4>
                   <p className="text-[10px] text-[#558253] flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#558253]" /> Consecrated & Live
                   </p>
@@ -139,7 +139,7 @@ export default function ChatWidget() {
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-[#4a382e]/60 hover:text-[#2a1f1a] p-1"
+                className="text-[#4a382e]/60 hover:text-[#2a1f1a] p-1 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -154,7 +154,7 @@ export default function ChatWidget() {
                 >
                   {msg.sender === "bot" && (
                     <div className="w-6 h-6 rounded-full bg-[#c8a951]/15 border border-[#c8a951]/40 flex items-center justify-center shrink-0 mt-0.5">
-                      <Sparkles className="w-3 h-3 text-[#a5762a]" />
+                      <Bot className="w-3.5 h-3.5 text-[#a5762a]" />
                     </div>
                   )}
 
@@ -176,9 +176,9 @@ export default function ChatWidget() {
               {loading && (
                 <div className="flex gap-2 items-center text-xs text-[#a5762a]">
                   <div className="w-6 h-6 rounded-full bg-[#c8a951]/15 border border-[#c8a951]/40 flex items-center justify-center">
-                    <Sparkles className="w-3 h-3 text-[#a5762a] animate-spin" />
+                    <Bot className="w-3.5 h-3.5 text-[#a5762a] animate-pulse" />
                   </div>
-                  <span className="italic">Channelling crystal guidance...</span>
+                  <span className="italic text-[11px] text-[#4a382e]/70">Channelling crystal guidance...</span>
                 </div>
               )}
               <div ref={messagesEndRef} />
@@ -190,7 +190,7 @@ export default function ChatWidget() {
                 <button
                   key={prompt}
                   onClick={() => handleSend(prompt)}
-                  className="px-2.5 py-1 text-[10px] bg-white border border-[#e8d9cf] text-[#4a382e] whitespace-nowrap rounded-sm hover:border-[#c8a951] hover:text-[#a5762a] transition-colors"
+                  className="px-2.5 py-1 text-[10px] bg-white border border-[#e8d9cf] text-[#4a382e] whitespace-nowrap rounded-sm hover:border-[#c8a951] hover:text-[#a5762a] transition-colors cursor-pointer"
                 >
                   {prompt}
                 </button>
@@ -199,7 +199,10 @@ export default function ChatWidget() {
 
             {/* Input Bar */}
             <form
-              onSubmit={(e) => { e.preventDefault(); handleSend(); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
               className="p-3 bg-white border-t border-[#e8d9cf] flex items-center gap-2"
             >
               <input
@@ -211,10 +214,10 @@ export default function ChatWidget() {
               />
               <button
                 type="submit"
-                disabled={!input.trim() || loading}
-                className="bg-[#c8a951] text-[#1a0e05] p-2 rounded-sm disabled:opacity-40 hover:bg-[#d4b565] transition-colors cursor-pointer"
+                disabled={loading || !input.trim()}
+                className="w-8 h-8 rounded-sm bg-[#c8a951] text-[#1a0e05] flex items-center justify-center disabled:opacity-40 hover:bg-[#b89840] transition-colors cursor-pointer shrink-0"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
               </button>
             </form>
           </motion.div>

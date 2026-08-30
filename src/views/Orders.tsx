@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Package, Search, Truck, CheckCircle, Clock, MapPin, Sparkles, AlertCircle, ArrowRight } from "lucide-react";
+import { Package, Search, Truck, CheckCircle, Clock, MapPin, AlertCircle, ArrowRight } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Order } from "@/lib/db/types";
 import { Link } from "wouter";
@@ -67,9 +67,7 @@ export default function Orders() {
       <section className="pt-20 pb-12 px-4 sm:px-6 text-center bg-[#f7efe6] border-b border-[#e8d9cf]">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
           <div className="flex items-center gap-2 justify-center text-[#a5762a] mb-2">
-            <Sparkles className="w-4 h-4" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Sacred Logistics</span>
-            <Sparkles className="w-4 h-4" />
           </div>
           <h1
             className="text-3xl sm:text-5xl font-light text-[#2a1f1a] mb-3"

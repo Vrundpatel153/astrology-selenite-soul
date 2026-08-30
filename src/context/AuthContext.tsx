@@ -79,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.success && data.user) {
         setUser(data.user);
         localStorage.setItem("ss_user", JSON.stringify(data.user));
-        toast.success(`Welcome back, ${data.user.name || "Seeker"}! ✨`);
+        toast.success(`Welcome back, ${data.user.name || "Seeker"}!`);
         setLoginModalOpen(false);
         return true;
       } else {

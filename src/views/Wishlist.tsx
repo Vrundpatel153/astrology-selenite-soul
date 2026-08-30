@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Heart, ShoppingBag, Trash2, Sparkles } from "lucide-react";
+import { Heart, ShoppingBag, Trash2 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import { products } from "@/data/products";
@@ -46,7 +46,7 @@ export default function Wishlist() {
                 animate={{ opacity: 1 }}
                 className="text-center py-16 md:py-24"
               >
-                <Sparkles className="w-10 h-10 text-[#c8a951]/40 mx-auto mb-6" />
+                <Heart className="w-10 h-10 text-[#c8a951]/40 mx-auto mb-6" />
                 <h2 className="text-2xl font-serif font-light text-[#2a1f1a] mb-3">Your wishlist is empty</h2>
                 <p className="text-[#2a1f1a]/50 mb-8">Explore our crystals and save the ones that call to you.</p>
                 <Link href="/shop">

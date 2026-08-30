@@ -13,7 +13,6 @@ import {
   MapPin,
   Heart,
   Settings,
-  Sparkles,
   Truck,
   CheckCircle,
   Clock,
@@ -92,7 +91,7 @@ export default function Account() {
         <div className="flex-1 flex items-center justify-center p-6 py-24">
           <div className="max-w-md w-full bg-white border border-[#c8a951]/40 p-8 sm:p-10 text-center shadow-xl rounded-sm">
             <div className="w-16 h-16 rounded-full bg-[#c8a951]/15 border border-[#c8a951] flex items-center justify-center mx-auto mb-5">
-              <Sparkles className="w-8 h-8 text-[#a5762a]" />
+              <User className="w-8 h-8 text-[#a5762a]" />
             </div>
             <h2
               className="text-3xl font-light text-[#2a1f1a] mb-2"
@@ -146,8 +145,7 @@ export default function Account() {
               {user?.name?.charAt(0) || "S"}
             </div>
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a]">
                 {user?.loyaltyTier || "Initiate Seeker"}
               </span>
               <h1

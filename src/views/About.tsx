@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Link } from "wouter";
-import { ArrowRight, ShieldCheck, Gem, Compass, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, Gem, Compass } from "lucide-react";
 
 // ─── Journey milestones ───────────────────────────────────────────────────────
 const journey = [
