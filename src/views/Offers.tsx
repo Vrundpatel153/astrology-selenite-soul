@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, Tag, ArrowRight, ShieldCheck, Gift, Gem, Moon } from "lucide-react";
+import { Copy, Check, Tag, ArrowRight, ShieldCheck, Gift, Moon } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -15,6 +15,7 @@ interface PromoOffer {
   description: string;
   minOrder: string;
   terms: string;
+  expiry: string;
 }
 
 const OFFERS: PromoOffer[] = [
@@ -25,6 +26,7 @@ const OFFERS: PromoOffer[] = [
     description: "Enjoy 10% off your entire sacred crystal collection order. Valid on all raw stones, bracelets, and spiritual jewelry.",
     minOrder: "No minimum purchase",
     terms: "Single use per seeker · Instant checkout apply",
+    expiry: "31 Dec 2027",
   },
   {
     code: "FULLMOON",
@@ -33,6 +35,7 @@ const OFFERS: PromoOffer[] = [
     description: "Save flat ₹500 on energizing crystal orders above ₹2,999. Includes ceremonial sage purification and velvet storage pouch.",
     minOrder: "Min order ₹2,999",
     terms: "Valid on handcrafted crystal jewels and raw geodes",
+    expiry: "31 Dec 2027",
   },
   {
     code: "VEDIC15",
@@ -41,6 +44,7 @@ const OFFERS: PromoOffer[] = [
     description: "Receive 15% discount when ordering any personalized astrological gemstone recommended in your Vedic birth chart.",
     minOrder: "Min order ₹1,499",
     terms: "Max discount ₹600 · Applicable storewide",
+    expiry: "31 Dec 2027",
   },
   {
     code: "SHIVAY20",
@@ -49,6 +53,7 @@ const OFFERS: PromoOffer[] = [
     description: "Receive 20% off on all Rudraksha malas, pyramid crystals, and Shiva-Shakti balancing gemstones for inner stillness.",
     minOrder: "Min order ₹3,999",
     terms: "Valid for all seekers · Limited period blessing",
+    expiry: "31 Dec 2027",
   },
 ];
 
@@ -93,7 +98,7 @@ export default function Offers() {
       {/* Coupon Cards Grid */}
       <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {coupons.map((coupon, idx) => (
+          {OFFERS.map((coupon, idx) => (
             <ScrollReveal key={coupon.code} delay={idx * 0.08}>
               <div className="bg-white border-2 border-dashed border-[#c8a951]/60 p-6 sm:p-8 rounded-sm shadow-md flex flex-col justify-between relative overflow-hidden group hover:border-[#c8a951] hover:shadow-xl transition-all">
                 {/* Background Watermark */}
@@ -102,10 +107,10 @@ export default function Offers() {
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-[#e8d9cf]">
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] bg-[#fdf8f4] border border-[#c8a951]/40 text-[#a5762a] px-3 py-1 rounded-full">
-                      {coupon.discountType === "percent" ? `${coupon.discountValue}% OFF` : `FLAT ₹${coupon.discountValue} OFF`}
+                      {coupon.discountBadge}
                     </span>
                     <span className="text-[10px] text-[#4a382e]/60 font-mono">
-                      Expires: {new Date(coupon.expiryDate).toLocaleDateString()}
+                      Expires: {coupon.expiry}
                     </span>
                   </div>
 
@@ -113,14 +118,11 @@ export default function Offers() {
                     className="text-2xl font-light text-[#2a1f1a] mb-2"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
-                    {coupon.description}
+                    {coupon.title}
                   </h3>
 
                   <p className="text-xs text-[#4a382e]/70 leading-relaxed font-light mb-6">
-                    {coupon.minOrderAmount > 0
-                      ? `Valid on all purchases above ₹${coupon.minOrderAmount}.`
-                      : "No minimum purchase required."}
-                    {coupon.maxDiscount ? ` Maximum discount capped at ₹${coupon.maxDiscount}.` : ""}
+                    {coupon.description}
                   </p>
                 </div>
 
