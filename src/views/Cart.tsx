@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag, CheckCircle } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ChevronLeft, ArrowRight, Tag, CheckCircle, Truck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -97,13 +97,16 @@ export default function Cart() {
         )}
         {totalPrice >= 999 && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-6 bg-green-50 border border-green-200 p-3 text-center rounded-sm"
+            className="mb-6 bg-[#faf6f0] border border-[#c8a951]/40 p-3.5 text-center rounded-sm shadow-sm"
           >
-            <p className="text-xs font-bold text-green-700 uppercase tracking-widest">
-              🎉 You've unlocked FREE Sacred Express Shipping!
-            </p>
+            <div className="flex items-center justify-center gap-2">
+              <Truck className="w-4 h-4 text-[#a5762a]" />
+              <p className="text-xs font-bold text-[#8f6d28] uppercase tracking-[0.16em]">
+                You have unlocked Free Sacred Express Shipping!
+              </p>
+            </div>
           </motion.div>
         )}
 
@@ -258,16 +261,16 @@ export default function Cart() {
                     <span className="font-medium text-[#2a1f1a]">₹{totalPrice.toLocaleString()}</span>
                   </div>
                   {discount > 0 && (
-                    <div className="flex justify-between text-[#558253] font-semibold">
+                    <div className="flex justify-between text-[#8f6d28] font-semibold">
                       <span className="flex items-center gap-1">
                         <Tag className="w-3 h-3" /> Coupon ({appliedCoupon?.code})
                       </span>
-                      <span>–₹{discount}</span>
+                      <span>-₹{discount}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-[#4a382e]">
                     <span>Shipping</span>
-                    <span>{shipping === 0 ? <strong className="text-[#558253]">FREE</strong> : `₹${shipping}`}</span>
+                    <span>{shipping === 0 ? <strong className="text-[#8f6d28]">FREE</strong> : `₹${shipping}`}</span>
                   </div>
                 </div>
 

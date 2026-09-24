@@ -59,7 +59,7 @@ export default function About() {
             <span className="italic text-[#a5762a]">Meets the Modern Soul</span>
           </h1>
           <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
-            Selenite Soul is Ekta's life's devotion — a sacred bridge between Vedic astrology, intuitive Tarot, Pythagorean numerology, and the healing intelligence of crystals.
+            Selenite Soul is Ekta's life's devotion: a sacred bridge between Vedic astrology, intuitive Tarot, Pythagorean numerology, and the healing intelligence of crystals.
           </p>
         </motion.div>
       </section>
@@ -82,7 +82,7 @@ export default function About() {
             {/* Editorial 3-Column Monolith */}
             <div className="grid grid-cols-1 md:grid-cols-3 border border-[#c8a951]/30 bg-white/80 divide-y md:divide-y-0 md:divide-x divide-[#c8a951]/25 rounded-sm shadow-xl">
               {[
-                { numeral: "I", label: "Ancient Vedic Wisdom", desc: "Jyotish, Tarot, and Numerology — three ancient sciences aligned to decode your cosmic blueprint with mathematical precision." },
+                { numeral: "I", label: "Ancient Vedic Wisdom", desc: "Jyotish, Tarot, and Numerology: three ancient sciences aligned to decode your cosmic blueprint with mathematical precision." },
                 { numeral: "II", label: "Earth's Crystal Resonance", desc: "100% natural, lab-tested gemstones ethically sourced from generational mines and energized under sacred full-moon rituals." },
                 { numeral: "III", label: "Ekta's Sovereign Intention", desc: "Every reading and crystal carries the personal devotion of over a decade of continuous study and client service." },
               ].map((item) => (
@@ -102,7 +102,7 @@ export default function About() {
               <p className="text-base md:text-lg text-[#2a1f1a] leading-relaxed italic font-light" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
                 "I believe every person carries a unique cosmic blueprint written in the stars, in numbers, and in the crystals that call to them. My mission is to help you remember your own innate truth and live from sovereign clarity."
               </p>
-              <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-[#a5762a]">— Ekta, Founder of Selenite Soul</p>
+              <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-[#a5762a]">Ekta, Founder of Selenite Soul</p>
             </div>
           </ScrollReveal>
         </div>
@@ -125,10 +125,10 @@ export default function About() {
                   Ekta's path to becoming a healer began not in a classroom, but in a moment of profound personal stillness. In 2012, during a pilgrimage to Haridwar, a sage placed a raw amethyst in her hands and said: <em className="italic text-[#2a1f1a]">"The Earth already knows your answer."</em>
                 </p>
                 <p className="text-sm text-[#4a3020]/80 leading-relaxed mb-4 font-light">
-                  That moment cracked something open. Over the next decade, Ekta immersed herself in Vedic astrology (Jyotish), Pythagorean Numerology, intuitive Tarot reading, and crystal healing — studying formally in Pune, and privately with masters across India.
+                  That moment cracked something open. Over the next decade, Ekta immersed herself in Vedic astrology (Jyotish), Pythagorean Numerology, intuitive Tarot reading, and crystal healing, studying formally in Pune, and privately with masters across India.
                 </p>
                 <p className="text-sm text-[#4a3020]/80 leading-relaxed font-light">
-                  In 2019, Selenite Soul was born — not as a commercial entity, but as a sacred sanctuary. To bring these ancient tools into the hands of every modern seeker looking for grounded clarity and emotional restoration.
+                  In 2019, Selenite Soul was born not as a commercial entity, but as a sacred sanctuary. To bring these ancient tools into the hands of every modern seeker looking for grounded clarity and emotional restoration.
                 </p>
               </div>
 
@@ -136,7 +136,7 @@ export default function About() {
                 <div className="overflow-hidden rounded-sm border border-[#c8a951]/40 shadow-2xl">
                   <img
                     src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=85&fm=webp&fit=crop&crop=top"
-                    alt="Ekta — Founder of Selenite Soul"
+                    alt="Ekta, Founder of Selenite Soul"
                     className="w-full aspect-[3/4] object-cover object-top"
                   />
                 </div>
@@ -234,7 +234,7 @@ export default function About() {
         <ScrollReveal>
           <h2 className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Begin Your Journey with Ekta</h2>
           <p className="text-xs md:text-sm text-[#4a3020]/75 mb-8 max-w-md mx-auto leading-relaxed font-light">
-            Whether you seek clarity through the stars, the cards, numbers, or healing crystals — Ekta is here to guide you home to yourself.
+            Whether you seek clarity through the stars, the cards, numbers, or healing crystals, Ekta is here to guide you home to yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/kundali">

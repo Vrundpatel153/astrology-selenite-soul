@@ -1,6 +1,6 @@
 "use client";
 /**
- * Selenite Soul — Astrala-Inspired 3D Interactive Tarot Deck (Light Luxury Edition)
+ * Selenite Soul: Astrala-Inspired 3D Interactive Tarot Deck (Light Luxury Edition)
  * Features an interactive 3D fanned arc deck on warm ivory silk parchment, pick-and-place dealing animations,
  * smooth 3D card flips with embossed gold foil backing, and in-depth crystal remedy correlations.
  * Fully responsive and optimized for all viewports.

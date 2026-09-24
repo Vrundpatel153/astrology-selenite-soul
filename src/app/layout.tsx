@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Selenite Soul — Vedic Kundali & Healing Crystals",
+  title: "Selenite Soul | Vedic Kundali & Sacred Gemstones",
   description:
     "Discover your Vedic birth chart, planetary positions, Vimshottari Dasha, yogas, and personalized crystal remedies aligned for your soul. Ancient Jyotish wisdom, beautifully designed.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Selenite Soul" }],
   creator: "Selenite Soul",
   openGraph: {
-    title: "Selenite Soul — Vedic Kundali & Healing Crystals",
+    title: "Selenite Soul | Vedic Kundali & Sacred Gemstones",
     description:
       "Generate your accurate sidereal Vedic birth chart and discover crystal remedies aligned with your planetary positions.",
     type: "website",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Selenite Soul — Vedic Kundali & Healing Crystals",
+    title: "Selenite Soul | Vedic Kundali & Sacred Gemstones",
     description:
       "Generate your accurate sidereal Vedic birth chart and discover crystal remedies.",
   },

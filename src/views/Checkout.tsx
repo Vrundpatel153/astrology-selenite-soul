@@ -170,7 +170,7 @@ export default function Checkout() {
           </button>
 
           <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider">
-            <span className={step === "info" ? "text-[#a5762a]" : "text-green-600"}>
+            <span className={step === "info" ? "text-[#a5762a]" : "text-[#8f6d28]"}>
               1. Delivery Details
             </span>
             <span className="text-[#e8d9cf]">•</span>

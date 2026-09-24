@@ -6,16 +6,16 @@ import { Truck, Package, RefreshCw, ShieldCheck, Clock, Globe } from "lucide-rea
 import { Link } from "wouter";
 
 const shippingTiers = [
-  { zone: "India – Standard",   time: "4–7 business days",   cost: "₹79",  free: "Free above ₹999" },
-  { zone: "India – Express",    time: "1–2 business days",   cost: "₹199", free: "Free above ₹2,499" },
-  { zone: "International",      time: "10–15 business days", cost: "₹799", free: "Free above ₹4,999" },
+  { zone: "India: Standard",   time: "4-7 business days",   cost: "₹79",  free: "Free above ₹999" },
+  { zone: "India: Express",    time: "1-2 business days",   cost: "₹199", free: "Free above ₹2,499" },
+  { zone: "International",     time: "10-15 business days", cost: "₹799", free: "Free above ₹4,999" },
 ];
 
 const returnSteps = [
   { step: "01", title: "Initiate Return",    desc: "WhatsApp or email us within 15 days of delivery with your order ID and reason." },
-  { step: "02", title: "Get Pickup Arranged", desc: "We'll schedule a courier pickup from your doorstep — no need to visit a store." },
+  { step: "02", title: "Get Pickup Arranged", desc: "We'll schedule a courier pickup from your doorstep, with no need to visit a store." },
   { step: "03", title: "Item Inspected",     desc: "Once received, we inspect the crystal (must be in original condition, unworn)." },
-  { step: "04", title: "Refund Processed",   desc: "Refund credited within 5–7 business days to your original payment method." },
+  { step: "04", title: "Refund Processed",   desc: "Refund credited within 5-7 business days to your original payment method." },
 ];
 
 export default function Shipping() {

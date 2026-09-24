@@ -105,43 +105,16 @@ function IconLotusPetal() {
     </svg>
   );
 }
-function IconStarBurst() {
+function IconConstellation() {
   return (
-    <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor">
-      <path d="M7 0.5c.3 2.7 1 4.3 2.6 5.9C11.2 8 12.8 8.7 13.5 9c-2.7.3-4.3 1-5.9 2.6C6 13.2 5.3 13.8 5 13.5c-.3-2.7-1-4.3-2.6-5.9C.8 6 .2 5.3.5 5c2.7-.3 4.3-1 5.9-2.6C7.8.8 8 .5 7 .5Z"/>
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1">
+      <circle cx="7" cy="7" r="4.5" />
+      <circle cx="7" cy="7" r="1.5" fill="currentColor" />
     </svg>
   );
 }
 
-// ─── Sparkle field (soft gold twinkles on cream backgrounds) ───────────────────
-function SparkleField({ count = 22 }: { count?: number }) {
-  const pts = useRef(
-    Array.from({ length: count }, () => ({
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: 2 + Math.random() * 3,
-      delay: Math.random() * 4,
-      dur: 2.5 + Math.random() * 2.5,
-    }))
-  ).current;
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {pts.map((p, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            top: `${p.top}%`, left: `${p.left}%`,
-            width: p.size, height: p.size,
-            background: "#d9b25c",
-          }}
-          animate={{ opacity: [0.15, 0.9, 0.15], scale: [0.7, 1.15, 0.7] }}
-          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
-        />
-      ))}
-    </div>
-  );
-}
+
 
 // ─── Decorative corner leaves (soft watercolour-style botanical accents) ────────
 function CornerLeaves({ flip = false }: { flip?: boolean }) {
@@ -163,18 +136,18 @@ function CornerLeaves({ flip = false }: { flip?: boolean }) {
 
 // Elemental colour coding for the 12 zodiac glyphs (fire / earth / air / water)
 const ZODIAC_COLORS = [
-  "#d9704a", // Aries — fire
-  "#5f8a52", // Taurus — earth
-  "#3f8fa0", // Gemini — air
-  "#b15a86", // Cancer — water
-  "#d9704a", // Leo — fire
-  "#5f8a52", // Virgo — earth
-  "#3f8fa0", // Libra — air
-  "#b15a86", // Scorpio — water
-  "#d9704a", // Sagittarius — fire
-  "#5f8a52", // Capricorn — earth
-  "#3f8fa0", // Aquarius — air
-  "#b15a86", // Pisces — water
+  "#d9704a", // Aries: fire
+  "#5f8a52", // Taurus: earth
+  "#3f8fa0", // Gemini: air
+  "#b15a86", // Cancer: water
+  "#d9704a", // Leo: fire
+  "#5f8a52", // Virgo: earth
+  "#3f8fa0", // Libra: air
+  "#b15a86", // Scorpio: water
+  "#d9704a", // Sagittarius: fire
+  "#5f8a52", // Capricorn: earth
+  "#3f8fa0", // Aquarius: air
+  "#b15a86", // Pisces: water
 ];
 
 // ─── Geometric Mandala ─────────────────────────────────────────────────────────
@@ -184,32 +157,32 @@ function VedicMandala({ lagna = 0 }: { lagna?: number }) {
   const innerR = 56;
   const labelR = outerR + 26; // radius where zodiac icons sit
 
-  // 12 zodiac SVG paths — each drawn in a 20×20 coordinate space (0–20)
+  // 12 zodiac SVG paths: each drawn in a 20×20 coordinate space (0–20)
   // These are STATIC (never rotate), so they always read upright
   const zodiacPaths: [string, string][] = [
-    // 0  Aries ♈ — ram horns: two upward arcs
+    // 0  Aries : ram horns: two upward arcs
     ["Aries",    "M5,15 C5,9 9,5.5 10,9 C11,5.5 15,9 15,15"],
-    // 1  Taurus ♉ — circle + two short horns
+    // 1  Taurus : circle + two short horns
     ["Taurus",   "M6,14 a4,4 0 1,1 8,0 M10,10 L7,5 M10,10 L13,5"],
-    // 2  Gemini ♊ — two vertical bars with top & bottom rails
+    // 2  Gemini : two vertical bars with top & bottom rails
     ["Gemini",   "M7,5 L7,15 M13,5 L13,15 M7,5 L13,5 M7,15 L13,15"],
-    // 3  Cancer ♋ — interlocked 6 & 9
+    // 3  Cancer : interlocked 6 & 9
     ["Cancer",   "M13,9 a3.5,3.5 0 1,0 -3.5,3.5 M7,11 a3.5,3.5 0 1,0 3.5,-3.5"],
-    // 4  Leo ♌ — circle + curling tail
+    // 4  Leo : circle + curling tail
     ["Leo",      "M7,9 a3,3 0 1,1 6,0 M13,9 C15,9 16,13 14,15 C12,17 11,15 12,13"],
-    // 5  Virgo ♍ — m-shape + right descending loop
+    // 5  Virgo : m-shape + right descending loop
     ["Virgo",    "M4,15 L4,7 C4,5 6.5,5 7,7.5 C7.5,5 10,5 10.5,7.5 L10.5,12 C10.5,15.5 15,15.5 15,12 C15,8.5 10.5,8.5 10.5,12"],
-    // 6  Libra ♎ — flat line + arch
+    // 6  Libra : flat line + arch
     ["Libra",    "M4,13 L16,13 M7,13 C7,8.5 13,8.5 13,13"],
-    // 7  Scorpio ♏ — m-shape + forward arrow
+    // 7  Scorpio : m-shape + forward arrow
     ["Scorpio",  "M4,14 L4,7 C4,5 6.5,5 7,7.5 C7.5,5 10,5 10.5,7.5 L10.5,12 L15,12 M13,10 L15,12 L13,14"],
-    // 8  Sagittarius ♐ — diagonal arrow up-right
+    // 8  Sagittarius : diagonal arrow up-right
     ["Sagittarius","M5,15 L15,5 M15,5 L10,5 M15,5 L15,10"],
-    // 9  Capricorn ♑ — V + curling right tail
+    // 9  Capricorn : V + curling right tail
     ["Capricorn","M4,5 L8,13 C9,16 11,16 12,13 C13,10 13,9 15,9 C17,9 17,14 15,14"],
-    // 10 Aquarius ♒ — two wavy lines
+    // 10 Aquarius : two wavy lines
     ["Aquarius", "M4,9 C6,7 8,11 10,9 C12,7 14,11 16,9 M4,13 C6,11 8,15 10,13 C12,11 14,15 16,13"],
-    // 11 Pisces ♓ — two arcs + center vertical line
+    // 11 Pisces : two arcs + center vertical line
     ["Pisces",   "M10,5 L10,15 M5,7.5 C5,5 9,5 9,10 C9,15 5,15 5,12.5 M15,7.5 C15,5 11,5 11,10 C11,15 15,15 15,12.5"],
   ];
 
@@ -310,9 +283,9 @@ function VedicMandala({ lagna = 0 }: { lagna?: number }) {
           />
         </g>
 
-        {/* ═══ Layer 6: LOTUS (many pointed petals, slow REVERSE — opposite of wheel) ═══ */}
+        {/* ═══ Layer 6: LOTUS (many pointed petals, slow REVERSE: opposite of wheel) ═══ */}
         <g className="kundali-spin-rev-150">
-          {/* Outer pointed petal ring — 24 long petals */}
+          {/* Outer pointed petal ring: 24 long petals */}
           {Array.from({ length: 24 }, (_, i) => {
             const rot = i * 15;
             return (
@@ -324,7 +297,7 @@ function VedicMandala({ lagna = 0 }: { lagna?: number }) {
               />
             );
           })}
-          {/* Mid petal ring — 16 petals offset */}
+          {/* Mid petal ring: 16 petals offset */}
           {Array.from({ length: 16 }, (_, i) => {
             const rot = i * 22.5 + 11.25;
             return (
@@ -336,7 +309,7 @@ function VedicMandala({ lagna = 0 }: { lagna?: number }) {
               />
             );
           })}
-          {/* Inner petal ring — 12 small petals */}
+          {/* Inner petal ring: 12 small petals */}
           {Array.from({ length: 12 }, (_, i) => {
             const rot = i * 30;
             return (
@@ -793,7 +766,6 @@ export default function Kundali() {
 
       {/* KUNDALI INTRO */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #2a1f1a 0%, #1e1410 100%)" }}>
-        <SparkleField count={20} />
         <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-20 md:py-28 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-4">Free Vedic Reading</p>
@@ -802,7 +774,7 @@ export default function Kundali() {
               <span className="italic text-[#c8a951]">The Blueprint of Your Soul</span>
             </h1>
             <p className="text-[#fdf8f4]/60 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-8">
-              In Vedic astrology, your Kundali is a precise cosmic map of the sky at the moment you were born. It reveals your dharma, karma, relationships, health, wealth, and spiritual path — all encoded in the positions of nine planets across twelve houses.
+              In Vedic astrology, your Kundali is a precise cosmic map of the sky at the moment you were born. It reveals your dharma, karma, relationships, health, wealth, and spiritual path: all encoded in the positions of nine planets across twelve houses.
             </p>
             <a href="#kundali-calc">
               <motion.span
@@ -833,10 +805,10 @@ export default function Kundali() {
             {[
               { tag: "Ascendant & Moon", title: "Lagna & Rashi Chart", desc: "Your Ascendant, Moon sign, and complete D1 birth chart showing all 9 planets across 12 houses." },
               { tag: "Navagraha Sidereal", title: "Planetary Positions", desc: "Precise sidereal longitudes for all Navagrahas including Rahu & Ketu, with dignity and retrograde states." },
-              { tag: "27-Star System", title: "Nakshatra Reading", desc: "Your Moon Nakshatra, Nakshatra lord, and pada — the 27-star system that adds unmatched depth." },
+              { tag: "27-Star System", title: "Nakshatra Reading", desc: "Your Moon Nakshatra, Nakshatra lord, and pada: the 27-star system that adds unmatched depth." },
               { tag: "Lifetime Timeline", title: "Vimshottari Dasha", desc: "Your full lifetime Dasha sequence, including the current Mahadasha and Antardasha with exact dates." },
               { tag: "Planetary Combos", title: "Yogas & Doshas", desc: "Automatic detection of auspicious Yogas (Raj Yoga, Gaja Kesari) and Doshas (Mangal, Kaal Sarp)." },
-              { tag: "Gemstone Remedies", title: "Crystal Prescriptions", desc: "Personalised gemstone recommendations based on your planetary placements — add directly to cart." },
+              { tag: "Gemstone Remedies", title: "Crystal Prescriptions", desc: "Personalised gemstone recommendations based on your planetary placements: add directly to cart." },
             ].map((item, i) => (
               <motion.div key={item.title}
                 className="border border-[#c8a951]/30 p-8 bg-white/90 shadow-md backdrop-blur-md rounded-sm flex flex-col justify-between group"
@@ -870,8 +842,8 @@ export default function Kundali() {
           <div className="space-y-0">
             {[
               { n: "01", title: "Enter Your Birth Details", desc: "Provide your name, date of birth, exact birth time, and birth place. The more precise your birth time, the more accurate your Lagna." },
-              { n: "02", title: "Jyotish Engine Calculates", desc: "Our VSOP87-based astronomy engine computes your sidereal planetary positions using Lahiri Ayanamsa — the standard used by Indian Vedic astrology." },
-              { n: "03", title: "Receive Your Full Chart", desc: "Instantly view your complete Kundali — birth chart, planetary positions, Nakshatras, Dasha timeline, Panchang, Yogas, Doshas, and crystal prescriptions." },
+              { n: "02", title: "Jyotish Engine Calculates", desc: "Our VSOP87-based astronomy engine computes your sidereal planetary positions using Lahiri Ayanamsa: the standard used by Indian Vedic astrology." },
+              { n: "03", title: "Receive Your Full Chart", desc: "Instantly view your complete Kundali: birth chart, planetary positions, Nakshatras, Dasha timeline, Panchang, Yogas, Doshas, and crystal prescriptions." },
             ].map((step, i) => (
               <motion.div key={step.n} className="flex gap-8 pb-10 relative"
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
@@ -907,7 +879,6 @@ export default function Kundali() {
       <div id="kundali-calc" />
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <div ref={heroRef} className="relative overflow-hidden" style={{ minHeight: "min(560px, 70vw)" }}>
-        <SparkleField count={26} />
 
         {/* Soft blush glows + botanical corners */}
         <div className="absolute inset-0 pointer-events-none">
@@ -917,7 +888,7 @@ export default function Kundali() {
             style={{ background: "radial-gradient(circle, rgba(233,178,150,0.28) 0%, transparent 70%)" }} />
           <div className="absolute -top-6 -left-6 opacity-90"><CornerLeaves /></div>
           <div className="absolute bottom-0 right-0 opacity-80"><CornerLeaves flip /></div>
-          {/* Botanical vine branches flanking the mandala — responsive */}
+          {/* Botanical vine branches flanking the mandala: responsive */}
           <img
             src={leafBranch.src}
             alt=""
@@ -972,7 +943,7 @@ export default function Kundali() {
             transition={{ delay: 0.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-center md:text-left max-w-[360px]"
           >
-            {/* Label line — no icons, just geometry */}
+            {/* Label line: no icons, just geometry */}
             <div className="flex items-center gap-3 mb-5 justify-center md:justify-start">
               <div className="h-px w-8 bg-[#c8a951]/60" />
               <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Vedic Jyotish</span>
@@ -993,16 +964,16 @@ export default function Kundali() {
             </div>
 
             <p className="text-sm text-[#6b5645] leading-relaxed mb-8">
-              Discover your Vedic birth chart, nakshatra, planetary positions, yogas — and the crystals the universe has aligned for your soul.
+              Discover your Vedic birth chart, nakshatra, planetary positions, yogas: and the crystals the universe has aligned for your soul.
             </p>
 
-            {/* Tags — colourful pills, one per topic */}
+            {/* Tags: colourful pills, one per topic */}
             <div ref={labelsRef} className="flex flex-wrap gap-2 justify-center md:justify-start">
               {[
                 { label: "Lahiri Ayanamsa", icon: <IconMandalaDot />, color: "#1f8a6f", bg: "rgba(31,138,111,0.08)", border: "rgba(31,138,111,0.25)" },
                 { label: "Vedic Sidereal",  icon: <IconFlame />,      color: "#c1622f", bg: "rgba(193,98,47,0.08)",  border: "rgba(193,98,47,0.25)" },
                 { label: "9 Grahas",        icon: <IconLotusPetal />, color: "#5f8a3e", bg: "rgba(95,138,62,0.08)",  border: "rgba(95,138,62,0.25)" },
-                { label: "27 Nakshatras",   icon: <IconStarBurst />,  color: "#8558a8", bg: "rgba(133,88,168,0.08)", border: "rgba(133,88,168,0.25)" },
+                { label: "27 Nakshatras",   icon: <IconConstellation />,  color: "#8558a8", bg: "rgba(133,88,168,0.08)", border: "rgba(133,88,168,0.25)" },
               ].map(tag => (
                 <span key={tag.label}
                   className="reveal-tag flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.1em] px-3.5 py-2 rounded-full"
@@ -1190,7 +1161,6 @@ export default function Kundali() {
 
               {/* Summary banner */}
               <div className="relative mb-7 overflow-hidden" style={{ border: "1px solid rgba(200,169,81,0.2)", background: "rgba(200,169,81,0.04)" }}>
-                <SparkleField count={14} />
                 <div className="relative z-10 p-7 md:p-9">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-7">
                     <div>
@@ -1275,7 +1245,7 @@ export default function Kundali() {
                   {activeTab === "chart" && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#5c4636] mb-4">D1 — Janma Kundali (North Indian)</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#5c4636] mb-4">D1: Janma Kundali (North Indian)</p>
                         <KundaliChart result={result} />
                       </div>
                       <div>
@@ -1338,7 +1308,7 @@ export default function Kundali() {
                             {result.lagnaName} Rising Collection
                           </p>
                           <p className="text-xs text-[#4a2c11] leading-relaxed max-w-sm">
-                            Crystals curated for your Lagna — worn as jewellery they continuously strengthen your energy field.
+                            Crystals curated for your Lagna: worn as jewellery they continuously strengthen your energy field.
                           </p>
                         </div>
                         <motion.button onClick={() => navigate("/shop")}
@@ -1418,7 +1388,7 @@ export default function Kundali() {
                         {result.currentDasha.antardashas && (
                           <>
                             <p className="text-[10px] font-bold uppercase tracking-widest text-[#5c4636] mb-3 mt-6">
-                              {result.currentDasha.lord} Mahadasha — Antardasha Sub-periods
+                              {result.currentDasha.lord} Mahadasha: Antardasha Sub-periods
                             </p>
                             <div style={{ border: "1px solid rgba(184,134,58,0.3)" }}>
                               {result.currentDasha.antardashas.map((ad) => {

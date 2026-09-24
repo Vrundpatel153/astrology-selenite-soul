@@ -291,7 +291,7 @@ export default function Account() {
                         Placed on {new Date(userOrders[0].createdAt).toLocaleDateString()} · Total: ₹{userOrders[0].total}
                       </p>
                     </div>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#558253]/15 text-[#558253] border border-[#558253]/30 text-[9px] font-bold uppercase tracking-wider rounded-full self-start">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#c8a951]/15 text-[#8f6d28] border border-[#c8a951]/35 text-[9px] font-bold uppercase tracking-wider rounded-full self-start">
                       <Truck className="w-3.5 h-3.5" /> {userOrders[0].orderStatus}
                     </span>
                   </div>
@@ -434,7 +434,7 @@ export default function Account() {
                   )}
                   <h4 className="text-sm font-bold text-[#2a1f1a] mb-1">{addr.fullName}</h4>
                   <p className="text-xs text-[#4a382e]/80 leading-relaxed font-light mb-2">
-                    {addr.addressLine}, {addr.city}, {addr.state} — {addr.pincode}
+                    {addr.addressLine}, {addr.city}, {addr.state}, PIN: {addr.pincode}
                   </p>
                   <p className="text-xs text-[#4a382e]/70 mb-4">Phone: {addr.phone}</p>
 

@@ -2,7 +2,7 @@
 //
 // Uses `astronomy-engine` (VSOP/ELP-based, arc-second accurate 1900-2100) for
 // true geocentric ecliptic longitudes, then converts to the sidereal zodiac
-// via the Lahiri (Chitrapaksha) ayanamsa — the standard used by Indian
+// via the Lahiri (Chitrapaksha) ayanamsa: the standard used by Indian
 // Vedic astrology software and panchang publishers.
 import * as Astronomy from "astronomy-engine";
 import { DateTime } from "luxon";
@@ -345,25 +345,25 @@ function detectYogas(planets: PlanetResult[], lagnaRashiIndex: number): YogaResu
   const kendras = [1, 4, 7, 10];
   const kendraFromEachOther = (h1: number, h2: number) => kendras.includes((((h1 - h2 + 12) % 12) + 1));
   if (kendraFromEachOther(moon.house, jup.house)) {
-    yogas.push({ name: "Gaja Kesari Yoga", description: "Moon and Jupiter stand in mutual kendra (angular houses) — grants intelligence, reputation and steady prosperity throughout life.", strength: "Strong" });
+    yogas.push({ name: "Gaja Kesari Yoga", description: "Moon and Jupiter stand in mutual kendra (angular houses): grants intelligence, reputation and steady prosperity throughout life.", strength: "Strong" });
   }
 
-  // Panch Mahapurusha Yogas — karaka planet in own/exalted sign AND in a kendra house.
+  // Panch Mahapurusha Yogas: karaka planet in own/exalted sign AND in a kendra house.
   const mahapurusha: [PlanetResult, string][] = [[mars, "Ruchaka"], [merc, "Bhadra"], [jup, "Hamsa"], [ven, "Malavya"], [sat, "Sasha"]];
   for (const [p, yogaName] of mahapurusha) {
     if (kendras.includes(p.house) && (p.dignity === "Own Sign" || p.dignity === "Exalted")) {
-      yogas.push({ name: `${yogaName} Yoga`, description: `${p.name} (${p.sanskrit}) occupies its own/exalted sign in a kendra (house ${p.house}) — one of the five Panch Mahapurusha yogas, indicating exceptional strength of character, status and success tied to ${p.name}'s significations.`, strength: "Very Strong" });
+      yogas.push({ name: `${yogaName} Yoga`, description: `${p.name} (${p.sanskrit}) occupies its own/exalted sign in a kendra (house ${p.house}): one of the five Panch Mahapurusha yogas, indicating exceptional strength of character, status and success tied to ${p.name}'s significations.`, strength: "Very Strong" });
     }
   }
 
   if (sun.rashi === merc.rashi) {
-    yogas.push({ name: "Budh-Aditya Yoga", description: "Sun and Mercury conjoin in the same sign — sharpens intellect, analytical skill and communication; favours careers in analysis, writing and strategy.", strength: "Moderate" });
+    yogas.push({ name: "Budh-Aditya Yoga", description: "Sun and Mercury conjoin in the same sign: sharpens intellect, analytical skill and communication; favours careers in analysis, writing and strategy.", strength: "Moderate" });
   }
   if (moon.rashi === mars.rashi) {
-    yogas.push({ name: "Chandra-Mangal Yoga", description: "Moon and Mars conjoin — a classical wealth-producing yoga, granting business acumen, drive and the ability to accumulate resources.", strength: "Moderate" });
+    yogas.push({ name: "Chandra-Mangal Yoga", description: "Moon and Mars conjoin: a classical wealth-producing yoga, granting business acumen, drive and the ability to accumulate resources.", strength: "Moderate" });
   }
   if (jup.rashi === mars.rashi) {
-    yogas.push({ name: "Guru-Mangal Yoga", description: "Jupiter and Mars conjoin — combines courage with wisdom, favouring leadership, property gains and bold but principled decision-making.", strength: "Moderate" });
+    yogas.push({ name: "Guru-Mangal Yoga", description: "Jupiter and Mars conjoin: combines courage with wisdom, favouring leadership, property gains and bold but principled decision-making.", strength: "Moderate" });
   }
 
   // Raj Yoga: a kendra lord and a trikona lord (from lagna) conjoined in the same rashi.
@@ -375,7 +375,7 @@ function detectYogas(planets: PlanetResult[], lagnaRashiIndex: number): YogaResu
       const pk = planets.find((p) => p.name === kl);
       const pt = planets.find((p) => p.name === tl);
       if (pk && pt && pk.rashi === pt.rashi) {
-        yogas.push({ name: "Raja Yoga", description: `The lord of a kendra house (${kl}) and the lord of a trikona house (${tl}) unite in the same sign — a classic Raja Yoga bestowing authority, rank and rising fortune.`, strength: "Strong" });
+        yogas.push({ name: "Raja Yoga", description: `The lord of a kendra house (${kl}) and the lord of a trikona house (${tl}) unite in the same sign: a classic Raja Yoga bestowing authority, rank and rising fortune.`, strength: "Strong" });
       }
     }
   }
@@ -386,19 +386,19 @@ function detectYogas(planets: PlanetResult[], lagnaRashiIndex: number): YogaResu
   const p2 = planets.find((p) => p.name === lord2);
   const p11 = planets.find((p) => p.name === lord11);
   if (p2 && p11 && lord2 !== lord11 && p2.rashi === p11.rashi) {
-    yogas.push({ name: "Dhana Yoga", description: "The lords of the 2nd (wealth) and 11th (gains) houses combine — a strong indicator of financial growth and accumulation of assets over the native's life.", strength: "Moderate" });
+    yogas.push({ name: "Dhana Yoga", description: "The lords of the 2nd (wealth) and 11th (gains) houses combine: a strong indicator of financial growth and accumulation of assets over the native's life.", strength: "Moderate" });
   }
 
-  // Sunapha / Anapha / Durudhara — planets (excluding Sun) in the 2nd/12th from Moon.
+  // Sunapha / Anapha / Durudhara: planets (excluding Sun) in the 2nd/12th from Moon.
   const nonLuminaries = planets.filter((p) => p.name !== "Sun" && p.name !== "Moon");
   const has2ndFromMoon = nonLuminaries.some((p) => (((p.house - moon.house + 12) % 12) + 1) === 2);
   const has12thFromMoon = nonLuminaries.some((p) => (((p.house - moon.house + 12) % 12) + 1) === 12);
   if (has2ndFromMoon && has12thFromMoon) {
-    yogas.push({ name: "Durudhara Yoga", description: "Planets flank the Moon on both sides (2nd and 12th houses from Chandra) — brings comfort, resources and support networks throughout life.", strength: "Moderate" });
+    yogas.push({ name: "Durudhara Yoga", description: "Planets flank the Moon on both sides (2nd and 12th houses from Chandra): brings comfort, resources and support networks throughout life.", strength: "Moderate" });
   } else if (has2ndFromMoon) {
-    yogas.push({ name: "Sunapha Yoga", description: "A planet (other than the Sun) occupies the 2nd house from the Moon — grants self-earned wealth, eloquence and reputation.", strength: "Moderate" });
+    yogas.push({ name: "Sunapha Yoga", description: "A planet (other than the Sun) occupies the 2nd house from the Moon: grants self-earned wealth, eloquence and reputation.", strength: "Moderate" });
   } else if (has12thFromMoon) {
-    yogas.push({ name: "Anapha Yoga", description: "A planet (other than the Sun) occupies the 12th house from the Moon — grants good health, contentment and a dignified nature.", strength: "Moderate" });
+    yogas.push({ name: "Anapha Yoga", description: "A planet (other than the Sun) occupies the 12th house from the Moon: grants good health, contentment and a dignified nature.", strength: "Moderate" });
   }
 
   if (yogas.length === 0) {
@@ -419,7 +419,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (manglikHouses.includes(mars.house)) {
     doshas.push({
       name: "Mangal Dosha (from Lagna)",
-      description: `Mars occupies house ${mars.house} from the Ascendant, one of the Manglik houses (1, 2, 4, 7, 8, 12) — traditionally watched for in marriage compatibility.` + (marsCancelled ? " Mars is in its own/exalted sign here, which classically cancels or greatly weakens the dosha." : ""),
+      description: `Mars occupies house ${mars.house} from the Ascendant, one of the Manglik houses (1, 2, 4, 7, 8, 12): traditionally watched for in marriage compatibility.` + (marsCancelled ? " Mars is in its own/exalted sign here, which classically cancels or greatly weakens the dosha." : ""),
       remedy: marsCancelled ? "Largely self-cancelled by Mars' own dignity; Red Coral or Red Jasper can still be worn to further strengthen Mars." : "Worship of Hanuman on Tuesdays, Kumbh Vivah before marriage, or wearing Red Coral after consultation.",
       severity: marsCancelled ? "Low" : "Moderate",
     });
@@ -442,7 +442,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (allOneSide) {
     doshas.push({
       name: "Kaal Sarp Dosha",
-      description: "All seven classical planets are hemmed between Rahu and Ketu — a Kaal Sarp yoga/dosha associated with karmic struggle early in life followed by sudden, fated rises once the axis matures.",
+      description: "All seven classical planets are hemmed between Rahu and Ketu: a Kaal Sarp yoga/dosha associated with karmic struggle early in life followed by sudden, fated rises once the axis matures.",
       remedy: "Nag Panchami puja, chanting the Maha Mrityunjaya mantra, and worship of Lord Shiva are the classical remedies.",
       severity: "Moderate",
     });
@@ -453,7 +453,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (diffFromMoon === 12 || diffFromMoon === 1 || diffFromMoon === 2) {
     const phase = diffFromMoon === 12 ? "Rising phase" : diffFromMoon === 1 ? "Peak phase" : "Setting phase";
     doshas.push({
-      name: `Shani Sade Sati — ${phase}`,
+      name: `Shani Sade Sati: ${phase}`,
       description: "Transiting Saturn is currently within the seven-and-a-half-year cycle around the natal Moon sign, a period of restructuring, discipline and long-term karmic lessons.",
       remedy: "Recite the Shani Chalisa/Hanuman Chalisa on Saturdays, donate black sesame and iron, and avoid unnecessary conflict during this period.",
       severity: diffFromMoon === 1 ? "High" : "Moderate",
@@ -463,7 +463,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (jup.rashi === rahu.rashi) {
     doshas.push({
       name: "Guru Chandal Dosha",
-      description: "Jupiter conjoins Rahu — can cloud judgement, ethics or belief systems, or produce unconventional, boundary-breaking wisdom depending on the rest of the chart.",
+      description: "Jupiter conjoins Rahu: can cloud judgement, ethics or belief systems, or produce unconventional, boundary-breaking wisdom depending on the rest of the chart.",
       remedy: "Strengthen Jupiter with Yellow Sapphire (after consultation), recite Guru mantras on Thursdays, and practice ethical discernment.",
       severity: "Moderate",
     });
@@ -472,7 +472,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (sun.rashi === rahu.rashi || sun.rashi === ketu.rashi || rahu.house === 9 || ketu.house === 9) {
     doshas.push({
       name: "Pitra Dosha",
-      description: "The Sun (or the 9th house of ancestry) is afflicted by a lunar node — traditionally linked to unresolved ancestral karma affecting steady progress.",
+      description: "The Sun (or the 9th house of ancestry) is afflicted by a lunar node: traditionally linked to unresolved ancestral karma affecting steady progress.",
       remedy: "Perform Pitru Tarpan/Shraddha rituals, offer water to the Sun at sunrise, and donate on Amavasya (new moon) days.",
       severity: "Low",
     });
@@ -481,7 +481,7 @@ function detectDoshas(planets: PlanetResult[], lagnaRashiIndex: number, currentT
   if (sun.rashi === rahu.rashi || sun.rashi === ketu.rashi || moon.rashi === rahu.rashi || moon.rashi === ketu.rashi) {
     doshas.push({
       name: "Grahan (Eclipse) Dosha",
-      description: "A luminary (Sun or Moon) conjoins a lunar node, resembling an eclipse axis in the birth chart — can bring intensity, obscured clarity or transformative turning points tied to that luminary's house.",
+      description: "A luminary (Sun or Moon) conjoins a lunar node, resembling an eclipse axis in the birth chart: can bring intensity, obscured clarity or transformative turning points tied to that luminary's house.",
       remedy: "Chant the Gayatri mantra (for Sun) or Chandra mantras (for Moon), and observe fasting on the relevant eclipse-adjacent days.",
       severity: "Low",
     });
@@ -502,20 +502,20 @@ function getCrystalRecommendations(planets: PlanetResult[], lagnaRashiIndex: num
     recs.push({ planet, reason, ...rec });
   };
 
-  // Primary: the current Mahadasha lord — the single most relevant remedy right now.
-  push(dashaLord, `${dashaLord} Mahadasha is currently active — the most impactful gemstone to strengthen now`);
+  // Primary: the current Mahadasha lord: the single most relevant remedy right now.
+  push(dashaLord, `${dashaLord} Mahadasha is currently active: the most impactful gemstone to strengthen now`);
 
   const lagnaLordName = rashiLord(lagnaRashiIndex);
-  push(lagnaLordName, `Lagna lord ${lagnaLordName} — strengthens core vitality and self-expression`);
+  push(lagnaLordName, `Lagna lord ${lagnaLordName}: strengthens core vitality and self-expression`);
 
   const moon = planets.find((p) => p.name === "Moon")!;
-  push(rashiLord(moon.rashi - 1), `Moon in ${RASHIS[moon.rashi - 1]!.name} — supports emotional balance and intuition`);
+  push(rashiLord(moon.rashi - 1), `Moon in ${RASHIS[moon.rashi - 1]!.name}: supports emotional balance and intuition`);
 
   const weak = planets.find((p) => p.dignity === "Debilitated" && CRYSTAL_MAP[p.name]);
-  if (weak) push(weak.name, `${weak.name} is debilitated — remedial support recommended`);
+  if (weak) push(weak.name, `${weak.name} is debilitated: remedial support recommended`);
 
   const retro = planets.find((p) => p.isRetrograde && CRYSTAL_MAP[p.name] && !seen.has(p.name));
-  if (retro) push(retro.name, `${retro.name} is retrograde — remedy & balance`);
+  if (retro) push(retro.name, `${retro.name} is retrograde: remedy & balance`);
 
   return recs.slice(0, 4);
 }

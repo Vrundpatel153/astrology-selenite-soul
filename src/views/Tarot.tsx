@@ -218,12 +218,12 @@ function BookingForm({ id }: { id: string }) {
                 className="w-full bg-[#fdf8f4] border border-[#e8d9cf] px-4 py-3 text-sm text-[#2a1f1a] outline-none focus:border-[#c8a951] rounded-sm transition-colors [color-scheme:light]"
               >
                 <option value="">Select a preferred time window</option>
-                <option>10:00 AM – 11:00 AM (IST)</option>
-                <option>11:30 AM – 12:30 PM (IST)</option>
-                <option>02:00 PM – 03:00 PM (IST)</option>
-                <option>04:00 PM – 05:00 PM (IST)</option>
-                <option>06:00 PM – 07:00 PM (IST)</option>
-                <option>07:30 PM – 08:30 PM (IST)</option>
+                <option>10:00 AM - 11:00 AM (IST)</option>
+                <option>11:30 AM - 12:30 PM (IST)</option>
+                <option>02:00 PM - 03:00 PM (IST)</option>
+                <option>04:00 PM - 05:00 PM (IST)</option>
+                <option>06:00 PM - 07:00 PM (IST)</option>
+                <option>07:30 PM - 08:30 PM (IST)</option>
               </select>
             </div>
             <div>
@@ -232,7 +232,7 @@ function BookingForm({ id }: { id: string }) {
               </label>
               <textarea
                 name="message" value={form.message} onChange={handleChange}
-                placeholder="Share the area of life you're seeking clarity on — love, career, a life pivot, spiritual growth..."
+                placeholder="Share the area of life you're seeking clarity on: love, career, a life pivot, spiritual growth..."
                 rows={4}
                 className="w-full bg-[#fdf8f4] border border-[#e8d9cf] px-4 py-3 text-sm text-[#2a1f1a] outline-none focus:border-[#c8a951] rounded-sm transition-colors resize-none placeholder:text-[#2a1f1a]/30"
               />
@@ -262,7 +262,7 @@ function BookingForm({ id }: { id: string }) {
 
 // ─── FAQ accordion ─────────────────────────────────────────────────────────────
 const faqs = [
-  { q: "How long is a Tarot reading session?", a: "Each reading is 45–60 minutes, conducted via private high-definition video call or in person. Ekta ensures dedicated time for in-depth questions and custom spread interpretations." },
+  { q: "How long is a Tarot reading session?", a: "Each reading is 45 to 60 minutes, conducted via private high-definition video call or in person. Ekta ensures dedicated time for in-depth questions and custom spread interpretations." },
   { q: "Do I need prior knowledge of Tarot?", a: "Not at all. You only need an open heart and a willingness to explore your path. Ekta translates the archetypal symbolism into clear, grounded guidance." },
   { q: "Is Tarot fortune-telling or deterministic?", a: "Ekta's philosophy honors your sovereign free will. Tarot serves as an intuitive mirror reflecting present energetic trajectories, empowering you to make aligned choices." },
   { q: "What is included with my session?", a: "In addition to your live consultation, Ekta provides a personalized crystal prescription and a recap of key affirmations to anchor your session's energy." },
@@ -330,7 +330,7 @@ export default function Tarot() {
             <span className="italic text-[#a5762a]">with Ekta</span>
           </h1>
           <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-10">
-            Not fortune-telling — a sacred mirror reflecting your soul's highest wisdom. Draw from the 3D deck below or schedule an intimate consultation with Ekta.
+            Not fortune-telling, but a sacred mirror reflecting your soul's highest wisdom. Draw from the 3D deck below or schedule an intimate consultation with Ekta.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#interactive-deck">
@@ -441,7 +441,7 @@ export default function Tarot() {
             </h2>
             <div className="flex flex-wrap justify-center gap-8">
               {[
-                { Icon: Clock, label: "45–60 Minutes" },
+                { Icon: Clock, label: "45-60 Minutes" },
                 { Icon: Calendar, label: "Private Video or In-Person" },
                 { Icon: CheckCircle, label: "Crystal Remedy Prescription Included" },
               ].map(({ Icon, label }) => (

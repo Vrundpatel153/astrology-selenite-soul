@@ -138,8 +138,8 @@ export default function Offers() {
                     >
                       {copiedCode === coupon.code ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-green-600" />
-                          <span className="text-green-600">Copied!</span>
+                          <Check className="w-3.5 h-3.5 text-[#a5762a]" />
+                          <span className="text-[#a5762a]">Copied!</span>
                         </>
                       ) : (
                         <>

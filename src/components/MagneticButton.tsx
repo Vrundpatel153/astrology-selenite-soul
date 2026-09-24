@@ -1,6 +1,6 @@
 "use client";
 /**
- * MagneticButton — button that magnetically attracts the cursor within a radius.
+ * MagneticButton: button that magnetically attracts the cursor within a radius.
  * Gives every CTA a premium tactile feel.
  */
 import { useRef, ReactNode } from "react";

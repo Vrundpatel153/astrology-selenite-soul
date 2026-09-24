@@ -3,13 +3,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Mail, Phone, MapPin, Clock, MessageCircle, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle, Instagram, Check } from "lucide-react";
 
 const info = [
   { icon: Mail,    label: "Email Us",        value: "hello@selenitesoul.com",  sub: "We reply within 24 hours" },
-  { icon: Phone,   label: "Call / WhatsApp",  value: "+91 98765 43210",         sub: "Mon–Sat, 10am – 6pm IST" },
+  { icon: Phone,   label: "Call / WhatsApp",  value: "+91 98765 43210",         sub: "Mon-Sat, 10am - 6pm IST" },
   { icon: MapPin,  label: "Our Studio",       value: "Hauz Khas, New Delhi",    sub: "Visit by appointment only" },
-  { icon: Clock,   label: "Support Hours",    value: "Mon–Sat",                 sub: "10:00 AM – 6:00 PM IST" },
+  { icon: Clock,   label: "Support Hours",    value: "Mon-Sat",                 sub: "10:00 AM - 6:00 PM IST" },
 ];
 
 export default function Contact() {
@@ -30,7 +30,7 @@ export default function Contact() {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Reach Out</p>
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] mb-3">We'd Love to Hear from You</h1>
-          <p className="text-[#2a1f1a]/60 max-w-xl mx-auto text-sm">Whether it's a question about your order, crystal advice, or Vedic astrology — our team is here to help.</p>
+          <p className="text-[#2a1f1a]/60 max-w-xl mx-auto text-sm">Whether it's a question about your order, crystal advice, or Vedic astrology: our team is here to help.</p>
         </motion.div>
       </section>
 
@@ -87,7 +87,9 @@ export default function Contact() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#c8a951]/20 border border-[#c8a951] flex items-center justify-center text-[#a5762a] mx-auto mb-4 font-bold text-xl">✓</div>
+                  <div className="w-12 h-12 rounded-full bg-[#c8a951]/20 border border-[#c8a951] flex items-center justify-center text-[#a5762a] mx-auto mb-4">
+                    <Check className="w-6 h-6 stroke-[2]" />
+                  </div>
                   <h3 className="text-2xl font-serif font-light text-[#2a1f1a] mb-3">Message Received</h3>
                   <p className="text-[#2a1f1a]/60 text-sm max-w-xs">Thank you for reaching out. We will get back to you within 24 hours.</p>
                 </motion.div>

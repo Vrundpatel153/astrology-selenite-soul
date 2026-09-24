@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, MapPin, ShoppingBag, Menu, X, Heart, ChevronRight, Star, User as UserIcon, Tag } from "lucide-react";
+import { Search, MapPin, ShoppingBag, Menu, X, Heart, ChevronRight, User as UserIcon, Tag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -188,7 +188,7 @@ export default function Header() {
               <Menu className="w-5 h-5 stroke-[1.5]" />
             </motion.button>
 
-            {/* Search icon — mobile */}
+            {/* Search icon : mobile */}
             <motion.button
               onClick={() => setSearchOpen(true)}
               className="md:hidden flex items-center justify-center w-9 h-9 text-[#2a1f1a]"

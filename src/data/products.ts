@@ -38,18 +38,18 @@ export const concerns = [
 ];
 
 export const zodiacSigns = [
-  { sign: "Aries",       dates: "Mar 21 – Apr 19", crystal: "Carnelian",     emoji: "♈" },
-  { sign: "Taurus",      dates: "Apr 20 – May 20", crystal: "Rose Quartz",   emoji: "♉" },
-  { sign: "Gemini",      dates: "May 21 – Jun 20", crystal: "Tiger Eye",     emoji: "♊" },
-  { sign: "Cancer",      dates: "Jun 21 – Jul 22", crystal: "Selenite",      emoji: "♋" },
-  { sign: "Leo",         dates: "Jul 23 – Aug 22", crystal: "Citrine",       emoji: "♌" },
-  { sign: "Virgo",       dates: "Aug 23 – Sep 22", crystal: "Amazonite",     emoji: "♍" },
-  { sign: "Libra",       dates: "Sep 23 – Oct 22", crystal: "Lapis Lazuli",  emoji: "♎" },
-  { sign: "Scorpio",     dates: "Oct 23 – Nov 21", crystal: "Unakite",       emoji: "♏" },
-  { sign: "Sagittarius", dates: "Nov 22 – Dec 21", crystal: "Turquoise",     emoji: "♐" },
-  { sign: "Capricorn",   dates: "Dec 22 – Jan 19", crystal: "Garnet",        emoji: "♑" },
-  { sign: "Aquarius",    dates: "Jan 20 – Feb 18", crystal: "Amethyst",      emoji: "♒" },
-  { sign: "Pisces",      dates: "Feb 19 – Mar 20", crystal: "Clear Quartz",  emoji: "♓" },
+  { sign: "Aries",       dates: "Mar 21 - Apr 19", crystal: "Carnelian" },
+  { sign: "Taurus",      dates: "Apr 20 - May 20", crystal: "Rose Quartz" },
+  { sign: "Gemini",      dates: "May 21 - Jun 20", crystal: "Tiger Eye" },
+  { sign: "Cancer",      dates: "Jun 21 - Jul 22", crystal: "Selenite" },
+  { sign: "Leo",         dates: "Jul 23 - Aug 22", crystal: "Citrine" },
+  { sign: "Virgo",       dates: "Aug 23 - Sep 22", crystal: "Amazonite" },
+  { sign: "Libra",       dates: "Sep 23 - Oct 22", crystal: "Lapis Lazuli" },
+  { sign: "Scorpio",     dates: "Oct 23 - Nov 21", crystal: "Unakite" },
+  { sign: "Sagittarius", dates: "Nov 22 - Dec 21", crystal: "Turquoise" },
+  { sign: "Capricorn",   dates: "Dec 22 - Jan 19", crystal: "Garnet" },
+  { sign: "Aquarius",    dates: "Jan 20 - Feb 18", crystal: "Amethyst" },
+  { sign: "Pisces",      dates: "Feb 19 - Mar 20", crystal: "Clear Quartz" },
 ];
 
 export const products: Product[] = [

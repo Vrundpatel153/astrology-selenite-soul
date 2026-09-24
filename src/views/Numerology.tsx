@@ -51,10 +51,10 @@ function CompatibilityCalculator() {
   }
 
   function compatDesc(score: number) {
-    if (score >= 90) return "Cosmic Alchemy — your life path numbers resonate at the deepest vibrational core, fostering effortless spiritual harmony and mutual elevation.";
-    if (score >= 80) return "Strong Resonance — your energetic blueprints complement each other with natural understanding, shared ethics, and passionate collaboration.";
-    if (score >= 70) return "Dynamic Growth — you challenge each other to expand beyond comfort zones, teaching valuable karmic lessons through healthy balance.";
-    return "Transformative Dynamic — differences in core purpose require conscious communication, boundary respect, and mutual celebration of each other's unique perspective.";
+    if (score >= 90) return "Cosmic Alchemy: your life path numbers resonate at the deepest vibrational core, fostering effortless spiritual harmony and mutual elevation.";
+    if (score >= 80) return "Strong Resonance: your energetic blueprints complement each other with natural understanding, shared ethics, and passionate collaboration.";
+    if (score >= 70) return "Dynamic Growth: you challenge each other to expand beyond comfort zones, teaching valuable karmic lessons through healthy balance.";
+    return "Transformative Dynamic: differences in core purpose require conscious communication, boundary respect, and mutual celebration of each other's unique perspective.";
   }
 
   return (

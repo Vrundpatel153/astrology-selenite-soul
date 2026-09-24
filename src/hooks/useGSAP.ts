@@ -1,6 +1,6 @@
 "use client";
 /**
- * useGSAPReveal — attaches GSAP ScrollTrigger to a ref.
+ * useGSAPReveal: attaches GSAP ScrollTrigger to a ref.
  * Usage:
  *   const ref = useGSAPReveal();
  *   <div ref={ref}>...</div>
@@ -51,7 +51,7 @@ export function useGSAPReveal(options: RevealOptions = {}) {
   return ref as React.RefObject<any>;
 }
 
-/** Parallax background — moves at a fraction of scroll speed */
+/** Parallax background: moves at a fraction of scroll speed */
 export function useParallax(speed = 0.25) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -124,7 +124,7 @@ export function useSplitReveal() {
   return ref as React.RefObject<any>;
 }
 
-/** Counter animation — animates a number from 0 to target */
+/** Counter animation: animates a number from 0 to target */
 export function useCounter(target: number, suffix = "") {
   const ref = useRef<HTMLElement | null>(null);
 

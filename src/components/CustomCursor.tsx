@@ -1,6 +1,6 @@
 "use client";
 /**
- * Selenite Soul — Ultra-Responsive Luxury Cursor
+ * Selenite Soul: Ultra-Responsive Luxury Cursor
  * A fast, hardware-accelerated, unified celestial cursor that tracks tightly
  * with zero lag, sleek interactive states, and a dedicated gold pointing finger
  * for card selection.

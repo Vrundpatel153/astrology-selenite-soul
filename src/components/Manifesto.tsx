@@ -28,7 +28,7 @@ export default function Manifesto() {
             For too long, healing crystals were seen as mystical objects locked away in boutiques. Reserved for seekers. For the spiritually devoted. Selenite Soul set out to change that.
           </p>
           <p className="font-mono text-[13px] md:text-base lg:text-lg text-[#2a1f1a] leading-relaxed">
-            We believe crystals aren't for display. They're for living. For protection. For love. For calm. For owning your energy—because you deserve a life aligned with the universe.
+            We believe crystals aren't for display. They're for living. For protection. For love. For calm. For owning your energy, because you deserve a life aligned with the universe.
           </p>
         </motion.div>
 

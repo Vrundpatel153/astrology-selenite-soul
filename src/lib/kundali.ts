@@ -12,18 +12,18 @@ export interface BirthData {
 }
 
 export const RASHIS = [
-  { name: "Mesha", english: "Aries", symbol: "♈", ruler: "Mars", element: "Fire" },
-  { name: "Vrishabha", english: "Taurus", symbol: "♉", ruler: "Venus", element: "Earth" },
-  { name: "Mithuna", english: "Gemini", symbol: "♊", ruler: "Mercury", element: "Air" },
-  { name: "Karka", english: "Cancer", symbol: "♋", ruler: "Moon", element: "Water" },
-  { name: "Simha", english: "Leo", symbol: "♌", ruler: "Sun", element: "Fire" },
-  { name: "Kanya", english: "Virgo", symbol: "♍", ruler: "Mercury", element: "Earth" },
-  { name: "Tula", english: "Libra", symbol: "♎", ruler: "Venus", element: "Air" },
-  { name: "Vrishchika", english: "Scorpio", symbol: "♏", ruler: "Mars", element: "Water" },
-  { name: "Dhanu", english: "Sagittarius", symbol: "♐", ruler: "Jupiter", element: "Fire" },
-  { name: "Makara", english: "Capricorn", symbol: "♑", ruler: "Saturn", element: "Earth" },
-  { name: "Kumbha", english: "Aquarius", symbol: "♒", ruler: "Saturn", element: "Air" },
-  { name: "Meena", english: "Pisces", symbol: "♓", ruler: "Jupiter", element: "Water" },
+  { name: "Mesha", english: "Aries", symbol: "Ari", ruler: "Mars", element: "Fire" },
+  { name: "Vrishabha", english: "Taurus", symbol: "Tau", ruler: "Venus", element: "Earth" },
+  { name: "Mithuna", english: "Gemini", symbol: "Gem", ruler: "Mercury", element: "Air" },
+  { name: "Karka", english: "Cancer", symbol: "Can", ruler: "Moon", element: "Water" },
+  { name: "Simha", english: "Leo", symbol: "Leo", ruler: "Sun", element: "Fire" },
+  { name: "Kanya", english: "Virgo", symbol: "Vir", ruler: "Mercury", element: "Earth" },
+  { name: "Tula", english: "Libra", symbol: "Lib", ruler: "Venus", element: "Air" },
+  { name: "Vrishchika", english: "Scorpio", symbol: "Sco", ruler: "Mars", element: "Water" },
+  { name: "Dhanu", english: "Sagittarius", symbol: "Sag", ruler: "Jupiter", element: "Fire" },
+  { name: "Makara", english: "Capricorn", symbol: "Cap", ruler: "Saturn", element: "Earth" },
+  { name: "Kumbha", english: "Aquarius", symbol: "Aqu", ruler: "Saturn", element: "Air" },
+  { name: "Meena", english: "Pisces", symbol: "Pis", ruler: "Jupiter", element: "Water" },
 ];
 
 export async function geocodePlace(place: string): Promise<{ lat: number; lon: number } | null> {

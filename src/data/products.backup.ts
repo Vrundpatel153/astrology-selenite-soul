@@ -35,22 +35,22 @@ export const concerns = [
 ];
 
 export const zodiacSigns = [
-  { sign: "Aries",       dates: "Mar 21 – Apr 19", crystal: "Carnelian",     emoji: "♈" },
-  { sign: "Taurus",      dates: "Apr 20 – May 20", crystal: "Rose Quartz",   emoji: "♉" },
-  { sign: "Gemini",      dates: "May 21 – Jun 20", crystal: "Tiger Eye",     emoji: "♊" },
-  { sign: "Cancer",      dates: "Jun 21 – Jul 22", crystal: "Moonstone",     emoji: "♋" },
-  { sign: "Leo",         dates: "Jul 23 – Aug 22", crystal: "Citrine",       emoji: "♌" },
-  { sign: "Virgo",       dates: "Aug 23 – Sep 22", crystal: "Amazonite",     emoji: "♍" },
-  { sign: "Libra",       dates: "Sep 23 – Oct 22", crystal: "Lapis Lazuli",  emoji: "♎" },
-  { sign: "Scorpio",     dates: "Oct 23 – Nov 21", crystal: "Black Obsidian",emoji: "♏" },
-  { sign: "Sagittarius", dates: "Nov 22 – Dec 21", crystal: "Turquoise",     emoji: "♐" },
-  { sign: "Capricorn",   dates: "Dec 22 – Jan 19", crystal: "Garnet",        emoji: "♑" },
-  { sign: "Aquarius",    dates: "Jan 20 – Feb 18", crystal: "Amethyst",      emoji: "♒" },
-  { sign: "Pisces",      dates: "Feb 19 – Mar 20", crystal: "Aquamarine",    emoji: "♓" },
+  { sign: "Aries",       dates: "Mar 21 - Apr 19", crystal: "Carnelian",     emoji: "" },
+  { sign: "Taurus",      dates: "Apr 20 - May 20", crystal: "Rose Quartz",   emoji: "" },
+  { sign: "Gemini",      dates: "May 21 - Jun 20", crystal: "Tiger Eye",     emoji: "" },
+  { sign: "Cancer",      dates: "Jun 21 - Jul 22", crystal: "Moonstone",     emoji: "" },
+  { sign: "Leo",         dates: "Jul 23 - Aug 22", crystal: "Citrine",       emoji: "" },
+  { sign: "Virgo",       dates: "Aug 23 - Sep 22", crystal: "Amazonite",     emoji: "" },
+  { sign: "Libra",       dates: "Sep 23 - Oct 22", crystal: "Lapis Lazuli",  emoji: "" },
+  { sign: "Scorpio",     dates: "Oct 23 - Nov 21", crystal: "Black Obsidian",emoji: "" },
+  { sign: "Sagittarius", dates: "Nov 22 - Dec 21", crystal: "Turquoise",     emoji: "" },
+  { sign: "Capricorn",   dates: "Dec 22 - Jan 19", crystal: "Garnet",        emoji: "" },
+  { sign: "Aquarius",    dates: "Jan 20 - Feb 18", crystal: "Amethyst",      emoji: "" },
+  { sign: "Pisces",      dates: "Feb 19 - Mar 20", crystal: "Aquamarine",    emoji: "" },
 ];
 
 export const products: Product[] = [
-  // ─── BRACELETS (1–69) ───────────────────────────────────────────────────────
+  // ─── BRACELETS (1-69) ───────────────────────────────────────────────────────
   { id:1,  name:"Energised Dhan Yog Bracelet",            price:1499, originalPrice:1999, material:"7 Crystal Wealth Blend",              category:"bracelets", gemstone:"Multi-stone",     image:CDN+"dhan-yog-bracelet-8697571.webp",                                       badge:"SALE",        savePercent:25, swatches:["#c8a951","#ffd54f","#81c784"], concern:["money"],                   isBestSeller:true },
   { id:2,  name:"Dhan Yog Chips Bracelet",                price:1199, originalPrice:1599, material:"Raw Wealth Crystal Blend",            category:"bracelets", gemstone:"Multi-stone",     image:CDN+"dhan-yog-chips-bracelet-1.webp",                  badge:"SALE",        savePercent:25, swatches:["#c8a951","#ffd54f"],          concern:["money"] },
   { id:3,  name:"Raw Dhan Yog Bracelet",                  price:999,  originalPrice:1399, material:"Uncut Crystal Wealth Chain",          category:"bracelets", gemstone:"Multi-stone",     image:CDN+"raw_dhan_yog_bracelet.webp",                                           badge:"SALE",        savePercent:28, swatches:["#c8a951"],                    concern:["money"] },
@@ -121,7 +121,7 @@ export const products: Product[] = [
   { id:68, name:"Red Jasper Cylinder Bracelet",           price:999,                      material:"Red Jasper Cylinders, Elastic",       category:"bracelets", gemstone:"Red Jasper",      image:CDN+"DSC_6465.webp",                                                        badge:"NEW",                         swatches:["#e57373"],                    concern:["health"],                  isNew:true },
   { id:69, name:"Pyrite Cylinder Bracelet",               price:1199,                     material:"Pyrite Cylinders, Elastic",           category:"bracelets", gemstone:"Pyrite",          image:CDN+"DSC_6461.webp",                                                        badge:"NEW",                         swatches:["#c8a951"],                    concern:["money"],                   isNew:true },
 
-  // ─── PENDANTS (70–120) ───────────────────────────────────────────────────────
+  // ─── PENDANTS (70-120) ───────────────────────────────────────────────────────
   { id:70,  name:"Raw Pyrite Pendant",                    price:1299, originalPrice:1699, material:"Raw Pyrite, Gold Plated Chain",       category:"pendants",  gemstone:"Pyrite",          image:CDN+"business-success-combo-5516503.webp",                                  badge:"SALE",        savePercent:23, swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
   { id:71,  name:"Raw Pyrite Oval Pendant",               price:999,                      material:"Oval Pyrite, Gold Plated Chain",      category:"pendants",  gemstone:"Pyrite",          image:CDN+"raw-pyrite-oval-pendant-7465152.webp",                                                       swatches:["#c8a951"],                    concern:["money"] },
   { id:72,  name:"Pyrite Pendant",                        price:1199,                     material:"Polished Pyrite, 925 Silver",         category:"pendants",  gemstone:"Pyrite",          image:CDN+"pyrite-pendant-9695250.webp",                                                                swatches:["#c8a951","#c8c8c8"],          concern:["money"] },
@@ -174,7 +174,7 @@ export const products: Product[] = [
   { id:119, name:"Tiger Eye Heart Pendant",               price:1499,                     material:"Tiger Eye Heart, 925 Silver",         category:"pendants",  gemstone:"Tiger Eye",       image:CDN+"tiger-eye-heart-pendant-8725650.webp",                                                       swatches:["#8b6914","#c8c8c8"],          concern:["protection","money"] },
   { id:120, name:"Green Aventurine Heart Pendant",        price:1499,                     material:"Green Aventurine Heart, 925 Silver",  category:"pendants",  gemstone:"Green Aventurine",image:CDN+"green-aventurine-heart-pendant-6633311.webp",                          badge:"BEST SELLER",                 swatches:["#81c784","#c8c8c8"],          concern:["money","health"],          isBestSeller:true },
 
-  // ─── RINGS (121–148) ─────────────────────────────────────────────────────────
+  // ─── RINGS (121-148) ─────────────────────────────────────────────────────────
   { id:121, name:"Raw Pyrite Ring",                       price:1599, originalPrice:2249, material:"Pyrite, 925 Sterling Silver",         category:"rings",     gemstone:"Pyrite",          image:CDN+"business-success-combo-6709797.webp",                                  badge:"SALE",        savePercent:29, swatches:["#c8a951","#c8c8c8"],          concern:["money"] },
   { id:122, name:"Polished Pyrite Ring",                  price:1799,                     material:"Pyrite, 925 Sterling Silver",         category:"rings",     gemstone:"Pyrite",          image:CDN+"polished-pyrite-ring-3289725.webp",                                    badge:"BEST SELLER",                 swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
   { id:123, name:"Citrine Oval Gemstone Ring",            price:1499, originalPrice:2029, material:"Citrine, 925 Silver",                 category:"rings",     gemstone:"Citrine",         image:CDN+"Citrine_Classic_Ring_2.webp",                                          badge:"SALE",        savePercent:26, swatches:["#ffd54f","#c8c8c8"],          concern:["money","health"] },
@@ -204,7 +204,7 @@ export const products: Product[] = [
   { id:147, name:"Black Obsidian Truth Ring",             price:1199, originalPrice:1649, material:"Black Obsidian, Sterling Silver",     category:"rings",     gemstone:"Black Obsidian",  image:CDN+"black-obsidian-ring-5351496.webp",                                     badge:"SALE",        savePercent:28, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
   { id:148, name:"Jade Prosperity Ring",                  price:1499,                     material:"Jade, 925 Sterling Silver",           category:"rings",     gemstone:"Jade",            image:CDN+"jade-ring-7990240.webp",                                                                     swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
 
-  // ─── NECKLACES & MALA (149–170) ──────────────────────────────────────────────
+  // ─── NECKLACES & MALA (149-170) ──────────────────────────────────────────────
   { id:149, name:"5 Mukhi Rudraksha Mala",                price:1599,                     material:"5 Mukhi Rudraksha, 108 Beads",        category:"necklaces", gemstone:"Rudraksha",       image:CDN+"shiv-raksha-rudraksha-set-1513284.webp",                               badge:"BEST SELLER",                 swatches:["#8b4513"],                    concern:["peace","protection"],      isBestSeller:true },
   { id:150, name:"7 Chakra Mala",                         price:1799, originalPrice:2399, material:"7 Chakra Gemstones, 108 Beads",       category:"necklaces", gemstone:"Multi-stone",     image:CDN+"7-chakra-gemstone-mala-7913405.jpg",                                   badge:"SALE",        savePercent:25, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"], concern:["love","peace","health","money","protection"] },
   { id:151, name:"Amethyst Mala",                         price:1799,                     material:"Amethyst, 108 Beads, Tassel",         category:"necklaces", gemstone:"Amethyst",        image:CDN+"amethyst-mala-3848985.jpg",                                            badge:"BEST SELLER",                 swatches:["#9c6fc4"],                    concern:["peace","love"],            isBestSeller:true },
@@ -228,7 +228,7 @@ export const products: Product[] = [
   { id:169, name:"Jade Harmony Mala",                     price:1999,                     material:"Jade, 108 Beads, Green Tassel",       category:"necklaces", gemstone:"Jade",            image:CDN+"jade-bracelet-3015072.webp",                                           badge:"NEW",                         swatches:["#81c784"],                    concern:["money","health"],          isNew:true },
   { id:170, name:"Carnelian Vitality Necklace",           price:1499,                     material:"Carnelian, 925 Sterling Silver",      category:"necklaces", gemstone:"Carnelian",       image:CDN+"carnelian-bracelet-6862093.webp",                                                            swatches:["#e57373","#c8a951"],          concern:["health"] },
 
-  // ─── EAR STUDS & ANKLETS (171–188) ───────────────────────────────────────────
+  // ─── EAR STUDS & ANKLETS (171-188) ───────────────────────────────────────────
   { id:171, name:"Amethyst Hanging Earrings",             price:999,                      material:"Amethyst, 925 Sterling Silver",       category:"ear-studs", gemstone:"Amethyst",        image:CDN+"amethyst-hanging-earring-4057099.webp",                                badge:"NEW",                         swatches:["#9c6fc4","#c8c8c8"],          concern:["peace"],                   isNew:true },
   { id:172, name:"Amethyst Stud Earrings",                price:899,                      material:"Amethyst, 925 Sterling Silver",       category:"ear-studs", gemstone:"Amethyst",        image:CDN+"amethyst-studs-5939351.jpg",                                           badge:"NEW",                         swatches:["#9c6fc4","#c8c8c8"],          concern:["peace"],                   isNew:true },
   { id:173, name:"Black Spinel Anklet",                   price:799,  originalPrice:999,  material:"Black Spinel, Silver Thread",         category:"ear-studs", gemstone:"Black Spinel",    image:CDN+"black-spinel-anklet-1474278.jpg",                                      badge:"SALE",        savePercent:20, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
@@ -248,7 +248,7 @@ export const products: Product[] = [
   { id:187, name:"7 Chakra Healing Anklet",               price:799,  originalPrice:999,  material:"7 Crystal Beads, Elastic Thread",    category:"ear-studs", gemstone:"Multi-stone",     image:CDN+"7-chakra-bracelet-7825780.webp",                                       badge:"SALE",        savePercent:20, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"],concern:["love","peace","health","money","protection"] },
   { id:188, name:"Green Aventurine Luck Studs",           price:799,                      material:"Green Aventurine, 925 Silver",        category:"ear-studs", gemstone:"Green Aventurine",image:CDN+"green-aventurine-pendant-1890616.webp",                                                      swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
 
-  // ─── GEMSTONES & RAW CRYSTALS (189–222) ──────────────────────────────────────
+  // ─── GEMSTONES & RAW CRYSTALS (189-222) ──────────────────────────────────────
   { id:189, name:"Raw Pyrite Cluster",                    price:899,                      material:"Natural Raw Pyrite, Peru Origin",     category:"gemstones", gemstone:"Pyrite",          image:CDN+"business-success-combo-4210605.jpg",                                   badge:"BEST SELLER",                 swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
   { id:190, name:"Raw Black Tourmaline Cluster",          price:699,                      material:"Natural Black Tourmaline",            category:"gemstones", gemstone:"Black Tourmaline",image:CDN+"raw-black-tourmaline-cluster-1470946.webp",                                                   swatches:["#212121"],                    concern:["protection"] },
   { id:191, name:"Raw Rose Quartz Cluster",               price:799,                      material:"Natural Rose Quartz, Brazil Origin",  category:"gemstones", gemstone:"Rose Quartz",     image:CDN+"raw-rose-quartz-cluster-6984920.webp",                                 badge:"BEST SELLER",                 swatches:["#f48fb1"],                    concern:["love"],                    isBestSeller:true },

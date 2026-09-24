@@ -7,18 +7,18 @@ import { Link } from "wouter";
 import { ZodiacGlyph } from "./ZodiacGlyphs";
 
 const signs = [
-  { sign: "Aries",       dates: "Mar 21 – Apr 19", crystal: "Carnelian",     latin: "The Ram",          element: "Fire",  color: "#e07a52" },
-  { sign: "Taurus",      dates: "Apr 20 – May 20", crystal: "Rose Quartz",   latin: "The Bull",         element: "Earth", color: "#7aad78" },
-  { sign: "Gemini",      dates: "May 21 – Jun 20", crystal: "Tiger Eye",     latin: "The Twins",        element: "Air",   color: "#c8a951" },
-  { sign: "Cancer",      dates: "Jun 21 – Jul 22", crystal: "Moonstone",     latin: "The Crab",         element: "Water", color: "#8fa8d0" },
-  { sign: "Leo",         dates: "Jul 23 – Aug 22", crystal: "Citrine",       latin: "The Lion",         element: "Fire",  color: "#e07a52" },
-  { sign: "Virgo",       dates: "Aug 23 – Sep 22", crystal: "Amazonite",     latin: "The Maiden",       element: "Earth", color: "#7aad78" },
-  { sign: "Libra",       dates: "Sep 23 – Oct 22", crystal: "Lapis Lazuli",  latin: "The Scales",       element: "Air",   color: "#c8a951" },
-  { sign: "Scorpio",     dates: "Oct 23 – Nov 21", crystal: "Black Obsidian",latin: "The Scorpion",     element: "Water", color: "#8fa8d0" },
-  { sign: "Sagittarius", dates: "Nov 22 – Dec 21", crystal: "Turquoise",     latin: "The Archer",       element: "Fire",  color: "#e07a52" },
-  { sign: "Capricorn",   dates: "Dec 22 – Jan 19", crystal: "Garnet",        latin: "The Sea Goat",     element: "Earth", color: "#7aad78" },
-  { sign: "Aquarius",    dates: "Jan 20 – Feb 18", crystal: "Amethyst",      latin: "The Water Bearer", element: "Air",   color: "#c8a951" },
-  { sign: "Pisces",      dates: "Feb 19 – Mar 20", crystal: "Aquamarine",    latin: "The Fish",         element: "Water", color: "#8fa8d0" },
+  { sign: "Aries",       dates: "Mar 21 - Apr 19", crystal: "Carnelian",     latin: "The Ram",          element: "Fire",  color: "#e07a52" },
+  { sign: "Taurus",      dates: "Apr 20 - May 20", crystal: "Rose Quartz",   latin: "The Bull",         element: "Earth", color: "#7aad78" },
+  { sign: "Gemini",      dates: "May 21 - Jun 20", crystal: "Tiger Eye",     latin: "The Twins",        element: "Air",   color: "#c8a951" },
+  { sign: "Cancer",      dates: "Jun 21 - Jul 22", crystal: "Moonstone",     latin: "The Crab",         element: "Water", color: "#8fa8d0" },
+  { sign: "Leo",         dates: "Jul 23 - Aug 22", crystal: "Citrine",       latin: "The Lion",         element: "Fire",  color: "#e07a52" },
+  { sign: "Virgo",       dates: "Aug 23 - Sep 22", crystal: "Amazonite",     latin: "The Maiden",       element: "Earth", color: "#7aad78" },
+  { sign: "Libra",       dates: "Sep 23 - Oct 22", crystal: "Lapis Lazuli",  latin: "The Scales",       element: "Air",   color: "#c8a951" },
+  { sign: "Scorpio",     dates: "Oct 23 - Nov 21", crystal: "Black Obsidian",latin: "The Scorpion",     element: "Water", color: "#8fa8d0" },
+  { sign: "Sagittarius", dates: "Nov 22 - Dec 21", crystal: "Turquoise",     latin: "The Archer",       element: "Fire",  color: "#e07a52" },
+  { sign: "Capricorn",   dates: "Dec 22 - Jan 19", crystal: "Garnet",        latin: "The Sea Goat",     element: "Earth", color: "#7aad78" },
+  { sign: "Aquarius",    dates: "Jan 20 - Feb 18", crystal: "Amethyst",      latin: "The Water Bearer", element: "Air",   color: "#c8a951" },
+  { sign: "Pisces",      dates: "Feb 19 - Mar 20", crystal: "Aquamarine",    latin: "The Fish",         element: "Water", color: "#8fa8d0" },
 ];
 
 export default function ShopByAstrologyCarousel() {

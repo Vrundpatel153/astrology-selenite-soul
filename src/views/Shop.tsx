@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLocation, useSearch } from "wouter";
-import { Heart, Plus, SlidersHorizontal, X, ShoppingBag, Compass } from "lucide-react";
+import { Heart, Plus, SlidersHorizontal, X, ShoppingBag, Compass, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products, categories, newArrivals, bestSellers, concerns, zodiacSigns } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { ZodiacGlyph } from "@/components/ZodiacGlyphs";
 
 const gemstones = Array.from(new Set(products.map(p => p.gemstone).filter(Boolean) as string[])).sort();
 
@@ -220,8 +221,8 @@ export default function Shop() {
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2 h-2 bg-white" />
                       )}
                     </motion.div>
-                    <span className="text-sm text-[#2a1f1a] flex items-center gap-1.5">
-                      <span>{zod.emoji}</span>
+                    <span className="text-sm text-[#2a1f1a] flex items-center gap-2">
+                      <ZodiacGlyph sign={zod.sign} size={15} />
                       <span>{zod.sign}</span>
                     </span>
                   </motion.label>
@@ -293,7 +294,7 @@ export default function Shop() {
 
                     {/* Add to cart */}
                     <motion.button
-                      className={`absolute bottom-2.5 right-2.5 w-8 h-8 flex items-center justify-center text-white transition-colors opacity-0 group-hover:opacity-100 ${addedId === product.id ? "bg-green-600" : "bg-[#2a1f1a]"}`}
+                      className={`absolute bottom-2.5 right-2.5 w-8 h-8 flex items-center justify-center text-white transition-colors opacity-0 group-hover:opacity-100 ${addedId === product.id ? "bg-[#a5762a]" : "bg-[#2a1f1a]"}`}
                       onClick={e => handleAddToCart(e, product)}
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.88 }}
@@ -301,7 +302,9 @@ export default function Shop() {
                     >
                       <AnimatePresence mode="wait">
                         {addedId === product.id ? (
-                          <motion.span key="check" initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0 }} className="text-[11px] font-bold">✓</motion.span>
+                          <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                            <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                          </motion.span>
                         ) : (
                           <motion.span key="plus" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
                             <Plus className="w-4 h-4" />
@@ -492,7 +495,7 @@ export default function Shop() {
                           )}
                         </motion.div>
                         <span className="text-base flex items-center gap-2">
-                          <span>{zod.emoji}</span>
+                          <ZodiacGlyph sign={zod.sign} size={18} />
                           <span>{zod.sign}</span>
                         </span>
                       </motion.label>

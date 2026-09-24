@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Plus, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import { bestSellers, newArrivals, products } from "@/data/products";
 import type { Product } from "@/data/products";
 
-// "Ekta's Picks" — a curated hand-picked selection
+// "Ekta's Picks": a curated hand-picked selection
 const ektaPicks = products.filter(p =>
   [1, 4, 7, 8, 12, 18, 22, 25, 26, 34, 45, 48, 54, 57, 60, 64, 73, 81].includes(p.id)
 ).slice(0, 14);
@@ -16,7 +16,7 @@ const ektaPicks = products.filter(p =>
 const tabs = [
   { id: "new",       label: "New Arrivals",      icon: "•",  products: newArrivals.slice(0, 14)  },
   { id: "best",      label: "Bestsellers",        icon: "◈",  products: bestSellers.slice(0, 14)  },
-  { id: "ekta",      label: "Ekta's Picks",       icon: "♥",  products: ektaPicks                 },
+  { id: "ekta",      label: "Ekta's Picks",       icon: "◆",  products: ektaPicks                 },
 ];
 
 function ProductCard({ product }: { product: Product }) {

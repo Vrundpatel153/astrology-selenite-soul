@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Package, Search, Truck, CheckCircle, Clock, MapPin, AlertCircle, ArrowRight } from "lucide-react";
+import { Package, Search, Truck, CheckCircle, Clock, MapPin, AlertCircle, ArrowRight, Check } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Order } from "@/lib/db/types";
 import { Link } from "wouter";
@@ -158,7 +158,7 @@ export default function Orders() {
                                 : "bg-[#fdf8f4] border border-[#e8d9cf] text-[#4a382e]/40"
                             }`}
                           >
-                            {isComplete ? "✓" : idx + 1}
+                            {isComplete ? <Check className="w-3 h-3 stroke-[2.5]" /> : idx + 1}
                           </div>
 
                           <div>

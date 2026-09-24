@@ -103,7 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.success && data.user) {
         setUser(data.user);
         localStorage.setItem("ss_user", JSON.stringify(data.user));
-        toast.success(`Welcome to Selenite Soul, ${data.user.name}! 🌟`);
+        toast.success(`Welcome to Selenite Soul, ${data.user.name}!`);
         setLoginModalOpen(false);
         return true;
       } else {
@@ -134,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (resData.success && resData.user) {
         setUser(resData.user);
         localStorage.setItem("ss_user", JSON.stringify(resData.user));
-        toast.success("Cosmic profile updated successfully! 🔮");
+        toast.success("Cosmic profile updated successfully!");
         return true;
       }
       return false;
@@ -179,7 +179,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       toast.info("Removed from sacred wishlist");
     } else {
       updated.add(productId);
-      toast.success("Added to sacred wishlist! 💖");
+      toast.success("Added to sacred wishlist!");
     }
     setWishlistIds(updated);
     localStorage.setItem("ss_wishlist", JSON.stringify(Array.from(updated)));

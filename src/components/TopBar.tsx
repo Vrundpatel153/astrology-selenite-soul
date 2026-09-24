@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const messages = [
-  "Every order comes with tiered gifts & cashback — because your energy deserves a reward.",
+  "Every order comes with tiered gifts & cashback, because your energy deserves a reward.",
   "Free shipping on orders above ₹999.",
   "100% Natural · Lab Testing Certificate Included"
 ];

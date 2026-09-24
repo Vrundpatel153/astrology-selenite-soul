@@ -1,4 +1,5 @@
 import { zodiacSigns } from "@/data/products";
+import { ZodiacGlyph } from "./ZodiacGlyphs";
 
 export default function ShopByAstrology() {
   return (
@@ -22,8 +23,8 @@ export default function ShopByAstrology() {
               key={sign.sign} 
               className="bg-[#f7f1ec] border border-[#e8d9cf] p-4 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#2a1f1a] hover:bg-white transition-colors group"
             >
-              <div className="text-3xl md:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                {sign.emoji}
+              <div className="mb-2 group-hover:scale-110 transition-transform duration-300">
+                <ZodiacGlyph sign={sign.sign} size={32} />
               </div>
               <h3 className="font-bold text-[#2a1f1a] uppercase text-sm mb-1">{sign.sign}</h3>
               <p className="text-[10px] text-[#2a1f1a]/60 uppercase tracking-wider mb-2">{sign.dates}</p>

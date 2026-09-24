@@ -2,7 +2,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, useSpring, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Plus, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, ArrowRight, Check } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCart } from "@/context/CartContext";
 import TopBar from "@/components/TopBar";
@@ -117,7 +117,7 @@ function EktaStory() {
           <motion.img
             ref={imgRef as any}
             src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1100&q=85&fm=webp&fit=crop&crop=top"
-            alt="Ekta — Founder, Selenite Soul"
+            alt="Ekta, Founder, Selenite Soul"
             className="w-full h-full object-cover object-top scale-110"
           />
           <div className="absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(to right, transparent 60%, #fcf8f4 100%)" }} />
@@ -151,7 +151,7 @@ function EktaStory() {
               In 2012, during a pilgrimage to Haridwar, a sage placed a raw amethyst in Ekta's hands and said: <span className="italic text-[#2a1f1a] font-medium">"The Earth already knows your answer."</span>
             </p>
             <p className="text-sm text-[#4a3020]/75 leading-[1.85] font-light">
-              That moment ignited a decade of immersion — Vedic Jyotish, Pythagorean Numerology, intuitive Tarot, and crystal healing. In 2019, Selenite Soul was born.
+              That moment ignited a decade of immersion in Vedic Jyotish, Pythagorean Numerology, intuitive Tarot, and crystal healing. In 2019, Selenite Soul was born.
             </p>
           </div>
 
@@ -188,13 +188,13 @@ function EktaStory() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. BRAND PHILOSOPHY — Light Silk Parchment & Embossed Gold Sri Yantra
+// 3. BRAND PHILOSOPHY: Light Silk Parchment & Embossed Gold Sri Yantra
 // ─────────────────────────────────────────────────────────────────────────────
 const pillars = [
-  { num: "01", title: "Ancient Vedic Wisdom", body: "Jyotish, Tarot, and Numerology — three sacred systems that have guided humanity for millennia, now decoded for your modern path." },
+  { num: "01", title: "Ancient Vedic Wisdom", body: "Jyotish, Tarot, and Numerology: three sacred systems that have guided humanity for millennia, now decoded for your modern path." },
   { num: "02", title: "Earth's Crystal Energy", body: "Every stone is ethically sourced, lab-tested for authenticity, and ceremonially energised under the full moon before it reaches you." },
   { num: "03", title: "Ekta's Sacred Intention", body: "Each reading carries the energy of over a decade of dedicated study and thousands of personal client sessions." },
-  { num: "04", title: "Holistic Healing", body: "We work across physical, emotional, mental, and spiritual layers — because true healing is never one-dimensional." },
+  { num: "04", title: "Holistic Healing", body: "We work across physical, emotional, mental, and spiritual layers, because true healing is never one-dimensional." },
 ];
 
 function BrandPhilosophy() {
@@ -251,7 +251,7 @@ function BrandPhilosophy() {
             className="text-sm md:text-base text-[#4a382e]/80 leading-relaxed max-w-md font-light"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
           >
-            We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life — through crystals, astrology, Tarot, and numbers.
+            We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life through crystals, astrology, Tarot, and numbers.
           </motion.p>
         </div>
 
@@ -284,10 +284,10 @@ function BrandPhilosophy() {
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
         >
           <p className="text-lg md:text-xl text-[#2a1f1a]/95 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
-            "I believe every person carries a cosmic blueprint — a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
+            "I believe every person carries a cosmic blueprint: a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
           </p>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">
-            — Ekta, Founder of Selenite Soul
+            Ekta, Founder of Selenite Soul
           </p>
         </motion.div>
       </div>
@@ -296,7 +296,7 @@ function BrandPhilosophy() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. KUNDALI — Luxury Vedic Birth Chart & Astrological Mandala (Light)
+// 4. KUNDALI: Luxury Vedic Birth Chart & Astrological Mandala (Light)
 // ─────────────────────────────────────────────────────────────────────────────
 function KundaliSection() {
   const bgRef = useParallax(0.12);
@@ -327,10 +327,10 @@ function KundaliSection() {
             className="k-reveal text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-[#2a1f1a] leading-[1.04] mb-6"
             style={serif}
           >
-            Your Kundali — The Blueprint of Your Soul
+            Your Kundali: The Blueprint of Your Soul
           </h2>
           <p className="k-reveal text-sm md:text-base text-[#4a382e]/85 leading-[1.85] mb-8 max-w-[520px] font-light">
-            Your birth chart is a precise cosmic map — revealing dharma, karma, relationships, health, wealth, and spiritual path. Computed free, instantly.
+            Your birth chart is a precise cosmic map, revealing dharma, karma, relationships, health, wealth, and spiritual path. Computed free, instantly.
           </p>
           <div className="k-reveal flex flex-wrap gap-y-2 gap-x-6 mb-10 text-[#4a382e]/70 text-[10px] uppercase tracking-widest font-bold">
             {["Lahiri Ayanamsa", "9 Grahas", "27 Nakshatras", "Dasha Timeline", "Crystal Remedies"].map(f => (
@@ -358,7 +358,7 @@ function KundaliSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. NUMEROLOGY — with Interactive Live Decoder (Light Theme)
+// 5. NUMEROLOGY: with Interactive Live Decoder (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function NumerologySection() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".num-reveal", staggerDelay: 0.1, start: "top 80%" });
@@ -388,7 +388,7 @@ function NumerologySection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 6. ASTROLOGY & ZODIAC — with Interactive Celestial Wheel (Light Theme)
+// 6. ASTROLOGY & ZODIAC: with Interactive Celestial Wheel (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function AstrologyZodiacSection() {
   return (
@@ -416,7 +416,7 @@ function AstrologyZodiacSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 7. CRYSTALS — full bleed with Light Parallax
+// 7. CRYSTALS: full bleed with Light Parallax
 // ─────────────────────────────────────────────────────────────────────────────
 function CrystalsSection() {
   const bgRef = useParallax(0.15);
@@ -481,7 +481,7 @@ function CrystalsSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 8. TAROT — with 3D Interactive Oracle Deck (Light Theme)
+// 8. TAROT: with 3D Interactive Oracle Deck (Light Theme)
 // ─────────────────────────────────────────────────────────────────────────────
 function TarotSection() {
   return (
@@ -607,7 +607,7 @@ function ShopByProductCarousel() {
                   >
                     <AnimatePresence mode="wait">
                       {addedIds.has(product.id)
-                        ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>✓</motion.span>
+                        ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Check className="w-4 h-4 stroke-[2.5]" /></motion.span>
                         : <motion.span key="plus" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Plus className="w-4 h-4 stroke-[1.5]" /></motion.span>
                       }
                     </AnimatePresence>

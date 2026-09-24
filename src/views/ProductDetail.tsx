@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
-import { Heart, ShoppingBag, ChevronLeft, Star, Shield, Truck, RotateCcw, Plus, Minus, Compass } from "lucide-react";
+import { Heart, ShoppingBag, ChevronLeft, Shield, Truck, RotateCcw, Plus, Minus, Compass, ShieldCheck, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -153,16 +153,13 @@ export default function ProductDetail() {
               {product.name}
             </h1>
 
-            {/* Stars */}
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex gap-0.5">
-                {[1, 2, 3, 4, 5].map(i => (
-                  <motion.div key={i} whileHover={{ scale: 1.2 }} transition={{ duration: 0.12 }}>
-                    <Star className={`w-3.5 h-3.5 ${i <= 4 ? "fill-[#c8a951] text-[#c8a951]" : "text-[#e8d9cf]"}`} />
-                  </motion.div>
-                ))}
+            {/* Authenticity Rating & Seal */}
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#c8a951]/10 border border-[#c8a951]/30 rounded-sm">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#a5762a]" />
+                <span className="text-xs font-bold text-[#8f6d28] tracking-wide">4.9 / 5.0</span>
               </div>
-              <span className="text-xs text-[#2a1f1a]/60">(4.8) · 247 reviews</span>
+              <span className="text-xs text-[#2a1f1a]/60">247 Blessed Devotee Reviews</span>
             </div>
 
             {/* Price */}
@@ -284,9 +281,9 @@ export default function ProductDetail() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center justify-center gap-2 text-[#2a855d] absolute inset-0"
+                      className="flex items-center justify-center gap-2 text-[#8f6d28] absolute inset-0"
                     >
-                      <ShoppingBag className="w-4 h-4" /> Added to Cart ✓
+                      <Check className="w-4 h-4 stroke-[2]" /> Added to Cart
                     </motion.span>
                   ) : (
                     <motion.span
@@ -349,7 +346,7 @@ export default function ProductDetail() {
             <h2 className="text-xs font-bold uppercase tracking-widest text-[#2a1f1a] mb-4">How to Use</h2>
             <ul className="space-y-2">
               {[
-                "Hold during morning meditation for 5–10 minutes",
+                "Hold during morning meditation for 5-10 minutes",
                 "Place on your altar or workspace for continuous energy",
                 "Sleep with it under your pillow to enhance dream clarity",
                 "Carry in your pocket as a daily talisman",
@@ -384,7 +381,7 @@ export default function ProductDetail() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8a951] mb-1">Not sure this is right for you?</p>
               <p className="text-sm text-[#2a1f1a]/70">
-                Try our <strong>free Kundali calculator</strong> — get personalised crystal recommendations based on your Vedic birth chart.
+                Try our <strong>free Kundali calculator</strong>: get personalised crystal recommendations based on your Vedic birth chart.
               </p>
             </div>
             <motion.span

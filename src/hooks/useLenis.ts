@@ -1,5 +1,5 @@
 /**
- * useLenis — upgraded with GSAP ScrollTrigger sync.
+ * useLenis: upgraded with GSAP ScrollTrigger sync.
  * Replaces the old hook so the entire app gets smooth scroll + ScrollTrigger working together.
  */
 import Lenis from "lenis";
@@ -10,7 +10,7 @@ export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.3,
-      easing: (t: number) => 1 - Math.pow(1 - t, 4),  // quartic ease-out — silky feel
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),  // quartic ease-out: silky feel
       smoothWheel: true,
       wheelMultiplier: 0.9,
       touchMultiplier: 1.8,

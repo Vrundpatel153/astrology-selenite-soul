@@ -10,7 +10,7 @@ const slides = [
     image: "/hero.webp",
     eyebrow: "New Collection",
     heading: "Align Your\nEnergy",
-    subheading: "Ethically sourced crystals, energised under the full moon — for your highest self.",
+    subheading: "Ethically sourced crystals, energised under the full moon for your highest self.",
     cta: { label: "Shop Healing Crystals", href: "/shop" },
     ctaSecondary: { label: "Free Kundali Reading", href: "/kundali" },
     overlay: "from-[#2a1f1a]/70 via-[#2a1f1a]/20 to-transparent",
@@ -21,7 +21,7 @@ const slides = [
     image: "/concern-love.webp",
     eyebrow: "Tarot & Guidance",
     heading: "Sacred\nReadings",
-    subheading: "Book a one-on-one Tarot session with Ekta — clarity for love, career, and soul.",
+    subheading: "Book a one-on-one Tarot session with Ekta: clarity for love, career, and soul.",
     cta: { label: "Book a Reading", href: "/tarot" },
     ctaSecondary: { label: "About Tarot", href: "/tarot#guidance" },
     overlay: "from-[#2a0e3d]/80 via-[#3d1550]/30 to-transparent",
@@ -32,7 +32,7 @@ const slides = [
     image: "/concern-protection.webp",
     eyebrow: "Vedic Jyotish",
     heading: "Your Cosmic\nBlueprint",
-    subheading: "Discover your planetary chart, crystal remedies, and life path — all in one Kundali reading.",
+    subheading: "Discover your planetary chart, crystal remedies, and life path in one comprehensive Kundali reading.",
     cta: { label: "Get My Kundali", href: "/kundali" },
     ctaSecondary: { label: "Explore Numerology", href: "/numerology" },
     overlay: "from-[#0d1520]/80 via-[#1a2535]/30 to-transparent",
@@ -43,7 +43,7 @@ const slides = [
     image: "/concern-peace.webp",
     eyebrow: "Crystal Shop",
     heading: "Find Your\nCrystal",
-    subheading: "From raw stones to sacred bracelets — every piece carries the earth's healing intelligence.",
+    subheading: "From raw stones to sacred bracelets, every piece carries the earth's healing intelligence.",
     cta: { label: "Shop Crystals", href: "/shop" },
     ctaSecondary: { label: "Know Your Crystal", href: "/kundali" },
     overlay: "from-[#1a2010]/80 via-[#2a3020]/30 to-transparent",
@@ -132,7 +132,7 @@ export default function HeroCarousel() {
                         className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.35em] mb-3 md:mb-5"
                         style={{ color: slide.accent }}
                       >
-                        — {slide.eyebrow}
+                        {slide.eyebrow}
                       </motion.p>
                       <motion.h2
                         initial={{ opacity: 0, y: 22 }}
@@ -186,7 +186,7 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Dot indicators — bottom right */}
+      {/* Dot indicators : bottom right */}
       <div className="absolute bottom-7 md:bottom-10 right-6 md:right-14 flex items-center gap-2 z-20">
         {slides.map((_, idx) => (
           <button
@@ -203,7 +203,7 @@ export default function HeroCarousel() {
         ))}
       </div>
 
-      {/* Counter — bottom left */}
+      {/* Counter : bottom left */}
       <div className="absolute bottom-7 md:bottom-10 left-6 md:left-14 z-20">
         <span className="text-white/40 text-[10px] font-mono tracking-widest">
           {String(selectedIndex + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(slides.length).padStart(2, "0")}

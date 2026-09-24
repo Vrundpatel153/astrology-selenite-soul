@@ -88,7 +88,7 @@ function App() {
       <TooltipProvider>
         <AuthProvider>
           <CartProvider>
-            {/* Custom cursor — desktop only */}
+            {/* Custom cursor: desktop only */}
             <CustomCursor />
             {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
             
