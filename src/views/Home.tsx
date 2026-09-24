@@ -97,7 +97,7 @@ function TrustStrip() {
 // ─────────────────────────────────────────────────────────────────────────────
 function EktaStory() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".ekta-reveal", staggerDelay: 0.13, from: { opacity: 0, y: 60 }, start: "top 80%" });
-  const imgRef = useParallax(0.15);
+  const imgRef = useParallax(0.12);
 
   const stats = [
     { target: 10, suffix: "+", label: "Years of Study" },
@@ -111,55 +111,64 @@ function EktaStory() {
 
   return (
     <section ref={sectionRef} className="bg-[#fcf8f4] overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] min-h-[600px] lg:min-h-[720px]">
-        {/* Image */}
-        <div className="relative overflow-hidden min-h-[380px] lg:min-h-0" data-cursor="view">
+      <div className="grid grid-cols-1 lg:grid-cols-[53%_47%] min-h-[580px] lg:min-h-[720px]">
+        {/* Responsive Image Column */}
+        <div className="relative overflow-hidden h-[440px] sm:h-[500px] md:h-[560px] lg:h-auto lg:min-h-0" data-cursor="hover">
           <motion.img
             ref={imgRef as any}
-            src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1100&q=85&fm=webp&fit=crop&crop=top"
-            alt="Ekta, Founder, Selenite Soul"
-            className="w-full h-full object-cover object-top scale-110"
+            src="/ekta-founder.webp"
+            alt="Ekta, Founder of Selenite Soul, holding sacred amethyst and selenite"
+            className="w-full h-full object-cover object-[center_10%] sm:object-[center_16%] lg:object-[center_24%] scale-105"
+            loading="eager"
           />
-          <div className="absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(to right, transparent 60%, #fcf8f4 100%)" }} />
+          {/* Ethereal blend gradient: right fade on desktop, bottom fade on mobile */}
+          <div
+            className="absolute inset-0 hidden lg:block pointer-events-none"
+            style={{ background: "linear-gradient(to right, transparent 65%, #fcf8f4 100%)" }}
+          />
+          <div
+            className="absolute inset-0 lg:hidden pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, transparent 60%, #fcf8f4 98%)" }}
+          />
 
           {/* Animated credential badge */}
           <motion.div
-            className="ekta-reveal absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/95 backdrop-blur-md px-5 py-4 border-l-2 border-[#c8a951] shadow-2xl"
+            className="ekta-reveal absolute bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-10 md:left-10 bg-white/95 backdrop-blur-md px-3.5 py-2.5 sm:px-5 sm:py-4 border-l-2 border-[#c8a951] shadow-xl max-w-[calc(100%-2rem)]"
             whileHover={{ x: 4, borderLeftWidth: "4px" }}
             transition={{ duration: 0.2 }}
           >
-            <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-1">Founder · Selenite Soul</p>
-            <p className="text-lg text-[#2a1f1a] leading-snug" style={serif}>Ekta</p>
-            <p className="text-[10px] text-[#4a3020]/60 mt-0.5">Jyotish · Tarot · Numerology · Crystal Healing</p>
+            <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-0.5 sm:mb-1">Founder · Selenite Soul</p>
+            <p className="text-sm sm:text-lg text-[#2a1f1a] leading-snug" style={serif}>Ekta</p>
+            <p className="text-[8.5px] sm:text-[10px] text-[#4a3020]/60 mt-0.5">Jyotish · Tarot · Numerology · Crystal Healing</p>
           </motion.div>
         </div>
 
-        {/* Text */}
-        <div className="flex flex-col justify-center px-8 md:px-14 lg:px-16 xl:px-20 py-14 lg:py-20">
-          <div className="ekta-reveal flex items-center gap-3 mb-6">
-            <div className="h-px w-10 bg-[#c8a951]/60" />
+        {/* Story Text Column */}
+        <div className="flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-14 xl:px-20 py-10 sm:py-14 lg:py-20">
+          <div className="ekta-reveal flex items-center gap-3 mb-4 sm:mb-6">
+            <div className="h-px w-8 sm:w-10 bg-[#c8a951]/60" />
             <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Ekta's Story</span>
           </div>
 
-          <h2 className="ekta-reveal text-3xl md:text-4xl xl:text-5xl font-light text-[#2a1f1a] leading-[1.1] mb-7" style={serif}>
+          <h2 className="ekta-reveal text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-light text-[#2a1f1a] leading-[1.15] mb-5 sm:mb-7" style={serif}>
             A Journey From<br />
             <em className="italic text-[#a5762a]">Seeking to Guiding</em>
           </h2>
 
-          <div className="ekta-reveal space-y-4 mb-8 max-w-lg">
-            <p className="text-sm text-[#4a3020]/80 leading-[1.85] font-light">
+          <div className="ekta-reveal space-y-3 sm:space-y-4 mb-6 sm:mb-8 max-w-lg">
+            <p className="text-xs sm:text-sm text-[#4a3020]/80 leading-[1.85] font-light">
               In 2012, during a pilgrimage to Haridwar, a sage placed a raw amethyst in Ekta's hands and said: <span className="italic text-[#2a1f1a] font-medium">"The Earth already knows your answer."</span>
             </p>
-            <p className="text-sm text-[#4a3020]/75 leading-[1.85] font-light">
+            <p className="text-xs sm:text-sm text-[#4a3020]/75 leading-[1.85] font-light">
               That moment ignited a decade of immersion in Vedic Jyotish, Pythagorean Numerology, intuitive Tarot, and crystal healing. In 2019, Selenite Soul was born.
             </p>
           </div>
 
           {/* Animated counters */}
-          <div className="ekta-reveal flex gap-8 mb-8 pb-8 border-b border-[#e8d9cf]">
+          <div className="ekta-reveal flex flex-wrap sm:flex-nowrap gap-5 sm:gap-8 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-[#e8d9cf]">
             {stats.map((stat, i) => (
-              <div key={stat.label}>
-                <p ref={counters[i]} className="text-2xl text-[#a5762a] font-light" style={serif}>
+              <div key={stat.label} className="min-w-[90px]">
+                <p ref={counters[i]} className="text-xl sm:text-2xl text-[#a5762a] font-light" style={serif}>
                   0{stat.suffix}
                 </p>
                 <p className="text-[9px] uppercase tracking-[0.18em] text-[#4a3020]/50 mt-0.5">{stat.label}</p>

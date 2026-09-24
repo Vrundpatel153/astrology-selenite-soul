@@ -132,12 +132,13 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="relative" data-cursor="view">
+              <div className="relative" data-cursor="hover">
                 <div className="overflow-hidden rounded-sm border border-[#c8a951]/40 shadow-2xl">
                   <img
-                    src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=85&fm=webp&fit=crop&crop=top"
+                    src="/ekta-founder.webp"
                     alt="Ekta, Founder of Selenite Soul"
-                    className="w-full aspect-[3/4] object-cover object-top"
+                    className="w-full aspect-[4/3] object-cover object-[center_24%]"
+                    loading="lazy"
                   />
                 </div>
               </div>
