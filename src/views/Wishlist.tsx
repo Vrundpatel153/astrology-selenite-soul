@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Wishlist() {
   const [, navigate] = useLocation();
   const { addToCart } = useCart();
-  const [wishlistIds, setWishlistIds] = useState<number[]>([1, 5, 18, 85, 122, 191, 201]);
+  const [wishlistIds, setWishlistIds] = useState<number[]>([1, 4, 12, 18, 25, 48, 57]);
 
   const wishlistProducts = products.filter(p => wishlistIds.includes(p.id));
 

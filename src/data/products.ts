@@ -7,18 +7,21 @@ export interface Product {
   category: string;
   gemstone?: string;
   image: string;
+  images?: string[];
   badge?: "NEW" | "SALE" | "SOLD OUT" | "BEST SELLER";
   savePercent?: number;
   swatches?: string[];
   concern?: string[];
   isNew?: boolean;
   isBestSeller?: boolean;
+  beadSize?: string;
+  zodiac?: string[];
+  chakra?: string;
+  description?: string;
 }
 
-const CDN = "https://cdn.shopify.com/s/files/1/0720/7813/1509/files/";
-
 export const categories = [
-  { id: "bracelets",  name: "Bracelets",                image: "/cat-bracelets.webp",  count: 69 },
+  { id: "bracelets",  name: "All Bracelets",             image: "/cat-bracelets.webp",  count: 81 },
   { id: "pendants",   name: "Pendants",                  image: "/cat-pendants.webp",   count: 51 },
   { id: "rings",      name: "Rings",                     image: "/cat-rings.webp",       count: 28 },
   { id: "necklaces",  name: "Necklaces & Mala",          image: "/cat-necklaces.webp",  count: 22 },
@@ -27,272 +30,3039 @@ export const categories = [
 ];
 
 export const concerns = [
-  { id: "love",       name: "Love",       subtitle: "OPEN YOUR HEART",    image: "/concern-love.webp",       description: "Rose Quartz, Rhodonite" },
-  { id: "peace",      name: "Peace",      subtitle: "RELIEVE YOUR STRESS", image: "/concern-peace.webp",      description: "Amethyst, Blue Lace Agate" },
-  { id: "protection", name: "Protection", subtitle: "SHIELD YOUR ENERGY",  image: "/concern-protection.webp", description: "Black Tourmaline, Obsidian" },
-  { id: "money",      name: "Money",      subtitle: "ATTRACT ABUNDANCE",   image: "/concern-money.webp",      description: "Citrine, Pyrite" },
-  { id: "health",     name: "Health",     subtitle: "HEAL YOUR BODY",      image: "/concern-health.webp",     description: "Clear Quartz, Jade" },
+  { id: "love",       name: "Love",       subtitle: "OPEN YOUR HEART",    image: "/concern-love.webp",       description: "Rose Quartz, Rhodochrosite, Rhodonite" },
+  { id: "peace",      name: "Peace",      subtitle: "RELIEVE YOUR STRESS", image: "/concern-peace.webp",      description: "Amethyst, Amazonite, Selenite" },
+  { id: "protection", name: "Protection", subtitle: "SHIELD YOUR ENERGY",  image: "/concern-protection.webp", description: "Black Tourmaline, Sulemani Hakik, Obsidian" },
+  { id: "money",      name: "Money",      subtitle: "ATTRACT ABUNDANCE",   image: "/concern-money.webp",      description: "Citrine, Pyrite, Green Aventurine, Dhan Yog" },
+  { id: "health",     name: "Health",     subtitle: "HEAL YOUR BODY",      image: "/concern-health.webp",     description: "Clear Quartz, Carnelian, Red Jasper, Turquoise" },
 ];
 
 export const zodiacSigns = [
   { sign: "Aries",       dates: "Mar 21 – Apr 19", crystal: "Carnelian",     emoji: "♈" },
   { sign: "Taurus",      dates: "Apr 20 – May 20", crystal: "Rose Quartz",   emoji: "♉" },
   { sign: "Gemini",      dates: "May 21 – Jun 20", crystal: "Tiger Eye",     emoji: "♊" },
-  { sign: "Cancer",      dates: "Jun 21 – Jul 22", crystal: "Moonstone",     emoji: "♋" },
+  { sign: "Cancer",      dates: "Jun 21 – Jul 22", crystal: "Selenite",      emoji: "♋" },
   { sign: "Leo",         dates: "Jul 23 – Aug 22", crystal: "Citrine",       emoji: "♌" },
   { sign: "Virgo",       dates: "Aug 23 – Sep 22", crystal: "Amazonite",     emoji: "♍" },
   { sign: "Libra",       dates: "Sep 23 – Oct 22", crystal: "Lapis Lazuli",  emoji: "♎" },
-  { sign: "Scorpio",     dates: "Oct 23 – Nov 21", crystal: "Black Obsidian",emoji: "♏" },
+  { sign: "Scorpio",     dates: "Oct 23 – Nov 21", crystal: "Unakite",       emoji: "♏" },
   { sign: "Sagittarius", dates: "Nov 22 – Dec 21", crystal: "Turquoise",     emoji: "♐" },
   { sign: "Capricorn",   dates: "Dec 22 – Jan 19", crystal: "Garnet",        emoji: "♑" },
   { sign: "Aquarius",    dates: "Jan 20 – Feb 18", crystal: "Amethyst",      emoji: "♒" },
-  { sign: "Pisces",      dates: "Feb 19 – Mar 20", crystal: "Aquamarine",    emoji: "♓" },
+  { sign: "Pisces",      dates: "Feb 19 – Mar 20", crystal: "Clear Quartz",  emoji: "♓" },
 ];
 
 export const products: Product[] = [
-  // ─── BRACELETS (1–69) ───────────────────────────────────────────────────────
-  { id:1,  name:"Energised Dhan Yog Bracelet",            price:1499, originalPrice:1999, material:"7 Crystal Wealth Blend",              category:"bracelets", gemstone:"Multi-stone",     image:CDN+"dhan-yog-bracelet-8697571.webp",                                       badge:"SALE",        savePercent:25, swatches:["#c8a951","#ffd54f","#81c784"], concern:["money"],                   isBestSeller:true },
-  { id:2,  name:"Dhan Yog Chips Bracelet",                price:1199, originalPrice:1599, material:"Raw Wealth Crystal Blend",            category:"bracelets", gemstone:"Multi-stone",     image:CDN+"dhan-yog-chips-bracelet-1.webp",                  badge:"SALE",        savePercent:25, swatches:["#c8a951","#ffd54f"],          concern:["money"] },
-  { id:3,  name:"Raw Dhan Yog Bracelet",                  price:999,  originalPrice:1399, material:"Uncut Crystal Wealth Chain",          category:"bracelets", gemstone:"Multi-stone",     image:CDN+"raw_dhan_yog_bracelet.webp",                                           badge:"SALE",        savePercent:28, swatches:["#c8a951"],                    concern:["money"] },
-  { id:4,  name:"Dhan Vridhi Bracelet",                   price:1299, originalPrice:1699, material:"7 Crystal Wealth & Relationship",     category:"bracelets", gemstone:"Multi-stone",     image:CDN+"dhan-vridhi-bracelet-2323224.webp",                                    badge:"SALE",        savePercent:23, swatches:["#ffd54f","#f48fb1","#81c784"],concern:["money","love"] },
-  { id:5,  name:"Amethyst Bracelet",                      price:1099,                     material:"Amethyst, Sterling Silver",           category:"bracelets", gemstone:"Amethyst",        image:CDN+"amethyst-bracelet-6500408.webp",                                                               swatches:["#9c6fc4","#c8c8c8"],          concern:["peace","love"],            isBestSeller:true },
-  { id:6,  name:"Pyrite Bracelet",                        price:1199, originalPrice:1599, material:"Pyrite, Elastic Band",                category:"bracelets", gemstone:"Pyrite",          image:CDN+"pyrite-bracelet-5264057.webp",                                         badge:"BEST SELLER", savePercent:25, swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
-  { id:7,  name:"Citrine Bracelet",                       price:1099,                     material:"Citrine, Sterling Silver",            category:"bracelets", gemstone:"Citrine",         image:CDN+"citrine-bracelet-3555918.webp",                                                                swatches:["#ffd54f","#c8a951"],          concern:["money","health"] },
-  { id:8,  name:"Rose Quartz Bracelet",                   price:1299, originalPrice:1599, material:"Rose Quartz, Sterling Silver",        category:"bracelets", gemstone:"Rose Quartz",     image:CDN+"rose-quartz-bracelet-6171779.webp",                                    badge:"BEST SELLER", savePercent:18, swatches:["#f48fb1","#c8c8c8"],          concern:["love"],                    isBestSeller:true },
-  { id:9,  name:"Rose Quartz Chips Bracelet",             price:799,                      material:"Rose Quartz Chips, Elastic",          category:"bracelets", gemstone:"Rose Quartz",     image:CDN+"rose_quartz_chips_bracelet.webp",                                                              swatches:["#f48fb1"],                    concern:["love"] },
-  { id:10, name:"Green Aventurine Bracelet",              price:999,                      material:"Green Aventurine, Elastic",           category:"bracelets", gemstone:"Green Aventurine",image:CDN+"green-aventurine-bracelet-5552489.webp",                                                       swatches:["#81c784"],                    concern:["money","health"] },
-  { id:11, name:"Black Tourmaline Bracelet",              price:999,  originalPrice:1299, material:"Black Tourmaline, Elastic",           category:"bracelets", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-bracelet-8430947.webp",                               badge:"SALE",        savePercent:23, swatches:["#212121"],                    concern:["protection"] },
-  { id:12, name:"Money Attraction Bracelet",              price:1399, originalPrice:1799, material:"4 Crystal Wealth Blend",              category:"bracelets", gemstone:"Multi-stone",     image:CDN+"money-attraction-bracelet-3794172.webp",                               badge:"SALE",        savePercent:22, swatches:["#c8a951","#ffd54f"],          concern:["money"] },
-  { id:13, name:"Moonstone Bracelet",                     price:1299,                     material:"Moonstone, Sterling Silver",          category:"bracelets", gemstone:"Moonstone",       image:CDN+"moonstone-bracelet-2352141.webp",                                      badge:"NEW",                         swatches:["#e8eaf6","#c8c8c8"],          concern:["love","peace"],            isNew:true },
-  { id:14, name:"Triple Protection Bracelet",             price:1499, originalPrice:1999, material:"Black Obsidian, Tiger Eye & Hematite",category:"bracelets", gemstone:"Multi-stone",     image:CDN+"triple-protection-bracelet-4217483.webp",                              badge:"SALE",        savePercent:25, swatches:["#212121","#8b6914","#757575"],concern:["protection"],              isBestSeller:true },
-  { id:15, name:"Lapis Lazuli Bracelet",                  price:1799,                     material:"Lapis Lazuli, 18k Gold Vermeil",      category:"bracelets", gemstone:"Lapis Lazuli",    image:CDN+"lapis-lazuli-bracelet-6597959.webp",                                   badge:"NEW",                         swatches:["#1a237e","#c8a951"],          concern:["peace","money"],           isNew:true },
-  { id:16, name:"Jade Bracelet",                          price:1499,                     material:"Green Jade, Elastic Band",            category:"bracelets", gemstone:"Jade",            image:CDN+"jade-bracelet-3015072.webp",                                                                   swatches:["#81c784"],                    concern:["money","health"] },
-  { id:17, name:"Clear Quartz Bracelet (Sphatik)",        price:999,                      material:"Clear Quartz, Sterling Silver",       category:"bracelets", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-bracelet-sphatik-7277686.webp",                                                  swatches:["#f5f5f5","#c8c8c8"],          concern:["peace","health"] },
-  { id:18, name:"7 Chakra Bracelet",                      price:1299, originalPrice:1699, material:"7 Chakra Gemstones, Elastic",         category:"bracelets", gemstone:"Multi-stone",     image:CDN+"7-chakra-bracelet-7825780.webp",                                       badge:"SALE",        savePercent:23, swatches:["#e57373","#e8a951","#ffd54f","#81c784","#4fc3f7","#7986cb","#ba68c8"], concern:["love","peace","health","money","protection"], isBestSeller:true },
-  { id:19, name:"7 Chakra with Pyrite Bracelet",          price:1499, originalPrice:1999, material:"7 Chakra + Pyrite, Elastic",          category:"bracelets", gemstone:"Multi-stone",     image:CDN+"7-chakra-with-pyrite-5024517.jpg",                                     badge:"SALE",        savePercent:25, swatches:["#c8a951","#ba68c8"],          concern:["money","peace","health"] },
-  { id:20, name:"7 Chakra with Rose Quartz Bracelet",     price:1399,                     material:"7 Chakra + Rose Quartz, Elastic",     category:"bracelets", gemstone:"Multi-stone",     image:CDN+"7-chakra-with-rose-quartz-1142041.webp",                                                     swatches:["#f48fb1","#ba68c8"],          concern:["love","peace","health"] },
-  { id:21, name:"7 Chakra Wooden Beads Bracelet",         price:899,                      material:"7 Chakra + Tulsi Wood Beads",         category:"bracelets", gemstone:"Multi-stone",     image:CDN+"7-chakra-with-tulsi-beads-6583542.webp",                                                     swatches:["#8b6914","#ba68c8"],          concern:["peace","protection"] },
-  { id:22, name:"7 Chakra Lava Bracelet",                 price:999,                      material:"7 Chakra + Lava Stone, Elastic",      category:"bracelets", gemstone:"Multi-stone",     image:CDN+"7-chakra-lava-bracelet-7479816.jpg",                                                         swatches:["#212121","#ba68c8"],          concern:["peace","protection"] },
-  { id:23, name:"Sulemani Hakik Bracelet",                price:1199,                     material:"Sulemani Agate, Elastic Band",        category:"bracelets", gemstone:"Agate",           image:CDN+"sulemani-hakik-bracelet-8243387.webp",                                                       swatches:["#757575","#212121"],          concern:["protection"] },
-  { id:24, name:"Tiger Eye Bracelet",                     price:999,  originalPrice:1299, material:"Tiger Eye, Elastic Band",             category:"bracelets", gemstone:"Tiger Eye",       image:CDN+"tiger-eye-bracelet-7658701.webp",                                      badge:"SALE",        savePercent:23, swatches:["#8b6914","#c8a951"],          concern:["protection","money"] },
-  { id:25, name:"Turquoise Bracelet (Firoza)",            price:1299,                     material:"Turquoise, Sterling Silver",          category:"bracelets", gemstone:"Turquoise",       image:CDN+"turquoise-bracelet-firoza-4945301.webp",                               badge:"NEW",                         swatches:["#4db6ac","#757575"],          concern:["protection","health"],     isNew:true },
-  { id:26, name:"Carnelian Bracelet",                     price:899,                      material:"Carnelian, Elastic Band",             category:"bracelets", gemstone:"Carnelian",       image:CDN+"carnelian-bracelet-6862093.webp",                                                             swatches:["#e57373","#c8a951"],          concern:["health"] },
-  { id:27, name:"Multi-Fluorite Bracelet",                price:999,                      material:"Multi-Fluorite, Elastic Band",        category:"bracelets", gemstone:"Fluorite",        image:CDN+"multifluorite-bracelet-8884926.webp",                                                        swatches:["#ba68c8","#4fc3f7","#81c784"],concern:["peace"] },
-  { id:28, name:"Weight Loss Crystal Bracelet",           price:1299, originalPrice:1699, material:"Blue Apatite, Clear Quartz & Sodalite",category:"bracelets",gemstone:"Multi-stone",     image:CDN+"weightloss-bracelet-9580384.jpg",                                      badge:"SALE",        savePercent:23, swatches:["#4fc3f7","#f5f5f5"],          concern:["health"] },
-  { id:29, name:"Cats Eye (Lehsunia) Bracelet",           price:1599,                     material:"Cats Eye, Elastic Band",              category:"bracelets", gemstone:"Cats Eye",        image:CDN+"cats-eye-lehsunia-bracelet-4803786.webp",                              badge:"NEW",                         swatches:["#8b6914","#c8a951"],          concern:["protection","money"],      isNew:true },
-  { id:30, name:"Howlite Bracelet",                       price:799,                      material:"Howlite, Elastic Band",               category:"bracelets", gemstone:"Howlite",         image:CDN+"howlite-bracelet-1156397.webp",                                                              swatches:["#f5f5f5","#757575"],          concern:["peace"] },
-  { id:31, name:"Selenite Bracelet",                      price:899,                      material:"Selenite, Elastic Band",              category:"bracelets", gemstone:"Selenite",        image:CDN+"selenite-bracelet-5598380.webp",                                                             swatches:["#f5f5f5"],                    concern:["peace","health"] },
-  { id:32, name:"Rhodochrosite Bracelet",                 price:1399,                     material:"Rhodochrosite, Elastic Band",         category:"bracelets", gemstone:"Rhodochrosite",   image:CDN+"rhodochrosite-bracelet-2218961.webp",                                  badge:"NEW",                         swatches:["#f48fb1","#e57373"],          concern:["love"],                    isNew:true },
-  { id:33, name:"Exam Focus & Success Bracelet",          price:1199, originalPrice:1499, material:"Focus Crystal Blend",                 category:"bracelets", gemstone:"Multi-stone",     image:CDN+"exams-focus-success-8543586.webp",                                     badge:"SALE",        savePercent:20, swatches:["#4fc3f7","#ffd54f"],          concern:["peace","health"] },
-  { id:34, name:"Double Power Money Bracelet",            price:1499, originalPrice:1999, material:"Gold & Grey Pyrite Blend",            category:"bracelets", gemstone:"Pyrite",          image:CDN+"double-power-money-attraction-bracelet-1603331.webp",                  badge:"SALE",        savePercent:25, swatches:["#c8a951","#757575"],          concern:["money"] },
-  { id:35, name:"Blue Apatite Bracelet",                  price:1099,                     material:"Blue Apatite, Elastic Band",          category:"bracelets", gemstone:"Blue Apatite",    image:CDN+"blue-apatite-bracelet-2667079.webp",                                   badge:"NEW",                         swatches:["#4fc3f7"],                    concern:["peace"],                   isNew:true },
-  { id:36, name:"Morganite Bracelet",                     price:1499,                     material:"Morganite, Sterling Silver",          category:"bracelets", gemstone:"Morganite",       image:CDN+"morganite-bracelet-6385649.webp",                                                            swatches:["#f8bbd9","#f48fb1"],          concern:["love"] },
-  { id:37, name:"Pregnancy Support Bracelet",             price:1299, originalPrice:1699, material:"Moonstone Nurturing Blend",           category:"bracelets", gemstone:"Moonstone",       image:CDN+"pregnancy-bracelet-2549519.webp",                                      badge:"SALE",        savePercent:23, swatches:["#e8eaf6","#f48fb1"],          concern:["love","health"] },
-  { id:38, name:"Smoky Quartz Bracelet",                  price:999,                      material:"Smoky Quartz, Elastic Band",          category:"bracelets", gemstone:"Smoky Quartz",    image:CDN+"smoky-quartz-bracelet-7237920.webp",                                                         swatches:["#757575","#212121"],          concern:["peace","protection"] },
-  { id:39, name:"Garnet Bracelet",                        price:1199,                     material:"Garnet, Sterling Silver",             category:"bracelets", gemstone:"Garnet",          image:CDN+"garnet-bracelet-9977834.jpg",                                          badge:"NEW",                         swatches:["#e57373"],                    concern:["health","love"],           isNew:true },
-  { id:40, name:"Aquamarine Bracelet",                    price:1399,                     material:"Aquamarine, Sterling Silver",         category:"bracelets", gemstone:"Aquamarine",      image:CDN+"aquamarine-bracelet-6347011.webp",                                                           swatches:["#80deea"],                    concern:["peace","health"] },
-  { id:41, name:"Sunstone Bracelet",                      price:1099,                     material:"Sunstone, Elastic Band",              category:"bracelets", gemstone:"Sunstone",        image:CDN+"sunstone-bracelet-2671072.jpg",                                        badge:"NEW",                         swatches:["#e8a951","#e57373"],          concern:["love"],                    isNew:true },
-  { id:42, name:"Red Jasper Bracelet",                    price:899,                      material:"Red Jasper, Elastic Band",            category:"bracelets", gemstone:"Red Jasper",      image:CDN+"red-jasper-bracelet-3633864.webp",                                                           swatches:["#e57373","#8b4513"],          concern:["health"] },
-  { id:43, name:"Black Obsidian Bracelet",                price:1099, originalPrice:1399, material:"Black Obsidian, Elastic Band",        category:"bracelets", gemstone:"Black Obsidian",  image:CDN+"black-obsidian-bracelet-8054853.webp",                                 badge:"SALE",        savePercent:21, swatches:["#212121"],                    concern:["protection"] },
-  { id:44, name:"Bloodstone Bracelet",                    price:999,                      material:"Bloodstone, Elastic Band",            category:"bracelets", gemstone:"Bloodstone",      image:CDN+"bloodstone-bracelet-2050804.webp",                                                           swatches:["#2e7d32","#e57373"],          concern:["health"] },
-  { id:45, name:"PCOD/PCOS Support Bracelet",             price:1299, originalPrice:1699, material:"Carnelian, Garnet & Moonstone",       category:"bracelets", gemstone:"Multi-stone",     image:CDN+"pcodpcos-bracelet-4197230.webp",                                       badge:"SALE",        savePercent:23, swatches:["#e57373","#f48fb1","#e8eaf6"],concern:["health"] },
-  { id:46, name:"Labradorite Bracelet",                   price:1299,                     material:"Labradorite, Sterling Silver",        category:"bracelets", gemstone:"Labradorite",     image:CDN+"labradorite-bracelet-4521613.webp",                                    badge:"NEW",                         swatches:["#7986cb","#4fc3f7"],          concern:["protection","peace"],      isNew:true },
-  { id:47, name:"Red Coral Bracelet (Moonga)",            price:1799,                     material:"Red Coral, 18k Gold Vermeil",         category:"bracelets", gemstone:"Red Coral",       image:CDN+"red-coral-bracelet-moonga-1758949.webp",                               badge:"NEW",                         swatches:["#e57373"],                    concern:["health","protection"],     isNew:true },
-  { id:48, name:"Malachite Bracelet",                     price:1499, originalPrice:1999, material:"Malachite, Elastic Band",             category:"bracelets", gemstone:"Malachite",       image:CDN+"malachite-bracelet-5694846.webp",                                      badge:"SALE",        savePercent:25, swatches:["#2e7d32","#81c784"],          concern:["protection","health"] },
-  { id:49, name:"Mother of Pearl Bracelet",               price:1199,                     material:"Mother of Pearl, Sterling Silver",   category:"bracelets", gemstone:"Mother of Pearl",  image:CDN+"mother-of-pearl-bracelet-6419865.webp",                                                      swatches:["#f5f5f5","#e8eaf6"],          concern:["peace","love"] },
-  { id:50, name:"Blue Lace Agate Bracelet",               price:1099,                     material:"Blue Lace Agate, Elastic Band",       category:"bracelets", gemstone:"Blue Lace Agate", image:CDN+"blue-lace-agate-bracelet-9261404.webp",                                                      swatches:["#b3e5fc"],                    concern:["peace"] },
-  { id:51, name:"Dragon Vein Bracelet",                   price:899,  originalPrice:1199, material:"Dragon Vein Agate, Elastic Band",    category:"bracelets", gemstone:"Agate",           image:CDN+"dragon-vein-bracelet-4821076.webp",                                    badge:"SALE",        savePercent:25, swatches:["#e57373","#4fc3f7"],          concern:["protection"] },
-  { id:52, name:"Love & Stress Relief Bracelet",          price:1299, originalPrice:1699, material:"Rose Quartz, Amethyst & Rhodochrosite",category:"bracelets",gemstone:"Multi-stone",    image:CDN+"love-stress-relief-bracelet-3771153.webp",                             badge:"SALE",        savePercent:23, swatches:["#f48fb1","#9c6fc4"],          concern:["love","peace"] },
-  { id:53, name:"Nazar Raksha Bracelet",                  price:1199, originalPrice:1499, material:"Evil Eye Protection Blend",           category:"bracelets", gemstone:"Multi-stone",     image:CDN+"nazar-raksha-bracelet-1530601.webp",                                   badge:"SALE",        savePercent:20, swatches:["#4fc3f7","#212121"],          concern:["protection"] },
-  { id:54, name:"Shungite EMF Protection Bracelet",       price:1499,                     material:"Shungite, Elastic Band",              category:"bracelets", gemstone:"Shungite",        image:CDN+"images_3.jpg",                                                         badge:"NEW",                         swatches:["#212121"],                    concern:["protection","health"],     isNew:true },
-  { id:55, name:"Fame & Recognition Bracelet",            price:1599, originalPrice:1999, material:"Pyrite, Sunstone & Labradorite",      category:"bracelets", gemstone:"Multi-stone",     image:CDN+"images_93e17c92-0d0b-4427-870d-16646f35897c.jpg",                      badge:"SALE",        savePercent:20, swatches:["#c8a951","#e8a951","#7986cb"],concern:["money"] },
-  { id:56, name:"Love Attraction & Marriage Bracelet",    price:1499,                     material:"Rose Quartz, Moonstone & Rhodonite",  category:"bracelets", gemstone:"Multi-stone",     image:CDN+"unnamed.jpg",                                                          badge:"NEW",                         swatches:["#f48fb1","#e8eaf6"],          concern:["love"],                    isNew:true },
-  { id:57, name:"Moss Agate Bracelet",                    price:999,                      material:"Moss Agate, Elastic Band",            category:"bracelets", gemstone:"Moss Agate",      image:CDN+"moss-agate-bracelet-9387610.jpg",                                                            swatches:["#81c784","#2e7d32"],          concern:["health"] },
-  { id:58, name:"Sodalite Bracelet",                      price:899,                      material:"Sodalite, Elastic Band",              category:"bracelets", gemstone:"Sodalite",        image:CDN+"sodalite-bracelet-9340905.webp",                                                             swatches:["#7986cb","#1a237e"],          concern:["peace"] },
-  { id:59, name:"Angelite Bracelet",                      price:999,                      material:"Angelite, Elastic Band",              category:"bracelets", gemstone:"Angelite",        image:CDN+"angelite-bracelet-2645313.webp",                                                             swatches:["#b3e5fc","#90caf9"],          concern:["peace"] },
-  { id:60, name:"Unakite Bracelet",                       price:799,                      material:"Unakite, Elastic Band",               category:"bracelets", gemstone:"Unakite",         image:CDN+"unakite-bracelet-3575771.webp",                                                              swatches:["#81c784","#e57373"],          concern:["health","love"] },
-  { id:61, name:"Amazonite Bracelet",                     price:1099,                     material:"Amazonite, Elastic Band",             category:"bracelets", gemstone:"Amazonite",       image:CDN+"amazonite-bracelet-1464571.jpg",                                                             swatches:["#80cbc4"],                    concern:["peace"] },
-  { id:62, name:"Amethyst Cylinder Bracelet",             price:1299,                     material:"Amethyst Cylinders, Elastic",         category:"bracelets", gemstone:"Amethyst",        image:CDN+"DSC_6470_2263eb16-3678-4f4b-8462-a56828e008f4.webp",                   badge:"NEW",                         swatches:["#9c6fc4"],                    concern:["peace","love"],            isNew:true },
-  { id:63, name:"Clear Quartz Cylinder Bracelet",         price:1099,                     material:"Clear Quartz Cylinders, Elastic",     category:"bracelets", gemstone:"Clear Quartz",    image:CDN+"DSC_6427.webp",                                                        badge:"NEW",                         swatches:["#f5f5f5"],                    concern:["peace","health"],          isNew:true },
-  { id:64, name:"Tiger Eye Cylinder Bracelet",            price:1099,                     material:"Tiger Eye Cylinders, Elastic",        category:"bracelets", gemstone:"Tiger Eye",       image:CDN+"DSC_6439.webp",                                                        badge:"NEW",                         swatches:["#8b6914","#c8a951"],          concern:["protection","money"],      isNew:true },
-  { id:65, name:"Green Aventurine Cylinder Bracelet",     price:999,                      material:"Green Aventurine Cylinders, Elastic", category:"bracelets", gemstone:"Green Aventurine",image:CDN+"DSC_6440.webp",                                                        badge:"NEW",                         swatches:["#81c784"],                    concern:["money","health"],          isNew:true },
-  { id:66, name:"Rose Quartz Cylinder Bracelet",          price:1099,                     material:"Rose Quartz Cylinders, Elastic",      category:"bracelets", gemstone:"Rose Quartz",     image:CDN+"DSC_6448.webp",                                                        badge:"NEW",                         swatches:["#f48fb1"],                    concern:["love"],                    isNew:true },
-  { id:67, name:"Black Tourmaline Cylinder Bracelet",     price:999,                      material:"Black Tourmaline Cylinders, Elastic", category:"bracelets", gemstone:"Black Tourmaline",image:CDN+"DSC_6452.webp",                                                        badge:"NEW",                         swatches:["#212121"],                    concern:["protection"],              isNew:true },
-  { id:68, name:"Red Jasper Cylinder Bracelet",           price:999,                      material:"Red Jasper Cylinders, Elastic",       category:"bracelets", gemstone:"Red Jasper",      image:CDN+"DSC_6465.webp",                                                        badge:"NEW",                         swatches:["#e57373"],                    concern:["health"],                  isNew:true },
-  { id:69, name:"Pyrite Cylinder Bracelet",               price:1199,                     material:"Pyrite Cylinders, Elastic",           category:"bracelets", gemstone:"Pyrite",          image:CDN+"DSC_6461.webp",                                                        badge:"NEW",                         swatches:["#c8a951"],                    concern:["money"],                   isNew:true },
-
-  // ─── PENDANTS (70–120) ───────────────────────────────────────────────────────
-  { id:70,  name:"Raw Pyrite Pendant",                    price:1299, originalPrice:1699, material:"Raw Pyrite, Gold Plated Chain",       category:"pendants",  gemstone:"Pyrite",          image:CDN+"business-success-combo-5516503.webp",                                  badge:"SALE",        savePercent:23, swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
-  { id:71,  name:"Raw Pyrite Oval Pendant",               price:999,                      material:"Oval Pyrite, Gold Plated Chain",      category:"pendants",  gemstone:"Pyrite",          image:CDN+"raw-pyrite-oval-pendant-7465152.webp",                                                       swatches:["#c8a951"],                    concern:["money"] },
-  { id:72,  name:"Pyrite Pendant",                        price:1199,                     material:"Polished Pyrite, 925 Silver",         category:"pendants",  gemstone:"Pyrite",          image:CDN+"pyrite-pendant-9695250.webp",                                                                swatches:["#c8a951","#c8c8c8"],          concern:["money"] },
-  { id:73,  name:"Pyrite Pendant Mini",                   price:799,                      material:"Pyrite Mini, Gold Plated Chain",      category:"pendants",  gemstone:"Pyrite",          image:CDN+"pyrite-pendant-mini-4341793.webp",                                                           swatches:["#c8a951"],                    concern:["money"] },
-  { id:74,  name:"Pyrite Pencil Pendant",                 price:899,                      material:"Pyrite Crystal Point, Silver Chain",  category:"pendants",  gemstone:"Pyrite",          image:CDN+"pyrite-pencil-pendant-2258161.png",                                                          swatches:["#c8a951","#c8c8c8"],          concern:["money"] },
-  { id:75,  name:"Saffordite Chintamani Pendant",         price:2499,                     material:"Saffordite, 925 Sterling Silver",     category:"pendants",  gemstone:"Saffordite",      image:CDN+"saffordite-chintamani-pendant-2470027.webp",                           badge:"NEW",                         swatches:["#757575"],                    concern:["protection","peace"],      isNew:true },
-  { id:76,  name:"Raw Amethyst Pendant",                  price:1899, originalPrice:2149, material:"Raw Amethyst, 925 Sterling Silver",   category:"pendants",  gemstone:"Amethyst",        image:CDN+"raw-amethyst-pendant-6486782.webp",                                    badge:"SALE",        savePercent:11, swatches:["#9c6fc4","#c8c8c8"],          concern:["peace","love"] },
-  { id:77,  name:"Amethyst Pendant",                      price:1499,                     material:"Amethyst, 925 Sterling Silver",       category:"pendants",  gemstone:"Amethyst",        image:CDN+"amethyst-pendant-4882688.webp",                                                              swatches:["#9c6fc4","#c8c8c8"],          concern:["peace","love"] },
-  { id:78,  name:"Amethyst Pendant Mini",                 price:999,                      material:"Amethyst Mini, 925 Sterling Silver",  category:"pendants",  gemstone:"Amethyst",        image:CDN+"amethyst-pendant-mini-3567497.webp",                                                         swatches:["#9c6fc4"],                    concern:["peace","love"] },
-  { id:79,  name:"Amethyst Pencil Pendant",               price:999,                      material:"Amethyst Point, Silver Chain",        category:"pendants",  gemstone:"Amethyst",        image:CDN+"amethyst-pencil-pendant-4701307.webp",                                                       swatches:["#9c6fc4","#c8c8c8"],          concern:["peace"] },
-  { id:80,  name:"Raw Citrine Pendant",                   price:1199,                     material:"Raw Citrine, Gold Plated Chain",      category:"pendants",  gemstone:"Citrine",         image:CDN+"career-booster-trio-2033063.jpg",                                      badge:"NEW",                         swatches:["#ffd54f","#c8a951"],          concern:["money","health"],          isNew:true },
-  { id:81,  name:"Citrine Pendant",                       price:1699, originalPrice:2199, material:"Citrine, 18k Gold Vermeil",           category:"pendants",  gemstone:"Citrine",         image:CDN+"citrine-pendant-9416544.webp",                                         badge:"SALE",        savePercent:22, swatches:["#ffd54f","#c8a951"],          concern:["money","health"] },
-  { id:82,  name:"Citrine Pencil Pendant",                price:999,                      material:"Citrine Point, Gold Plated Chain",    category:"pendants",  gemstone:"Citrine",         image:CDN+"citrine-pencil-pendant-6737122.webp",                                                        swatches:["#ffd54f"],                    concern:["money"] },
-  { id:83,  name:"Raw Rose Quartz Pendant",               price:1199,                     material:"Raw Rose Quartz, Rose Gold Chain",    category:"pendants",  gemstone:"Rose Quartz",     image:CDN+"love-happiness-combo-2604969.webp",                                                          swatches:["#f48fb1"],                    concern:["love"] },
-  { id:84,  name:"Rose Quartz Pendant",                   price:1499, originalPrice:1899, material:"Rose Quartz, 925 Sterling Silver",    category:"pendants",  gemstone:"Rose Quartz",     image:CDN+"rose-quartz-pendant-1498015.webp",                                     badge:"SALE",        savePercent:21, swatches:["#f48fb1","#c8c8c8"],          concern:["love"] },
-  { id:85,  name:"Rose Quartz Heart Pendant",             price:1799,                     material:"Rose Quartz Heart, Rose Gold",        category:"pendants",  gemstone:"Rose Quartz",     image:CDN+"rose-quartz-heart-pendant-6300055.jpg",                                badge:"BEST SELLER",                 swatches:["#f48fb1"],                    concern:["love"],                    isBestSeller:true },
-  { id:86,  name:"Rose Quartz Pendant Mini",              price:799,                      material:"Rose Quartz Mini, Rose Gold Chain",   category:"pendants",  gemstone:"Rose Quartz",     image:CDN+"rose-quartz-pendant-mini-5673226.jpg",                                                       swatches:["#f48fb1"],                    concern:["love"] },
-  { id:87,  name:"Rose Quartz Pencil Pendant",            price:899,                      material:"Rose Quartz Point, Rose Gold Chain",  category:"pendants",  gemstone:"Rose Quartz",     image:CDN+"rose-quartz-pencil-pendant-8347383.webp",                                                    swatches:["#f48fb1"],                    concern:["love"] },
-  { id:88,  name:"Turquoise Pendant (Firoza)",            price:1399,                     material:"Turquoise, Oxidised Silver",          category:"pendants",  gemstone:"Turquoise",       image:CDN+"turquoise-pendant-firoza-5080123.jpg",                                 badge:"NEW",                         swatches:["#4db6ac","#757575"],          concern:["protection","health"],     isNew:true },
-  { id:89,  name:"Raw Black Tourmaline Pendant",          price:1299,                     material:"Raw Black Tourmaline, 925 Silver",    category:"pendants",  gemstone:"Black Tourmaline",image:CDN+"raw-black-tourmaline-pendant-6490502.webp",                                                   swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:90,  name:"Black Tourmaline Pendant",              price:1599, originalPrice:2249, material:"Black Tourmaline, 925 Silver",        category:"pendants",  gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-pendant-1096581.webp",                                badge:"SALE",        savePercent:29, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:91,  name:"Black Tourmaline Pencil Pendant",       price:999,                      material:"Black Tourmaline Point, Silver",      category:"pendants",  gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-pencil-pendant-1484743.png",                                                 swatches:["#212121"],                    concern:["protection"] },
-  { id:92,  name:"Black Obsidian Teardrop Pendant",       price:1599, originalPrice:2249, material:"Black Obsidian, 925 Silver",          category:"pendants",  gemstone:"Black Obsidian",  image:CDN+"black-obsidian-pendant-3750971.jpg",                                   badge:"SALE",        savePercent:29, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:93,  name:"Carnelian Pendant",                     price:1199,                     material:"Carnelian, 925 Sterling Silver",      category:"pendants",  gemstone:"Carnelian",       image:CDN+"carnelian-pendant-7664243.jpg",                                                               swatches:["#e57373","#c8c8c8"],          concern:["health"] },
-  { id:94,  name:"Carnelian Pencil Pendant",              price:899,                      material:"Carnelian Point, Silver Chain",       category:"pendants",  gemstone:"Carnelian",       image:CDN+"carnelian-pencil-pendant-7413695.webp",                                                      swatches:["#e57373"],                    concern:["health"] },
-  { id:95,  name:"Tiger Eye Pendant",                     price:1299,                     material:"Tiger Eye, 925 Sterling Silver",      category:"pendants",  gemstone:"Tiger Eye",       image:CDN+"tiger-eye-pendant-1581389.webp",                                                             swatches:["#8b6914","#c8a951"],          concern:["protection","money"] },
-  { id:96,  name:"Tiger Eye Pencil Pendant",              price:899,                      material:"Tiger Eye Point, Silver Chain",       category:"pendants",  gemstone:"Tiger Eye",       image:CDN+"tiger-eye-pencil-pendant-4739408.webp",                                                      swatches:["#8b6914"],                    concern:["protection"] },
-  { id:97,  name:"Opal Pendant",                          price:1899,                     material:"Opal, 925 Sterling Silver",           category:"pendants",  gemstone:"Opal",            image:CDN+"opal-pendant-8334851.jpg",                                             badge:"NEW",                         swatches:["#e8eaf6","#f48fb1"],          concern:["love"],                    isNew:true },
-  { id:98,  name:"Moonstone Pendant Mini",                price:999,                      material:"Moonstone Mini, 18k Gold Vermeil",    category:"pendants",  gemstone:"Moonstone",       image:CDN+"moonstone-pendant-mini-9307706.webp",                                                        swatches:["#e8eaf6","#c8a951"],          concern:["love","peace"] },
-  { id:99,  name:"Moonstone Oval Pendant",                price:2199, originalPrice:2999, material:"Moonstone, 18k Gold Vermeil",         category:"pendants",  gemstone:"Moonstone",       image:CDN+"moonstone-pendant-7210134.webp",                                       badge:"SALE",        savePercent:22, swatches:["#e8eaf6","#c8a951"],          concern:["love","peace"] },
-  { id:100, name:"Kunzite Pendant",                       price:1999,                     material:"Kunzite, 925 Sterling Silver",        category:"pendants",  gemstone:"Kunzite",         image:CDN+"kunzite-pendant-6725004.webp",                                         badge:"NEW",                         swatches:["#f8bbd9"],                    concern:["love","peace"],            isNew:true },
-  { id:101, name:"Emerald (Panna) Pendant",               price:2999,                     material:"Emerald, 925 Sterling Silver",        category:"pendants",  gemstone:"Emerald",         image:CDN+"emerald-panna-pendant-9419370.webp",                                   badge:"NEW",                         swatches:["#2e7d32","#c8c8c8"],          concern:["money","health"],          isNew:true },
-  { id:102, name:"Yellow Sapphire (Pukhraj) Pendant",     price:3499,                     material:"Yellow Sapphire, 18k Gold Vermeil",   category:"pendants",  gemstone:"Yellow Sapphire", image:CDN+"yellow-sapphire-pukhraj-pendant-9123864.webp",                                                swatches:["#ffd54f","#c8a951"],          concern:["money","peace"] },
-  { id:103, name:"Ruby (Manik) Pendant",                  price:2999,                     material:"Ruby, 18k Gold Vermeil",              category:"pendants",  gemstone:"Ruby",            image:CDN+"ruby-manik-pendant-3374921.jpg",                                                             swatches:["#e57373","#c8a951"],          concern:["health","love"] },
-  { id:104, name:"Blue Sapphire (Neelam) Pendant",        price:3499,                     material:"Blue Sapphire, 925 Silver",           category:"pendants",  gemstone:"Blue Sapphire",   image:CDN+"blue-sapphire-neelam-pendant-5771012.webp",                                                  swatches:["#1a237e","#c8c8c8"],          concern:["peace","money"] },
-  { id:105, name:"Pearl (Moti) Pendant",                  price:1599,                     material:"Pearl, 925 Sterling Silver",          category:"pendants",  gemstone:"Pearl",           image:CDN+"pearl-pendant-5078921.webp",                                                                 swatches:["#f5f5f5","#c8c8c8"],          concern:["peace","love"] },
-  { id:106, name:"Red Coral (Moonga) Pendant",            price:1999,                     material:"Red Coral, 18k Gold Vermeil",         category:"pendants",  gemstone:"Red Coral",       image:CDN+"red-coral-moonga-pendant-9350718.webp",                                badge:"NEW",                         swatches:["#e57373","#c8a951"],          concern:["health","protection"],     isNew:true },
-  { id:107, name:"Clear Quartz (Sphatik) Pendant",        price:1499,                     material:"Clear Quartz, 925 Sterling Silver",   category:"pendants",  gemstone:"Clear Quartz",    image:CDN+"clear-quartz-sphatik-pendant-9575375.webp",                                                  swatches:["#f5f5f5","#c8c8c8"],          concern:["health","peace"] },
-  { id:108, name:"Clear Quartz Pencil Pendant",           price:899,                      material:"Clear Quartz Point, Silver Chain",    category:"pendants",  gemstone:"Clear Quartz",    image:CDN+"clear-quartz-pencil-pendant-1203964.webp",                                                   swatches:["#f5f5f5"],                    concern:["peace","health"] },
-  { id:109, name:"Lapis Lazuli Pendant",                  price:1899,                     material:"Lapis Lazuli, 925 Silver",            category:"pendants",  gemstone:"Lapis Lazuli",    image:CDN+"lapis-lazuli-pendant-8522852.webp",                                    badge:"NEW",                         swatches:["#1a237e","#c8c8c8"],          concern:["peace","money"],           isNew:true },
-  { id:110, name:"Lapis Lazuli Pencil Pendant",           price:1099,                     material:"Lapis Lazuli Point, Silver Chain",    category:"pendants",  gemstone:"Lapis Lazuli",    image:CDN+"lapis-lazuli-pencil-pendant-8516845.webp",                                                   swatches:["#1a237e"],                    concern:["peace"] },
-  { id:111, name:"Green Aventurine Pendant",              price:1199,                     material:"Green Aventurine, 925 Sterling Silver",category:"pendants", gemstone:"Green Aventurine",image:CDN+"green-aventurine-pendant-1890616.webp",                                                       swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
-  { id:112, name:"Fluorite Pencil Pendant",               price:899,                      material:"Multi-Fluorite Point, Silver Chain",  category:"pendants",  gemstone:"Fluorite",        image:CDN+"flourite-pencil-pendant-3199469.webp",                                                       swatches:["#ba68c8","#4fc3f7"],          concern:["peace"] },
-  { id:113, name:"Jade Pendant",                          price:1399,                     material:"Jade, 925 Sterling Silver",           category:"pendants",  gemstone:"Jade",            image:CDN+"jade-pendant-3050256.webp",                                                                  swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
-  { id:114, name:"Ruby Zoisite Pencil Pendant",           price:1199,                     material:"Ruby Zoisite Point, Silver Chain",    category:"pendants",  gemstone:"Ruby Zoisite",    image:CDN+"ruby-zoisite-pencil-pendant-5932115.webp",                             badge:"NEW",                         swatches:["#e57373","#2e7d32"],          concern:["health","love"],           isNew:true },
-  { id:115, name:"Red Jasper Pencil Pendant",             price:799,                      material:"Red Jasper Point, Silver Chain",      category:"pendants",  gemstone:"Red Jasper",      image:CDN+"red-jasper-pencil-pendant-7902879.webp",                                                     swatches:["#e57373"],                    concern:["health"] },
-  { id:116, name:"Cats Eye (Lehsunia) Pendant",           price:1799,                     material:"Cats Eye, 925 Sterling Silver",       category:"pendants",  gemstone:"Cats Eye",        image:CDN+"cats-eye-lehsunia-pendant-2200052.webp",                               badge:"NEW",                         swatches:["#8b6914","#c8a951"],          concern:["protection","money"],      isNew:true },
-  { id:117, name:"Amethyst Heart Pendant",                price:1799, originalPrice:2199, material:"Amethyst Heart, 18k Gold Vermeil",    category:"pendants",  gemstone:"Amethyst",        image:CDN+"amethyst-heart-pendant-6843606.webp",                                  badge:"SALE",        savePercent:18, swatches:["#9c6fc4","#c8a951"],          concern:["love","peace"] },
-  { id:118, name:"Carnelian Heart Pendant",               price:1499,                     material:"Carnelian Heart, 925 Silver",         category:"pendants",  gemstone:"Carnelian",       image:CDN+"carnelian-heart-pendant-6079187.webp",                                                       swatches:["#e57373","#c8c8c8"],          concern:["health","love"] },
-  { id:119, name:"Tiger Eye Heart Pendant",               price:1499,                     material:"Tiger Eye Heart, 925 Silver",         category:"pendants",  gemstone:"Tiger Eye",       image:CDN+"tiger-eye-heart-pendant-8725650.webp",                                                       swatches:["#8b6914","#c8c8c8"],          concern:["protection","money"] },
-  { id:120, name:"Green Aventurine Heart Pendant",        price:1499,                     material:"Green Aventurine Heart, 925 Silver",  category:"pendants",  gemstone:"Green Aventurine",image:CDN+"green-aventurine-heart-pendant-6633311.webp",                          badge:"BEST SELLER",                 swatches:["#81c784","#c8c8c8"],          concern:["money","health"],          isBestSeller:true },
-
-  // ─── RINGS (121–148) ─────────────────────────────────────────────────────────
-  { id:121, name:"Raw Pyrite Ring",                       price:1599, originalPrice:2249, material:"Pyrite, 925 Sterling Silver",         category:"rings",     gemstone:"Pyrite",          image:CDN+"business-success-combo-6709797.webp",                                  badge:"SALE",        savePercent:29, swatches:["#c8a951","#c8c8c8"],          concern:["money"] },
-  { id:122, name:"Polished Pyrite Ring",                  price:1799,                     material:"Pyrite, 925 Sterling Silver",         category:"rings",     gemstone:"Pyrite",          image:CDN+"polished-pyrite-ring-3289725.webp",                                    badge:"BEST SELLER",                 swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
-  { id:123, name:"Citrine Oval Gemstone Ring",            price:1499, originalPrice:2029, material:"Citrine, 925 Silver",                 category:"rings",     gemstone:"Citrine",         image:CDN+"Citrine_Classic_Ring_2.webp",                                          badge:"SALE",        savePercent:26, swatches:["#ffd54f","#c8c8c8"],          concern:["money","health"] },
-  { id:124, name:"Turquoise (Firoza) Ring",               price:1799, originalPrice:2499, material:"Turquoise, 18k Gold Plated",          category:"rings",     gemstone:"Turquoise",       image:CDN+"turquoise-firoza-ring-7538506.jpg",                                    badge:"SALE",        savePercent:28, swatches:["#4db6ac","#c8a951"],          concern:["health","protection"] },
-  { id:125, name:"Rose Quartz Heart Ring",                price:1099,                     material:"Rose Quartz, Rose Gold Plated",       category:"rings",     gemstone:"Rose Quartz",     image:CDN+"Rose_quartz_ring_1.webp",                                              badge:"NEW",                         swatches:["#f48fb1","#f8bbd9"],          concern:["love"],                    isNew:true },
-  { id:126, name:"Amethyst Solitaire Ring",               price:1299,                     material:"Amethyst, 925 Sterling Silver",       category:"rings",     gemstone:"Amethyst",        image:CDN+"amethyst-ring-7977858.webp",                                           badge:"NEW",                         swatches:["#9c6fc4","#c8c8c8"],          concern:["peace","love"],            isNew:true },
-  { id:127, name:"Moonstone Adjustable Ring",             price:1399,                     material:"Moonstone, 925 Silver",               category:"rings",     gemstone:"Moonstone",       image:CDN+"moonstone-ring-4666730.webp",                                          badge:"NEW",                         swatches:["#e8eaf6","#c8c8c8"],          concern:["love","peace"],            isNew:true },
-  { id:128, name:"Emerald (Panna) Ring",                  price:3499,                     material:"Emerald, 18k Gold Vermeil",           category:"rings",     gemstone:"Emerald",         image:CDN+"DSC_6531.jpg",                                                         badge:"NEW",                         swatches:["#2e7d32","#c8a951"],          concern:["money","health"],          isNew:true },
-  { id:129, name:"Green Aventurine Ring",                 price:1199,                     material:"Green Aventurine, 925 Silver",        category:"rings",     gemstone:"Green Aventurine",image:CDN+"vktrfz1j2jyydl3rojrm.webp",                                                                  swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
-  { id:130, name:"Opal Statement Ring",                   price:1899,                     material:"Opal, 18k Gold Vermeil",              category:"rings",     gemstone:"Opal",            image:CDN+"opal-ring-2023409.webp",                                               badge:"NEW",                         swatches:["#e8eaf6","#c8a951"],          concern:["love"],                    isNew:true },
-  { id:131, name:"Black Tourmaline Band Ring",            price:999,                      material:"Black Tourmaline, Sterling Silver",   category:"rings",     gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-ring-2614010.webp",                                                          swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:132, name:"Yellow Sapphire (Pukhraj) Ring",        price:3499,                     material:"Yellow Sapphire, 18k Gold Vermeil",   category:"rings",     gemstone:"Yellow Sapphire", image:CDN+"rzktjw6ugppy1iel8esl.webp",                                                                  swatches:["#ffd54f","#c8a951"],          concern:["money","peace"] },
-  { id:133, name:"Ruby (Manik) Ring",                     price:2999,                     material:"Ruby, 18k Gold Vermeil",              category:"rings",     gemstone:"Ruby",            image:CDN+"ruby-manik-ring-4866346.jpg",                                                                swatches:["#e57373","#c8a951"],          concern:["health","love"] },
-  { id:134, name:"Tiger Eye Protection Ring",             price:1199, originalPrice:1599, material:"Tiger Eye, 925 Sterling Silver",      category:"rings",     gemstone:"Tiger Eye",       image:CDN+"tiger-eye-ring-7930048.jpg",                                           badge:"SALE",        savePercent:25, swatches:["#8b6914","#c8c8c8"],          concern:["protection","money"] },
-  { id:135, name:"Blue Sapphire (Neelam) Ring",           price:3499,                     material:"Blue Sapphire, 925 Silver",           category:"rings",     gemstone:"Blue Sapphire",   image:CDN+"ya34wss0q3qk1odp6o95.webp",                                                                  swatches:["#1a237e","#c8c8c8"],          concern:["peace","money"] },
-  { id:136, name:"Clear Quartz (Sphatik) Ring",           price:1299,                     material:"Clear Quartz, 925 Silver",            category:"rings",     gemstone:"Clear Quartz",    image:CDN+"xc5mbmfae3otxdcosgfx.webp",                                                                  swatches:["#f5f5f5","#c8c8c8"],          concern:["peace","health"] },
-  { id:137, name:"Carnelian Confidence Ring",             price:1099,                     material:"Carnelian, 925 Silver",               category:"rings",     gemstone:"Carnelian",       image:CDN+"pq9smnzote9djji9fw9v.webp",                                            badge:"NEW",                         swatches:["#e57373","#c8c8c8"],          concern:["health"],                  isNew:true },
-  { id:138, name:"Evil Eye Protection Ring",              price:1199, originalPrice:1599, material:"Evil Eye Enamel, 925 Silver",         category:"rings",     gemstone:"Evil Eye",        image:CDN+"evil-eye-ring-1968693.webp",                                           badge:"SALE",        savePercent:25, swatches:["#4fc3f7","#c8c8c8"],          concern:["protection"] },
-  { id:139, name:"Red Coral (Moonga) Ring",               price:1999,                     material:"Red Coral, 18k Gold Vermeil",         category:"rings",     gemstone:"Red Coral",       image:CDN+"red-coral-moonga-ring-8737557.webp",                                   badge:"NEW",                         swatches:["#e57373","#c8a951"],          concern:["health","protection"],     isNew:true },
-  { id:140, name:"Pearl (Moti) Ring",                     price:1599,                     material:"Pearl, 925 Sterling Silver",          category:"rings",     gemstone:"Pearl",           image:CDN+"pearl-ring-1338536.webp",                                                                    swatches:["#f5f5f5","#c8c8c8"],          concern:["peace","love"] },
-  { id:141, name:"Amber Healing Ring",                    price:1499,                     material:"Amber, 925 Sterling Silver",          category:"rings",     gemstone:"Amber",           image:CDN+"amber-ring-1906545.jpg",                                               badge:"NEW",                         swatches:["#c8a951","#e8a951"],          concern:["health"],                  isNew:true },
-  { id:142, name:"Malachite Transformation Ring",         price:1499, originalPrice:1999, material:"Malachite, 925 Silver",               category:"rings",     gemstone:"Malachite",       image:CDN+"malachite-ring-4810301.jpg",                                           badge:"SALE",        savePercent:25, swatches:["#2e7d32","#81c784"],          concern:["protection","health"] },
-  { id:143, name:"Labradorite Magic Ring",                price:1799,                     material:"Labradorite, 925 Sterling Silver",    category:"rings",     gemstone:"Labradorite",     image:CDN+"plwuom2t02yd6qcm5ljn.webp",                                            badge:"NEW",                         swatches:["#7986cb","#4fc3f7"],          concern:["protection","peace"],      isNew:true },
-  { id:144, name:"Lapis Lazuli Wisdom Ring",              price:1799,                     material:"Lapis Lazuli, 925 Silver",            category:"rings",     gemstone:"Lapis Lazuli",    image:CDN+"a9jdhrjqnfaloezerma9.webp",                                                                  swatches:["#1a237e","#c8c8c8"],          concern:["peace","money"] },
-  { id:145, name:"Cats Eye (Lehsunia) Ring",              price:1999,                     material:"Cats Eye, 925 Sterling Silver",       category:"rings",     gemstone:"Cats Eye",        image:CDN+"cats-eye-lehsunia-ring-3838963.webp",                                                        swatches:["#8b6914","#c8a951"],          concern:["protection","money"] },
-  { id:146, name:"Smoky Quartz Grounding Ring",           price:1299,                     material:"Smoky Quartz, 925 Silver",            category:"rings",     gemstone:"Smoky Quartz",    image:CDN+"rzvddzqsnh9haf10hqd5.webp",                                                                  swatches:["#757575","#212121"],          concern:["peace","protection"] },
-  { id:147, name:"Black Obsidian Truth Ring",             price:1199, originalPrice:1649, material:"Black Obsidian, Sterling Silver",     category:"rings",     gemstone:"Black Obsidian",  image:CDN+"black-obsidian-ring-5351496.webp",                                     badge:"SALE",        savePercent:28, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:148, name:"Jade Prosperity Ring",                  price:1499,                     material:"Jade, 925 Sterling Silver",           category:"rings",     gemstone:"Jade",            image:CDN+"jade-ring-7990240.webp",                                                                     swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
-
-  // ─── NECKLACES & MALA (149–170) ──────────────────────────────────────────────
-  { id:149, name:"5 Mukhi Rudraksha Mala",                price:1599,                     material:"5 Mukhi Rudraksha, 108 Beads",        category:"necklaces", gemstone:"Rudraksha",       image:CDN+"shiv-raksha-rudraksha-set-1513284.webp",                               badge:"BEST SELLER",                 swatches:["#8b4513"],                    concern:["peace","protection"],      isBestSeller:true },
-  { id:150, name:"7 Chakra Mala",                         price:1799, originalPrice:2399, material:"7 Chakra Gemstones, 108 Beads",       category:"necklaces", gemstone:"Multi-stone",     image:CDN+"7-chakra-gemstone-mala-7913405.jpg",                                   badge:"SALE",        savePercent:25, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"], concern:["love","peace","health","money","protection"] },
-  { id:151, name:"Amethyst Mala",                         price:1799,                     material:"Amethyst, 108 Beads, Tassel",         category:"necklaces", gemstone:"Amethyst",        image:CDN+"amethyst-mala-3848985.jpg",                                            badge:"BEST SELLER",                 swatches:["#9c6fc4"],                    concern:["peace","love"],            isBestSeller:true },
-  { id:152, name:"Amethyst Crystal Necklace",             price:1499, originalPrice:1999, material:"Amethyst, 925 Sterling Silver Chain", category:"necklaces", gemstone:"Amethyst",        image:CDN+"amethyst-necklace-1836515.webp",                                       badge:"SALE",        savePercent:25, swatches:["#9c6fc4","#c8c8c8"],          concern:["peace","love"] },
-  { id:153, name:"Black Spinel Necklace",                 price:2099, originalPrice:2999, material:"Black Spinel, 925 Silver",            category:"necklaces", gemstone:"Black Spinel",    image:CDN+"black-spinel-necklace-9748996.webp",                                   badge:"SALE",        savePercent:30, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:154, name:"Black Tourmaline Mala",                 price:1999, originalPrice:2799, material:"Black Tourmaline, 108 Beads",         category:"necklaces", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-mala-1057128.jpg",                                   badge:"SALE",        savePercent:29, swatches:["#212121"],                    concern:["protection"] },
-  { id:155, name:"Black Tourmaline Necklace",             price:1599,                     material:"Black Tourmaline, 925 Silver Chain",  category:"necklaces", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-necklace-9980529.webp",                                                     swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:156, name:"Citrine Mala",                          price:1899, originalPrice:2499, material:"Citrine, 108 Beads, Gold Tassel",     category:"necklaces", gemstone:"Citrine",         image:CDN+"citrine-mala-8088036.jpg",                                             badge:"SALE",        savePercent:24, swatches:["#ffd54f","#c8a951"],          concern:["money"] },
-  { id:157, name:"Citrine Beaded Necklace",               price:1899, originalPrice:2699, material:"Citrine, 18k Gold Chain",             category:"necklaces", gemstone:"Citrine",         image:CDN+"citrine-necklace-4592741.webp",                                        badge:"SALE",        savePercent:29, swatches:["#ffd54f","#c8a951"],          concern:["money"] },
-  { id:158, name:"Clear Quartz & Rudraksha Mala",         price:1799,                     material:"Clear Quartz + Rudraksha, 108 Beads", category:"necklaces", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-and-rudraksha-mala-3351125.jpg",                                                swatches:["#f5f5f5","#8b4513"],          concern:["peace","health"] },
-  { id:159, name:"Clear Quartz (Sphatik) Mala",           price:1599,                     material:"Clear Quartz, 108 Beads",             category:"necklaces", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-sphatik-mala-6234267.jpg",                                badge:"BEST SELLER",                 swatches:["#f5f5f5"],                    concern:["peace","health"],          isBestSeller:true },
-  { id:160, name:"Custom Crystal Mala",                   price:2499,                     material:"Your Choice of Gemstones, 108 Beads", category:"necklaces", gemstone:"Multi-stone",     image:CDN+"customise-your-mala-5159302.jpg",                                      badge:"NEW",                         swatches:["#e57373","#ffd54f","#4fc3f7","#9c6fc4"],concern:["love","peace","health","money"], isNew:true },
-  { id:161, name:"Garnet & Green Onyx Necklace",          price:2299, originalPrice:2999, material:"Garnet, Green Onyx, 18k Gold Vermeil",category:"necklaces", gemstone:"Garnet",          image:CDN+"garnet-and-green-onyx-necklace-1998208.webp",                          badge:"SALE",        savePercent:23, swatches:["#e57373","#81c784","#c8a951"],concern:["health","love"] },
-  { id:162, name:"Rose Quartz Love Mala",                 price:1699,                     material:"Rose Quartz, 108 Beads, Pink Tassel", category:"necklaces", gemstone:"Rose Quartz",     image:CDN+"rose-quartz-bracelet-6171779.webp",                                    badge:"NEW",                         swatches:["#f48fb1"],                    concern:["love"],                    isNew:true },
-  { id:163, name:"Labradorite Magic Necklace",            price:1999,                     material:"Labradorite, 925 Sterling Silver",    category:"necklaces", gemstone:"Labradorite",     image:CDN+"labradorite-bracelet-4521613.webp",                                    badge:"NEW",                         swatches:["#7986cb","#4fc3f7"],          concern:["protection","peace"],      isNew:true },
-  { id:164, name:"Turquoise Protection Necklace",         price:1799,                     material:"Turquoise, Oxidised Silver Chain",    category:"necklaces", gemstone:"Turquoise",       image:CDN+"turquoise-bracelet-firoza-4945301.webp",                               badge:"NEW",                         swatches:["#4db6ac","#757575"],          concern:["protection","health"],     isNew:true },
-  { id:165, name:"Moonstone Divine Feminine Mala",        price:2099,                     material:"Moonstone, 108 Beads, Silver Tassel", category:"necklaces", gemstone:"Moonstone",       image:CDN+"moonstone-bracelet-2352141.webp",                                      badge:"NEW",                         swatches:["#e8eaf6","#c8c8c8"],          concern:["love","peace"],            isNew:true },
-  { id:166, name:"Lapis Lazuli Wisdom Necklace",          price:1999,                     material:"Lapis Lazuli, 18k Gold Vermeil Chain",category:"necklaces", gemstone:"Lapis Lazuli",    image:CDN+"lapis-lazuli-bracelet-6597959.webp",                                   badge:"NEW",                         swatches:["#1a237e","#c8a951"],          concern:["peace","money"],           isNew:true },
-  { id:167, name:"Pyrite Abundance Mala",                 price:1799, originalPrice:2299, material:"Pyrite, 108 Beads, Gold Tassel",      category:"necklaces", gemstone:"Pyrite",          image:CDN+"pyrite-bracelet-5264057.webp",                                         badge:"SALE",        savePercent:22, swatches:["#c8a951"],                    concern:["money"] },
-  { id:168, name:"Tiger Eye Power Necklace",              price:1599,                     material:"Tiger Eye, 925 Sterling Silver",      category:"necklaces", gemstone:"Tiger Eye",       image:CDN+"tiger-eye-bracelet-7658701.webp",                                                            swatches:["#8b6914","#c8a951"],          concern:["protection","money"] },
-  { id:169, name:"Jade Harmony Mala",                     price:1999,                     material:"Jade, 108 Beads, Green Tassel",       category:"necklaces", gemstone:"Jade",            image:CDN+"jade-bracelet-3015072.webp",                                           badge:"NEW",                         swatches:["#81c784"],                    concern:["money","health"],          isNew:true },
-  { id:170, name:"Carnelian Vitality Necklace",           price:1499,                     material:"Carnelian, 925 Sterling Silver",      category:"necklaces", gemstone:"Carnelian",       image:CDN+"carnelian-bracelet-6862093.webp",                                                            swatches:["#e57373","#c8a951"],          concern:["health"] },
-
-  // ─── EAR STUDS & ANKLETS (171–188) ───────────────────────────────────────────
-  { id:171, name:"Amethyst Hanging Earrings",             price:999,                      material:"Amethyst, 925 Sterling Silver",       category:"ear-studs", gemstone:"Amethyst",        image:CDN+"amethyst-hanging-earring-4057099.webp",                                badge:"NEW",                         swatches:["#9c6fc4","#c8c8c8"],          concern:["peace"],                   isNew:true },
-  { id:172, name:"Amethyst Stud Earrings",                price:899,                      material:"Amethyst, 925 Sterling Silver",       category:"ear-studs", gemstone:"Amethyst",        image:CDN+"amethyst-studs-5939351.jpg",                                           badge:"NEW",                         swatches:["#9c6fc4","#c8c8c8"],          concern:["peace"],                   isNew:true },
-  { id:173, name:"Black Spinel Anklet",                   price:799,  originalPrice:999,  material:"Black Spinel, Silver Thread",         category:"ear-studs", gemstone:"Black Spinel",    image:CDN+"black-spinel-anklet-1474278.jpg",                                      badge:"SALE",        savePercent:20, swatches:["#212121","#c8c8c8"],          concern:["protection"] },
-  { id:174, name:"Black Tourmaline Evil Eye Anklet",      price:799,                      material:"Black Tourmaline + Evil Eye Charm",   category:"ear-studs", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-anklet-with-evil-eye-charm-4862682.webp",             badge:"BEST SELLER",                 swatches:["#212121","#4fc3f7"],          concern:["protection"],              isBestSeller:true },
-  { id:175, name:"Carnelian Stud Earrings",               price:799,                      material:"Carnelian, 925 Sterling Silver",      category:"ear-studs", gemstone:"Carnelian",       image:CDN+"carnelian-studs-3703334.jpg",                                                                swatches:["#e57373","#c8c8c8"],          concern:["health"] },
-  { id:176, name:"Citrine Drop Earrings",                 price:999,                      material:"Citrine, 18k Gold Plated",            category:"ear-studs", gemstone:"Citrine",         image:CDN+"citrine-hanging-earring-2789390.jpg",                                  badge:"NEW",                         swatches:["#ffd54f","#c8a951"],          concern:["money"],                   isNew:true },
-  { id:177, name:"Citrine Stud Earrings",                 price:799,                      material:"Citrine, 925 Sterling Silver",        category:"ear-studs", gemstone:"Citrine",         image:CDN+"citrine-studs-1470363.jpg",                                                                  swatches:["#ffd54f","#c8c8c8"],          concern:["money"] },
-  { id:178, name:"Clear Quartz Healing Anklet",           price:699,  originalPrice:899,  material:"Clear Quartz, Silver Thread",         category:"ear-studs", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-anklet-6327424.webp",                                     badge:"SALE",        savePercent:22, swatches:["#f5f5f5","#c8c8c8"],          concern:["peace","health"] },
-  { id:179, name:"Dhan Yog Wealth Anklet",                price:799,                      material:"6 Crystal Wealth Blend, Thread",      category:"ear-studs", gemstone:"Multi-stone",     image:CDN+"dhan-yog-anklet-9058454.webp",                                         badge:"NEW",                         swatches:["#c8a951","#ffd54f"],          concern:["money"],                   isNew:true },
-  { id:180, name:"Garnet Passion Anklet",                 price:899,                      material:"Garnet, Silver Thread",               category:"ear-studs", gemstone:"Garnet",          image:CDN+"garnet-anklet-1079883.webp",                                                                 swatches:["#e57373"],                    concern:["health","love"] },
-  { id:181, name:"Rose Quartz Drop Earrings",             price:999,                      material:"Rose Quartz, Rose Gold Plated",       category:"ear-studs", gemstone:"Rose Quartz",     image:CDN+"rose-quartz-pendant-1498015.webp",                                     badge:"NEW",                         swatches:["#f48fb1"],                    concern:["love"],                    isNew:true },
-  { id:182, name:"Moonstone Stud Earrings",               price:1099,                     material:"Moonstone, 18k Gold Vermeil",         category:"ear-studs", gemstone:"Moonstone",       image:CDN+"moonstone-pendant-mini-9307706.webp",                                  badge:"NEW",                         swatches:["#e8eaf6","#c8a951"],          concern:["love","peace"],            isNew:true },
-  { id:183, name:"Tiger Eye Protection Studs",            price:799,                      material:"Tiger Eye, 925 Sterling Silver",      category:"ear-studs", gemstone:"Tiger Eye",       image:CDN+"tiger-eye-pendant-1581389.webp",                                                             swatches:["#8b6914","#c8c8c8"],          concern:["protection"] },
-  { id:184, name:"Turquoise Boho Anklet",                 price:699,                      material:"Turquoise Beads, Silver Thread",      category:"ear-studs", gemstone:"Turquoise",       image:CDN+"turquoise-bracelet-firoza-4945301.webp",                                                     swatches:["#4db6ac","#c8c8c8"],          concern:["protection","health"] },
-  { id:185, name:"Pyrite Abundance Anklet",               price:799,                      material:"Pyrite Beads, Gold Thread",           category:"ear-studs", gemstone:"Pyrite",          image:CDN+"pyrite-bracelet-5264057.webp",                                         badge:"NEW",                         swatches:["#c8a951"],                    concern:["money"],                   isNew:true },
-  { id:186, name:"Lapis Lazuli Stud Earrings",            price:999,                      material:"Lapis Lazuli, 925 Silver",            category:"ear-studs", gemstone:"Lapis Lazuli",    image:CDN+"lapis-lazuli-pendant-8522852.webp",                                    badge:"NEW",                         swatches:["#1a237e","#c8c8c8"],          concern:["peace"],                   isNew:true },
-  { id:187, name:"7 Chakra Healing Anklet",               price:799,  originalPrice:999,  material:"7 Crystal Beads, Elastic Thread",    category:"ear-studs", gemstone:"Multi-stone",     image:CDN+"7-chakra-bracelet-7825780.webp",                                       badge:"SALE",        savePercent:20, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"],concern:["love","peace","health","money","protection"] },
-  { id:188, name:"Green Aventurine Luck Studs",           price:799,                      material:"Green Aventurine, 925 Silver",        category:"ear-studs", gemstone:"Green Aventurine",image:CDN+"green-aventurine-pendant-1890616.webp",                                                      swatches:["#81c784","#c8c8c8"],          concern:["money","health"] },
-
-  // ─── GEMSTONES & RAW CRYSTALS (189–222) ──────────────────────────────────────
-  { id:189, name:"Raw Pyrite Cluster",                    price:899,                      material:"Natural Raw Pyrite, Peru Origin",     category:"gemstones", gemstone:"Pyrite",          image:CDN+"business-success-combo-4210605.jpg",                                   badge:"BEST SELLER",                 swatches:["#c8a951"],                    concern:["money"],                   isBestSeller:true },
-  { id:190, name:"Raw Black Tourmaline Cluster",          price:699,                      material:"Natural Black Tourmaline",            category:"gemstones", gemstone:"Black Tourmaline",image:CDN+"raw-black-tourmaline-cluster-1470946.webp",                                                   swatches:["#212121"],                    concern:["protection"] },
-  { id:191, name:"Raw Rose Quartz Cluster",               price:799,                      material:"Natural Rose Quartz, Brazil Origin",  category:"gemstones", gemstone:"Rose Quartz",     image:CDN+"raw-rose-quartz-cluster-6984920.webp",                                 badge:"BEST SELLER",                 swatches:["#f48fb1"],                    concern:["love"],                    isBestSeller:true },
-  { id:192, name:"Raw Amethyst Cluster",                  price:699,                      material:"Natural Raw Amethyst, Uruguay",       category:"gemstones", gemstone:"Amethyst",        image:CDN+"raw-amethyst-cluster-5524600.webp",                                                          swatches:["#9c6fc4"],                    concern:["peace"] },
-  { id:193, name:"Raw Citrine Cluster",                   price:799,                      material:"Natural Citrine Crystal",             category:"gemstones", gemstone:"Citrine",         image:CDN+"raw-citrine-cluster-6490975.webp",                                     badge:"NEW",                         swatches:["#ffd54f"],                    concern:["money"],                   isNew:true },
-  { id:194, name:"Raw Clear Quartz Cluster",              price:599,                      material:"Natural Clear Quartz, Brazil",        category:"gemstones", gemstone:"Clear Quartz",    image:CDN+"raw-clear-quartz-cluster-4037163.webp",                                                      swatches:["#f5f5f5"],                    concern:["peace","health"] },
-  { id:195, name:"Raw Carnelian Cluster",                 price:599,                      material:"Natural Raw Carnelian",               category:"gemstones", gemstone:"Carnelian",       image:CDN+"raw-carnelian-cluster-5784354.webp",                                                         swatches:["#e57373"],                    concern:["health"] },
-  { id:196, name:"Raw Multi-Fluorite Cluster",            price:699,                      material:"Natural Multi-Fluorite Crystal",      category:"gemstones", gemstone:"Fluorite",        image:CDN+"raw-multiflourite-cluster-5303566.webp",                                                     swatches:["#ba68c8","#4fc3f7","#81c784"],concern:["peace"] },
-  { id:197, name:"Raw Moonstone Cluster",                 price:799,                      material:"Natural Raw Moonstone",               category:"gemstones", gemstone:"Moonstone",       image:CDN+"raw-moonstone-cluster-4962016.webp",                                   badge:"NEW",                         swatches:["#e8eaf6"],                    concern:["love","peace"],            isNew:true },
-  { id:198, name:"Raw Tiger Eye Cluster",                 price:699,                      material:"Natural Raw Tiger Eye",               category:"gemstones", gemstone:"Tiger Eye",       image:CDN+"raw-tiger-eye-cluster-5107694.webp",                                                         swatches:["#8b6914"],                    concern:["protection","money"] },
-  { id:199, name:"Pyrite Heart (Peru Origin)",            price:1499,                     material:"Pyrite Heart Crystal, Peru",          category:"gemstones", gemstone:"Pyrite",          image:CDN+"pyrite-heart-peru-origin-7460343.webp",                                badge:"NEW",                         swatches:["#c8a951"],                    concern:["money"],                   isNew:true },
-  { id:200, name:"Rose Quartz Swan Pair",                 price:1299,                     material:"Rose Quartz Carved Swans",            category:"gemstones", gemstone:"Rose Quartz",     image:CDN+"rose-quartz-swan-love-pair-6787599.webp",                              badge:"BEST SELLER",                 swatches:["#f48fb1"],                    concern:["love"],                    isBestSeller:true },
-  { id:201, name:"7 Chakra Crystal Tree",                 price:1799, originalPrice:2299, material:"7 Natural Gemstones, Wire Tree",      category:"gemstones", gemstone:"Multi-stone",     image:CDN+"7-chakra-crystal-tree-1684722.jpg",                                    badge:"SALE",        savePercent:22, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"],concern:["love","peace","health","money","protection"] },
-  { id:202, name:"7 Chakra Harmony Crystal Kit",         price:1499, originalPrice:1999, material:"7 Natural Gemstones, Gift Box",       category:"gemstones", gemstone:"Multi-stone",     image:CDN+"7-chakra-harmony-kit-7631985.webp",                                    badge:"SALE",        savePercent:25, swatches:["#e57373","#ffd54f","#81c784","#4fc3f7","#ba68c8"],concern:["love","peace","health","money","protection"] },
-  { id:203, name:"7 Chakra Pyramid",                      price:999,                      material:"7 Chakra Gemstones, Crystal Pyramid", category:"gemstones", gemstone:"Multi-stone",     image:CDN+"7-chakra-pyramid-8877555.jpg",                                         badge:"NEW",                         swatches:["#e57373","#ffd54f","#4fc3f7","#ba68c8"],concern:["peace","protection"],  isNew:true },
-  { id:204, name:"Crystal Abundance Kit",                 price:1499,                     material:"Wealth Crystal Set, Gift Box",        category:"gemstones", gemstone:"Multi-stone",     image:CDN+"abundance-kit-4551692.jpg",                                            badge:"NEW",                         swatches:["#c8a951","#ffd54f"],          concern:["money"],                   isNew:true },
-  { id:205, name:"Amethyst Crystal Tree",                 price:1599,                     material:"Amethyst, Wire Tree on Crystal Base", category:"gemstones", gemstone:"Amethyst",        image:CDN+"amethyst-crystal-tree-7080491.webp",                                                         swatches:["#9c6fc4"],                    concern:["peace","love"] },
-  { id:206, name:"Amethyst Tumble Stones Set",            price:499,  originalPrice:699,  material:"Natural Amethyst Tumbles (5 Pcs)",    category:"gemstones", gemstone:"Amethyst",        image:CDN+"health-happiness-stone-1739329.webp",                                  badge:"SALE",        savePercent:28, swatches:["#9c6fc4"],                    concern:["peace"] },
-  { id:207, name:"Aquamarine Crystal Tree",               price:1799,                     material:"Aquamarine, Wire Tree on Crystal",    category:"gemstones", gemstone:"Aquamarine",      image:CDN+"aquamarine-crystal-tree-5435190.webp",                                 badge:"NEW",                         swatches:["#80deea"],                    concern:["peace","health"],          isNew:true },
-  { id:208, name:"Black Tourmaline & Selenite Hanging",   price:1299,                     material:"Black Tourmaline + Selenite Cubes",   category:"gemstones", gemstone:"Multi-stone",     image:CDN+"aura-grandeur-gift-set-9340032.png",                                                         swatches:["#212121","#f5f5f5"],          concern:["protection","peace"] },
-  { id:209, name:"Black Tourmaline Crystal Tree",         price:1599,                     material:"Black Tourmaline, Wire Tree",         category:"gemstones", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-crystal-tree-2356594.webp",                                                  swatches:["#212121"],                    concern:["protection"] },
-  { id:210, name:"Black Tourmaline Pyramid",              price:999,                      material:"Black Tourmaline, Crystal Pyramid",   category:"gemstones", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-pyramid-9565590.webp",                                badge:"NEW",                         swatches:["#212121"],                    concern:["protection"],              isNew:true },
-  { id:211, name:"Black Tourmaline Tumble Stones",        price:399,  originalPrice:549,  material:"Natural Black Tourmaline Tumbles",    category:"gemstones", gemstone:"Black Tourmaline",image:CDN+"black-tourmaline-tumble-stones-2568956.webp",                          badge:"SALE",        savePercent:27, swatches:["#212121"],                    concern:["protection"] },
-  { id:212, name:"Carnelian Crystal Tree",                price:1499,                     material:"Carnelian, Wire Tree on Crystal",     category:"gemstones", gemstone:"Carnelian",       image:CDN+"carnelian-crystal-tree-6307428.webp",                                                        swatches:["#e57373"],                    concern:["health"] },
-  { id:213, name:"Citrine Crystal Tree",                  price:1699, originalPrice:2199, material:"Citrine, Wire Tree on Crystal Base",  category:"gemstones", gemstone:"Citrine",         image:CDN+"citrine-crystal-tree-6945079.webp",                                    badge:"SALE",        savePercent:22, swatches:["#ffd54f"],                    concern:["money"] },
-  { id:214, name:"Citrine Tumble Stones Set",             price:499,  originalPrice:699,  material:"Natural Citrine Tumbles (5 Pcs)",     category:"gemstones", gemstone:"Citrine",         image:CDN+"citrine-tumble-stones-3238494.webp",                                   badge:"SALE",        savePercent:28, swatches:["#ffd54f"],                    concern:["money"] },
-  { id:215, name:"Clear Quartz Crystal Tree (Sphatik)",   price:1599,                     material:"Clear Quartz, Wire Tree on Crystal",  category:"gemstones", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-crystal-tree-1131799.webp",                               badge:"BEST SELLER",                 swatches:["#f5f5f5"],                    concern:["peace","health"],          isBestSeller:true },
-  { id:216, name:"Clear Quartz Pyramid (Sphatik)",        price:899,                      material:"Clear Quartz, Crystal Pyramid",       category:"gemstones", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-sphatik-pyramid-7039309.jpg",                                                   swatches:["#f5f5f5"],                    concern:["peace","health"] },
-  { id:217, name:"Clear Quartz Tumble Stones",            price:399,  originalPrice:549,  material:"Natural Clear Quartz Tumbles (5 Pcs)",category:"gemstones", gemstone:"Clear Quartz",    image:CDN+"clear-quartz-tumble-stones-4509203.png",                               badge:"SALE",        savePercent:27, swatches:["#f5f5f5"],                    concern:["peace","health"] },
-  { id:218, name:"Crystal Concentration Kit",             price:1299, originalPrice:1699, material:"Focus Crystal Set, Gift Box",         category:"gemstones", gemstone:"Multi-stone",     image:CDN+"concentration-kit-2480262.jpg",                                        badge:"SALE",        savePercent:23, swatches:["#4fc3f7","#f5f5f5"],          concern:["peace","health"] },
-  { id:219, name:"Crystal Healing Wands Set",             price:1499,                     material:"Assorted Crystal Wands, Gift Box",    category:"gemstones", gemstone:"Multi-stone",     image:CDN+"crystal-wands-3404639.webp",                                           badge:"NEW",                         swatches:["#9c6fc4","#ffd54f","#f48fb1"],concern:["peace","health","love"],     isNew:true },
-  { id:220, name:"Dhan Yog Crystal Fish (Vastu)",         price:1599,                     material:"Pyrite Crystal Fish, Vastu Idol",     category:"gemstones", gemstone:"Pyrite",          image:CDN+"DSC_6362.webp",                                                        badge:"NEW",                         swatches:["#c8a951"],                    concern:["money"],                   isNew:true },
-  { id:221, name:"Dhan Yog Energy Pyramid",               price:1999,                     material:"Crystal Pyramid on Selenite Base",    category:"gemstones", gemstone:"Multi-stone",     image:CDN+"IMG_8369.webp",                                                        badge:"BEST SELLER",                 swatches:["#c8a951","#f5f5f5"],          concern:["money","peace"],           isBestSeller:true },
-  { id:222, name:"Crystal Cleansing & Charging Kit",      price:1299, originalPrice:1699, material:"Selenite Plate + White Sage Bundle",  category:"gemstones", gemstone:"Selenite",        image:CDN+"cleansing-charging-kit-7606796.webp",                                  badge:"SALE",        savePercent:23, swatches:["#f5f5f5"],                    concern:["peace","health"] },
+  {
+    "id": 1,
+    "name": "Amazonite Classic Harmony Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Natural Amazonite, Durable Stretch Cord",
+    "category": "bracelets",
+    "gemstone": "Amazonite",
+    "image": "/products/amazonite-classic/image-1.webp",
+    "images": [
+      "/products/amazonite-classic/image-1.webp",
+      "/products/amazonite-classic/image-2.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#7ec8b8",
+      "#a8dadc"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Virgo",
+      "Aries"
+    ],
+    "chakra": "Throat & Heart Chakra",
+    "description": "Handcrafted with authentic soothing Amazonite beads known as the stone of courage and truth. Dissipates negative energy and calms the nervous system."
+  },
+  {
+    "id": 2,
+    "name": "Amazonite 10MM Power Energy Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Grade-A Amazonite (10mm), High-Tensile Elastic",
+    "category": "bracelets",
+    "gemstone": "Amazonite",
+    "image": "/products/amazonite-10mm/image-1.webp",
+    "images": [
+      "/products/amazonite-10mm/image-1.webp",
+      "/products/amazonite-10mm/image-2.webp",
+      "/products/amazonite-10mm/image-3.webp",
+      "/products/amazonite-10mm/image-4.webp",
+      "/products/amazonite-10mm/image-5.webp",
+      "/products/amazonite-10mm/image-6.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 22,
+    "swatches": [
+      "#7ec8b8",
+      "#457b9d"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Virgo"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Bold 10mm Amazonite beads provide a strong energetic shield against electromagnetic stress while enhancing articulate self-expression."
+  },
+  {
+    "id": 3,
+    "name": "Amazonite 8MM Expression & Truth Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Selected Natural Amazonite (8mm), Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Amazonite",
+    "image": "/products/amazonite-8mm/image-1.webp",
+    "images": [
+      "/products/amazonite-8mm/image-1.webp",
+      "/products/amazonite-8mm/image-2.webp",
+      "/products/amazonite-8mm/image-3.webp",
+      "/products/amazonite-8mm/image-4.webp",
+      "/products/amazonite-8mm/image-5.webp",
+      "/products/amazonite-8mm/image-6.webp",
+      "/products/amazonite-8mm/image-7.webp"
+    ],
+    "badge": null,
+    "savePercent": 25,
+    "swatches": [
+      "#7ec8b8",
+      "#a8dadc"
+    ],
+    "concern": [
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Virgo",
+      "Aries"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Classic 8mm polished Amazonite beads encourage peaceful dialogue, inner balance, and deep emotional clarity."
+  },
+  {
+    "id": 4,
+    "name": "Spiritual Amethyst Meditation Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Natural Deep Purple Amethyst, Stretch Cord",
+    "category": "bracelets",
+    "gemstone": "Amethyst",
+    "image": "/products/amethyst-classic/image-1.webp",
+    "images": [
+      "/products/amethyst-classic/image-1.webp",
+      "/products/amethyst-classic/image-2.webp",
+      "/products/amethyst-classic/image-3.webp",
+      "/products/amethyst-classic/image-4.webp",
+      "/products/amethyst-classic/image-5.webp",
+      "/products/amethyst-classic/image-6.webp",
+      "/products/amethyst-classic/image-7.webp",
+      "/products/amethyst-classic/image-8.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#7b2cbf",
+      "#9d4edd"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aquarius",
+      "Pisces"
+    ],
+    "chakra": "Crown & Third Eye Chakra",
+    "description": "Consecrated with Vedic mantras under the full moon to awaken spiritual wisdom, relieve insomnia, and calm restless thoughts."
+  },
+  {
+    "id": 5,
+    "name": "Royal Amethyst 10MM Aura Cleansing Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Deep Purple Brazilian Amethyst (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Amethyst",
+    "image": "/products/amethyst-10mm/image-1.webp",
+    "images": [
+      "/products/amethyst-10mm/image-1.webp",
+      "/products/amethyst-10mm/image-2.webp",
+      "/products/amethyst-10mm/image-3.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#5a189a",
+      "#7b2cbf"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Aquarius",
+      "Pisces"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Substantial 10mm Amethyst spheres emit high-frequency spiritual vibrations, providing an energetic cocoon against negative vibes."
+  },
+  {
+    "id": 6,
+    "name": "Pure Amethyst 8MM Stress Relief Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Natural Amethyst Beads (8mm), Stretch String",
+    "category": "bracelets",
+    "gemstone": "Amethyst",
+    "image": "/products/amethyst-8mm/image-1.webp",
+    "images": [
+      "/products/amethyst-8mm/image-1.webp",
+      "/products/amethyst-8mm/image-2.webp",
+      "/products/amethyst-8mm/image-3.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 27,
+    "swatches": [
+      "#7b2cbf",
+      "#c77dff"
+    ],
+    "concern": [
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aquarius",
+      "Pisces"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Ideal everyday spiritual companion for daily mindfulness, anxiety relief, and deep restorative sleep."
+  },
+  {
+    "id": 7,
+    "name": "Anti-Anger & Self-Love Healing Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Rose Quartz, Howlite & Rhodonite Synergy Blend",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/anti-anger-self-love/image-1.webp",
+    "images": [
+      "/products/anti-anger-self-love/image-1.webp",
+      "/products/anti-anger-self-love/image-2.webp",
+      "/products/anti-anger-self-love/image-3.webp",
+      "/products/anti-anger-self-love/image-4.webp",
+      "/products/anti-anger-self-love/image-5.webp",
+      "/products/anti-anger-self-love/image-6.webp",
+      "/products/anti-anger-self-love/image-7.webp",
+      "/products/anti-anger-self-love/image-8.webp",
+      "/products/anti-anger-self-love/image-9.webp",
+      "/products/anti-anger-self-love/image-10.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#f48fb1",
+      "#f5f5f5",
+      "#c2185b"
+    ],
+    "concern": [
+      "love",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Cancer",
+      "Libra"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Formulated specifically to dissolve bottled-up frustration, emotional volatility, and resentment, replacing them with tender self-acceptance."
+  },
+  {
+    "id": 8,
+    "name": "Rare Azurite 8MM Third Eye Awakening Bracelet",
+    "price": 1799,
+    "originalPrice": 2399,
+    "material": "Natural Deep Blue Azurite Beads (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Azurite",
+    "image": "/products/azurite-8mm/image-1.webp",
+    "images": [
+      "/products/azurite-8mm/image-1.webp",
+      "/products/azurite-8mm/image-2.webp",
+      "/products/azurite-8mm/image-3.webp",
+      "/products/azurite-8mm/image-4.webp",
+      "/products/azurite-8mm/image-5.webp",
+      "/products/azurite-8mm/image-6.webp",
+      "/products/azurite-8mm/image-7.webp",
+      "/products/azurite-8mm/image-8.webp",
+      "/products/azurite-8mm/image-9.webp",
+      "/products/azurite-8mm/image-10.webp",
+      "/products/azurite-8mm/image-11.webp",
+      "/products/azurite-8mm/image-12.webp",
+      "/products/azurite-8mm/image-13.webp",
+      "/products/azurite-8mm/image-14.webp",
+      "/products/azurite-8mm/image-15.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#1d3557",
+      "#457b9d"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Sagittarius",
+      "Aquarius"
+    ],
+    "chakra": "Third Eye Chakra",
+    "description": "Often called the Stone of Heaven, rare Azurite clears psychic blockages, unlocks intuitive sight, and enhances meditation depth."
+  },
+  {
+    "id": 9,
+    "name": "Black Tourmaline Root Defense Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Raw Black Tourmaline Polished Spheres, Elastic",
+    "category": "bracelets",
+    "gemstone": "Black Tourmaline",
+    "image": "/products/black-tourmaline-classic/image-1.webp",
+    "images": [
+      "/products/black-tourmaline-classic/image-1.webp",
+      "/products/black-tourmaline-classic/image-2.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#1a1a1a",
+      "#333333"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn",
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "The ultimate psychic shield. Grounds spiritual energy while neutralizing environmental toxins, negative thoughts, and psychic vampirism."
+  },
+  {
+    "id": 10,
+    "name": "Black Tourmaline 10MM Aura Shield Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Dense Black Tourmaline (10mm), Heavy Duty Elastic",
+    "category": "bracelets",
+    "gemstone": "Black Tourmaline",
+    "image": "/products/black-tourmaline-10mm/image-1.webp",
+    "images": [
+      "/products/black-tourmaline-10mm/image-1.webp",
+      "/products/black-tourmaline-10mm/image-2.webp",
+      "/products/black-tourmaline-10mm/image-3.webp",
+      "/products/black-tourmaline-10mm/image-4.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 26,
+    "swatches": [
+      "#111111",
+      "#222222"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Capricorn",
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Heavyweight 10mm protection spheres establish an impenetrable energetic fortress around the bearer's aura."
+  },
+  {
+    "id": 11,
+    "name": "Black Tourmaline 8MM Psychic Protection Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Genuine Black Tourmaline (8mm), Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Black Tourmaline",
+    "image": "/products/black-tourmaline-8mm/image-1.webp",
+    "images": [
+      "/products/black-tourmaline-8mm/image-1.webp",
+      "/products/black-tourmaline-8mm/image-2.webp",
+      "/products/black-tourmaline-8mm/image-3.webp"
+    ],
+    "badge": null,
+    "savePercent": 25,
+    "swatches": [
+      "#1a1a1a"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn",
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Essential daily armor for empaths, healers, and professionals working in high-stress or emotionally dense environments."
+  },
+  {
+    "id": 12,
+    "name": "Clear Quartz (Sphatik) Master Healer Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Natural Clear Quartz Crystal (Sphatik), Elastic",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-classic/image-1.webp",
+    "images": [
+      "/products/clear-quartz-classic/image-1.webp",
+      "/products/clear-quartz-classic/image-2.webp",
+      "/products/clear-quartz-classic/image-3.webp",
+      "/products/clear-quartz-classic/image-4.webp",
+      "/products/clear-quartz-classic/image-5.webp",
+      "/products/clear-quartz-classic/image-6.webp",
+      "/products/clear-quartz-classic/image-7.webp",
+      "/products/clear-quartz-classic/image-8.webp",
+      "/products/clear-quartz-classic/image-9.webp",
+      "/products/clear-quartz-classic/image-10.webp",
+      "/products/clear-quartz-classic/image-11.webp",
+      "/products/clear-quartz-classic/image-12.webp",
+      "/products/clear-quartz-classic/image-13.webp",
+      "/products/clear-quartz-classic/image-14.webp",
+      "/products/clear-quartz-classic/image-15.webp",
+      "/products/clear-quartz-classic/image-16.webp",
+      "/products/clear-quartz-classic/image-17.webp",
+      "/products/clear-quartz-classic/image-18.webp",
+      "/products/clear-quartz-classic/image-19.webp",
+      "/products/clear-quartz-classic/image-20.webp",
+      "/products/clear-quartz-classic/image-21.webp",
+      "/products/clear-quartz-classic/image-22.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#ffffff",
+      "#e0e0e0"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "All Chakras (Crown Primary)",
+    "description": "Pure Himalayan Sphatik beads amplify spiritual intentions, clarify mental fog, and balance the bio-electromagnetic field."
+  },
+  {
+    "id": 13,
+    "name": "Clear Quartz 10MM Master Amplification Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Optical Grade Clear Quartz (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-10mm/image-1.webp",
+    "images": [
+      "/products/clear-quartz-10mm/image-1.webp",
+      "/products/clear-quartz-10mm/image-2.webp",
+      "/products/clear-quartz-10mm/image-3.webp",
+      "/products/clear-quartz-10mm/image-4.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#ffffff",
+      "#f5f5f5"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "10mm crystalline globes radiate supreme light frequency, purifying any stagnant energy in your personal sanctuary."
+  },
+  {
+    "id": 14,
+    "name": "Clear Quartz 12MM Sovereign Statement Bracelet",
+    "price": 1599,
+    "originalPrice": 2199,
+    "material": "Rare Jumbo Clear Quartz (12mm), Heavy Cord",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-12mm/image-1.webp",
+    "images": [
+      "/products/clear-quartz-12mm/image-1.webp",
+      "/products/clear-quartz-12mm/image-2.webp",
+      "/products/clear-quartz-12mm/image-3.webp",
+      "/products/clear-quartz-12mm/image-4.webp",
+      "/products/clear-quartz-12mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 27,
+    "swatches": [
+      "#ffffff"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "12mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Majestic 12mm water-clear Sphatik beads. Designed for master practitioners, energy workers, and crystal connoisseurs."
+  },
+  {
+    "id": 15,
+    "name": "Clear Quartz 8MM Divine Radiance Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Pure Sphatik Quartz Beads (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-8mm/image-1.webp",
+    "images": [
+      "/products/clear-quartz-8mm/image-1.webp",
+      "/products/clear-quartz-8mm/image-2.webp",
+      "/products/clear-quartz-8mm/image-3.webp",
+      "/products/clear-quartz-8mm/image-4.webp"
+    ],
+    "badge": null,
+    "savePercent": 27,
+    "swatches": [
+      "#ffffff"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Cooling and purifying on the wrist, harmonizing planetary imbalances and enhancing concentration."
+  },
+  {
+    "id": 16,
+    "name": "Faceted Clear Quartz Cut 10MM Diamond-Facet Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Diamond-Cut Faceted Sphatik Quartz (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-cut-10mm/image-1.webp",
+    "images": [
+      "/products/clear-quartz-cut-10mm/image-1.webp",
+      "/products/clear-quartz-cut-10mm/image-2.webp",
+      "/products/clear-quartz-cut-10mm/image-3.webp",
+      "/products/clear-quartz-cut-10mm/image-4.webp",
+      "/products/clear-quartz-cut-10mm/image-5.webp",
+      "/products/clear-quartz-cut-10mm/image-6.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#ffffff",
+      "#e0e0e0"
+    ],
+    "concern": [
+      "peace",
+      "health",
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "10mm Cut",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Precision micro-faceted 10mm Sphatik gems catch and refract sunlight into prismatic rainbows, raising physical vibration."
+  },
+  {
+    "id": 17,
+    "name": "Faceted Clear Quartz Cut 8MM Prismatic Light Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Diamond-Faceted Pure Quartz (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Clear Quartz",
+    "image": "/products/clear-quartz-cut-8mm/image-1.webp",
+    "images": [
+      "/products/clear-quartz-cut-8mm/image-1.webp",
+      "/products/clear-quartz-cut-8mm/image-2.webp",
+      "/products/clear-quartz-cut-8mm/image-3.webp",
+      "/products/clear-quartz-cut-8mm/image-4.webp",
+      "/products/clear-quartz-cut-8mm/image-5.webp",
+      "/products/clear-quartz-cut-8mm/image-6.webp",
+      "/products/clear-quartz-cut-8mm/image-7.webp",
+      "/products/clear-quartz-cut-8mm/image-8.webp",
+      "/products/clear-quartz-cut-8mm/image-9.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 24,
+    "swatches": [
+      "#ffffff",
+      "#f0f0f0"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm Cut",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Sparkling multifaceted Sphatik beads create a continuous halo of clarity, shielding your personal prana throughout the day."
+  },
+  {
+    "id": 18,
+    "name": "Sacred Carnelian Fire Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Natural Sunset Carnelian Agate, Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Carnelian",
+    "image": "/products/carnelian-classic/image-1.webp",
+    "images": [
+      "/products/carnelian-classic/image-1.webp",
+      "/products/carnelian-classic/image-2.webp",
+      "/products/carnelian-classic/image-3.webp",
+      "/products/carnelian-classic/image-4.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#d94e24",
+      "#e76f51"
+    ],
+    "concern": [
+      "health",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aries",
+      "Leo",
+      "Virgo"
+    ],
+    "chakra": "Sacral & Root Chakra",
+    "description": "Known as the Singer's Stone and ancient talisman of courage. Kindles the fire of passion, motivation, and physical stamina."
+  },
+  {
+    "id": 19,
+    "name": "Carnelian 10MM Vitality & Passion Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Fiery Orange Carnelian (10mm), High-Grade Elastic",
+    "category": "bracelets",
+    "gemstone": "Carnelian",
+    "image": "/products/carnelian-10mm/image-1.webp",
+    "images": [
+      "/products/carnelian-10mm/image-1.webp",
+      "/products/carnelian-10mm/image-2.webp",
+      "/products/carnelian-10mm/image-3.webp",
+      "/products/carnelian-10mm/image-4.webp",
+      "/products/carnelian-10mm/image-5.webp",
+      "/products/carnelian-10mm/image-6.webp",
+      "/products/carnelian-10mm/image-7.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#c1440e",
+      "#e76f51"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Aries",
+      "Leo"
+    ],
+    "chakra": "Sacral Chakra",
+    "description": "Bold 10mm Carnelian beads stimulate circulation, dispel lethargy, and instill courageous determination."
+  },
+  {
+    "id": 20,
+    "name": "Carnelian 8MM Creative Fire Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Polished Natural Carnelian (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Carnelian",
+    "image": "/products/carnelian-8mm/image-1.webp",
+    "images": [
+      "/products/carnelian-8mm/image-1.webp",
+      "/products/carnelian-8mm/image-2.webp",
+      "/products/carnelian-8mm/image-3.webp",
+      "/products/carnelian-8mm/image-4.webp",
+      "/products/carnelian-8mm/image-5.webp",
+      "/products/carnelian-8mm/image-6.webp"
+    ],
+    "badge": null,
+    "savePercent": 27,
+    "swatches": [
+      "#d94e24",
+      "#f4a261"
+    ],
+    "concern": [
+      "health",
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aries",
+      "Virgo"
+    ],
+    "chakra": "Sacral Chakra",
+    "description": "Inspires artists, entrepreneurs, and leaders with unwavering focus and creative drive."
+  },
+  {
+    "id": 21,
+    "name": "Natural Cat's Eye (Lehsunia) 8MM Ketu Aura Shield Bracelet",
+    "price": 1599,
+    "originalPrice": 2199,
+    "material": "Natural Chatoyant Chrysoberyl Cat's Eye (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Cats Eye",
+    "image": "/products/cats-eye-8mm/image-1.webp",
+    "images": [
+      "/products/cats-eye-8mm/image-1.webp",
+      "/products/cats-eye-8mm/image-2.webp",
+      "/products/cats-eye-8mm/image-3.webp",
+      "/products/cats-eye-8mm/image-4.webp",
+      "/products/cats-eye-8mm/image-5.webp",
+      "/products/cats-eye-8mm/image-6.webp",
+      "/products/cats-eye-8mm/image-7.webp",
+      "/products/cats-eye-8mm/image-8.webp",
+      "/products/cats-eye-8mm/image-9.webp",
+      "/products/cats-eye-8mm/image-10.webp",
+      "/products/cats-eye-8mm/image-11.webp",
+      "/products/cats-eye-8mm/image-12.webp",
+      "/products/cats-eye-8mm/image-13.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#a3b18a",
+      "#588157"
+    ],
+    "concern": [
+      "protection",
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Pisces",
+      "Scorpio"
+    ],
+    "chakra": "Solar Plexus & Crown",
+    "description": "Vedic gemstone for planet Ketu. Protects against sudden financial setbacks, evil eye, and hidden enemies while attracting sudden wealth."
+  },
+  {
+    "id": 22,
+    "name": "Golden Citrine Gem-Cut Abundance Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Faceted Natural Citrine Quartz, Gold Elastic",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/citrine-gem-classic/image-1.webp",
+    "images": [
+      "/products/citrine-gem-classic/image-1.webp",
+      "/products/citrine-gem-classic/image-2.webp",
+      "/products/citrine-gem-classic/image-3.webp",
+      "/products/citrine-gem-classic/image-4.webp",
+      "/products/citrine-gem-classic/image-5.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#f39c12",
+      "#f1c40f"
+    ],
+    "concern": [
+      "money",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm Gem",
+    "zodiac": [
+      "Gemini",
+      "Leo",
+      "Sagittarius"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "The Merchant's Stone in exquisite gem cut. Directly channels the solar abundance ray to attract business prosperity and financial freedom."
+  },
+  {
+    "id": 23,
+    "name": "Golden Citrine Gem-Grade 10MM Wealth Attractor Bracelet",
+    "price": 1699,
+    "originalPrice": 2299,
+    "material": "Gem-Grade Citrine Crystal (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/citrine-gem-10mm/image-1.webp",
+    "images": [
+      "/products/citrine-gem-10mm/image-1.webp",
+      "/products/citrine-gem-10mm/image-2.webp",
+      "/products/citrine-gem-10mm/image-3.webp",
+      "/products/citrine-gem-10mm/image-4.webp",
+      "/products/citrine-gem-10mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 26,
+    "swatches": [
+      "#e67e22",
+      "#f39c12"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm Gem",
+    "zodiac": [
+      "Leo",
+      "Gemini"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Substantial 10mm gem-grade Citrine radiates optimism and unshakeable confidence, unlocking new streams of revenue."
+  },
+  {
+    "id": 24,
+    "name": "Golden Citrine Gem-Grade 8MM Prosperity Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Selected Transparent Golden Citrine (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/citrine-gem-8mm/image-1.webp",
+    "images": [
+      "/products/citrine-gem-8mm/image-1.webp",
+      "/products/citrine-gem-8mm/image-2.webp",
+      "/products/citrine-gem-8mm/image-3.webp",
+      "/products/citrine-gem-8mm/image-4.webp",
+      "/products/citrine-gem-8mm/image-5.webp",
+      "/products/citrine-gem-8mm/image-6.webp",
+      "/products/citrine-gem-8mm/image-7.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#f1c40f",
+      "#f39c12"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm Gem",
+    "zodiac": [
+      "Leo",
+      "Sagittarius"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Does not hold negative energy, making it an everlasting magnet for joy, self-worth, and material wealth."
+  },
+  {
+    "id": 25,
+    "name": "Dhan Yog (Wealth & Abundance) Sacred Synergy Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Pyrite, Citrine, Green Aventurine & Tiger Eye Synergy",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/dhanyog-wealth-synergy/image-1.webp",
+    "images": [
+      "/products/dhanyog-wealth-synergy/image-1.webp",
+      "/products/dhanyog-wealth-synergy/image-2.webp",
+      "/products/dhanyog-wealth-synergy/image-3.webp",
+      "/products/dhanyog-wealth-synergy/image-4.webp",
+      "/products/dhanyog-wealth-synergy/image-5.webp",
+      "/products/dhanyog-wealth-synergy/image-6.webp",
+      "/products/dhanyog-wealth-synergy/image-7.webp",
+      "/products/dhanyog-wealth-synergy/image-8.webp",
+      "/products/dhanyog-wealth-synergy/image-9.webp",
+      "/products/dhanyog-wealth-synergy/image-10.webp",
+      "/products/dhanyog-wealth-synergy/image-11.webp",
+      "/products/dhanyog-wealth-synergy/image-12.webp",
+      "/products/dhanyog-wealth-synergy/image-13.webp",
+      "/products/dhanyog-wealth-synergy/image-14.webp",
+      "/products/dhanyog-wealth-synergy/image-15.webp",
+      "/products/dhanyog-wealth-synergy/image-16.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#c8a951",
+      "#ffd54f",
+      "#81c784",
+      "#8b6914"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Leo",
+      "Virgo",
+      "Capricorn"
+    ],
+    "chakra": "Solar Plexus & Heart",
+    "description": "Formulated by Vedic Jyotish practitioners combining the 4 supreme wealth crystals: Pyrite for money luck, Citrine for cash flow, Green Aventurine for opportunity, and Tiger Eye for execution."
+  },
+  {
+    "id": 26,
+    "name": "Saraswati Vidya & Focus Study Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Sodalite, Rainbow Fluorite, Amethyst & Clear Quartz",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/education-focus-study/image-1.webp",
+    "images": [
+      "/products/education-focus-study/image-1.webp",
+      "/products/education-focus-study/image-2.webp",
+      "/products/education-focus-study/image-3.webp",
+      "/products/education-focus-study/image-4.webp",
+      "/products/education-focus-study/image-5.webp",
+      "/products/education-focus-study/image-6.webp",
+      "/products/education-focus-study/image-7.webp",
+      "/products/education-focus-study/image-8.webp",
+      "/products/education-focus-study/image-9.webp",
+      "/products/education-focus-study/image-10.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 24,
+    "swatches": [
+      "#3f51b5",
+      "#00bcd4",
+      "#9c27b0",
+      "#ffffff"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Gemini",
+      "Virgo",
+      "Aquarius"
+    ],
+    "chakra": "Third Eye & Throat Chakra",
+    "description": "Consecrated with Saraswati Mantras for students, exam aspirants, and researchers. Banishes brain fog, calms exam jitters, and supercharges information retention."
+  },
+  {
+    "id": 27,
+    "name": "Deep Crimson Garnet Prana Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Natural Almandine Garnet, Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Garnet",
+    "image": "/products/garnet-classic/image-1.webp",
+    "images": [
+      "/products/garnet-classic/image-1.webp",
+      "/products/garnet-classic/image-2.webp",
+      "/products/garnet-classic/image-3.webp",
+      "/products/garnet-classic/image-4.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#6b0f1a",
+      "#8b0000"
+    ],
+    "concern": [
+      "health",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn",
+      "Aquarius",
+      "Aries"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Deep wine-red Garnet rekindles passion, restores healthy libido, purifies toxins from the bloodstream, and grounds scattered prana."
+  },
+  {
+    "id": 28,
+    "name": "Bohemian Garnet 10MM Kundalini Strength Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Selected Crimson Garnet (10mm), Strong Elastic",
+    "category": "bracelets",
+    "gemstone": "Garnet",
+    "image": "/products/garnet-10mm/image-1.webp",
+    "images": [
+      "/products/garnet-10mm/image-1.webp",
+      "/products/garnet-10mm/image-2.webp",
+      "/products/garnet-10mm/image-3.webp",
+      "/products/garnet-10mm/image-4.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#4a0e17",
+      "#6b0f1a"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Capricorn",
+      "Aries"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Heavier 10mm Garnet beads deliver an unwavering feeling of physical security, survival instinct, and endurance."
+  },
+  {
+    "id": 29,
+    "name": "Bohemian Garnet 8MM Vitality & Passion Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Natural Garnet Spheres (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Garnet",
+    "image": "/products/garnet-8mm/image-1.webp",
+    "images": [
+      "/products/garnet-8mm/image-1.webp",
+      "/products/garnet-8mm/image-2.webp",
+      "/products/garnet-8mm/image-3.webp",
+      "/products/garnet-8mm/image-4.webp",
+      "/products/garnet-8mm/image-5.webp"
+    ],
+    "badge": null,
+    "savePercent": 24,
+    "swatches": [
+      "#6b0f1a"
+    ],
+    "concern": [
+      "health",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn",
+      "Aquarius"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Known as the Stone of Commitment. Inspires devotion in relationships and revitalizes depleted bio-energy."
+  },
+  {
+    "id": 30,
+    "name": "Premium Faceted Garnet Gem 8MM Luxury Energy Bracelet",
+    "price": 1599,
+    "originalPrice": 2199,
+    "material": "Micro-Faceted Gem-Grade Garnet (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Garnet",
+    "image": "/products/garnet-gem-8mm/image-1.webp",
+    "images": [
+      "/products/garnet-gem-8mm/image-1.webp",
+      "/products/garnet-gem-8mm/image-2.webp",
+      "/products/garnet-gem-8mm/image-3.webp",
+      "/products/garnet-gem-8mm/image-4.webp",
+      "/products/garnet-gem-8mm/image-5.webp",
+      "/products/garnet-gem-8mm/image-6.webp",
+      "/products/garnet-gem-8mm/image-7.webp",
+      "/products/garnet-gem-8mm/image-8.webp",
+      "/products/garnet-gem-8mm/image-9.webp",
+      "/products/garnet-gem-8mm/image-10.webp",
+      "/products/garnet-gem-8mm/image-11.webp",
+      "/products/garnet-gem-8mm/image-12.webp",
+      "/products/garnet-gem-8mm/image-13.webp",
+      "/products/garnet-gem-8mm/image-14.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#800020",
+      "#6b0f1a"
+    ],
+    "concern": [
+      "love",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm Gem",
+    "zodiac": [
+      "Capricorn",
+      "Scorpio"
+    ],
+    "chakra": "Root & Heart Chakra",
+    "description": "Luxurious faceted cut refracts blood-red light with royal grace. Ideal for evening wear, romance, and spiritual grounding."
+  },
+  {
+    "id": 31,
+    "name": "Lucky Green Aventurine Opportunity Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Natural Jade-Green Aventurine, Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Green Aventurine",
+    "image": "/products/green-aventurine-classic/image-1.webp",
+    "images": [
+      "/products/green-aventurine-classic/image-1.webp",
+      "/products/green-aventurine-classic/image-2.webp",
+      "/products/green-aventurine-classic/image-3.webp",
+      "/products/green-aventurine-classic/image-4.webp",
+      "/products/green-aventurine-classic/image-5.webp",
+      "/products/green-aventurine-classic/image-6.webp",
+      "/products/green-aventurine-classic/image-7.webp",
+      "/products/green-aventurine-classic/image-8.webp",
+      "/products/green-aventurine-classic/image-9.webp",
+      "/products/green-aventurine-classic/image-10.webp",
+      "/products/green-aventurine-classic/image-11.webp",
+      "/products/green-aventurine-classic/image-12.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#2d6a4f",
+      "#52b788"
+    ],
+    "concern": [
+      "money",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Virgo"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "The Premier Stone of Opportunity and luck. Attracts favorable synchronicities, lottery luck, and commercial triumphs."
+  },
+  {
+    "id": 32,
+    "name": "Green Aventurine 10MM Prosperity & Growth Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Vibrant Green Aventurine (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Green Aventurine",
+    "image": "/products/green-aventurine-10mm/image-1.webp",
+    "images": [
+      "/products/green-aventurine-10mm/image-1.webp",
+      "/products/green-aventurine-10mm/image-2.webp",
+      "/products/green-aventurine-10mm/image-3.webp",
+      "/products/green-aventurine-10mm/image-4.webp",
+      "/products/green-aventurine-10mm/image-5.webp",
+      "/products/green-aventurine-10mm/image-6.webp",
+      "/products/green-aventurine-10mm/image-7.webp",
+      "/products/green-aventurine-10mm/image-8.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#1b4332",
+      "#40916c"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Taurus",
+      "Virgo"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "10mm Aventurine beads anchor an expansive mindset of abundance, shielding the heart against financial anxiety."
+  },
+  {
+    "id": 33,
+    "name": "Green Aventurine 8MM Good Fortune Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Selected Green Aventurine (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Green Aventurine",
+    "image": "/products/green-aventurine-8mm/image-1.webp",
+    "images": [
+      "/products/green-aventurine-8mm/image-1.webp",
+      "/products/green-aventurine-8mm/image-2.webp",
+      "/products/green-aventurine-8mm/image-3.webp",
+      "/products/green-aventurine-8mm/image-4.webp",
+      "/products/green-aventurine-8mm/image-5.webp",
+      "/products/green-aventurine-8mm/image-6.webp",
+      "/products/green-aventurine-8mm/image-7.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 27,
+    "swatches": [
+      "#2d6a4f"
+    ],
+    "concern": [
+      "money",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Virgo"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Daily talisman for wealth seekers, investors, and anyone undertaking a bold new business venture."
+  },
+  {
+    "id": 34,
+    "name": "Maha Mrityunjaya Wellness & Vitality Healing Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Bloodstone, Green Jade, Clear Quartz & Carnelian",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/health-wellness-vitality/image-1.webp",
+    "images": [
+      "/products/health-wellness-vitality/image-1.webp",
+      "/products/health-wellness-vitality/image-2.webp",
+      "/products/health-wellness-vitality/image-3.webp",
+      "/products/health-wellness-vitality/image-4.webp",
+      "/products/health-wellness-vitality/image-5.webp",
+      "/products/health-wellness-vitality/image-6.webp",
+      "/products/health-wellness-vitality/image-7.webp",
+      "/products/health-wellness-vitality/image-8.webp",
+      "/products/health-wellness-vitality/image-9.webp",
+      "/products/health-wellness-vitality/image-10.webp",
+      "/products/health-wellness-vitality/image-11.webp",
+      "/products/health-wellness-vitality/image-12.webp",
+      "/products/health-wellness-vitality/image-13.webp",
+      "/products/health-wellness-vitality/image-14.webp",
+      "/products/health-wellness-vitality/image-15.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#2e7d32",
+      "#81c784",
+      "#f5f5f5",
+      "#d94e24"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "Heart, Root & Solar Plexus",
+    "description": "Vedic healing blend designed to strengthen cellular vitality, accelerate recovery from fatigue, and detoxify the physical vessel."
+  },
+  {
+    "id": 35,
+    "name": "Radiant Golden Sun Citrine Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Golden Madeira Citrine, Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/heated-citrine-classic/image-1.webp",
+    "images": [
+      "/products/heated-citrine-classic/image-1.webp",
+      "/products/heated-citrine-classic/image-2.webp",
+      "/products/heated-citrine-classic/image-3.webp",
+      "/products/heated-citrine-classic/image-4.webp",
+      "/products/heated-citrine-classic/image-5.webp",
+      "/products/heated-citrine-classic/image-6.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#e67e22",
+      "#d35400"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Gemini"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Warm golden-amber hues radiate cheerful enthusiasm and manifest new professional opportunities with ease."
+  },
+  {
+    "id": 36,
+    "name": "Golden Sun Citrine 10MM Solar Energy Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Warm Honey Citrine (10mm), Strong Cord",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/heated-citrine-10mm/image-1.webp",
+    "images": [
+      "/products/heated-citrine-10mm/image-1.webp",
+      "/products/heated-citrine-10mm/image-2.webp",
+      "/products/heated-citrine-10mm/image-3.webp",
+      "/products/heated-citrine-10mm/image-4.webp",
+      "/products/heated-citrine-10mm/image-5.webp",
+      "/products/heated-citrine-10mm/image-6.webp",
+      "/products/heated-citrine-10mm/image-7.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 22,
+    "swatches": [
+      "#d35400",
+      "#e67e22"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Leo"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Bold 10mm golden beads provide a continuous solar recharge, eradicating lethargy and self-doubt."
+  },
+  {
+    "id": 37,
+    "name": "Golden Sun Citrine 8MM Radiance & Success Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Sun-Kissed Amber Citrine (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Citrine",
+    "image": "/products/heated-citrine-8mm/image-1.webp",
+    "images": [
+      "/products/heated-citrine-8mm/image-1.webp",
+      "/products/heated-citrine-8mm/image-2.webp",
+      "/products/heated-citrine-8mm/image-3.webp",
+      "/products/heated-citrine-8mm/image-4.webp",
+      "/products/heated-citrine-8mm/image-5.webp",
+      "/products/heated-citrine-8mm/image-6.webp",
+      "/products/heated-citrine-8mm/image-7.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#e67e22"
+    ],
+    "concern": [
+      "money",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Sagittarius"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Brings the warmth of midsummer sunlight to your wrist, promoting joyful abundance and steady financial growth."
+  },
+  {
+    "id": 38,
+    "name": "Royal Lapis Lazuli Sovereign Wisdom Bracelet",
+    "price": 1299,
+    "originalPrice": 1799,
+    "material": "Natural Afghan Lapis Lazuli with Gold Pyrite Specks",
+    "category": "bracelets",
+    "gemstone": "Lapis Lazuli",
+    "image": "/products/lapis-lazuli-classic/image-1.webp",
+    "images": [
+      "/products/lapis-lazuli-classic/image-1.webp",
+      "/products/lapis-lazuli-classic/image-2.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 28,
+    "swatches": [
+      "#1d3557",
+      "#c8a951"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Sagittarius",
+      "Libra"
+    ],
+    "chakra": "Throat & Third Eye Chakra",
+    "description": "The sacred stone of ancient Pharaohs and celestial seers. Stimulates clear speech, honest communication, and profound insight."
+  },
+  {
+    "id": 39,
+    "name": "Celestial Lapis Lazuli 10MM Inner Truth Bracelet",
+    "price": 1699,
+    "originalPrice": 2299,
+    "material": "Deep Ultramarine Lapis (10mm), Pyrite Flecked",
+    "category": "bracelets",
+    "gemstone": "Lapis Lazuli",
+    "image": "/products/lapis-lazuli-10mm/image-1.webp",
+    "images": [
+      "/products/lapis-lazuli-10mm/image-1.webp",
+      "/products/lapis-lazuli-10mm/image-2.webp",
+      "/products/lapis-lazuli-10mm/image-3.webp",
+      "/products/lapis-lazuli-10mm/image-4.webp",
+      "/products/lapis-lazuli-10mm/image-5.webp",
+      "/products/lapis-lazuli-10mm/image-6.webp",
+      "/products/lapis-lazuli-10mm/image-7.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 26,
+    "swatches": [
+      "#03045e",
+      "#c8a951"
+    ],
+    "concern": [
+      "peace"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Sagittarius"
+    ],
+    "chakra": "Throat & Third Eye",
+    "description": "Rich royal blue 10mm beads with shimmering natural pyrite crystals provide an aura of undeniable dignity and poise."
+  },
+  {
+    "id": 40,
+    "name": "Celestial Lapis Lazuli 8MM Insight & Vision Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Grade-A Lapis Lazuli (8mm), Stretch Cord",
+    "category": "bracelets",
+    "gemstone": "Lapis Lazuli",
+    "image": "/products/lapis-lazuli-8mm/image-1.webp",
+    "images": [
+      "/products/lapis-lazuli-8mm/image-1.webp",
+      "/products/lapis-lazuli-8mm/image-2.webp",
+      "/products/lapis-lazuli-8mm/image-3.webp",
+      "/products/lapis-lazuli-8mm/image-4.webp"
+    ],
+    "badge": null,
+    "savePercent": 26,
+    "swatches": [
+      "#1d3557"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Sagittarius",
+      "Libra"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Connects intellectual discernment with spiritual understanding, liberating the voice from stage fright and anxiety."
+  },
+  {
+    "id": 41,
+    "name": "Grounding Mahogany Obsidian Earth Shield Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Natural Volcanic Mahogany Obsidian, Elastic",
+    "category": "bracelets",
+    "gemstone": "Mahogany Obsidian",
+    "image": "/products/mahogany-obsidian-classic/image-1.webp",
+    "images": [
+      "/products/mahogany-obsidian-classic/image-1.webp",
+      "/products/mahogany-obsidian-classic/image-2.webp",
+      "/products/mahogany-obsidian-classic/image-3.webp",
+      "/products/mahogany-obsidian-classic/image-4.webp",
+      "/products/mahogany-obsidian-classic/image-5.webp"
+    ],
+    "badge": null,
+    "savePercent": 27,
+    "swatches": [
+      "#3d0c02",
+      "#1a1a1a"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Scorpio",
+      "Sagittarius"
+    ],
+    "chakra": "Root & Sacral Chakra",
+    "description": "Rich reddish-brown volcanic glass balances fierce protection with gentle, nurturing earth grounding."
+  },
+  {
+    "id": 42,
+    "name": "Mahogany Obsidian 10MM Strength & Release Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Deep Brown-Black Obsidian (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Mahogany Obsidian",
+    "image": "/products/mahogany-obsidian-10mm/image-1.webp",
+    "images": [
+      "/products/mahogany-obsidian-10mm/image-1.webp",
+      "/products/mahogany-obsidian-10mm/image-2.webp",
+      "/products/mahogany-obsidian-10mm/image-3.webp",
+      "/products/mahogany-obsidian-10mm/image-4.webp",
+      "/products/mahogany-obsidian-10mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 22,
+    "swatches": [
+      "#2b0900",
+      "#111111"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "10mm grounding beads pull excessive mental chatter down into the earth, relieving chronic emotional exhaustion."
+  },
+  {
+    "id": 43,
+    "name": "Mahogany Obsidian 8MM Gentle Protection Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Polished Mahogany Obsidian (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Mahogany Obsidian",
+    "image": "/products/mahogany-obsidian-8mm/image-1.webp",
+    "images": [
+      "/products/mahogany-obsidian-8mm/image-1.webp",
+      "/products/mahogany-obsidian-8mm/image-2.webp",
+      "/products/mahogany-obsidian-8mm/image-3.webp",
+      "/products/mahogany-obsidian-8mm/image-4.webp",
+      "/products/mahogany-obsidian-8mm/image-5.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#3d0c02"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Scorpio",
+      "Sagittarius"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Assists with severing karmic ties and attachments while protecting against psychic invasions."
+  },
+  {
+    "id": 44,
+    "name": "Multi-Gemstone Cosmic Harmony Rainbow Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Amethyst, Rose Quartz, Citrine, Aventurine, Lapis & Tiger Eye",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/multi-gemstone-harmony/image-1.webp",
+    "images": [
+      "/products/multi-gemstone-harmony/image-1.webp",
+      "/products/multi-gemstone-harmony/image-2.webp",
+      "/products/multi-gemstone-harmony/image-3.webp",
+      "/products/multi-gemstone-harmony/image-4.webp",
+      "/products/multi-gemstone-harmony/image-5.webp",
+      "/products/multi-gemstone-harmony/image-6.webp",
+      "/products/multi-gemstone-harmony/image-7.webp",
+      "/products/multi-gemstone-harmony/image-8.webp",
+      "/products/multi-gemstone-harmony/image-9.webp",
+      "/products/multi-gemstone-harmony/image-10.webp",
+      "/products/multi-gemstone-harmony/image-11.webp",
+      "/products/multi-gemstone-harmony/image-12.webp",
+      "/products/multi-gemstone-harmony/image-13.webp",
+      "/products/multi-gemstone-harmony/image-14.webp",
+      "/products/multi-gemstone-harmony/image-15.webp",
+      "/products/multi-gemstone-harmony/image-16.webp",
+      "/products/multi-gemstone-harmony/image-17.webp",
+      "/products/multi-gemstone-harmony/image-18.webp",
+      "/products/multi-gemstone-harmony/image-19.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#9c27b0",
+      "#e91e63",
+      "#ffeb3b",
+      "#4caf50",
+      "#2196f3"
+    ],
+    "concern": [
+      "peace",
+      "love",
+      "money",
+      "protection",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "All Signs"
+    ],
+    "chakra": "All 7 Chakras",
+    "description": "A complete spectrum of crystalline harmony. Aligns the bio-energetic meridians from root to crown in complete balance."
+  },
+  {
+    "id": 45,
+    "name": "Rare Untreated Natural Kundalini Citrine Bracelet",
+    "price": 1699,
+    "originalPrice": 2299,
+    "material": "100% Earth-Mined Natural Citrine, Elastic",
+    "category": "bracelets",
+    "gemstone": "Natural Citrine",
+    "image": "/products/natural-citrine-classic/image-1.webp",
+    "images": [
+      "/products/natural-citrine-classic/image-1.webp",
+      "/products/natural-citrine-classic/image-2.webp",
+      "/products/natural-citrine-classic/image-3.webp",
+      "/products/natural-citrine-classic/image-4.webp",
+      "/products/natural-citrine-classic/image-5.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#d4af37",
+      "#f4d03f"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Gemini"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Pure untreated Kundalini Citrine from the Congo. Smoky golden hues signify authentic geological genesis, free of thermal treatment."
+  },
+  {
+    "id": 46,
+    "name": "Natural Kundalini Citrine 10MM Pure Wealth Magnet Bracelet",
+    "price": 2199,
+    "originalPrice": 2899,
+    "material": "Untreated Geological Citrine (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Natural Citrine",
+    "image": "/products/natural-citrine-10mm/image-1.webp",
+    "images": [
+      "/products/natural-citrine-10mm/image-1.webp",
+      "/products/natural-citrine-10mm/image-2.webp",
+      "/products/natural-citrine-10mm/image-3.webp",
+      "/products/natural-citrine-10mm/image-4.webp",
+      "/products/natural-citrine-10mm/image-5.webp",
+      "/products/natural-citrine-10mm/image-6.webp",
+      "/products/natural-citrine-10mm/image-7.webp",
+      "/products/natural-citrine-10mm/image-8.webp",
+      "/products/natural-citrine-10mm/image-9.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#c59b27",
+      "#e5c07b"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Leo",
+      "Gemini"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Rare collector's grade 10mm spheres of genuine untreated Citrine. The definitive physical anchor for monumental abundance."
+  },
+  {
+    "id": 47,
+    "name": "Natural Kundalini Citrine 8MM Manifestation Bracelet",
+    "price": 1799,
+    "originalPrice": 2399,
+    "material": "Natural Earth-Grown Citrine (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Natural Citrine",
+    "image": "/products/natural-citrine-8mm/image-1.webp",
+    "images": [
+      "/products/natural-citrine-8mm/image-1.webp",
+      "/products/natural-citrine-8mm/image-2.webp",
+      "/products/natural-citrine-8mm/image-3.webp",
+      "/products/natural-citrine-8mm/image-4.webp",
+      "/products/natural-citrine-8mm/image-5.webp",
+      "/products/natural-citrine-8mm/image-6.webp",
+      "/products/natural-citrine-8mm/image-7.webp",
+      "/products/natural-citrine-8mm/image-8.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#d4af37"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Gemini"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Holds the pure vibration of golden sunlight trapped in crystalline quartz over millions of years."
+  },
+  {
+    "id": 48,
+    "name": "Golden Pyrite Iron Sun Wealth Armor Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Peruvian Natural Pyrite Spheres, Elastic",
+    "category": "bracelets",
+    "gemstone": "Pyrite",
+    "image": "/products/pyrite-classic/image-1.webp",
+    "images": [
+      "/products/pyrite-classic/image-1.webp",
+      "/products/pyrite-classic/image-2.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#c8a951",
+      "#b8973d"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Capricorn"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Known as Fool's Gold, this metallic mineral possesses fierce masculine sun energy. Blocks financial leaks and attracts sudden wealth."
+  },
+  {
+    "id": 49,
+    "name": "Golden Pyrite 10MM Abundance & Wealth Magnet Bracelet",
+    "price": 1599,
+    "originalPrice": 2099,
+    "material": "Dense Metallic Pyrite (10mm), Heavy Duty Cord",
+    "category": "bracelets",
+    "gemstone": "Pyrite",
+    "image": "/products/pyrite-10mm/image-1.webp",
+    "images": [
+      "/products/pyrite-10mm/image-1.webp",
+      "/products/pyrite-10mm/image-2.webp",
+      "/products/pyrite-10mm/image-3.webp",
+      "/products/pyrite-10mm/image-4.webp",
+      "/products/pyrite-10mm/image-5.webp",
+      "/products/pyrite-10mm/image-6.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#a5762a",
+      "#c8a951"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Leo",
+      "Capricorn"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Heavy, weighty 10mm Pyrite beads instill an unshakeable aura of authority, financial abundance, and leadership prowess."
+  },
+  {
+    "id": 50,
+    "name": "Golden Pyrite 8MM Prosperity & Solar Power Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "High-Grade Peruvian Pyrite (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Pyrite",
+    "image": "/products/pyrite-8mm/image-1.webp",
+    "images": [
+      "/products/pyrite-8mm/image-1.webp",
+      "/products/pyrite-8mm/image-2.webp",
+      "/products/pyrite-8mm/image-3.webp",
+      "/products/pyrite-8mm/image-4.webp",
+      "/products/pyrite-8mm/image-5.webp",
+      "/products/pyrite-8mm/image-6.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 24,
+    "swatches": [
+      "#c8a951"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Essential gemstone remedy for entrepreneurs and professionals seeking to break through financial ceilings."
+  },
+  {
+    "id": 51,
+    "name": "Sacred Red Jasper Supreme Nurturer Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Deep Terracotta Red Jasper, Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Red Jasper",
+    "image": "/products/red-jasper-classic/image-1.webp",
+    "images": [
+      "/products/red-jasper-classic/image-1.webp",
+      "/products/red-jasper-classic/image-2.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#a03020",
+      "#c0392b"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aries",
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Ancient warrior talisman. Grounding and stabilizing, providing quiet strength in emotional crisis and sustaining physical stamina."
+  },
+  {
+    "id": 52,
+    "name": "Red Jasper 10MM Earth Grounding & Stamina Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Dense Red Jasper Beads (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Red Jasper",
+    "image": "/products/red-jasper-10mm/image-1.webp",
+    "images": [
+      "/products/red-jasper-10mm/image-1.webp",
+      "/products/red-jasper-10mm/image-2.webp",
+      "/products/red-jasper-10mm/image-3.webp",
+      "/products/red-jasper-10mm/image-4.webp",
+      "/products/red-jasper-10mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#872314",
+      "#a03020"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Aries",
+      "Scorpio"
+    ],
+    "chakra": "Root Chakra",
+    "description": "10mm earthy beads reconnect the subtle body directly to Mother Earth, dispersing inertia and self-defeating patterns."
+  },
+  {
+    "id": 53,
+    "name": "Red Jasper 8MM Physical Endurance & Courage Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Selected Red Jasper (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Red Jasper",
+    "image": "/products/red-jasper-8mm/image-1.webp",
+    "images": [
+      "/products/red-jasper-8mm/image-1.webp",
+      "/products/red-jasper-8mm/image-2.webp",
+      "/products/red-jasper-8mm/image-3.webp",
+      "/products/red-jasper-8mm/image-4.webp",
+      "/products/red-jasper-8mm/image-5.webp",
+      "/products/red-jasper-8mm/image-6.webp",
+      "/products/red-jasper-8mm/image-7.webp",
+      "/products/red-jasper-8mm/image-8.webp"
+    ],
+    "badge": null,
+    "savePercent": 27,
+    "swatches": [
+      "#a03020"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Aries"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Awakens Kundalini serpent energy safely at the base of the spine, fueling healthy ambition and stamina."
+  },
+  {
+    "id": 54,
+    "name": "Sacred Inca Rose Rhodochrosite 8MM Divine Love Bracelet",
+    "price": 1899,
+    "originalPrice": 2499,
+    "material": "Natural Pink Argentinian Rhodochrosite (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Rhodochrosite",
+    "image": "/products/rhodochrosite-8mm/image-1.webp",
+    "images": [
+      "/products/rhodochrosite-8mm/image-1.webp",
+      "/products/rhodochrosite-8mm/image-2.webp",
+      "/products/rhodochrosite-8mm/image-3.webp",
+      "/products/rhodochrosite-8mm/image-4.webp",
+      "/products/rhodochrosite-8mm/image-5.webp",
+      "/products/rhodochrosite-8mm/image-6.webp",
+      "/products/rhodochrosite-8mm/image-7.webp",
+      "/products/rhodochrosite-8mm/image-8.webp",
+      "/products/rhodochrosite-8mm/image-9.webp",
+      "/products/rhodochrosite-8mm/image-10.webp",
+      "/products/rhodochrosite-8mm/image-11.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 24,
+    "swatches": [
+      "#e056fd",
+      "#ff7979",
+      "#f6e58d"
+    ],
+    "concern": [
+      "love",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Scorpio"
+    ],
+    "chakra": "Heart & Solar Plexus",
+    "description": "The national gemstone of Argentina with raspberry pink banding. Heals deep inner-child wounds, dissolves grief, and magnetizes soulmate connections."
+  },
+  {
+    "id": 55,
+    "name": "Rhodonite 10MM Emotional Rescue & Forgiveness Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Rose-Pink & Black Dendritic Rhodonite (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Rhodonite",
+    "image": "/products/rhodonite-10mm/image-1.webp",
+    "images": [
+      "/products/rhodonite-10mm/image-1.webp",
+      "/products/rhodonite-10mm/image-2.webp",
+      "/products/rhodonite-10mm/image-3.webp",
+      "/products/rhodonite-10mm/image-4.webp",
+      "/products/rhodonite-10mm/image-5.webp",
+      "/products/rhodonite-10mm/image-6.webp",
+      "/products/rhodonite-10mm/image-7.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#c2185b",
+      "#212121"
+    ],
+    "concern": [
+      "love",
+      "peace"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Taurus"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Features captivating black manganese inclusions that ground emotional shock, panic, and heartbreaks."
+  },
+  {
+    "id": 56,
+    "name": "Rhodonite 8MM Heart Clearing & Compassion Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Natural Pink Rhodonite (8mm), Stretch String",
+    "category": "bracelets",
+    "gemstone": "Rhodonite",
+    "image": "/products/rhodonite-8mm/image-1.webp",
+    "images": [
+      "/products/rhodonite-8mm/image-1.webp",
+      "/products/rhodonite-8mm/image-2.webp",
+      "/products/rhodonite-8mm/image-3.webp",
+      "/products/rhodonite-8mm/image-4.webp",
+      "/products/rhodonite-8mm/image-5.webp",
+      "/products/rhodonite-8mm/image-6.webp",
+      "/products/rhodonite-8mm/image-7.webp",
+      "/products/rhodonite-8mm/image-8.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 24,
+    "swatches": [
+      "#c2185b",
+      "#f48fb1"
+    ],
+    "concern": [
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Fosters self-worth, emotional maturity, and the grace to forgive past relationship betrayals."
+  },
+  {
+    "id": 57,
+    "name": "Madagascar Rose Quartz Unconditional Love Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Soft Pink Madagascar Rose Quartz, Elastic",
+    "category": "bracelets",
+    "gemstone": "Rose Quartz",
+    "image": "/products/rose-quartz-classic/image-1.webp",
+    "images": [
+      "/products/rose-quartz-classic/image-1.webp",
+      "/products/rose-quartz-classic/image-2.webp",
+      "/products/rose-quartz-classic/image-3.webp",
+      "/products/rose-quartz-classic/image-4.webp",
+      "/products/rose-quartz-classic/image-5.webp",
+      "/products/rose-quartz-classic/image-6.webp",
+      "/products/rose-quartz-classic/image-7.webp",
+      "/products/rose-quartz-classic/image-8.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#f48fb1",
+      "#f8bbd9"
+    ],
+    "concern": [
+      "love",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Libra"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "The quintessential stone of unconditional love. Opens the heart to receive romance, friendship, and profound self-worth."
+  },
+  {
+    "id": 58,
+    "name": "Madagascar Rose Quartz 10MM Emotional Healing Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Translucent Pink Rose Quartz (10mm), Strong Elastic",
+    "category": "bracelets",
+    "gemstone": "Rose Quartz",
+    "image": "/products/rose-quartz-10mm/image-1.webp",
+    "images": [
+      "/products/rose-quartz-10mm/image-1.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 22,
+    "swatches": [
+      "#f48fb1"
+    ],
+    "concern": [
+      "love"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Taurus",
+      "Libra"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Luminous 10mm pink spheres transmit soothing frequencies that melt emotional ice and invite tender affection."
+  },
+  {
+    "id": 59,
+    "name": "Madagascar Rose Quartz 8MM Loving Grace Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Grade-A Rose Quartz Spheres (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Rose Quartz",
+    "image": "/products/rose-quartz-8mm/image-1.webp",
+    "images": [
+      "/products/rose-quartz-8mm/image-1.webp",
+      "/products/rose-quartz-8mm/image-2.webp",
+      "/products/rose-quartz-8mm/image-3.webp",
+      "/products/rose-quartz-8mm/image-4.webp",
+      "/products/rose-quartz-8mm/image-5.webp",
+      "/products/rose-quartz-8mm/image-6.webp",
+      "/products/rose-quartz-8mm/image-7.webp",
+      "/products/rose-quartz-8mm/image-8.webp",
+      "/products/rose-quartz-8mm/image-9.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#f48fb1",
+      "#fce4ec"
+    ],
+    "concern": [
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Taurus",
+      "Libra"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "A must-have foundational crystal. Radiates gentleness and tenderness across all interpersonal relationships."
+  },
+  {
+    "id": 60,
+    "name": "Divine Light Selenite Lunar Cleansing Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Silky White Moroccan Selenite (Gypsum), Elastic",
+    "category": "bracelets",
+    "gemstone": "Selenite",
+    "image": "/products/selenite-classic/image-1.webp",
+    "images": [
+      "/products/selenite-classic/image-1.webp",
+      "/products/selenite-classic/image-2.webp",
+      "/products/selenite-classic/image-3.webp",
+      "/products/selenite-classic/image-4.webp",
+      "/products/selenite-classic/image-5.webp",
+      "/products/selenite-classic/image-6.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#ffffff",
+      "#f5f5f5"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Cancer",
+      "Taurus"
+    ],
+    "chakra": "Crown & Third Eye",
+    "description": "Named after Selene, the Greek Moon Goddess. Holds liquid white light frequency, automatically purifying the other crystals on your wrist."
+  },
+  {
+    "id": 61,
+    "name": "White Satin Selenite 10MM Angelic Ray Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Satin Spar Selenite (10mm), Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Selenite",
+    "image": "/products/selenite-10mm/image-1.webp",
+    "images": [
+      "/products/selenite-10mm/image-1.webp",
+      "/products/selenite-10mm/image-2.webp",
+      "/products/selenite-10mm/image-3.webp",
+      "/products/selenite-10mm/image-4.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#ffffff"
+    ],
+    "concern": [
+      "peace"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Cancer"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "10mm luminous spheres of fiber-optic Selenite connect your consciousness with angelic guidance and higher wisdom."
+  },
+  {
+    "id": 62,
+    "name": "White Satin Selenite 8MM Moonbeam Purifying Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Selected Selenite Gypsum (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Selenite",
+    "image": "/products/selenite-8mm/image-1.webp",
+    "images": [
+      "/products/selenite-8mm/image-1.webp",
+      "/products/selenite-8mm/image-2.webp",
+      "/products/selenite-8mm/image-3.webp",
+      "/products/selenite-8mm/image-4.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 27,
+    "swatches": [
+      "#ffffff",
+      "#fafafa"
+    ],
+    "concern": [
+      "peace",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Cancer"
+    ],
+    "chakra": "Crown Chakra",
+    "description": "Provides instant relief from energetic heaviness after crowded social events or taxing meetings."
+  },
+  {
+    "id": 63,
+    "name": "Mystical Sulemani Hakik 8MM Nazar Suraksha Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Natural Sulemani Agate (8mm), Durable Cord",
+    "category": "bracelets",
+    "gemstone": "Sulemani Hakik",
+    "image": "/products/sulemani-hakik-8mm/image-1.webp",
+    "images": [
+      "/products/sulemani-hakik-8mm/image-1.webp",
+      "/products/sulemani-hakik-8mm/image-2.webp",
+      "/products/sulemani-hakik-8mm/image-3.webp",
+      "/products/sulemani-hakik-8mm/image-4.webp",
+      "/products/sulemani-hakik-8mm/image-5.webp",
+      "/products/sulemani-hakik-8mm/image-6.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 25,
+    "swatches": [
+      "#212121",
+      "#757575"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn",
+      "Aquarius"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Ancient Vedic protection amulet against Evil Eye (Buri Nazar), psychic envy, and dark planetary afflictions."
+  },
+  {
+    "id": 64,
+    "name": "Classic Sulemani Hakik Evil Eye Ward Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Black & Grey Banded Agate, Elastic",
+    "category": "bracelets",
+    "gemstone": "Sulemani Hakik",
+    "image": "/products/sulemani-hakik-classic/image-1.webp",
+    "images": [
+      "/products/sulemani-hakik-classic/image-1.webp",
+      "/products/sulemani-hakik-classic/image-2.webp",
+      "/products/sulemani-hakik-classic/image-3.webp",
+      "/products/sulemani-hakik-classic/image-4.webp",
+      "/products/sulemani-hakik-classic/image-5.webp",
+      "/products/sulemani-hakik-classic/image-6.webp",
+      "/products/sulemani-hakik-classic/image-7.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 27,
+    "swatches": [
+      "#1a1a1a",
+      "#9e9e9e"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Capricorn"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Neutralizes planetary malefic effects of Rahu and Ketu, creating a stable mental anchor during challenging transits."
+  },
+  {
+    "id": 65,
+    "name": "Sulemani Hakik 10MM Rahu-Ketu Pacifying Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Heavy Banded Sulemani Agate (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Sulemani Hakik",
+    "image": "/products/sulemani-hakik-10mm/image-1.webp",
+    "images": [
+      "/products/sulemani-hakik-10mm/image-1.webp",
+      "/products/sulemani-hakik-10mm/image-2.webp",
+      "/products/sulemani-hakik-10mm/image-3.webp",
+      "/products/sulemani-hakik-10mm/image-4.webp",
+      "/products/sulemani-hakik-10mm/image-5.webp",
+      "/products/sulemani-hakik-10mm/image-6.webp",
+      "/products/sulemani-hakik-10mm/image-7.webp",
+      "/products/sulemani-hakik-10mm/image-8.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#000000",
+      "#616161"
+    ],
+    "concern": [
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Capricorn",
+      "Aquarius"
+    ],
+    "chakra": "Root Chakra",
+    "description": "Robust 10mm agate beads with natural geological banding, absorbing heavy negative energies from your surroundings."
+  },
+  {
+    "id": 66,
+    "name": "Rare Red Sulemani Hakik 10MM Courage & Shield Bracelet",
+    "price": 1599,
+    "originalPrice": 2199,
+    "material": "Natural Red Banded Agate (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Sulemani Hakik",
+    "image": "/products/sulemani-hakik-red-10mm/image-1.webp",
+    "images": [
+      "/products/sulemani-hakik-red-10mm/image-1.webp",
+      "/products/sulemani-hakik-red-10mm/image-2.webp",
+      "/products/sulemani-hakik-red-10mm/image-3.webp",
+      "/products/sulemani-hakik-red-10mm/image-4.webp",
+      "/products/sulemani-hakik-red-10mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 27,
+    "swatches": [
+      "#8b0000",
+      "#d32f2f"
+    ],
+    "concern": [
+      "protection",
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Aries",
+      "Scorpio"
+    ],
+    "chakra": "Root & Sacral Chakra",
+    "description": "Rare red-hued Sulemani Agate spheres combine warrior courage with impenetrable occult shielding."
+  },
+  {
+    "id": 67,
+    "name": "Sparkling Sunstone Solar Leadership Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Natural Oregon-Style Aventurine Sunstone, Elastic",
+    "category": "bracelets",
+    "gemstone": "Sunstone",
+    "image": "/products/sunstone-classic/image-1.webp",
+    "images": [
+      "/products/sunstone-classic/image-1.webp",
+      "/products/sunstone-classic/image-2.webp",
+      "/products/sunstone-classic/image-3.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 24,
+    "swatches": [
+      "#e67e22",
+      "#f39c12"
+    ],
+    "concern": [
+      "money",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Libra"
+    ],
+    "chakra": "Sacral & Solar Plexus",
+    "description": "Infused with golden hematite or copper platelets that shimmer under sunlight, awakening leadership magnetism and boundless vitality."
+  },
+  {
+    "id": 68,
+    "name": "Golden Sunstone 10MM Sovereign Charisma Bracelet",
+    "price": 1599,
+    "originalPrice": 2099,
+    "material": "Shimmering Sunstone Spheres (10mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Sunstone",
+    "image": "/products/sunstone-10mm/image-1.webp",
+    "images": [
+      "/products/sunstone-10mm/image-1.webp",
+      "/products/sunstone-10mm/image-2.webp",
+      "/products/sunstone-10mm/image-3.webp",
+      "/products/sunstone-10mm/image-4.webp",
+      "/products/sunstone-10mm/image-5.webp",
+      "/products/sunstone-10mm/image-6.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#d35400",
+      "#f39c12"
+    ],
+    "concern": [
+      "money"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Leo"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "10mm golden solar beads boost masculine Yang energy, career authority, and authentic stage presence."
+  },
+  {
+    "id": 69,
+    "name": "Golden Sunstone 8MM Joy & Pranic Radiance Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Polished Natural Sunstone (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Sunstone",
+    "image": "/products/sunstone-8mm/image-1.webp",
+    "images": [
+      "/products/sunstone-8mm/image-1.webp",
+      "/products/sunstone-8mm/image-2.webp",
+      "/products/sunstone-8mm/image-3.webp",
+      "/products/sunstone-8mm/image-4.webp",
+      "/products/sunstone-8mm/image-5.webp",
+      "/products/sunstone-8mm/image-6.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 22,
+    "swatches": [
+      "#e67e22"
+    ],
+    "concern": [
+      "money",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Leo",
+      "Libra"
+    ],
+    "chakra": "Sacral & Solar Plexus",
+    "description": "Dispels seasonal affective melancholy and codependency, encouraging you to shine your authentic light unapologetically."
+  },
+  {
+    "id": 70,
+    "name": "Golden Tiger Eye Fearless Action Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Chatoyant Golden-Brown Tiger Eye, Elastic",
+    "category": "bracelets",
+    "gemstone": "Tiger Eye",
+    "image": "/products/tiger-eye-classic/image-1.webp",
+    "images": [
+      "/products/tiger-eye-classic/image-1.webp",
+      "/products/tiger-eye-classic/image-2.webp",
+      "/products/tiger-eye-classic/image-3.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 27,
+    "swatches": [
+      "#8b6914",
+      "#c8a951"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Gemini",
+      "Leo",
+      "Capricorn"
+    ],
+    "chakra": "Solar Plexus & Root",
+    "description": "Classic stone of courage, discernment, and practical focus. Helps navigate complex business negotiations with predatory precision."
+  },
+  {
+    "id": 71,
+    "name": "Golden Tiger Eye 10MM Courage & Grounding Bracelet",
+    "price": 1399,
+    "originalPrice": 1799,
+    "material": "Rich Banded Tiger Eye (10mm), Strong Elastic",
+    "category": "bracelets",
+    "gemstone": "Tiger Eye",
+    "image": "/products/tiger-eye-10mm/image-1.webp",
+    "images": [
+      "/products/tiger-eye-10mm/image-1.webp",
+      "/products/tiger-eye-10mm/image-2.webp",
+      "/products/tiger-eye-10mm/image-3.webp",
+      "/products/tiger-eye-10mm/image-4.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 22,
+    "swatches": [
+      "#6b4e07",
+      "#8b6914"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Leo",
+      "Capricorn"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Substantial 10mm chatoyant spheres shimmer like molten gold under light, repelling self-doubt and fear of failure."
+  },
+  {
+    "id": 72,
+    "name": "Golden Tiger Eye 8MM Clarity & Confidence Bracelet",
+    "price": 1199,
+    "originalPrice": 1599,
+    "material": "Grade-A Tiger Eye (8mm), Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Tiger Eye",
+    "image": "/products/tiger-eye-8mm/image-1.webp",
+    "images": [
+      "/products/tiger-eye-8mm/image-1.webp",
+      "/products/tiger-eye-8mm/image-2.webp",
+      "/products/tiger-eye-8mm/image-3.webp",
+      "/products/tiger-eye-8mm/image-4.webp",
+      "/products/tiger-eye-8mm/image-5.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#8b6914"
+    ],
+    "concern": [
+      "money",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Gemini",
+      "Leo"
+    ],
+    "chakra": "Solar Plexus Chakra",
+    "description": "Balances solar and terrestrial energies, keeping you grounded while pursuing ambitious financial horizons."
+  },
+  {
+    "id": 73,
+    "name": "Tibetan Turquoise Sacred Sky Healer Bracelet",
+    "price": 1399,
+    "originalPrice": 1899,
+    "material": "Natural Turquoise with Matrix, Elastic",
+    "category": "bracelets",
+    "gemstone": "Turquoise",
+    "image": "/products/turquoise-classic/image-1.webp",
+    "images": [
+      "/products/turquoise-classic/image-1.webp",
+      "/products/turquoise-classic/image-2.webp",
+      "/products/turquoise-classic/image-3.webp",
+      "/products/turquoise-classic/image-4.webp",
+      "/products/turquoise-classic/image-5.webp",
+      "/products/turquoise-classic/image-6.webp",
+      "/products/turquoise-classic/image-7.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 26,
+    "swatches": [
+      "#16a085",
+      "#1abc9c"
+    ],
+    "concern": [
+      "health",
+      "protection"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Sagittarius",
+      "Pisces"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Cherished for thousands of years by Himalayan shamans. A premier master healing stone that protects travelers and aligns all meridians."
+  },
+  {
+    "id": 74,
+    "name": "Natural Turquoise 10MM Traveler Protection Bracelet",
+    "price": 1799,
+    "originalPrice": 2399,
+    "material": "Selected Turquoise (10mm), Heavy Duty Elastic",
+    "category": "bracelets",
+    "gemstone": "Turquoise",
+    "image": "/products/turquoise-10mm/image-1.webp",
+    "images": [
+      "/products/turquoise-10mm/image-1.webp",
+      "/products/turquoise-10mm/image-2.webp",
+      "/products/turquoise-10mm/image-3.webp",
+      "/products/turquoise-10mm/image-4.webp",
+      "/products/turquoise-10mm/image-5.webp",
+      "/products/turquoise-10mm/image-6.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 25,
+    "swatches": [
+      "#0e6655",
+      "#16a085"
+    ],
+    "concern": [
+      "protection",
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Sagittarius"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Bold 10mm robin-egg turquoise beads provide profound energetic cushioning during long journeys and major life transitions."
+  },
+  {
+    "id": 75,
+    "name": "Natural Turquoise 8MM Serenity & Communication Bracelet",
+    "price": 1499,
+    "originalPrice": 1999,
+    "material": "Natural Turquoise Beads (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Turquoise",
+    "image": "/products/turquoise-8mm/image-1.webp",
+    "images": [
+      "/products/turquoise-8mm/image-1.webp",
+      "/products/turquoise-8mm/image-2.webp",
+      "/products/turquoise-8mm/image-3.webp",
+      "/products/turquoise-8mm/image-4.webp",
+      "/products/turquoise-8mm/image-5.webp",
+      "/products/turquoise-8mm/image-6.webp",
+      "/products/turquoise-8mm/image-7.webp",
+      "/products/turquoise-8mm/image-8.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 25,
+    "swatches": [
+      "#16a085"
+    ],
+    "concern": [
+      "peace",
+      "health"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Sagittarius",
+      "Pisces"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Promotes peaceful communication, dissolves creative blocks, and shields against psychic depletion."
+  },
+  {
+    "id": 76,
+    "name": "Gem-Grade Turquoise 10MM Master Blessing Bracelet",
+    "price": 2199,
+    "originalPrice": 2899,
+    "material": "Premium Sleeping Beauty Quality Turquoise (10mm)",
+    "category": "bracelets",
+    "gemstone": "Turquoise",
+    "image": "/products/turquoise-gem-10mm/image-1.webp",
+    "images": [
+      "/products/turquoise-gem-10mm/image-1.webp",
+      "/products/turquoise-gem-10mm/image-2.webp",
+      "/products/turquoise-gem-10mm/image-3.webp",
+      "/products/turquoise-gem-10mm/image-4.webp",
+      "/products/turquoise-gem-10mm/image-5.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#00bcd4",
+      "#0097a7"
+    ],
+    "concern": [
+      "health",
+      "protection"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm Gem",
+    "zodiac": [
+      "Sagittarius"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Flawless cyan-blue gem-grade turquoise spheres of museum quality, sanctified for spiritual leadership and total health rejuvenation."
+  },
+  {
+    "id": 77,
+    "name": "Gem-Grade Turquoise 8MM Celestial Blue Bracelet",
+    "price": 1899,
+    "originalPrice": 2499,
+    "material": "Gem-Grade Natural Turquoise (8mm), Elastic",
+    "category": "bracelets",
+    "gemstone": "Turquoise",
+    "image": "/products/turquoise-gem-8mm/image-1.webp",
+    "images": [
+      "/products/turquoise-gem-8mm/image-1.webp",
+      "/products/turquoise-gem-8mm/image-2.webp",
+      "/products/turquoise-gem-8mm/image-3.webp",
+      "/products/turquoise-gem-8mm/image-4.webp",
+      "/products/turquoise-gem-8mm/image-5.webp",
+      "/products/turquoise-gem-8mm/image-6.webp",
+      "/products/turquoise-gem-8mm/image-7.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 24,
+    "swatches": [
+      "#00bcd4"
+    ],
+    "concern": [
+      "health",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm Gem",
+    "zodiac": [
+      "Sagittarius",
+      "Pisces"
+    ],
+    "chakra": "Throat Chakra",
+    "description": "Pristine vibrant blue beads devoid of harsh matrix, delivering pure throat-chakra resonance."
+  },
+  {
+    "id": 78,
+    "name": "Unakite Epidote Vision & Rebirth Bracelet",
+    "price": 999,
+    "originalPrice": 1399,
+    "material": "Natural Green Epidote & Pink Feldspar Unakite",
+    "category": "bracelets",
+    "gemstone": "Unakite",
+    "image": "/products/unakite-classic/image-1.webp",
+    "images": [
+      "/products/unakite-classic/image-1.webp",
+      "/products/unakite-classic/image-2.webp",
+      "/products/unakite-classic/image-3.webp",
+      "/products/unakite-classic/image-4.webp",
+      "/products/unakite-classic/image-5.webp",
+      "/products/unakite-classic/image-6.webp",
+      "/products/unakite-classic/image-7.webp",
+      "/products/unakite-classic/image-8.webp",
+      "/products/unakite-classic/image-9.webp",
+      "/products/unakite-classic/image-10.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 29,
+    "swatches": [
+      "#556b2f",
+      "#f48fb1"
+    ],
+    "concern": [
+      "health",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Scorpio",
+      "Taurus"
+    ],
+    "chakra": "Heart & Third Eye",
+    "description": "Harmonious union of forest green Epidote and delicate salmon-pink Feldspar. Nurtures emotional balance during rebirth and pregnancy."
+  },
+  {
+    "id": 79,
+    "name": "Unakite Jasper 10MM Emotional Healing & Rebirth Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Selected Unakite (10mm), Heavy Duty Elastic",
+    "category": "bracelets",
+    "gemstone": "Unakite",
+    "image": "/products/unakite-10mm/image-1.webp",
+    "images": [
+      "/products/unakite-10mm/image-1.webp",
+      "/products/unakite-10mm/image-2.webp",
+      "/products/unakite-10mm/image-3.webp",
+      "/products/unakite-10mm/image-4.webp",
+      "/products/unakite-10mm/image-5.webp",
+      "/products/unakite-10mm/image-6.webp",
+      "/products/unakite-10mm/image-7.webp",
+      "/products/unakite-10mm/image-8.webp"
+    ],
+    "badge": "NEW",
+    "savePercent": 24,
+    "swatches": [
+      "#425424",
+      "#e27b9c"
+    ],
+    "concern": [
+      "health"
+    ],
+    "isNew": true,
+    "isBestSeller": false,
+    "beadSize": "10mm",
+    "zodiac": [
+      "Scorpio"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "10mm earthy beads release buried emotional trauma from the heart and cellular memory, assisting in deep convalescence."
+  },
+  {
+    "id": 80,
+    "name": "Unakite Jasper 8MM Fertility & Balance Bracelet",
+    "price": 1099,
+    "originalPrice": 1499,
+    "material": "Grade-A Unakite (8mm), Elastic Cord",
+    "category": "bracelets",
+    "gemstone": "Unakite",
+    "image": "/products/unakite-8mm/image-1.webp",
+    "images": [
+      "/products/unakite-8mm/image-1.webp",
+      "/products/unakite-8mm/image-2.webp",
+      "/products/unakite-8mm/image-3.webp"
+    ],
+    "badge": "SALE",
+    "savePercent": 27,
+    "swatches": [
+      "#556b2f",
+      "#f48fb1"
+    ],
+    "concern": [
+      "health",
+      "love"
+    ],
+    "isNew": false,
+    "isBestSeller": false,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Scorpio",
+      "Taurus"
+    ],
+    "chakra": "Heart Chakra",
+    "description": "Renowned talisman for healthy reproductive balance, harmonious partnerships, and grounded emotional healing."
+  },
+  {
+    "id": 81,
+    "name": "Yin Yang Dual Harmony Balancing Bracelet",
+    "price": 1299,
+    "originalPrice": 1699,
+    "material": "Black Obsidian & White Howlite Dual Polarity Beads",
+    "category": "bracelets",
+    "gemstone": "Multi-stone",
+    "image": "/products/yin-yang-harmony/image-1.webp",
+    "images": [
+      "/products/yin-yang-harmony/image-1.webp",
+      "/products/yin-yang-harmony/image-2.webp",
+      "/products/yin-yang-harmony/image-3.webp",
+      "/products/yin-yang-harmony/image-4.webp",
+      "/products/yin-yang-harmony/image-5.webp",
+      "/products/yin-yang-harmony/image-6.webp",
+      "/products/yin-yang-harmony/image-7.webp",
+      "/products/yin-yang-harmony/image-8.webp",
+      "/products/yin-yang-harmony/image-9.webp"
+    ],
+    "badge": "BEST SELLER",
+    "savePercent": 24,
+    "swatches": [
+      "#111111",
+      "#f5f5f5"
+    ],
+    "concern": [
+      "protection",
+      "peace"
+    ],
+    "isNew": false,
+    "isBestSeller": true,
+    "beadSize": "8mm",
+    "zodiac": [
+      "Gemini",
+      "Libra",
+      "Pisces"
+    ],
+    "chakra": "Root & Crown Chakra",
+    "description": "Embodying the ancient Taoist principle of polar equilibrium. Integrates shadow and light, masculine and feminine, logic and intuition."
+  }
 ];
 
-export const bestSellers = products.filter(p => p.isBestSeller || p.badge === "BEST SELLER");
-export const newArrivals  = products.filter(p => p.isNew       || p.badge === "NEW");
-export const onSale       = products.filter(p => p.badge === "SALE");
-
-export function getProductsByCategory(categoryId: string) {
-  return products.filter(p => p.category === categoryId);
-}
-
-export function getProductsByConcern(concernId: string) {
-  return products.filter(p => p.concern?.includes(concernId));
-}
+export const newArrivals = products.filter(p => p.isNew);
+export const bestSellers = products.filter(p => p.isBestSeller);

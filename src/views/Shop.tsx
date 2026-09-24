@@ -8,12 +8,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { products, categories, newArrivals, bestSellers, concerns, zodiacSigns } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
-const gemstones = [
-  "Amethyst","Rose Quartz","Citrine","Black Tourmaline","Lapis Lazuli",
-  "Pyrite","Moonstone","Turquoise","Jade","Selenite","Multi-stone",
-  "Tiger Eye","Carnelian","Clear Quartz","Green Aventurine","Garnet",
-  "Aquamarine","Labradorite","Malachite","Red Jasper","Fluorite",
-];
+const gemstones = Array.from(new Set(products.map(p => p.gemstone).filter(Boolean) as string[])).sort();
 
 export default function Shop() {
   const [, navigate] = useLocation();

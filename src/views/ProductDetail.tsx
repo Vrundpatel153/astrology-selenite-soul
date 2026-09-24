@@ -36,6 +36,8 @@ export default function ProductDetail() {
     );
   }
 
+  const galleryImages = (product.images && product.images.length > 0) ? product.images : [product.image];
+  const activeImage = galleryImages[selectedThumb] || product.image;
   const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
@@ -63,7 +65,7 @@ export default function ProductDetail() {
       <div className="px-4 md:px-8 py-3 border-b border-[#e8d9cf] bg-white">
         <motion.button
           onClick={() => navigate("/shop")}
-          className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-[#2a1f1a]/60"
+          className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-[#2a1f1a]/60 cursor-pointer"
           whileHover={{ x: -3, color: "#2a1f1a" }}
           transition={{ duration: 0.18 }}
         >
@@ -80,8 +82,8 @@ export default function ProductDetail() {
             <div className="relative aspect-square bg-[#f7f1ec] overflow-hidden group">
               <AnimatePresence mode="wait">
                 <motion.img
-                  key={selectedThumb}
-                  src={product.image}
+                  key={activeImage}
+                  src={activeImage}
                   alt={product.name}
                   className="w-full h-full object-cover"
                   initial={{ opacity: 0, scale: 1.03 }}
@@ -108,7 +110,7 @@ export default function ProductDetail() {
               )}
               <motion.button
                 onClick={() => setWishlisted(w => !w)}
-                className="absolute top-4 right-4 w-9 h-9 bg-white/90 flex items-center justify-center"
+                className="absolute top-4 right-4 w-9 h-9 bg-white/90 flex items-center justify-center cursor-pointer shadow-xs"
                 whileHover={{ scale: 1.12, backgroundColor: "white" }}
                 whileTap={{ scale: 0.85 }}
                 transition={{ duration: 0.15 }}
@@ -119,20 +121,22 @@ export default function ProductDetail() {
               </motion.button>
             </div>
             {/* Thumbnails */}
-            <div className="grid grid-cols-4 gap-2">
-              {[0, 1, 2, 3].map(i => (
-                <motion.button
-                  key={i}
-                  onClick={() => setSelectedThumb(i)}
-                  className={`aspect-square bg-[#f7f1ec] overflow-hidden border-2 transition-colors ${selectedThumb === i ? "border-[#2a1f1a]" : "border-transparent"}`}
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <img src={product.image} alt="" className={`w-full h-full object-cover transition-opacity ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`} />
-                </motion.button>
-              ))}
-            </div>
+            {galleryImages.length > 1 && (
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 gap-2">
+                {galleryImages.map((imgSrc, i) => (
+                  <motion.button
+                    key={i}
+                    onClick={() => setSelectedThumb(i)}
+                    className={`aspect-square bg-[#f7f1ec] overflow-hidden border-2 transition-colors cursor-pointer ${selectedThumb === i ? "border-[#2a1f1a]" : "border-transparent"}`}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <img src={imgSrc} alt={`${product.name} ${i + 1}`} className={`w-full h-full object-cover transition-opacity ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`} />
+                  </motion.button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right: Details */}
@@ -182,8 +186,11 @@ export default function ProductDetail() {
             <div className="border-t border-b border-[#e8d9cf] py-4 mb-5 space-y-2.5">
               {[
                 { label: "Material", value: product.material },
+                ...(product.beadSize ? [{ label: "Bead Size", value: product.beadSize }] : []),
                 ...(product.gemstone ? [{ label: "Gemstone", value: product.gemstone }] : []),
-                ...(product.concern?.length ? [{ label: "Intention", value: product.concern.join(", ") }] : []),
+                ...(product.chakra ? [{ label: "Chakra Alignment", value: product.chakra }] : []),
+                ...(product.zodiac?.length ? [{ label: "Zodiac Signs", value: product.zodiac.join(", ") }] : []),
+                ...(product.concern?.length ? [{ label: "Spiritual Intention", value: product.concern.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(", ") }] : []),
               ].map(({ label, value }) => (
                 <motion.div
                   key={label}
@@ -335,10 +342,7 @@ export default function ProductDetail() {
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-[#2a1f1a] mb-4">About This Crystal</h2>
             <p className="text-sm text-[#2a1f1a]/70 leading-relaxed">
-              Each {product.name} is handpicked from ethically sourced mines across India and
-              South America. Our gemologists verify authenticity and energy quality before
-              each piece is cleansed under the full moon and infused with Reiki healing energy.
-              Every crystal carries its own unique frequency — no two are identical.
+              {product.description || `Each ${product.name} is handpicked from ethically sourced mines across India and South America. Our gemologists verify authenticity and energy quality before each piece is cleansed under the full moon and infused with sacred Vedic mantras.`}
             </p>
           </div>
           <div>

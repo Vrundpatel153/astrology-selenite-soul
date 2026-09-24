@@ -10,8 +10,8 @@ import type { Product } from "@/data/products";
 
 // "Ekta's Picks" — a curated hand-picked selection
 const ektaPicks = products.filter(p =>
-  [1, 5, 15, 30, 45, 68, 90, 120, 180, 215, 221].includes(p.id)
-).slice(0, 12);
+  [1, 4, 7, 8, 12, 18, 22, 25, 26, 34, 45, 48, 54, 57, 60, 64, 73, 81].includes(p.id)
+).slice(0, 14);
 
 const tabs = [
   { id: "new",       label: "New Arrivals",      icon: "•",  products: newArrivals.slice(0, 14)  },
