@@ -14,6 +14,7 @@ import ShopByConcernCarousel from "@/components/ShopByConcernCarousel";
 import ShopByAstrologyCarousel from "@/components/ShopByAstrologyCarousel";
 import TabbedProductCarousel from "@/components/TabbedProductCarousel";
 import InteractiveTarotDeck from "@/components/InteractiveTarotDeck";
+import TarotSimplerSection from "@/components/TarotSimplerSection";
 import InteractiveZodiacWheel from "@/components/InteractiveZodiacWheel";
 import InteractiveNumerologyMatrix from "@/components/InteractiveNumerologyMatrix";
 import { products } from "@/data/products";
@@ -593,7 +594,7 @@ function CrystalsSection() {
 function TarotSection() {
   return (
     <section className="py-10 md:py-14 overflow-hidden bg-[#f9f4ee]">
-      <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
+      <div className="px-5 md:px-14 max-w-[1400px] mx-auto mb-8 md:mb-12">
         <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
@@ -608,9 +609,12 @@ function TarotSection() {
           </p>
         </div>
 
-        {/* Live 3D Tarot Deck Component */}
+        {/* Live 3D Tarot Deck Component - The Game */}
         <InteractiveTarotDeck />
       </div>
+
+      {/* Simpler Tarot Section: Type of Reading, How to Book, Guided with Intention, Highlights */}
+      <TarotSimplerSection />
     </section>
   );
 }
