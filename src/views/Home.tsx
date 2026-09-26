@@ -207,13 +207,46 @@ function EktaStory() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. BRAND PHILOSOPHY: Light Silk Parchment & Embossed Gold Sri Yantra
 // ─────────────────────────────────────────────────────────────────────────────
-const pillars = [
-  { num: "01", title: "Ancient Vedic Wisdom", body: "Jyotish, Tarot, and Numerology: three sacred systems that have guided humanity for millennia, now decoded for your modern path." },
-  { num: "02", title: "Earth's Crystal Energy", body: "Every stone is ethically sourced, lab-tested for authenticity, and ceremonially energised under the full moon before it reaches you." },
-  { num: "03", title: "Ektaz's Sacred Intention", body: "Each reading carries the energy of over a decade of dedicated study and thousands of personal client sessions." },
-  { num: "04", title: "Holistic Healing", body: "We work across physical, emotional, mental, and spiritual layers, because true healing is never one-dimensional." },
+// 3. SACRED OFFERINGS & PHILOSOPHY: Guidance, Healing & Higher Living
+// ─────────────────────────────────────────────────────────────────────────────
+const sacredOfferings = [
+  {
+    num: "01",
+    numColor: "#a8785a",
+    title: "Tarot Guidance",
+    body: "Insights for love, career, relationships and life's big (and small) questions - to help you make more aligned choices.",
+    image: "/offerings-tarot.jpg",
+    href: "/tarot",
+    actionLabel: "Explore Tarot Guidance",
+  },
+  {
+    num: "02",
+    numColor: "#b86850",
+    title: "Crystal Healing",
+    body: "Authentic, high-quality crystals chosen with intention to support protection, clarity, love, abundance and emotional balance.",
+    image: "/offerings-crystals.jpg",
+    href: "/shop",
+    actionLabel: "Explore Crystal Healing",
+  },
+  {
+    num: "03",
+    numColor: "#8a805c",
+    title: "Numerology Insights",
+    body: "Decode your numbers to understand your strengths, life path and opportunities - and live in greater alignment with your true self.",
+    image: "/offerings-numerology.jpg",
+    href: "/numerology",
+    actionLabel: "Explore Numerology",
+  },
+  {
+    num: "04",
+    numColor: "#a8645a",
+    title: "Reiki & Pranic Healing",
+    body: "Gentle yet powerful energy healing to restore balance across your mind, body and spirit, helping you release blocks and invite positive energy.",
+    image: "/offerings-reiki.jpg",
+    href: "/tarot",
+    actionLabel: "Explore Energy Healing",
+  },
 ];
 
 function BrandPhilosophy() {
@@ -221,10 +254,10 @@ function BrandPhilosophy() {
 
   useEffect(() => {
     if (!sectionRef.current) return;
-    const cards = sectionRef.current.querySelectorAll(".pillar-card");
+    const cards = sectionRef.current.querySelectorAll(".offering-card");
     const ctx = gsap.context(() => {
       gsap.fromTo(cards,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1, y: 0,
           duration: 0.8, stagger: 0.12, ease: "power3.out",
@@ -236,70 +269,132 @@ function BrandPhilosophy() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-10 md:py-14 overflow-hidden bg-[#fcf8f4]">
-      {/* High-Resolution Luxury Sacred Geometry Artwork Backdrop */}
+    <section ref={sectionRef} className="relative py-12 md:py-16 overflow-hidden bg-[#faf6f0]">
+      {/* High-Resolution Luxury Sacred Geometry Backdrop */}
       <div className="absolute inset-0 pointer-events-none">
         <img
           src="/brand-philosophy-luxury.webp"
           alt="Sacred Geometry Sri Yantra"
-          className="w-full h-full object-cover object-center opacity-60 scale-105"
+          className="w-full h-full object-cover object-center opacity-40 scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcf8f4] via-transparent to-[#fcf8f4]" />
-        <div className="absolute inset-0 bg-[#fcf8f4]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#faf6f0] via-transparent to-[#faf6f0]" />
+        <div className="absolute inset-0 bg-[#faf6f0]/50" />
       </div>
 
-      <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
-        {/* Header */}
-        <div className="mb-8 md:mb-10">
-          <motion.p
-            className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a] mb-3"
-            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-          >
-            Selenite Soul Philosophy
-          </motion.p>
-          <motion.h2
-            className="text-4xl md:text-5xl xl:text-6xl font-light text-[#2a1f1a] leading-[1.08]" style={serif}
-            initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
-          >
-            Where Ancient Wisdom<br />
-            <em className="italic text-[#a5762a]">Meets Modern Life</em>
-          </motion.h2>
+      <div className="relative z-10 px-5 md:px-14 max-w-[1420px] mx-auto">
+        {/* Header matching exact user reference image */}
+        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+          <p className="text-[10px] sm:text-[11px] font-semibold tracking-[0.45em] text-[#7a5c43] uppercase mb-2">
+            S E L E N I T E &nbsp; S O U L
+          </p>
+
+          <div className="flex items-center justify-center gap-3 my-2.5 text-[#c8a951]">
+            <div className="h-px w-14 sm:w-20 bg-[#c8a951]/60" />
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+            </svg>
+            <div className="h-px w-14 sm:w-20 bg-[#c8a951]/60" />
+          </div>
+
+          <p className="text-[8.5px] sm:text-[10px] font-bold tracking-[0.32em] text-[#a5762a] uppercase mt-2.5 mb-3">
+            GUIDANCE &nbsp;+&nbsp; HEALING &nbsp;+&nbsp; HIGHER LIVING
+          </p>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#2a1f1a] leading-tight" style={serif}>
+            Ancient Wisdom for <em className="italic text-[#a5762a]">Modern Life</em>
+          </h2>
         </div>
 
-        {/* Pillar Cards in Luxury Ivory Glass */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((p) => {
-            const { ref, handleMouseMove, handleMouseLeave } = useTilt(5);
+        {/* 4 Interactive Offering Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          {sacredOfferings.map((offering) => {
+            const { ref, handleMouseMove, handleMouseLeave } = useTilt(4);
             return (
-              <div
-                key={p.num}
-                ref={ref}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="pillar-card bg-white/90 border border-[#c8a951]/40 p-8 flex flex-col group cursor-default backdrop-blur-md hover:border-[#c8a951] hover:shadow-xl transition-all duration-300 rounded-sm shadow-md"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl font-light text-[#a5762a]" style={serif}>{p.num}</span>
-                  <span className="text-[#a5762a]/50 text-xs font-mono">•</span>
+              <Link key={offering.num} href={offering.href} className="block group h-full">
+                <div
+                  ref={ref}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  className="offering-card h-full bg-[#fdfbf7] border border-[#e8d9cf] p-6 sm:p-7 rounded-sm shadow-sm hover:shadow-xl hover:border-[#c8a951] transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer group-hover:-translate-y-1.5"
+                  data-cursor="hover"
+                >
+                  {/* Top: Number & Floating Botanical Artwork */}
+                  <div>
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <span className="text-3xl sm:text-4xl font-light" style={{ ...serif, color: offering.numColor }}>
+                        {offering.num}
+                      </span>
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 -mt-2 -mr-2 shrink-0 overflow-hidden">
+                        <img
+                          src={offering.image}
+                          alt={offering.title}
+                          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Small Divider Line */}
+                    <div className="w-7 h-0.5 bg-[#d9bfa8] mb-3.5" />
+
+                    {/* Title */}
+                    <h3
+                      className="text-xl sm:text-[22px] font-light text-[#2a1f1a] leading-snug mb-3 group-hover:text-[#a5762a] transition-colors"
+                      style={serif}
+                    >
+                      {offering.title}
+                    </h3>
+
+                    {/* Body */}
+                    <p className="text-xs sm:text-[13px] text-[#4a382e]/85 leading-relaxed font-light mb-6">
+                      {offering.body}
+                    </p>
+                  </div>
+
+                  {/* Card Action Link */}
+                  <div className="pt-3 border-t border-[#e8d9cf]/60 flex items-center justify-between mt-auto text-[#a5762a] group-hover:text-[#2a1f1a] transition-colors">
+                    <span className="text-[9.5px] font-bold uppercase tracking-[0.2em]">
+                      {offering.actionLabel}
+                    </span>
+                    <span className="text-sm font-light text-[#c8a951] group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-lg md:text-xl font-light text-[#2a1f1a] leading-snug mb-3" style={serif}>{p.title}</h3>
-                <p className="text-xs md:text-sm text-[#4a382e]/80 leading-relaxed mt-auto font-light">{p.body}</p>
-              </div>
+              </Link>
             );
           })}
         </div>
 
-        {/* Pull quote */}
+        {/* "A MORE ALIGNED YOU" Divider */}
+        <div className="flex items-center justify-center gap-4 my-9 md:my-11">
+          <div className="h-px flex-1 max-w-[100px] sm:max-w-[180px] bg-[#c8a951]/45" />
+          <span className="text-[10px] sm:text-[11px] font-light tracking-[0.38em] text-[#7a5c43] uppercase">
+            A &nbsp;M O R E &nbsp;A L I G N E D &nbsp;Y O U
+          </span>
+          <div className="h-px flex-1 max-w-[100px] sm:max-w-[180px] bg-[#c8a951]/45" />
+        </div>
+
+        {/* Exact Quote from Ektaz Shah */}
         <motion.div
-          className="mt-8 md:mt-10 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-white/80 border border-y-0 border-r-0 border-l-[#c8a951] p-6 backdrop-blur-md shadow-md"
-          initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+          className="mx-auto max-w-3xl text-center bg-white/85 border border-[#e8d9cf] hover:border-[#c8a951]/60 p-7 sm:p-10 rounded-sm shadow-sm backdrop-blur-xs transition-all"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <p className="text-lg md:text-xl text-[#2a1f1a]/95 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
-            "I believe every person carries a cosmic blueprint: a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
+          <p
+            className="text-lg sm:text-xl md:text-2xl text-[#2a1f1a] leading-relaxed mb-5 font-light"
+            style={{ ...serif, fontStyle: "italic" }}
+          >
+            "I believe the universe is always guiding us through signs, energies and little nudges. Sometimes, all we need is the faith to listen."
           </p>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">
-            Ektaz Shah, Founder of Selenite Soul
-          </p>
+          <div className="flex items-center justify-center gap-2.5">
+            <span className="h-px w-8 bg-[#c8a951]" />
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">
+              Ektaz Shah, Founder of Selenite Soul
+            </p>
+            <span className="h-px w-8 bg-[#c8a951]" />
+          </div>
         </motion.div>
       </div>
     </section>
