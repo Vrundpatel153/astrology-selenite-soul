@@ -5,7 +5,7 @@
  * smooth 3D card flips with embossed gold foil backing, and in-depth crystal remedy correlations.
  * Fully responsive and optimized for all viewports.
  */
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, RotateCcw, Moon } from "lucide-react";
 import { Link } from "wouter";
@@ -168,6 +168,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
   const [pickedCardIds, setPickedCardIds] = useState<Set<string>>(new Set());
   const [selectedDetails, setSelectedDetails] = useState<TarotCardData | null>(null);
+  const desktopSpreadRef = useRef<HTMLDivElement>(null);
 
   // Switch spread mode
   const handleModeChange = (mode: "single" | "three") => {
@@ -217,7 +218,17 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     };
 
     setSlots(updatedSlots);
-    setPickedCardIds((prev) => new Set(prev).add(card.id));
+    const newPicked = new Set(pickedCardIds).add(card.id);
+    setPickedCardIds(newPicked);
+
+    // In PC mode, once all cards are chosen, smoothly scroll down to the spread section
+    if (newPicked.size >= maxPicks) {
+      setTimeout(() => {
+        if (typeof window !== "undefined" && window.innerWidth >= 768) {
+          desktopSpreadRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 500);
+    }
   };
 
   // Flip a dealt card
@@ -333,19 +344,23 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                         return (
                           <motion.div
                             key={card.id}
-                            className={`absolute w-[74px] h-[116px] rounded-md border border-[#c8a951]/75 overflow-hidden shadow-md transition-all ${
-                              isPicked ? "opacity-15 pointer-events-none scale-85" : "cursor-pointer active:scale-105 active:border-[#c8a951]"
+                            className={`absolute w-[74px] h-[116px] rounded-md border overflow-hidden shadow-md transition-all ${
+                              isPicked
+                                ? "border-[#c8a951] ring-2 ring-[#c8a951] shadow-lg shadow-[#c8a951]/30 pointer-events-none"
+                                : "border-[#c8a951]/75 cursor-pointer active:scale-105 active:border-[#c8a951]"
                             }`}
                             style={{
                               transformOrigin: "bottom center",
-                              zIndex: isPicked ? 0 : idx + 5,
+                              zIndex: isPicked ? 35 + idx : idx + 5,
                             }}
                             animate={{
                               x: transX,
-                              y: isPicked ? -45 : transY,
+                              y: isPicked ? -28 : transY,
                               rotate: rot,
-                              opacity: isPicked ? 0 : 1,
+                              opacity: isPicked ? 0.88 : 1,
+                              scale: isPicked ? 1.02 : 1,
                             }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
                             onClick={() => handlePickFromFan(card)}
                           >
                             <img
@@ -636,7 +651,12 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   {maxPicks - pickedCardIds.size > 1 ? "s" : ""} from the fanned deck below:
                 </>
               ) : (
-                <>All {maxPicks} cards chosen! Click each card in the spread below to flip and reveal.</>
+                <button
+                  onClick={() => desktopSpreadRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  className="underline underline-offset-4 decoration-[#c8a951] hover:text-[#2a1f1a] transition-colors cursor-pointer"
+                >
+                  All {maxPicks} cards chosen! Click each card in the spread below to flip and reveal.
+                </button>
               )}
             </p>
           </div>
@@ -656,18 +676,23 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute w-[100px] sm:w-[130px] h-[155px] sm:h-[200px] rounded-md border border-[#c8a951]/70 overflow-hidden shadow-xl transition-shadow ${
-                    isPicked ? "opacity-20 pointer-events-none scale-90" : "cursor-pointer hover:border-[#c8a951] hover:shadow-2xl hover:shadow-[#c8a951]/40"
+                  className={`absolute w-[100px] sm:w-[130px] h-[155px] sm:h-[200px] rounded-md border overflow-hidden shadow-xl transition-all ${
+                    isPicked
+                      ? "border-[#c8a951] ring-2 ring-[#c8a951] shadow-2xl shadow-[#c8a951]/40 pointer-events-none"
+                      : "border-[#c8a951]/70 cursor-pointer hover:border-[#c8a951] hover:shadow-2xl hover:shadow-[#c8a951]/40"
                   }`}
                   style={{
                     transformOrigin: "bottom center",
-                    zIndex: idx,
+                    zIndex: isPicked ? 45 + idx : idx,
                   }}
                   animate={{
                     x: transX,
-                    y: isPicked ? -40 : transY,
+                    y: isPicked ? transY - 48 : transY,
                     rotate: rot,
+                    opacity: isPicked ? 0.88 : 1,
+                    scale: isPicked ? 1.02 : 1,
                   }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
                   whileHover={
                     !isPicked
                       ? {
@@ -695,7 +720,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
       </div>
 
       {/* ── DEALING SPREAD SLOTS (DEALT CARDS) ── */}
-      <div className="mb-14">
+      <div ref={desktopSpreadRef} className="mb-14 scroll-mt-28">
         <div className="text-center mb-8">
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-1">
             Your Sacred Reading Spread
