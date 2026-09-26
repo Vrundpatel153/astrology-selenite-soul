@@ -47,11 +47,11 @@ export default function ShopByAstrologyCarousel() {
 
   return (
     <section
-      className="py-16 md:py-24 overflow-hidden bg-[#fcf8f4]"
+      className="py-10 md:py-14 overflow-hidden bg-[#fcf8f4]"
       data-testid="section-astrology-carousel"
     >
       {/* Section header */}
-      <div className="px-5 md:px-14 mb-10 md:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+      <div className="px-5 md:px-14 mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
         <div>
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-[#c8a951]/60" />

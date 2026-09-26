@@ -111,7 +111,7 @@ function EktaStory() {
 
   return (
     <section ref={sectionRef} className="bg-[#fcf8f4] overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-[53%_47%] min-h-[580px] lg:min-h-[720px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[53%_47%] min-h-[460px] lg:min-h-[540px]">
         {/* Responsive Image Column */}
         <div className="relative overflow-hidden h-[440px] sm:h-[500px] md:h-[560px] lg:h-auto lg:min-h-0" data-cursor="hover">
           <motion.img
@@ -144,7 +144,7 @@ function EktaStory() {
         </div>
 
         {/* Story Text Column */}
-        <div className="flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-14 xl:px-20 py-10 sm:py-14 lg:py-20">
+        <div className="flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-14 xl:px-20 py-8 sm:py-10 lg:py-12">
           <div className="ekta-reveal flex items-center gap-3 mb-4 sm:mb-6">
             <div className="h-px w-8 sm:w-10 bg-[#c8a951]/60" />
             <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Ekta's Story</span>
@@ -226,7 +226,7 @@ function BrandPhilosophy() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#fcf8f4]">
+    <section ref={sectionRef} className="relative py-10 md:py-14 overflow-hidden bg-[#fcf8f4]">
       {/* High-Resolution Luxury Sacred Geometry Artwork Backdrop */}
       <div className="absolute inset-0 pointer-events-none">
         <img
@@ -240,7 +240,7 @@ function BrandPhilosophy() {
 
       <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14 md:mb-20">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 md:mb-10">
           <div>
             <motion.p
               className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a] mb-3"
@@ -289,7 +289,7 @@ function BrandPhilosophy() {
 
         {/* Pull quote */}
         <motion.div
-          className="mt-16 md:mt-24 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-white/80 border border-y-0 border-r-0 border-l-[#c8a951] p-6 backdrop-blur-md shadow-md"
+          className="mt-8 md:mt-10 border-l-2 border-[#c8a951] pl-8 max-w-3xl bg-white/80 border border-y-0 border-r-0 border-l-[#c8a951] p-6 backdrop-blur-md shadow-md"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
         >
           <p className="text-lg md:text-xl text-[#2a1f1a]/95 leading-relaxed mb-4 font-light" style={{ ...serif, fontStyle: "italic" }}>
@@ -313,7 +313,7 @@ function KundaliSection() {
   const headRef = useSplitReveal();
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[600px] lg:min-h-[720px] flex items-center bg-[#fdf8f4]">
+    <section ref={sectionRef} className="relative overflow-hidden min-h-[460px] lg:min-h-[520px] flex items-center bg-[#fdf8f4]">
       {/* High-Resolution Luxury Vedic Astrology Mandala Artwork Backdrop */}
       <div className="absolute inset-0 scale-105 pointer-events-none">
         <img
@@ -326,7 +326,7 @@ function KundaliSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#fdf8f4] via-transparent to-[#fdf8f4]/60" />
       </div>
 
-      <div className="relative z-10 px-6 md:px-14 lg:px-20 py-16 md:py-24 max-w-[860px]">
+      <div className="relative z-10 px-6 md:px-14 lg:px-20 py-10 md:py-12 max-w-[860px]">
         <div>
           <div className="k-reveal flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#c8a951]/60" />
@@ -373,9 +373,9 @@ function NumerologySection() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".num-reveal", staggerDelay: 0.1, start: "top 80%" });
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 overflow-hidden bg-[#f9f4ee]">
+    <section ref={sectionRef} className="py-10 md:py-14 overflow-hidden bg-[#f9f4ee]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Pythagorean Numerology</span>
@@ -401,9 +401,9 @@ function NumerologySection() {
 // ─────────────────────────────────────────────────────────────────────────────
 function AstrologyZodiacSection() {
   return (
-    <section className="py-20 md:py-28 overflow-hidden bg-[#fcf8f4]">
+    <section className="py-10 md:py-14 overflow-hidden bg-[#fcf8f4]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Cosmic Alignment</span>
@@ -432,14 +432,14 @@ function CrystalsSection() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".cr-reveal", staggerDelay: 0.12, start: "top 80%" });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[580px] lg:min-h-[700px] flex items-stretch bg-[#f5ede4]">
+    <section ref={sectionRef} className="relative overflow-hidden min-h-[460px] lg:min-h-[520px] flex items-stretch bg-[#f5ede4]">
       <div className="absolute inset-0 scale-110">
         <img ref={bgRef as any} src="/crystal-collection.webp" alt="Healing Crystals"
           className="w-full h-full object-cover object-center" data-cursor="view" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(253,248,244,0.95) 0%, rgba(253,248,244,0.85) 48%, rgba(253,248,244,0.40) 100%)" }} />
       </div>
 
-      <div className="relative z-10 flex items-center px-6 md:px-14 lg:px-20 py-16 md:py-24 max-w-[780px]">
+      <div className="relative z-10 flex items-center px-6 md:px-14 lg:px-20 py-10 md:py-12 max-w-[780px]">
         <div className="w-full">
           <div className="cr-reveal flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#c8a951]/60" />
@@ -453,7 +453,7 @@ function CrystalsSection() {
           </p>
 
           {/* Animated stats */}
-          <div className="cr-reveal flex gap-8 mb-10 pb-10 border-b border-[#e8d9cf]">
+          <div className="cr-reveal flex gap-8 mb-8 pb-8 border-b border-[#e8d9cf]">
             {[["222+", "Unique Products"], ["100%", "Natural & Tested"], ["Full Moon", "Energised"]].map(([num, label]) => (
               <motion.div key={label} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
                 <p className="text-2xl text-[#a5762a] font-light" style={serif}>{num}</p>
@@ -494,9 +494,9 @@ function CrystalsSection() {
 // ─────────────────────────────────────────────────────────────────────────────
 function TarotSection() {
   return (
-    <section className="py-20 md:py-28 overflow-hidden bg-[#f9f4ee]">
+    <section className="py-10 md:py-14 overflow-hidden bg-[#f9f4ee]">
       <div className="px-5 md:px-14 max-w-[1400px] mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Intuitive Oracle</span>
@@ -550,7 +550,7 @@ function ShopByProductCarousel() {
   };
 
   return (
-    <section className="py-14 md:py-20 overflow-hidden bg-[#fcf8f4]">
+    <section className="py-10 md:py-14 overflow-hidden bg-[#fcf8f4]">
       <div className="px-5 md:px-14 mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 mb-3">

@@ -31,7 +31,7 @@ export default function ShopByConcernCarousel() {
   }, [emblaApi, update]);
 
   return (
-    <section className="py-12 md:py-20 bg-[#fdf3ec] overflow-hidden" data-testid="section-shop-by-concern">
+    <section className="py-10 md:py-14 bg-[#fdf3ec] overflow-hidden" data-testid="section-shop-by-concern">
       {/* Header */}
       <div className="px-4 md:px-14 mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>

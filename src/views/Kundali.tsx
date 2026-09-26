@@ -766,7 +766,7 @@ export default function Kundali() {
 
       {/* KUNDALI INTRO */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #2a1f1a 0%, #1e1410 100%)" }}>
-        <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-20 md:py-28 text-center">
+        <div className="relative z-10 max-w-[1000px] mx-auto px-6 py-10 md:py-14 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c8a951] mb-4">Free Vedic Reading</p>
             <h1 className="text-4xl md:text-6xl font-serif font-light text-white leading-tight mb-6">
@@ -789,9 +789,9 @@ export default function Kundali() {
       </section>
 
       {/* WHAT YOU RECEIVE */}
-      <section className="py-20 px-6 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #fdf8f4 0%, #f7ebe1 100%)" }}>
+      <section className="py-10 md:py-14 px-6 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #fdf8f4 0%, #f7ebe1 100%)" }}>
         <div className="max-w-[1140px] mx-auto relative z-10">
-          <motion.div className="text-center mb-14"
+          <motion.div className="text-center mb-8 md:mb-10"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-3 justify-center mb-3">
@@ -831,9 +831,9 @@ export default function Kundali() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-20 px-6" style={{ background: "#3d2115" }}>
+      <section className="py-10 md:py-14 px-6" style={{ background: "#3d2115" }}>
         <div className="max-w-[800px] mx-auto">
-          <motion.div className="text-center mb-14"
+          <motion.div className="text-center mb-8 md:mb-10"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-3">Simple & Free</p>
@@ -924,7 +924,7 @@ export default function Kundali() {
         </div>
 
         <motion.div
-          className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-20 max-w-[960px] mx-auto"
+          className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-10 md:py-14 max-w-[960px] mx-auto"
           style={{ y: heroY, opacity: heroOp }}
         >
           {/* Mandala */}

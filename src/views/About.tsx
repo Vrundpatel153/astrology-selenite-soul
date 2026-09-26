@@ -44,7 +44,7 @@ export default function About() {
         </div>
 
         <motion.div
-          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
+          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-10 md:py-14"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -231,7 +231,7 @@ export default function About() {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-[#f7ebe1] text-center">
+      <section className="py-10 md:py-14 px-6 bg-[#f7ebe1] text-center">
         <ScrollReveal>
           <h2 className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Begin Your Journey with Ekta</h2>
           <p className="text-xs md:text-sm text-[#4a3020]/75 mb-8 max-w-md mx-auto leading-relaxed font-light">

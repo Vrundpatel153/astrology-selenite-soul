@@ -96,7 +96,7 @@ export default function Offers() {
       </section>
 
       {/* Coupon Cards Grid */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-[1200px] mx-auto">
+      <section className="py-10 sm:py-14 px-4 sm:px-6 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {OFFERS.map((coupon, idx) => (
             <ScrollReveal key={coupon.code} delay={idx * 0.08}>

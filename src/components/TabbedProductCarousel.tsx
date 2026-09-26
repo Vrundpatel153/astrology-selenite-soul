@@ -131,9 +131,9 @@ export default function TabbedProductCarousel() {
   const currentTab = tabs[activeTab];
 
   return (
-    <section className="py-12 md:py-20 bg-[#fdf8f4] overflow-hidden">
+    <section className="py-10 md:py-14 bg-[#fdf8f4] overflow-hidden">
       {/* Header */}
-      <div className="px-4 md:px-14 mb-8 md:mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div className="px-4 md:px-14 mb-6 md:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-2">Crystal Collection</p>
           <h2 className="text-3xl md:text-5xl font-serif font-light text-[#2a1f1a] leading-none">

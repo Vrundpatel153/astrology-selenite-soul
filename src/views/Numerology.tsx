@@ -173,14 +173,14 @@ export default function Numerology() {
       <Header />
 
       {/* ── HERO ────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
         {/* Background Ambient Glow */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[160px] bg-[#c8a951]/15" />
         </div>
 
         <motion.div
-          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
+          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-10 md:py-14"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -211,9 +211,9 @@ export default function Numerology() {
       </section>
 
       {/* ── LIVE INTERACTIVE NUMEROLOGY MATRIX ─────────────────────────────────── */}
-      <section id="interactive-matrix" className="py-20 md:py-28 px-6 bg-[#f9f4ee] border-t border-b border-[#e8d9cf]">
+      <section id="interactive-matrix" className="py-10 md:py-14 px-6 bg-[#f9f4ee] border-t border-b border-[#e8d9cf]">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2">Live Engine</p>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               Calculate Your <em className="italic text-[#a5762a]">Core Vibration</em>
@@ -228,9 +228,9 @@ export default function Numerology() {
       </section>
 
       {/* ── MASTER NUMBERS SECTION ─────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-[#fcf8f4]">
+      <section className="py-10 md:py-14 px-6 bg-[#fcf8f4]">
         <div className="max-w-[1240px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <div className="flex items-center gap-3 justify-center mb-3">
               <div className="h-px w-8 bg-[#c8a951]/60" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Sacred Higher Octaves</span>
@@ -269,7 +269,7 @@ export default function Numerology() {
       </section>
 
       {/* ── COMPATIBILITY MATCHER ───────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-[#f7efe6] border-t border-[#e8d9cf]">
+      <section className="py-10 md:py-14 px-6 bg-[#f7efe6] border-t border-[#e8d9cf]">
         <div className="max-w-[1000px] mx-auto">
           <CompatibilityCalculator />
         </div>
