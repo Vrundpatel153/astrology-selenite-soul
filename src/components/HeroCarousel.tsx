@@ -21,7 +21,7 @@ const slides = [
     image: "/concern-love.webp",
     eyebrow: "Tarot & Guidance",
     heading: "Sacred\nReadings",
-    subheading: "Book a one-on-one Tarot session with Ekta: clarity for love, career, and soul.",
+    subheading: "Book a one-on-one Tarot session with Ektaz: clarity for love, career, and soul.",
     cta: { label: "Book a Reading", href: "/tarot" },
     ctaSecondary: { label: "About Tarot", href: "/tarot#guidance" },
     overlay: "from-[#2a0e3d]/80 via-[#3d1550]/30 to-transparent",

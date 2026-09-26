@@ -27,8 +27,8 @@ const KNOWLEDGE_RESPONSES: { keywords: string[]; reply: string }[] = [
     reply: "Your Kundali is the soul's energetic blueprint. You can calculate your full Vedic birth chart for free on our [Kundali Calculator](/kundali) using Lahiri Ayanamsa.",
   },
   {
-    keywords: ["tarot", "reading", "consultation", "ekta", "session"],
-    reply: "Ekta offers intimate 1-on-1 Tarot & Jyotish consultations (45–60 mins) to clarify career crossroads, relationships, and spiritual awakening. You can book directly on our [Tarot Sanctuary](/tarot#book).",
+    keywords: ["tarot", "reading", "consultation", "ektaz", "ekta", "session"],
+    reply: "Ektaz offers intimate 1-on-1 Tarot & spiritual consultations (45 to 60 mins) to clarify career crossroads, relationships, and spiritual awakening. You can book directly on our [Tarot Sanctuary](/tarot#book).",
   },
   {
     keywords: ["coupon", "discount", "offer", "promo", "code"],

@@ -8,11 +8,11 @@ import { ArrowRight, ShieldCheck, Gem, Compass } from "lucide-react";
 
 // ─── Journey milestones ───────────────────────────────────────────────────────
 const journey = [
-  { year: "2012", title: "The Sacred Awakening in Haridwar", desc: "A spontaneous encounter with an Himalayan sage in Haridwar sparks a decade-long spiritual immersion into Vedic Jyotish and the mineral kingdom." },
-  { year: "2015", title: "Formal Mastery of Jyotish & Numerology", desc: "Intensive classical training in Pune and Varanasi, mastering Lahiri Ayanamsa, Dasha calculations, and Pythagorean number matrices." },
-  { year: "2017", title: "Intuitive Tarot Channelling", desc: "Bridging Western Major Arcana archetypal psychology with Vedic astrological house lords to create a multi-dimensional guidance modality." },
-  { year: "2019", title: "Birth of Selenite Soul", desc: "Founded with the sacred mission to provide ethically sourced, full-moon charged gemstone remedies and grounded, non-alarmist spiritual consultations." },
-  { year: "Today", title: "1.5L+ Lives Illuminated", desc: "Guiding a global community of seekers, executives, and spiritual practitioners toward sovereign clarity and alignment." },
+  { year: "Roots", title: "Astrology & Remedies Across Kerala", desc: "Growing up, her father took the family to meet astrologers across Kerala, filling their home with sacred rituals and remedies to invite positive energy." },
+  { year: "Corporate", title: "Corporate Career & Tarot Calling", desc: "While thriving in the corporate world, curiosity led Ektaz to study Tarot on the side, quickly transforming from an exploration into a lifelong calling." },
+  { year: "Initiation", title: "Trained in Reiki & Pranic Healing", desc: "Studying under revered spiritual gurus, Ektaz was initiated into Reiki and Pranic Healing, carrying their blessings into every consultation." },
+  { year: "Crystals", title: "Ethical Sourcing Across the Globe", desc: "Immersing herself in the mineral kingdom, studying energetic frequencies, and sourcing authentic, high-vibration crystals worldwide." },
+  { year: "Sanctuary", title: "Selenite Soul", desc: "Uniting Tarot, energy healing, and crystals into a sacred sanctuary helping seekers navigate challenges, find clarity, and cultivate deep faith." },
 ];
 
 const modalities = [
@@ -59,7 +59,7 @@ export default function About() {
             <span className="italic text-[#a5762a]">Meets the Modern Soul</span>
           </h1>
           <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
-            Selenite Soul is Ekta's life's devotion: a sacred bridge between Vedic astrology, intuitive Tarot, Pythagorean numerology, and the healing intelligence of crystals.
+            Selenite Soul is Ektaz Shah's life devotion: a sacred bridge between intuitive Tarot, certified Reiki and Pranic Healing, and the living intelligence of ethically sourced crystals.
           </p>
         </motion.div>
       </section>
@@ -84,7 +84,7 @@ export default function About() {
               {[
                 { numeral: "I", label: "Ancient Vedic Wisdom", desc: "Jyotish, Tarot, and Numerology: three ancient sciences aligned to decode your cosmic blueprint with mathematical precision." },
                 { numeral: "II", label: "Earth's Crystal Resonance", desc: "100% natural, lab-tested gemstones ethically sourced from generational mines and energized under sacred full-moon rituals." },
-                { numeral: "III", label: "Ekta's Sovereign Intention", desc: "Every reading and crystal carries the personal devotion of over a decade of continuous study and client service." },
+                { numeral: "III", label: "Ektaz's Sovereign Intention", desc: "Every reading and crystal carries the personal devotion of over a decade of continuous study and client service." },
               ].map((item) => (
                 <div key={item.label} className="p-8 md:p-10 flex flex-col justify-between group hover:bg-[#fcf5ed] transition-colors">
                   <div>
@@ -102,44 +102,133 @@ export default function About() {
               <p className="text-base md:text-lg text-[#2a1f1a] leading-relaxed italic font-light" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
                 "I believe every person carries a unique cosmic blueprint written in the stars, in numbers, and in the crystals that call to them. My mission is to help you remember your own innate truth and live from sovereign clarity."
               </p>
-              <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-[#a5762a]">Ekta, Founder of Selenite Soul</p>
+              <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-[#a5762a]">Ektaz Shah, Founder of Selenite Soul</p>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ── EKTA'S STORY ─────────────────────────────────────────────────────────── */}
-      <section className="py-10 md:py-14 px-6 bg-[#f7ebe1]">
-        <div className="max-w-[1200px] mx-auto">
+      {/* ── MEET EKTAZ SHAH: HER STORY & LETTER ────────────────────────────────────── */}
+      <section className="py-12 md:py-16 px-6 bg-[#f7ebe1]">
+        <div className="max-w-[1240px] mx-auto">
           <ScrollReveal>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-px w-8 bg-[#c8a951]/60" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a]">Ekta's Origin</span>
-                </div>
-                <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-6 leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-                  A Journey from Seeking to Guiding
-                </h2>
-                <p className="text-sm text-[#4a3020]/80 leading-relaxed mb-4 font-light">
-                  Ekta's path to becoming a healer began not in a classroom, but in a moment of profound personal stillness. In 2012, during a pilgrimage to Haridwar, a sage placed a raw amethyst in her hands and said: <em className="italic text-[#2a1f1a]">"The Earth already knows your answer."</em>
-                </p>
-                <p className="text-sm text-[#4a3020]/80 leading-relaxed mb-4 font-light">
-                  That moment cracked something open. Over the next decade, Ekta immersed herself in Vedic astrology (Jyotish), Pythagorean Numerology, intuitive Tarot reading, and crystal healing, studying formally in Pune, and privately with masters across India.
-                </p>
-                <p className="text-sm text-[#4a3020]/80 leading-relaxed font-light">
-                  In 2019, Selenite Soul was born not as a commercial entity, but as a sacred sanctuary. To bring these ancient tools into the hands of every modern seeker looking for grounded clarity and emotional restoration.
-                </p>
-              </div>
-
-              <div className="relative" data-cursor="hover">
-                <div className="overflow-hidden rounded-sm border border-[#c8a951]/40 shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-10 md:gap-14 items-start">
+              {/* Photo & Credential Pillar */}
+              <div className="lg:sticky lg:top-24">
+                <div className="relative overflow-hidden rounded-sm border border-[#c8a951]/40 shadow-2xl bg-white" data-cursor="hover">
                   <img
                     src="/ekta-founder.webp"
-                    alt="Ekta, Founder of Selenite Soul"
-                    className="w-full aspect-[4/3] object-cover object-[center_16%]"
+                    alt="Ektaz Shah, Founder of Selenite Soul"
+                    className="w-full aspect-[4/5] object-cover object-[center_12%]"
                     loading="lazy"
                   />
+                  <div className="p-6 bg-white border-t border-[#e8d9cf]">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] block mb-1">Founder · Selenite Soul</span>
+                    <h3 className="text-2xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Ektaz Shah</h3>
+                    <p className="text-xs text-[#4a3020]/70 mt-1">Tarot · Reiki · Pranic Healing · Crystals</p>
+
+                    <div className="mt-4 pt-4 border-t border-[#e8d9cf] space-y-2">
+                      <div className="flex items-center gap-2 text-xs text-[#4a3020]/80">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c8a951]" />
+                        <span>Kerala Astrology & Spiritual Upbringing</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-[#4a3020]/80">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c8a951]" />
+                        <span>Corporate Background to Sacred Tarot</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-[#4a3020]/80">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c8a951]" />
+                        <span>Initiated in Reiki & Pranic Healing</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-[#4a3020]/80">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c8a951]" />
+                        <span>Ethically Sourced Crystals Worldwide</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Authentic Story Letter */}
+              <div className="bg-white/90 p-8 sm:p-10 md:p-12 border border-[#c8a951]/30 rounded-sm shadow-xl backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-8 bg-[#c8a951]/60" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Meet Ektaz Shah</span>
+                </div>
+
+                <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-6 leading-tight" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                  Some journeys begin<br />
+                  <em className="italic text-[#a5762a]">long before we realise we're on them.</em>
+                </h2>
+
+                <div className="space-y-4 text-sm text-[#4a3020]/85 font-light leading-relaxed">
+                  <p>
+                    Growing up, astrology and spirituality were simply a part of my life. My father would take us to meet astrologers across Kerala, and our home was filled with little rituals, remedies and practices believed to invite good luck, open doors and bring positive energy into our lives.
+                  </p>
+                  <p>
+                    Of all of us, I was always the ardent follower. I believed. I participated. And, perhaps without knowing it then, I was absorbing a world that I would return to much more deeply years later.
+                  </p>
+                  <p>
+                    While building my career in the corporate world, I began learning Tarot on the side. What started as curiosity slowly became a calling. One practice led me to another: I trained in Reiki and Pranic Healing, learnt under wonderful gurus whose teachings and blessings continue to guide me, and found myself going deeper into the fascinating world of crystals and their energies.
+                  </p>
+                  <p>
+                    Crystals, especially, became a passion. I started studying them, experiencing them, understanding their different properties and sourcing beautiful crystals from across the world.
+                  </p>
+                  <p className="font-normal text-[#2a1f1a]">
+                    Eventually, all these different paths came together to become Selenite Soul.
+                  </p>
+                </div>
+
+                {/* Purpose Highlight */}
+                <div className="my-8 p-6 bg-[#fcf8f4] border-l-4 border-[#c8a951] rounded-sm">
+                  <p className="text-xs uppercase tracking-[0.25em] font-bold text-[#a5762a] mb-2">My Purpose</p>
+                  <p className="text-xl md:text-2xl font-light text-[#2a1f1a] leading-snug mb-3" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                    "At the heart of it, though, my purpose is very simple: I love helping people."
+                  </p>
+                  <p className="text-xs md:text-sm text-[#4a3020]/80 leading-relaxed font-light">
+                    If something I have learnt can help someone find clarity, feel more positive, navigate a difficult phase or bring a little more hope into their life, that is what makes this journey meaningful to me.
+                  </p>
+                </div>
+
+                {/* The Faith Creed */}
+                <div className="space-y-4 text-sm text-[#4a3020]/85 font-light leading-relaxed">
+                  <p className="text-base text-[#2a1f1a] font-normal" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                    I don't want you to come here looking for magic that will change your life overnight. I ask for just one thing from you:
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                    <div className="p-4 bg-[#fdf3ec] border border-[#c8a951]/40 rounded-sm text-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#a5762a] block mb-1">01</span>
+                      <p className="text-sm font-medium text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Faith in the process</p>
+                    </div>
+                    <div className="p-4 bg-[#fdf3ec] border border-[#c8a951]/40 rounded-sm text-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#a5762a] block mb-1">02</span>
+                      <p className="text-sm font-medium text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Faith in your intention</p>
+                    </div>
+                    <div className="p-4 bg-[#fdf3ec] border border-[#c8a951]/40 rounded-sm text-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#a5762a] block mb-1">03</span>
+                      <p className="text-sm font-medium text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Faith in yourself</p>
+                    </div>
+                  </div>
+
+                  <p>
+                    Because when you approach these practices with an open heart and genuine belief, you allow yourself to connect with them at a much deeper level.
+                  </p>
+
+                  <div className="pt-6 mt-6 border-t border-[#e8d9cf] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <p className="text-lg text-[#2a1f1a] font-light" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                        Welcome to Selenite Soul.
+                      </p>
+                      <p className="text-xs text-[#a5762a] italic font-light">
+                        May you find here whatever your soul came looking for.
+                      </p>
+                    </div>
+                    <div className="sm:text-right">
+                      <p className="text-base text-[#2a1f1a] font-medium" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Ektaz Shah</p>
+                      <p className="text-[9px] uppercase tracking-widest text-[#4a3020]/60">Founder · Selenite Soul</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,7 +236,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── EKTA'S JOURNEY TIMELINE ──────────────────────────────────────────────── */}
+      {/* ── EKTAZ'S JOURNEY TIMELINE ──────────────────────────────────────────────── */}
       <section className="py-10 md:py-14 px-6 bg-[#1a0e08] text-white">
         <div className="max-w-[1000px] mx-auto">
           <ScrollReveal className="text-center mb-8 md:mb-10">
@@ -233,9 +322,9 @@ export default function About() {
       {/* ── CTA ─────────────────────────────────────────────────────────────────── */}
       <section className="py-10 md:py-14 px-6 bg-[#f7ebe1] text-center">
         <ScrollReveal>
-          <h2 className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Begin Your Journey with Ekta</h2>
+          <h2 className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Begin Your Journey with Ektaz</h2>
           <p className="text-xs md:text-sm text-[#4a3020]/75 mb-8 max-w-md mx-auto leading-relaxed font-light">
-            Whether you seek clarity through the stars, the cards, numbers, or healing crystals, Ekta is here to guide you home to yourself.
+            Whether you seek clarity through the stars, the cards, numbers, or healing crystals, Ektaz is here to guide you home to yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/kundali">

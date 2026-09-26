@@ -74,7 +74,7 @@ function MagLink({ href, children, className = "" }: { href: string; children: R
 // GOLD MARQUEE TRUST STRIP
 // ─────────────────────────────────────────────────────────────────────────────
 function TrustStrip() {
-  const items = ["100% Natural Crystals", "Full Moon Energised", "Lab Tested & Certified", "1.5L+ Lives Guided", "Ethically Sourced", "Vedic Wisdom", "Handpicked by Ekta"];
+  const items = ["100% Natural Crystals", "Full Moon Energised", "Lab Tested & Certified", "1.5L+ Lives Guided", "Ethically Sourced", "Vedic Wisdom", "Handpicked by Ektaz"];
   return (
     <div className="bg-[#c8a951] overflow-hidden py-3.5 select-none shadow-md">
       <motion.div
@@ -93,16 +93,16 @@ function TrustStrip() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 2. EKTA'S STORY
+// 2. EKTAZ SHAH'S STORY
 // ─────────────────────────────────────────────────────────────────────────────
 function EktaStory() {
   const sectionRef = useGSAPReveal({ staggerSelector: ".ekta-reveal", staggerDelay: 0.13, from: { opacity: 0, y: 60 }, start: "top 80%" });
   const imgRef = useParallax(0.12);
 
   const stats = [
-    { target: 10, suffix: "+", label: "Years of Study" },
-    { target: 150000, suffix: "+", label: "Lives Guided" },
-    { target: 3, suffix: "", label: "Sacred Disciplines" },
+    { target: 10, suffix: "+", label: "Years Guided" },
+    { target: 150000, suffix: "+", label: "Lives Touched" },
+    { target: 4, suffix: "", label: "Healing Arts" },
   ];
   const c1 = useCounter(stats[0].target, stats[0].suffix);
   const c2 = useCounter(stats[1].target, stats[1].suffix);
@@ -117,7 +117,7 @@ function EktaStory() {
           <motion.img
             ref={imgRef as any}
             src="/ekta-founder.webp"
-            alt="Ekta, Founder of Selenite Soul"
+            alt="Ektaz Shah, Founder of Selenite Soul"
             className="w-full h-full object-cover object-[center_8%] sm:object-[center_12%] lg:object-[center_18%] scale-105"
             loading="eager"
           />
@@ -138,8 +138,8 @@ function EktaStory() {
             transition={{ duration: 0.2 }}
           >
             <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-0.5 sm:mb-1">Founder · Selenite Soul</p>
-            <p className="text-sm sm:text-lg text-[#2a1f1a] leading-snug" style={serif}>Ekta</p>
-            <p className="text-[8.5px] sm:text-[10px] text-[#4a3020]/60 mt-0.5">Jyotish · Tarot · Numerology · Crystal Healing</p>
+            <p className="text-sm sm:text-lg text-[#2a1f1a] leading-snug" style={serif}>Ektaz Shah</p>
+            <p className="text-[8.5px] sm:text-[10px] text-[#4a3020]/60 mt-0.5">Tarot · Reiki · Pranic Healing · Crystals</p>
           </motion.div>
         </div>
 
@@ -147,25 +147,35 @@ function EktaStory() {
         <div className="flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-14 xl:px-20 py-8 sm:py-10 lg:py-12">
           <div className="ekta-reveal flex items-center gap-3 mb-4 sm:mb-6">
             <div className="h-px w-8 sm:w-10 bg-[#c8a951]/60" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Ekta's Story</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a5762a]">Meet Ektaz Shah</span>
           </div>
 
-          <h2 className="ekta-reveal text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-light text-[#2a1f1a] leading-[1.15] mb-5 sm:mb-7" style={serif}>
-            A Journey From<br />
-            <em className="italic text-[#a5762a]">Seeking to Guiding</em>
+          <h2 className="ekta-reveal text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-light text-[#2a1f1a] leading-[1.15] mb-5 sm:mb-6" style={serif}>
+            Some journeys begin<br />
+            <em className="italic text-[#a5762a]">long before we realise we're on them</em>
           </h2>
 
-          <div className="ekta-reveal space-y-3 sm:space-y-4 mb-6 sm:mb-8 max-w-lg">
-            <p className="text-xs sm:text-sm text-[#4a3020]/80 leading-[1.85] font-light">
-              In 2012, during a pilgrimage to Haridwar, a sage placed a raw amethyst in Ekta's hands and said: <span className="italic text-[#2a1f1a] font-medium">"The Earth already knows your answer."</span>
+          <div className="ekta-reveal space-y-3 mb-5 max-w-lg">
+            <p className="text-xs sm:text-sm text-[#4a3020]/80 leading-[1.8] font-light">
+              Growing up, astrology and spirituality were simply a part of my life. My father would take us to meet astrologers across Kerala, and our home was filled with little rituals, remedies and practices believed to invite good luck, open doors and bring positive energy into our lives. Of all of us, I was always the ardent follower.
             </p>
-            <p className="text-xs sm:text-sm text-[#4a3020]/75 leading-[1.85] font-light">
-              That moment ignited a decade of immersion in Vedic Jyotish, Pythagorean Numerology, intuitive Tarot, and crystal healing. In 2019, Selenite Soul was born.
+            <p className="text-xs sm:text-sm text-[#4a3020]/80 leading-[1.8] font-light">
+              While building my career in the corporate world, I began learning Tarot on the side. Curiosity slowly became a calling: I trained in Reiki and Pranic Healing under wonderful gurus, and immersed myself in the fascinating world of crystals.
             </p>
+
+            {/* The Faith Highlight Box */}
+            <div className="p-4 bg-white/90 border border-[#c8a951]/40 border-l-2 border-l-[#c8a951] rounded-sm shadow-sm backdrop-blur-sm">
+              <p className="text-xs text-[#2a1f1a] font-light leading-relaxed italic" style={serif}>
+                "I ask for just one thing from you: Faith. Faith in the process. Faith in your intention. And most importantly, faith in yourself."
+              </p>
+              <p className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] mt-2">
+                Ektaz Shah · Founder
+              </p>
+            </div>
           </div>
 
           {/* Animated counters */}
-          <div className="ekta-reveal flex flex-wrap sm:flex-nowrap gap-5 sm:gap-8 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-[#e8d9cf]">
+          <div className="ekta-reveal flex flex-wrap sm:flex-nowrap gap-5 sm:gap-8 mb-6 pb-6 border-b border-[#e8d9cf]">
             {stats.map((stat, i) => (
               <div key={stat.label} className="min-w-[90px]">
                 <p ref={counters[i]} className="text-xl sm:text-2xl text-[#a5762a] font-light" style={serif}>
@@ -181,7 +191,7 @@ function EktaStory() {
               className="inline-flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.24em] text-[#a5762a] group"
               whileHover={{ x: 4 }}
             >
-              Read Ekta's Full Story
+              Read Ektaz's Full Story
               <motion.span
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -202,7 +212,7 @@ function EktaStory() {
 const pillars = [
   { num: "01", title: "Ancient Vedic Wisdom", body: "Jyotish, Tarot, and Numerology: three sacred systems that have guided humanity for millennia, now decoded for your modern path." },
   { num: "02", title: "Earth's Crystal Energy", body: "Every stone is ethically sourced, lab-tested for authenticity, and ceremonially energised under the full moon before it reaches you." },
-  { num: "03", title: "Ekta's Sacred Intention", body: "Each reading carries the energy of over a decade of dedicated study and thousands of personal client sessions." },
+  { num: "03", title: "Ektaz's Sacred Intention", body: "Each reading carries the energy of over a decade of dedicated study and thousands of personal client sessions." },
   { num: "04", title: "Holistic Healing", body: "We work across physical, emotional, mental, and spiritual layers, because true healing is never one-dimensional." },
 ];
 
@@ -296,7 +306,7 @@ function BrandPhilosophy() {
             "I believe every person carries a cosmic blueprint: a unique energetic signature written in the stars, in numbers, and in the crystals that call to them."
           </p>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">
-            Ekta, Founder of Selenite Soul
+            Ektaz Shah, Founder of Selenite Soul
           </p>
         </motion.div>
       </div>
@@ -449,7 +459,7 @@ function CrystalsSection() {
             Discover Your<br /><em className="italic text-[#a5762a]">Healing Crystal</em>
           </h2>
           <p className="cr-reveal text-sm md:text-base text-[#4a382e]/85 leading-[1.85] mb-8 max-w-[480px] font-light">
-            Every crystal at Selenite Soul is personally selected by Ekta, ethically sourced, lab-tested, and energised under the full moon.
+            Every crystal at Selenite Soul is personally selected by Ektaz, ethically sourced, lab-tested, and energised under the full moon.
           </p>
 
           {/* Animated stats */}

@@ -907,7 +907,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                 <div className="flex flex-wrap gap-4">
                   <Link href="/tarot#book">
                     <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/40 transition-all cursor-pointer">
-                      Book Consultation with Ekta <ArrowRight className="w-3.5 h-3.5" />
+                      Book Consultation with Ektaz <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </Link>
                   <Link href="/shop">

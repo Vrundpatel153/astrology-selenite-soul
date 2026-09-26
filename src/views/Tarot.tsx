@@ -108,7 +108,7 @@ const sessionSteps = [
     num: "02",
     phase: "Channelling",
     title: "The Bespoke Oracle Spread",
-    desc: "Ekta lays a customized spread tailored specifically to your inquiry, weaving archetypal geometry and celestial aspects.",
+    desc: "Ektaz lays a customized spread tailored specifically to your inquiry, weaving archetypal geometry and celestial aspects.",
   },
   {
     num: "03",
@@ -144,7 +144,7 @@ function BookingForm({ id }: { id: string }) {
     setTimeout(() => {
       setLoading(false);
       setDone(true);
-      toast.success("Booking request received! Ekta will confirm your appointment within 24 hours.");
+      toast.success("Booking request received! Ektaz will confirm your appointment within 24 hours.");
     }, 1200);
   }
 
@@ -165,7 +165,7 @@ function BookingForm({ id }: { id: string }) {
               Booking Request Received
             </h3>
             <p className="text-[#4a382e]/80 mb-6 max-w-md mx-auto text-sm leading-relaxed font-light">
-              Thank you, {form.name}. Ekta will personally review your inquiry and confirm your appointment details within 24 hours via email at <span className="font-semibold text-[#a5762a]">{form.email}</span>.
+              Thank you, {form.name}. Ektaz will personally review your inquiry and confirm your appointment details within 24 hours via email at <span className="font-semibold text-[#a5762a]">{form.email}</span>.
             </p>
             <button
               onClick={() => { setDone(false); setForm({ name: "", email: "", phone: "", date: "", time: "", message: "" }); }}
@@ -262,10 +262,10 @@ function BookingForm({ id }: { id: string }) {
 
 // ─── FAQ accordion ─────────────────────────────────────────────────────────────
 const faqs = [
-  { q: "How long is a Tarot reading session?", a: "Each reading is 45 to 60 minutes, conducted via private high-definition video call or in person. Ekta ensures dedicated time for in-depth questions and custom spread interpretations." },
-  { q: "Do I need prior knowledge of Tarot?", a: "Not at all. You only need an open heart and a willingness to explore your path. Ekta translates the archetypal symbolism into clear, grounded guidance." },
-  { q: "Is Tarot fortune-telling or deterministic?", a: "Ekta's philosophy honors your sovereign free will. Tarot serves as an intuitive mirror reflecting present energetic trajectories, empowering you to make aligned choices." },
-  { q: "What is included with my session?", a: "In addition to your live consultation, Ekta provides a personalized crystal prescription and a recap of key affirmations to anchor your session's energy." },
+  { q: "How long is a Tarot reading session?", a: "Each reading is 45 to 60 minutes, conducted via private high-definition video call or in person. Ektaz ensures dedicated time for in-depth questions and custom spread interpretations." },
+  { q: "Do I need prior knowledge of Tarot?", a: "Not at all. You only need an open heart and a willingness to explore your path. Ektaz translates the archetypal symbolism into clear, grounded guidance." },
+  { q: "Is Tarot fortune-telling or deterministic?", a: "Ektaz's philosophy honors your sovereign free will. Tarot serves as an intuitive mirror reflecting present energetic trajectories, empowering you to make aligned choices." },
+  { q: "What is included with my session?", a: "In addition to your live consultation, Ektaz provides a personalized crystal prescription and a recap of key affirmations to anchor your session's energy." },
   { q: "Can I record or take notes during the reading?", a: "Yes, you are warmly encouraged to record or take notes so you can revisit the insights whenever you need guidance." },
 ];
 
@@ -327,10 +327,10 @@ export default function Tarot() {
           </div>
           <h1 className="text-5xl md:text-7xl font-light text-[#2a1f1a] leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Tarot Reading<br />
-            <span className="italic text-[#a5762a]">with Ekta</span>
+            <span className="italic text-[#a5762a]">with Ektaz</span>
           </h1>
           <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
-            Not fortune-telling, but a sacred mirror reflecting your soul's highest wisdom. Draw from the 3D deck below or schedule an intimate consultation with Ekta.
+            Not fortune-telling, but a sacred mirror reflecting your soul's highest wisdom. Draw from the 3D deck below or schedule an intimate consultation with Ektaz.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#interactive-deck">
@@ -380,7 +380,7 @@ export default function Tarot() {
               <div className="h-px w-8 bg-[#c8a951]/60" />
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-              What Ekta Guides You On
+              What Ektaz Guides You On
             </h2>
             <p className="text-[#4a382e]/75 max-w-xl mx-auto text-xs md:text-sm leading-relaxed font-light">
               Each domain bridges deep archetypal Tarot wisdom with planetary alignments and crystal remedies.
@@ -480,7 +480,7 @@ export default function Tarot() {
               <div className="h-px w-8 bg-[#c8a951]/60" />
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-              Book Your Consultation with Ekta
+              Book Your Consultation with Ektaz
             </h2>
             <p className="text-[#4a382e]/80 max-w-md mx-auto text-xs md:text-sm font-light leading-relaxed">
               Step into a private sanctuary of intuitive wisdom. Select your preferred date and time below.

@@ -145,7 +145,7 @@ function reduceNumber(num: number): number {
 export default function InteractiveNumerologyMatrix({ className = "" }: { className?: string }) {
   const [activeTab, setActiveTab] = useState<"lifepath" | "name">("lifepath");
   const [birthDate, setBirthDate] = useState("1996-08-15");
-  const [nameInput, setNameInput] = useState("Ekta Sharma");
+  const [nameInput, setNameInput] = useState("Ektaz Shah");
 
   // Calculate Life Path
   const calculateLifePath = (dateStr: string) => {
