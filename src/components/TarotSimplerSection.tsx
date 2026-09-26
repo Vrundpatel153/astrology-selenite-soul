@@ -1,16 +1,14 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, CheckCircle, Calendar, MessageCircle } from "lucide-react";
+import { X, ArrowRight, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
 interface ReadingType {
   id: string;
   title: string;
   desc: string;
-  bgColor: string;
-  iconColor: string;
-  icon: (color: string) => React.ReactNode;
+  image: string;
 }
 
 const READING_TYPES: ReadingType[] = [
@@ -18,60 +16,25 @@ const READING_TYPES: ReadingType[] = [
     id: "love",
     title: "Love & Relationships",
     desc: "Gain clarity on your current relationship, a new connection or your heart's next chapter.",
-    bgColor: "bg-[#faece7]",
-    iconColor: "#c27464",
-    icon: (color) => (
-      <svg className="w-8 h-8 fill-none" style={{ stroke: color }} viewBox="0 0 24 24" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-      </svg>
-    ),
+    image: "/tarot-icon-love.jpg",
   },
   {
     id: "career",
     title: "Career & Work",
     desc: "Explore opportunities, make confident decisions and align your work with your purpose.",
-    bgColor: "bg-[#fbf1db]",
-    iconColor: "#b28637",
-    icon: (color) => (
-      <svg className="w-8 h-8 fill-none" style={{ stroke: color }} viewBox="0 0 24 24" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="4" />
-        <line x1="12" y1="2" x2="12" y2="4" />
-        <line x1="12" y1="20" x2="12" y2="22" />
-        <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
-        <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-        <line x1="2" y1="12" x2="4" y2="12" />
-        <line x1="20" y1="12" x2="22" y2="12" />
-        <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
-        <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-      </svg>
-    ),
+    image: "/tarot-icon-career.jpg",
   },
   {
     id: "general",
     title: "General Guidance",
     desc: "Ask anything. Get intuitive insights and guidance for where you are right now.",
-    bgColor: "bg-[#f3ebf6]",
-    iconColor: "#8f6ea8",
-    icon: (color) => (
-      <svg className="w-8 h-8 fill-none" style={{ stroke: color }} viewBox="0 0 24 24" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-      </svg>
-    ),
+    image: "/tarot-icon-guidance.jpg",
   },
   {
     id: "year-ahead",
     title: "Year Ahead Reading",
     desc: "A broader look at the energy, opportunities and themes for the year ahead.",
-    bgColor: "bg-[#eaf1ea]",
-    iconColor: "#5f8563",
-    icon: (color) => (
-      <svg className="w-8 h-8 fill-none" style={{ stroke: color }} viewBox="0 0 24 24" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22V11" />
-        <path d="M12 11C12 6 7 4 2 5c0 5 3 9 10 9" />
-        <path d="M12 11c0-5 5-7 10-6 0 5-3 9-10 9" />
-        <circle cx="12" cy="4" r="1.8" />
-      </svg>
-    ),
+    image: "/tarot-icon-year.jpg",
   },
 ];
 
@@ -79,38 +42,26 @@ const PROCESS_STEPS = [
   {
     step: "1. BOOK",
     desc: "Choose your reading and preferred time.",
-    icon: <Calendar className="w-5 h-5 text-[#8c6b4b] stroke-[1.5]" />,
+    image: "/tarot-step-book.jpg",
   },
   {
     step: "2. CONNECT",
     desc: "You'll receive details on WhatsApp / email.",
-    icon: <MessageCircle className="w-5 h-5 text-[#8c6b4b] stroke-[1.5]" />,
+    image: "/tarot-step-connect.jpg",
   },
   {
     step: "3. YOUR READING",
     desc: "Join your session (online) at the scheduled time.",
-    icon: (
-      <svg className="w-5 h-5 stroke-[#8c6b4b] fill-none" viewBox="0 0 24 24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="5" width="10" height="15" rx="1" transform="rotate(-9 8 12.5)" />
-        <rect x="11" y="4" width="10" height="15" rx="1" transform="rotate(7 16 11.5)" />
-      </svg>
-    ),
+    image: "/tarot-step-reading.jpg",
   },
   {
     step: "4. INTEGRATE",
     desc: "Receive guidance and simple next steps.",
-    icon: (
-      <svg className="w-5 h-5 stroke-[#8c6b4b] fill-none" viewBox="0 0 24 24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22V10" />
-        <path d="M12 10c-3 0-6 2-6 5s3 5 6 5" />
-        <path d="M12 6c3 0 6 2 6 5s-3 5-6 5" />
-      </svg>
-    ),
+    image: "/tarot-step-integrate.jpg",
   },
 ];
 
 export default function TarotSimplerSection() {
-  const [selectedReading, setSelectedReading] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
@@ -133,7 +84,9 @@ export default function TarotSimplerSection() {
     setIsModalOpen(true);
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -158,13 +111,13 @@ export default function TarotSimplerSection() {
          ───────────────────────────────────────────────────────────── */}
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-12 max-w-[1360px] mx-auto">
         {/* Header */}
-        <div className="mb-10 md:mb-14">
-          <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2.5">
+        <div className="mb-10 md:mb-12">
+          <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-[#8c6b4b] mb-2">
             CHOOSE A READING
           </p>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <h2
-              className="text-3xl sm:text-4xl md:text-[44px] font-light text-[#2a1f1a] leading-tight"
+              className="text-3xl sm:text-4xl md:text-[44px] font-light text-[#1a0e05] leading-tight"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
               Read the Signs. Find Your Clarity.
@@ -185,33 +138,35 @@ export default function TarotSimplerSection() {
               key={item.id}
               whileHover={{ y: -4 }}
               transition={{ duration: 0.25 }}
-              className="bg-white border border-[#e8d9cf] p-7 md:p-8 flex flex-col items-center text-center rounded-sm shadow-xs hover:shadow-md hover:border-[#c8a951]/70 transition-all"
+              className="bg-white border border-[#e8dcd0] p-7 md:p-8 flex flex-col items-center text-center rounded-sm shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-[#c8a951]/70 transition-all"
             >
-              {/* Soft Circular Icon */}
-              <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-xs ${item.bgColor}`}
-              >
-                {item.icon(item.iconColor)}
+              {/* Exact Circular Watercolor Icon */}
+              <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden mb-6 flex items-center justify-center select-none pointer-events-none bg-white">
+                <img
+                  src={`${item.image}?v=2`}
+                  alt={item.title}
+                  className="w-full h-full object-cover object-center scale-135"
+                />
               </div>
 
               {/* Title */}
               <h3
-                className="text-lg md:text-[19px] font-serif font-light text-[#2a1f1a] mb-3"
+                className="text-lg md:text-[20px] font-serif font-light text-[#1a0e05] mb-3"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[12px] md:text-[12.5px] text-[#6b5645] leading-relaxed mb-6 font-light flex-1">
+              <p className="text-[12.5px] md:text-[13px] text-[#5c4a3e] leading-relaxed mb-6 font-light flex-1">
                 {item.desc}
               </p>
 
-              {/* Book Now Button */}
+              {/* Exact Book Now Button */}
               <button
                 type="button"
                 onClick={() => handleOpenBooking(item.title)}
-                className="px-5 py-2 border border-[#d8c5b4] text-[#2a1f1a] hover:border-[#2a1f1a] hover:bg-[#2a1f1a] hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest rounded-xs cursor-pointer inline-flex items-center gap-1.5"
+                className="px-6 py-2.5 border border-[#c2a278] text-[#8c6b4b] hover:border-[#1a0e05] hover:bg-[#1a0e05] hover:text-white transition-all text-[10px] font-bold uppercase tracking-[0.2em] rounded-xs cursor-pointer inline-flex items-center gap-2"
               >
                 <span>BOOK NOW</span>
                 <span>→</span>
@@ -227,13 +182,13 @@ export default function TarotSimplerSection() {
       <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-12 max-w-[1360px] mx-auto border-t border-[#ede0d4]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
           {/* Left: 4-Step Process (7 cols) */}
-          <div className="lg:col-span-7 bg-[#fbf7f2] border border-[#e8d9cf] p-6 sm:p-8 md:p-10 flex flex-col justify-between rounded-sm">
+          <div className="lg:col-span-7 bg-[#fbf7f2] border border-[#e8dcd0] p-6 sm:p-8 md:p-10 flex flex-col justify-between rounded-sm">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#8c6b4b] mb-2">
                 HOW IT WORKS
               </p>
               <h3
-                className="text-2xl sm:text-3xl font-light text-[#2a1f1a] mb-8"
+                className="text-2xl sm:text-3xl font-light text-[#1a0e05] mb-8"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 A Simple, Soulful Process
@@ -243,18 +198,22 @@ export default function TarotSimplerSection() {
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-2 relative">
                 {PROCESS_STEPS.map((step, idx) => (
                   <div key={step.step} className="flex flex-col items-center text-center relative px-1">
-                    {/* Circle icon */}
-                    <div className="w-13 h-13 rounded-full bg-[#f2e6dc] border border-[#e8d9cf]/60 flex items-center justify-center mb-3.5 shadow-xs">
-                      {step.icon}
+                    {/* Circle icon with exact image */}
+                    <div className="w-16 h-16 rounded-full overflow-hidden mb-3.5 shadow-xs select-none pointer-events-none bg-[#f2e6dc]">
+                      <img
+                        src={`${step.image}?v=2`}
+                        alt={step.step}
+                        className="w-full h-full object-cover object-center scale-135"
+                      />
                     </div>
 
                     {/* Step label */}
-                    <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#2a1f1a] mb-1.5">
+                    <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#1a0e05] mb-1.5">
                       {step.step}
                     </h4>
 
                     {/* Step subtitle */}
-                    <p className="text-[11px] text-[#6b5645] leading-relaxed font-light">
+                    <p className="text-[11.5px] text-[#5c4a3e] leading-relaxed font-light">
                       {step.desc}
                     </p>
 
@@ -270,81 +229,86 @@ export default function TarotSimplerSection() {
             </div>
           </div>
 
-          {/* Right: Quote Card (5 cols) */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#f8ece2] via-[#f5e6da] to-[#ecdcd0] border border-[#e8d9cf] p-8 md:p-10 flex flex-col justify-between text-center relative overflow-hidden rounded-sm shadow-xs">
-            {/* Subtle botanical branch background watermark */}
-            <div className="absolute right-0 bottom-0 pointer-events-none opacity-20">
-              <svg className="w-44 h-44 stroke-[#8c6b4b] fill-none" viewBox="0 0 100 100" strokeWidth="1">
-                <path d="M20 90 Q 60 70 80 20" />
-                <path d="M45 75 Q 35 60 40 50 Q 55 58 45 75" />
-                <path d="M60 55 Q 75 45 70 35 Q 55 45 60 55" />
-                <path d="M70 38 Q 85 28 80 18 Q 68 28 70 38" />
-              </svg>
-            </div>
-
+          {/* Right: Exact Blush Watercolor Quote Card (5 cols) */}
+          <div
+            className="lg:col-span-5 border border-[#e8dcd0] p-8 md:p-10 flex flex-col justify-between text-center relative overflow-hidden rounded-sm shadow-xs min-h-[360px]"
+            style={{
+              backgroundImage: "url('/tarot-quote-bg.jpg?v=2')",
+              backgroundSize: "cover",
+              backgroundPosition: "right center",
+            }}
+          >
             {/* Top quote glyph */}
-            <div className="mb-4">
-              <svg className="w-8 h-8 fill-[#a5762a]/40 mx-auto" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
+            <div className="mb-2">
+              <span
+                className="text-4xl text-[#a5762a] font-serif leading-none block"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                “
+              </span>
             </div>
 
             {/* Quote content */}
             <blockquote className="my-auto py-2">
               <p
-                className="text-[15px] sm:text-[16px] md:text-[17px] font-serif italic text-[#2a1f1a] leading-relaxed max-w-sm mx-auto"
+                className="text-[16px] sm:text-[17px] md:text-[18px] font-serif italic text-[#1a0e05] leading-relaxed max-w-sm mx-auto"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
-                "Tarot doesn't predict your future - it helps you see your possibilities more clearly."
+                "Tarot doesn't predict your future — it helps you see your possibilities more clearly."
               </p>
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mt-4">
-                - EKTAZ
+              <div className="w-8 h-px bg-[#c2a278] mx-auto my-3.5" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#1a0e05]">
+                — EKTA
               </p>
             </blockquote>
 
             {/* Bottom Mantra */}
-            <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[#7d6554] mt-6 border-t border-[#e2d0c2] pt-4">
-              TRUST THE CARDS. TRUST YOURSELF.
-            </p>
+            <div className="mt-4 pt-3 border-t border-[#d8c5b4]/50">
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#7d6554]">
+                TRUST THE CARDS.
+              </p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#7d6554] mt-0.5">
+                TRUST YOURSELF.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. GUIDED WITH INTENTION (Banner with Image)
+          3. GUIDED WITH INTENTION (Banner with Exact Altar Image)
          ───────────────────────────────────────────────────────────── */}
       <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-12 max-w-[1360px] mx-auto">
-        <div className="bg-[#f7efe6] border border-[#e8d9cf] rounded-sm overflow-hidden shadow-xs flex flex-col lg:flex-row items-center">
+        <div className="bg-[#fbf7f2] border border-[#e8dcd0] rounded-sm overflow-hidden shadow-xs flex flex-col lg:flex-row items-center">
           {/* Left Altar Image with Amethyst & Smoke */}
-          <div className="w-full lg:w-[45%] h-[260px] sm:h-[320px] lg:h-[380px] relative overflow-hidden shrink-0">
+          <div className="w-full lg:w-[42%] h-[260px] sm:h-[320px] lg:h-[380px] relative overflow-hidden shrink-0">
             <img
-              src="/tarot-intention-altar.jpg"
+              src="/tarot-sacred-altar.jpg"
               alt="Raw amethyst crystal cluster with sacred herbal incense bowl and gentle rising smoke"
               className="w-full h-full object-cover object-center select-none"
               draggable={false}
             />
-            <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/20 via-transparent to-transparent pointer-events-none" />
           </div>
 
           {/* Right Banner Content */}
           <div className="p-7 sm:p-10 lg:p-12 flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-8">
             <div className="max-w-xl">
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#a5762a] mb-2.5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#8c6b4b] mb-2.5">
                 A SAFE, SACRED SPACE
               </p>
               <h3
-                className="text-2xl sm:text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1a0e05] mb-4 leading-tight"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Guided with Intention
               </h3>
-              <p className="text-xs sm:text-[13.5px] text-[#5a483e] leading-relaxed font-light mb-7">
-                Every reading is a space for honest conversations, intuitive insights and compassionate guidance. You're welcome to ask anything with an open heart and an open mind.
+              <p className="text-xs sm:text-[13.5px] text-[#5c4a3e] leading-relaxed font-light mb-7">
+                Every reading is a space for honest conversations, intuitive insights and compassionate guidance. You're welcome to ask anything — with an open heart and an open mind.
               </p>
               <button
                 type="button"
                 onClick={() => handleOpenBooking()}
-                className="bg-[#9e6d44] hover:bg-[#885a33] text-white px-7 py-3.5 text-[11px] font-bold uppercase tracking-widest inline-flex items-center gap-2 rounded-xs shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                className="bg-[#a5762a] hover:bg-[#8c6020] text-white px-7 py-3.5 text-[11px] font-bold uppercase tracking-widest inline-flex items-center gap-2 rounded-xs shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <span>BOOK YOUR TAROT READING</span>
                 <span>→</span>
@@ -368,6 +332,7 @@ export default function TarotSimplerSection() {
                 <span>PERSPECTIVE</span>
                 <span>YOU</span>
               </div>
+              <div className="w-6 h-0.5 bg-[#b88c3a]/60 mx-auto mt-3" />
             </div>
           </div>
         </div>
@@ -376,49 +341,51 @@ export default function TarotSimplerSection() {
       {/* ─────────────────────────────────────────────────────────────
           4. BOTTOM HIGHLIGHT STRIP (3 Highlights)
          ───────────────────────────────────────────────────────────── */}
-      <section className="border-t border-b border-[#e8d9cf] bg-white/70 py-8 md:py-10">
+      <section className="border-t border-b border-[#e8dcd0] bg-white py-8 md:py-10">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e8d9cf]">
-            {/* Feature 1 */}
-            <div className="flex flex-col items-center text-center px-4 py-4 md:py-0">
-              <svg className="w-8 h-8 stroke-[#a5762a] fill-none mb-2" viewBox="0 0 24 24" strokeWidth="1.3">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e8dcd0]">
+            {/* Feature 1: Lotus Flower */}
+            <div className="flex flex-col items-center text-center px-6 py-4 md:py-0">
+              <svg className="w-9 h-9 stroke-[#a5762a] fill-none mb-2.5" viewBox="0 0 24 24" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 4c-1.5 3-3 6.5-3 10a3 3 0 0 0 6 0c0-3.5-1.5-7-3-10z" />
                 <path d="M9 14c-2.5-1-5-1-7 1 2 3.5 5 4 7 2" />
                 <path d="M15 14c2.5-1 5-1 7 1-2 3.5-5 4-7 2" />
+                <path d="M12 17c-2 2-5 2-8 1 2 2 5 2 8 0" />
+                <path d="M12 17c2 2 5 2 8 1-2 2-5 2-8 0" />
               </svg>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2a1f1a] mb-1">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1a0e05] mb-1">
                 INTUITIVE GUIDANCE
               </h4>
-              <p className="text-xs text-[#6b5645] font-light">
+              <p className="text-xs text-[#5c4a3e] font-light">
                 Messages that resonate
               </p>
             </div>
 
-            {/* Feature 2 */}
-            <div className="flex flex-col items-center text-center px-4 py-4 md:py-0">
-              <svg className="w-8 h-8 stroke-[#a5762a] fill-none mb-2" viewBox="0 0 24 24" strokeWidth="1.3">
-                <path d="M12 22V2" />
+            {/* Feature 2: Botanical Leaf */}
+            <div className="flex flex-col items-center text-center px-6 py-4 md:py-0">
+              <svg className="w-9 h-9 stroke-[#a5762a] fill-none mb-2.5" viewBox="0 0 24 24" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22V3" />
                 <path d="M12 6c3 0 6 2 6 5s-3 5-6 5" />
                 <path d="M12 11c-3 0-6 2-6 5s3 5 6 5" />
+                <path d="M12 16c3 0 6 1.5 6 4s-3 4-6 4" />
               </svg>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2a1f1a] mb-1">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1a0e05] mb-1">
                 A JUDGEMENT-FREE SPACE
               </h4>
-              <p className="text-xs text-[#6b5645] font-light">
+              <p className="text-xs text-[#5c4a3e] font-light">
                 Be open, be yourself
               </p>
             </div>
 
-            {/* Feature 3 */}
-            <div className="flex flex-col items-center text-center px-4 py-4 md:py-0">
-              <svg className="w-8 h-8 stroke-[#a5762a] fill-none mb-2" viewBox="0 0 24 24" strokeWidth="1.3">
-                <circle cx="12" cy="12" r="10" />
-                <polygon points="12 3 14.5 9.5 21 12 14.5 14.5 12 21 9.5 14.5 3 12 9.5 9.5" />
+            {/* Feature 3: 4-Point Star */}
+            <div className="flex flex-col items-center text-center px-6 py-4 md:py-0">
+              <svg className="w-9 h-9 stroke-[#a5762a] fill-none mb-2.5" viewBox="0 0 24 24" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2 L14.5 9.5 L22 12 L14.5 14.5 L12 22 L9.5 14.5 L2 12 L9.5 9.5 Z" />
               </svg>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2a1f1a] mb-1">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1a0e05] mb-1">
                 TOOLS FOR REAL LIFE
               </h4>
-              <p className="text-xs text-[#6b5645] font-light">
+              <p className="text-xs text-[#5c4a3e] font-light">
                 Practical insights, deeper clarity
               </p>
             </div>
