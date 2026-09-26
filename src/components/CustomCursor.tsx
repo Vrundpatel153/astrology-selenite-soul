@@ -25,8 +25,19 @@ export default function CustomCursor() {
     const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
     if (isTouch) return;
 
-    // Hide default OS cursor
+    // Hide default OS cursor completely on all elements
     document.documentElement.style.cursor = "none";
+    let styleEl = document.getElementById("force-hide-os-cursor");
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = "force-hide-os-cursor";
+      styleEl.textContent = `
+        *, *::before, *::after, html, body, a, button, input, textarea, select, [role="button"], .cursor-pointer {
+          cursor: none !important;
+        }
+      `;
+      document.head.appendChild(styleEl);
+    }
 
     const updatePosition = (x: number, y: number, curState: CursorState) => {
       if (!cursorRef.current) return;
@@ -124,6 +135,8 @@ export default function CustomCursor() {
       window.removeEventListener("mouseenter", onMouseEnter);
       window.removeEventListener("click", onClick);
       document.documentElement.style.cursor = "";
+      const el = document.getElementById("force-hide-os-cursor");
+      if (el) el.remove();
     };
   }, [isVisible]);
 

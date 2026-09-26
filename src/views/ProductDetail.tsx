@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams, useLocation } from "wouter";
-import { Heart, ShoppingBag, ChevronLeft, Shield, Truck, RotateCcw, Plus, Minus, Compass, ShieldCheck, Check } from "lucide-react";
+import { Heart, ShoppingBag, ChevronLeft, ChevronRight, Shield, Truck, RotateCcw, Plus, Minus, Compass, ShieldCheck, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,7 +17,20 @@ export default function ProductDetail() {
   const [addedAnim, setAddedAnim] = useState(false);
   const [selectedThumb, setSelectedThumb] = useState(0);
 
+  const thumbTrackRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
   const product = products.find(p => p.id === Number(id));
+
+  // Auto-scroll active thumbnail into view
+  useEffect(() => {
+    const el = thumbRefs.current[selectedThumb];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, [selectedThumb]);
 
   if (!product) {
     return (
@@ -39,6 +52,36 @@ export default function ProductDetail() {
   const galleryImages = (product.images && product.images.length > 0) ? product.images : [product.image];
   const activeImage = galleryImages[selectedThumb] || product.image;
   const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+
+  const handlePrev = () => {
+    setSelectedThumb(prev => (prev > 0 ? prev - 1 : galleryImages.length - 1));
+  };
+
+  const handleNext = () => {
+    setSelectedThumb(prev => (prev < galleryImages.length - 1 ? prev + 1 : 0));
+  };
+
+  // Touch swipe handling for mobile
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) addToCart(product);
@@ -79,20 +122,55 @@ export default function ProductDetail() {
 
           {/* Left: Image gallery */}
           <div className="space-y-3">
-            <div className="relative aspect-square bg-[#f7f1ec] overflow-hidden group">
+            {/* Main Image with touch swipe on mobile & thin PC left/right icons */}
+            <div
+              className="relative aspect-square bg-[#f7f1ec] overflow-hidden group touch-pan-y select-none"
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+            >
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeImage}
                   src={activeImage}
                   alt={product.name}
                   className="w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 1.03 }}
+                  initial={{ opacity: 0, scale: 1.02 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
-                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.03 }}
                 />
               </AnimatePresence>
+
+              {/* PC Only: Very simple and thin left/right icons to change images */}
+              {galleryImages.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                    className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#2a1f1a] items-center justify-center border border-[#e8d9cf] hover:border-[#c8a951] shadow-sm transition-all duration-200 cursor-pointer z-10 hover:scale-105"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                    className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#2a1f1a] items-center justify-center border border-[#e8d9cf] hover:border-[#c8a951] shadow-sm transition-all duration-200 cursor-pointer z-10 hover:scale-105"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+                  </button>
+                </>
+              )}
+
+              {/* Mobile image position counter */}
+              {galleryImages.length > 1 && (
+                <div className="md:hidden absolute bottom-3 right-3 bg-black/60 backdrop-blur-xs text-white text-[10px] font-medium px-2 py-0.5 rounded-full tracking-wider pointer-events-none">
+                  {selectedThumb + 1} / {galleryImages.length}
+                </div>
+              )}
+
               {product.badge && (
                 <motion.span
                   initial={{ opacity: 0, x: -8 }}
@@ -114,27 +192,65 @@ export default function ProductDetail() {
                 whileHover={{ scale: 1.12, backgroundColor: "white" }}
                 whileTap={{ scale: 0.85 }}
                 transition={{ duration: 0.15 }}
+                aria-label="Add to wishlist"
               >
                 <motion.div animate={{ scale: wishlisted ? [1, 1.3, 1] : 1 }} transition={{ duration: 0.3 }}>
                   <Heart className={`w-4 h-4 transition-all duration-200 ${wishlisted ? "fill-[#c84b31] text-[#c84b31]" : "text-[#2a1f1a]"}`} />
                 </motion.div>
               </motion.button>
             </div>
-            {/* Thumbnails */}
+
+            {/* Extra Images: Single sliding row, max 5 small images visible, swipeable on mobile, thin PC left/right controls */}
             {galleryImages.length > 1 && (
-              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 gap-2">
-                {galleryImages.map((imgSrc, i) => (
-                  <motion.button
-                    key={i}
-                    onClick={() => setSelectedThumb(i)}
-                    className={`aspect-square bg-[#f7f1ec] overflow-hidden border-2 transition-colors cursor-pointer ${selectedThumb === i ? "border-[#2a1f1a]" : "border-transparent"}`}
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ duration: 0.15 }}
+              <div className="relative flex items-center gap-1.5">
+                {/* PC Only thin left arrow for thumbnail row if > 5 images */}
+                {galleryImages.length > 5 && (
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className="hidden md:flex w-6 h-6 rounded-full bg-white border border-[#e8d9cf] hover:border-[#c8a951] text-[#2a1f1a]/70 hover:text-[#2a1f1a] items-center justify-center shadow-xs transition-colors shrink-0 cursor-pointer"
+                    aria-label="Previous thumbnail"
                   >
-                    <img src={imgSrc} alt={`${product.name} ${i + 1}`} className={`w-full h-full object-cover transition-opacity ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`} />
-                  </motion.button>
-                ))}
+                    <ChevronLeft className="w-3.5 h-3.5 stroke-[1.25]" />
+                  </button>
+                )}
+
+                {/* Sliding row container */}
+                <div
+                  ref={thumbTrackRef}
+                  className="flex items-center gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none w-full py-1 touch-pan-x"
+                >
+                  {galleryImages.map((imgSrc, i) => (
+                    <motion.button
+                      key={i}
+                      ref={el => { thumbRefs.current[i] = el; }}
+                      onClick={() => setSelectedThumb(i)}
+                      className={`aspect-square shrink-0 snap-start bg-[#f7f1ec] overflow-hidden border-2 transition-all cursor-pointer ${
+                        galleryImages.length > 5 ? 'w-[calc((100%-32px)/5)]' : 'flex-1 max-w-[calc((100%-32px)/5)]'
+                      } ${selectedThumb === i ? "border-[#2a1f1a] shadow-xs scale-[0.98]" : "border-transparent opacity-75 hover:opacity-100"}`}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <img
+                        src={imgSrc}
+                        alt={`${product.name} ${i + 1}`}
+                        className={`w-full h-full object-cover transition-opacity ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`}
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* PC Only thin right arrow for thumbnail row if > 5 images */}
+                {galleryImages.length > 5 && (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="hidden md:flex w-6 h-6 rounded-full bg-white border border-[#e8d9cf] hover:border-[#c8a951] text-[#2a1f1a]/70 hover:text-[#2a1f1a] items-center justify-center shadow-xs transition-colors shrink-0 cursor-pointer"
+                    aria-label="Next thumbnail"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 stroke-[1.25]" />
+                  </button>
+                )}
               </div>
             )}
           </div>

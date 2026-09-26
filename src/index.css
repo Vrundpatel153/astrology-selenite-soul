@@ -295,4 +295,31 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* Utility to hide scrollbars while preserving scrolling */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Strictly hide native PC cursor on fine-pointer devices so it never conflicts with the custom cursor */
+@media (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  .cursor-pointer {
+    cursor: none !important;
+  }
 }
