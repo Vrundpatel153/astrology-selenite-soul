@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { Link } from "wouter";
 import { ZodiacGlyph } from "./ZodiacGlyphs";
 
@@ -22,12 +23,15 @@ const signs = [
 ];
 
 export default function ShopByAstrologyCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true,
-    loop: false,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      containScroll: "trimSnaps",
+      dragFree: true,
+      loop: false,
+    },
+    [WheelGesturesPlugin()]
+  );
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
 
@@ -114,10 +118,10 @@ export default function ShopByAstrologyCarousel() {
           <ChevronRight className="w-4 h-4 stroke-[1.25]" />
         </button>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-4 pl-5 md:pl-14">
+        <div className="overflow-hidden select-none" ref={emblaRef}>
+          <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing gap-4 pl-5 md:pl-14">
           {signs.map((sign, idx) => (
-            <Link key={sign.sign} href={`/shop?zodiac=${sign.sign.toLowerCase()}`}>
+            <Link key={sign.sign} href={`/shop?zodiac=${sign.sign.toLowerCase()}`} draggable={false} onDragStart={e => e.preventDefault()}>
               <motion.div
                 className="flex-none cursor-pointer group select-none"
                 style={{ width: "clamp(180px, 16vw, 240px)" }}

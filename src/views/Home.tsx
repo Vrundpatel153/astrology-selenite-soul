@@ -4,6 +4,7 @@ import { Link, useLocation } from "wouter";
 import { motion, useSpring, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus, ArrowRight, Check } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { useCart } from "@/context/CartContext";
 import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
@@ -622,7 +623,10 @@ const shopByProductItems = products.slice(0, 14);
 function ShopByProductCarousel() {
   const [, navigate] = useLocation();
   const { addToCart } = useCart();
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps", dragFree: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { align: "start", containScroll: "trimSnaps", dragFree: true },
+    [WheelGesturesPlugin()]
+  );
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
   const [addedIds, setAddedIds] = useState<Set<number>>(new Set());
@@ -660,7 +664,7 @@ function ShopByProductCarousel() {
           {[{ icon: ChevronLeft, fn: () => emblaApi?.scrollPrev(), disabled: !canPrev },
             { icon: ChevronRight, fn: () => emblaApi?.scrollNext(), disabled: !canNext }].map(({ icon: Icon, fn, disabled }, i) => (
             <motion.button key={i} onClick={fn} disabled={disabled}
-              className="w-11 h-11 border border-[#e0cdb8] flex items-center justify-center text-[#4a3020] disabled:opacity-20 bg-white shadow-sm"
+              className="w-11 h-11 border border-[#e0cdb8] flex items-center justify-center text-[#4a3020] disabled:opacity-20 bg-white shadow-sm cursor-pointer"
               whileHover={{ borderColor: "#c8a951", backgroundColor: "rgba(200,169,81,0.06)" }}
               whileTap={{ scale: 0.93 }}
               data-cursor="hover"
@@ -694,12 +698,12 @@ function ShopByProductCarousel() {
           <ChevronRight className="w-4 h-4 stroke-[1.25]" />
         </button>
 
-        <div className="overflow-hidden border-t border-b border-[#e8d9cf]" ref={emblaRef}>
-          <div className="flex">
+        <div className="overflow-hidden border-t border-b border-[#e8d9cf] select-none" ref={emblaRef}>
+          <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing">
             {shopByProductItems.map(product => (
               <motion.div
                 key={product.id}
-                className="flex-none w-[56vw] sm:w-[40vw] md:w-[280px] lg:w-[300px] border-r border-[#e8d9cf] bg-[#f9f4ef] group cursor-pointer relative overflow-hidden"
+                className="flex-none w-[56vw] sm:w-[40vw] md:w-[280px] lg:w-[300px] border-r border-[#e8d9cf] bg-[#f9f4ef] group cursor-pointer relative overflow-hidden select-none"
                 onClick={() => navigate(`/product/${product.id}`)}
                 whileHover={{ y: -5, boxShadow: "0 16px 40px rgba(42,31,26,0.10)" }}
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
@@ -714,10 +718,12 @@ function ShopByProductCarousel() {
                     {product.badge}{product.savePercent ? ` −${product.savePercent}%` : ""}
                   </div>
                 )}
-                <div className="relative aspect-square w-full p-6 md:p-8 bg-[#f9f4ef] overflow-hidden">
+                <div className="relative aspect-square w-full p-6 md:p-8 bg-[#f9f4ef] overflow-hidden select-none">
                   <motion.img
                     src={product.image} alt={product.name}
-                    className="w-full h-full object-contain mix-blend-multiply"
+                    draggable={false}
+                    onDragStart={e => e.preventDefault()}
+                    className="w-full h-full object-contain mix-blend-multiply select-none pointer-events-none"
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   />

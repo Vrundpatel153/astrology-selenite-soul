@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import { bestSellers, newArrivals, products } from "@/data/products";
@@ -25,7 +26,7 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <motion.div
-      className="flex-none w-[58vw] sm:w-[42vw] md:w-[300px] lg:w-[320px] bg-[#f7f1ec] border-r border-[#e8d9cf] group cursor-pointer relative overflow-hidden"
+      className="flex-none w-[58vw] sm:w-[42vw] md:w-[300px] lg:w-[320px] bg-[#f7f1ec] border-r border-[#e8d9cf] group cursor-pointer relative overflow-hidden select-none"
       onClick={() => navigate(`/product/${product.id}`)}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
@@ -47,11 +48,13 @@ function ProductCard({ product }: { product: Product }) {
       )}
 
       {/* Image */}
-      <div className="relative aspect-square w-full bg-[#f7f1ec] p-5 md:p-8">
+      <div className="relative aspect-square w-full bg-[#f7f1ec] p-5 md:p-8 select-none">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-106 transition-transform duration-600"
+          draggable={false}
+          onDragStart={e => e.preventDefault()}
+          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-106 transition-transform duration-600 select-none pointer-events-none"
           data-testid={`img-product-${product.id}`}
         />
         {/* Quick add */}
@@ -93,11 +96,14 @@ function ProductCard({ product }: { product: Product }) {
 
 export default function TabbedProductCarousel() {
   const [activeTab, setActiveTab] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      containScroll: "trimSnaps",
+      dragFree: true,
+    },
+    [WheelGesturesPlugin()]
+  );
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 
@@ -219,8 +225,8 @@ export default function TabbedProductCarousel() {
             <ChevronRight className="w-4 h-4 stroke-[1.25]" />
           </button>
 
-          <div className="overflow-hidden border-t border-b border-[#e8d9cf]" ref={emblaRef}>
-            <div className="flex">
+          <div className="overflow-hidden border-t border-b border-[#e8d9cf] select-none" ref={emblaRef}>
+            <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing">
               {currentTab.products.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}

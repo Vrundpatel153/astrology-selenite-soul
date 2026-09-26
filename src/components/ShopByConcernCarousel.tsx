@@ -4,15 +4,19 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { concerns } from "@/data/products";
 
 export default function ShopByConcernCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true,
-    loop: false,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      containScroll: "trimSnaps",
+      dragFree: true,
+      loop: false,
+    },
+    [WheelGesturesPlugin()]
+  );
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
 
@@ -79,23 +83,25 @@ export default function ShopByConcernCarousel() {
           <ChevronRight className="w-4 h-4 stroke-[1.25]" />
         </button>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-3 pl-4 md:pl-14 pr-4">
+        <div className="overflow-hidden select-none" ref={emblaRef}>
+          <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing gap-3 pl-4 md:pl-14 pr-4">
           {concerns.map((concern, idx) => (
-            <Link key={concern.id} href={`/shop?filter=${concern.id}`}>
+            <Link key={concern.id} href={`/shop?filter=${concern.id}`} draggable={false} onDragStart={e => e.preventDefault()}>
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="relative group cursor-pointer overflow-hidden flex-none"
+                className="relative group cursor-pointer overflow-hidden flex-none select-none"
                 style={{ width: "clamp(240px, 28vw, 380px)", aspectRatio: "3/4" }}
                 data-testid={`card-concern-${concern.id}`}
               >
                 <img
                   src={concern.image}
                   alt={concern.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  draggable={false}
+                  onDragStart={e => e.preventDefault()}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 {/* Content */}

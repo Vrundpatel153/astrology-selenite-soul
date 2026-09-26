@@ -234,7 +234,9 @@ export default function ProductDetail() {
                       <img
                         src={imgSrc}
                         alt={`${product.name} ${i + 1}`}
-                        className={`w-full h-full object-cover transition-opacity ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`}
+                        draggable={false}
+                        onDragStart={e => e.preventDefault()}
+                        className={`w-full h-full object-cover transition-opacity select-none pointer-events-none ${selectedThumb === i ? "opacity-100" : "opacity-75 hover:opacity-100"}`}
                       />
                     </motion.button>
                   ))}

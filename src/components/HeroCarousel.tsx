@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 const slides = [
   {
@@ -55,7 +56,7 @@ const slides = [
 const AUTOPLAY_MS = 5000;
 
 export default function HeroCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 35 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 35 }, [WheelGesturesPlugin()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -119,15 +120,17 @@ export default function HeroCarousel() {
       </button>
 
       {/* Embla viewport */}
-      <div className="overflow-hidden h-full" ref={emblaRef}>
-        <div className="flex h-full touch-pan-y">
+      <div className="overflow-hidden h-full cursor-grab active:cursor-grabbing" ref={emblaRef}>
+        <div className="flex h-full touch-pan-y select-none">
           {slides.map((slide, idx) => (
             <div key={slide.id} className="relative flex-none w-full h-full select-none">
               {/* BG image */}
               <motion.img
                 src={slide.image}
                 alt={slide.heading.replace("\n", " ")}
-                className="absolute inset-0 w-full h-full object-cover object-[center_35%] sm:object-center"
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                className="absolute inset-0 w-full h-full object-cover object-[center_35%] sm:object-center select-none pointer-events-none"
                 animate={selectedIndex === idx ? { scale: 1.04 } : { scale: 1 }}
                 transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
               />

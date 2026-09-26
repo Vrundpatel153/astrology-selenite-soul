@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import { newArrivals } from "@/data/products";
@@ -9,11 +10,14 @@ import { newArrivals } from "@/data/products";
 export default function NewArrivals() {
   const [, navigate] = useLocation();
   const { addToCart } = useCart();
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      containScroll: "trimSnaps",
+      dragFree: true,
+    },
+    [WheelGesturesPlugin()]
+  );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -91,7 +95,7 @@ export default function NewArrivals() {
         </button>
 
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex">
+          <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing">
           {newArrivals.map((product) => (
             <div
               key={product.id}
@@ -109,7 +113,9 @@ export default function NewArrivals() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                  draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                   data-testid={`img-product-${product.id}`}
                 />
                 <button

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { useLocation } from "wouter";
 import { useCart } from "@/context/CartContext";
 import { products } from "@/data/products";
@@ -11,11 +12,14 @@ const carouselProducts = products.slice(0, 6);
 export default function ProductCarousel() {
   const [, navigate] = useLocation();
   const { addToCart } = useCart();
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      containScroll: "trimSnaps",
+      dragFree: true
+    },
+    [WheelGesturesPlugin()]
+  );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -103,21 +107,23 @@ export default function ProductCarousel() {
           <ChevronRight className="w-4 h-4 stroke-[1.25]" />
         </button>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex">
+        <div className="overflow-hidden select-none" ref={emblaRef}>
+          <div className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing">
           {carouselProducts.map((product) => (
             <div
               key={product.id}
-              className="flex-none w-[42vw] md:w-[340px] border-r border-[#e8d9cf] bg-[#f7f1ec] group cursor-pointer"
+              className="flex-none w-[42vw] md:w-[340px] border-r border-[#e8d9cf] bg-[#f7f1ec] group cursor-pointer select-none"
               data-testid={`card-product-${product.id}`}
               onClick={() => navigate(`/product/${product.id}`)}
             >
               {/* Image Area */}
-              <div className="relative aspect-square w-full bg-[#f7f1ec] p-4 md:p-8">
+              <div className="relative aspect-square w-full bg-[#f7f1ec] p-4 md:p-8 select-none">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                  draggable={false}
+                  onDragStart={e => e.preventDefault()}
+                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                   data-testid={`img-product-${product.id}`}
                 />
                 <button
