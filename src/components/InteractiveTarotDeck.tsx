@@ -329,7 +329,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                   </div>
 
                   {/* Perfectly Sized & Contained Deck Fan */}
-                  <div className="relative w-full h-[190px] flex items-center justify-center my-auto overflow-hidden">
+                  <div className="relative w-full h-[210px] flex items-center justify-center my-auto overflow-visible">
                     <div className="relative w-full max-w-[260px] h-full flex items-center justify-center">
                       {deck.map((card, idx) => {
                         const total = deck.length;
@@ -344,23 +344,23 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                         return (
                           <motion.div
                             key={card.id}
-                            className={`absolute w-[74px] h-[116px] rounded-md border overflow-hidden shadow-md transition-all ${
+                            className={`absolute w-[74px] h-[116px] rounded-md border-2 overflow-hidden transition-all ${
                               isPicked
-                                ? "border-[#c8a951] ring-2 ring-[#c8a951] shadow-lg shadow-[#c8a951]/30 pointer-events-none"
-                                : "border-[#c8a951]/75 cursor-pointer active:scale-105 active:border-[#c8a951]"
+                                ? "border-[#c8a951] ring-2 ring-[#c8a951]/80 shadow-[0_12px_24px_-4px_rgba(200,169,81,0.45)] pointer-events-none"
+                                : "border-[#c8a951]/75 shadow-md cursor-pointer active:scale-105 active:border-[#c8a951]"
                             }`}
                             style={{
                               transformOrigin: "bottom center",
-                              zIndex: isPicked ? 35 + idx : idx + 5,
                             }}
                             animate={{
                               x: transX,
-                              y: isPicked ? -28 : transY,
+                              y: isPicked ? -45 : transY,
                               rotate: rot,
-                              opacity: isPicked ? 0.88 : 1,
-                              scale: isPicked ? 1.02 : 1,
+                              opacity: 1,
+                              scale: isPicked ? 1.05 : 1,
+                              zIndex: isPicked ? 70 + idx : idx + 5,
                             }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            transition={{ duration: 0.35, ease: "easeOut" }}
                             onClick={() => handlePickFromFan(card)}
                           >
                             <img
@@ -369,6 +369,14 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                               className="w-full h-full object-cover object-center"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#c8a951]/20 via-transparent to-transparent pointer-events-none" />
+
+                            {isPicked && (
+                              <div className="absolute top-1 inset-x-0 flex justify-center pointer-events-none z-20">
+                                <span className="bg-[#1a0e05]/85 text-[#e5c575] border border-[#c8a951]/60 text-[6.5px] font-bold tracking-widest uppercase px-1.5 py-0.2 rounded-full shadow-xs">
+                                  Chosen
+                                </span>
+                              </div>
+                            )}
                           </motion.div>
                         );
                       })}
@@ -661,8 +669,8 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
             </p>
           </div>
 
-        {/* 3D Curved Fan Spread Container - Height enlarged to 280px-340px with ample headroom */}
-        <div className="relative h-[270px] sm:h-[320px] flex items-center justify-center select-none overflow-visible">
+        {/* 3D Curved Fan Spread Container - Height enlarged with ample headroom for lifted cards */}
+        <div className="relative h-[300px] sm:h-[350px] flex items-center justify-center select-none overflow-visible">
           <div className="relative w-full max-w-[860px] h-full flex items-center justify-center">
             {deck.map((card, idx) => {
               const total = deck.length;
@@ -676,21 +684,21 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute w-[100px] sm:w-[130px] h-[155px] sm:h-[200px] rounded-md border overflow-hidden shadow-xl transition-all ${
+                  className={`absolute w-[100px] sm:w-[130px] h-[155px] sm:h-[200px] rounded-md border-2 overflow-hidden transition-all ${
                     isPicked
-                      ? "border-[#c8a951] ring-2 ring-[#c8a951] shadow-2xl shadow-[#c8a951]/40 pointer-events-none"
-                      : "border-[#c8a951]/70 cursor-pointer hover:border-[#c8a951] hover:shadow-2xl hover:shadow-[#c8a951]/40"
+                      ? "border-[#c8a951] ring-2 ring-[#c8a951]/80 shadow-[0_22px_40px_-8px_rgba(200,169,81,0.5)] pointer-events-none"
+                      : "border-[#c8a951]/70 shadow-xl cursor-pointer hover:border-[#c8a951] hover:shadow-2xl hover:shadow-[#c8a951]/40"
                   }`}
                   style={{
                     transformOrigin: "bottom center",
-                    zIndex: isPicked ? 45 + idx : idx,
                   }}
                   animate={{
                     x: transX,
-                    y: isPicked ? transY - 48 : transY,
+                    y: isPicked ? transY - 80 : transY,
                     rotate: rot,
-                    opacity: isPicked ? 0.88 : 1,
-                    scale: isPicked ? 1.02 : 1,
+                    opacity: 1,
+                    scale: isPicked ? 1.05 : 1,
+                    zIndex: isPicked ? 85 + idx : idx,
                   }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   whileHover={
@@ -712,6 +720,14 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                     className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#c8a951]/15 via-transparent to-transparent pointer-events-none" />
+
+                  {isPicked && (
+                    <div className="absolute top-2 inset-x-0 flex justify-center pointer-events-none z-20">
+                      <span className="bg-[#1a0e05]/90 text-[#e5c575] border border-[#c8a951]/70 text-[8px] sm:text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-0.5 rounded-full shadow-md backdrop-blur-xs">
+                        Chosen
+                      </span>
+                    </div>
+                  )}
                 </motion.div>
               );
             })}
