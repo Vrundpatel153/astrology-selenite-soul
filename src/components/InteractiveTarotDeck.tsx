@@ -229,56 +229,417 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     setSelectedDetails(slots[index].card);
   };
 
+  // Flip all cards on mobile if desired
+  const handleFlipAll = () => {
+    const updated = slots.map((s) => (s.card ? { ...s, isFlipped: true } : s));
+    setSlots(updated);
+    if (updated[0]?.card) {
+      setSelectedDetails(updated[0].card);
+    }
+  };
+
+  const [activeSlotIdx, setActiveSlotIdx] = useState(0);
+  const isComplete = pickedCardIds.size >= maxPicks;
+
+  // Active card for mobile dossier display
+  const currentMobileCard =
+    slots[activeSlotIdx]?.isFlipped && slots[activeSlotIdx]?.card
+      ? slots[activeSlotIdx]?.card
+      : slots.find((s) => s.isFlipped)?.card || (slots[0]?.card ? slots[0]?.card : null);
+
   return (
     <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
-      {/* Control bar: Spread Mode Selection & Shuffle */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 pb-6 border-b border-[#e8d9cf]">
-        <div className="flex flex-wrap items-center justify-center gap-2.5 w-full sm:w-auto">
-          <button
-            onClick={() => handleModeChange("three")}
-            className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
-              spreadMode === "three"
-                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
-                : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
-            }`}
-          >
-            3-Card Spread (Past · Present · Future)
-          </button>
-          <button
-            onClick={() => handleModeChange("single")}
-            className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
-              spreadMode === "single"
-                ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
-                : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
-            }`}
-          >
-            Single Daily Oracle
-          </button>
-        </div>
+      {/* ════════════════════════════════════════════════════════════════════════
+          1. MOBILE GAMEPLAY WINDOW (DEDICATED COMPACT EXPERIENCE)
+          ════════════════════════════════════════════════════════════════════════ */}
+      <div className="block md:hidden mb-10">
+        <div className="relative rounded-lg border border-[#c8a951]/50 bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f4ebe1] shadow-2xl p-4 overflow-hidden min-h-[490px] flex flex-col justify-between">
+          {/* Subtle gold ornamental corner accents */}
+          <div className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-[#c8a951]/60 pointer-events-none" />
+          <div className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-[#c8a951]/60 pointer-events-none" />
+          <div className="absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-[#c8a951]/60 pointer-events-none" />
+          <div className="absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-[#c8a951]/60 pointer-events-none" />
 
-        <button
-          onClick={handleReshuffle}
-          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#a5762a] hover:text-[#2a1f1a] transition-colors cursor-pointer"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          Reshuffle Deck
-        </button>
+          {/* Top Window Bar: Mode Selector & Reshuffle */}
+          <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-[#c8a951]/25 z-10">
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => handleModeChange("three")}
+                className={`px-2.5 py-1 text-[8.5px] font-bold uppercase tracking-wider rounded-xs transition-all border ${
+                  spreadMode === "three"
+                    ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-xs"
+                    : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf]"
+                }`}
+              >
+                3 Cards
+              </button>
+              <button
+                onClick={() => handleModeChange("single")}
+                className={`px-2.5 py-1 text-[8.5px] font-bold uppercase tracking-wider rounded-xs transition-all border ${
+                  spreadMode === "single"
+                    ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-xs"
+                    : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf]"
+                }`}
+              >
+                1 Card
+              </button>
+            </div>
+
+            <button
+              onClick={handleReshuffle}
+              className="inline-flex items-center gap-1 text-[8.5px] font-bold uppercase tracking-wider text-[#a5762a] hover:text-[#2a1f1a] bg-white/70 px-2 py-1 rounded-xs border border-[#c8a951]/30 cursor-pointer"
+            >
+              <RotateCcw className="w-3 h-3" />
+              Reset
+            </button>
+          </div>
+
+          {/* Window Body: Smooth Transition between Stage 1 (Fan) and Stage 2 (3-Card Row) */}
+          <div className="relative py-2 flex-1 flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              {!isComplete ? (
+                /* ── STAGE 1: CARD PICKING (Strictly Contained within Window) ── */
+                <motion.div
+                  key="mobile-pick-view"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-between h-full py-1"
+                >
+                  {/* Status Prompt */}
+                  <div className="text-center mb-1">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-0.5">
+                      Sacred Oracle
+                    </p>
+                    <p className="text-xs text-[#2a1f1a] font-serif">
+                      Choose <span className="font-bold text-[#a5762a]">{maxPicks - pickedCardIds.size}</span> more card{maxPicks - pickedCardIds.size > 1 ? "s" : ""}:
+                    </p>
+                  </div>
+
+                  {/* Perfectly Sized & Contained Deck Fan */}
+                  <div className="relative w-full h-[190px] flex items-center justify-center my-auto overflow-hidden">
+                    <div className="relative w-full max-w-[260px] h-full flex items-center justify-center">
+                      {deck.map((card, idx) => {
+                        const total = deck.length;
+                        const mid = (total - 1) / 2;
+                        const offset = idx - mid; // -4 to +4
+                        // Compact offset so cards NEVER poke out of window
+                        const transX = offset * 15;
+                        const rot = offset * 3.2; // -12.8deg to +12.8deg
+                        const transY = Math.abs(offset) * 2.5;
+                        const isPicked = pickedCardIds.has(card.id);
+
+                        return (
+                          <motion.div
+                            key={card.id}
+                            className={`absolute w-[74px] h-[116px] rounded-md border border-[#c8a951]/75 overflow-hidden shadow-md transition-all ${
+                              isPicked ? "opacity-15 pointer-events-none scale-85" : "cursor-pointer active:scale-105 active:border-[#c8a951]"
+                            }`}
+                            style={{
+                              transformOrigin: "bottom center",
+                              zIndex: isPicked ? 0 : idx + 5,
+                            }}
+                            animate={{
+                              x: transX,
+                              y: isPicked ? -45 : transY,
+                              rotate: rot,
+                              opacity: isPicked ? 0 : 1,
+                            }}
+                            onClick={() => handlePickFromFan(card)}
+                          >
+                            <img
+                              src="/tarot-card-back.webp"
+                              alt="Card Back"
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#c8a951]/20 via-transparent to-transparent pointer-events-none" />
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Picked Progress Slots Bar */}
+                  <div className="w-full pt-1 flex flex-col items-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      {slots.map((s, idx) => (
+                        <div
+                          key={idx}
+                          className={`w-10 h-14 rounded border transition-all duration-300 flex items-center justify-center overflow-hidden ${
+                            s.card
+                              ? "border-[#c8a951] bg-[#2a1f1a] shadow-xs"
+                              : "border-dashed border-[#c8a951]/40 bg-white/40"
+                          }`}
+                        >
+                          {s.card ? (
+                            <img
+                              src="/tarot-card-back.webp"
+                              alt="Picked"
+                              className="w-full h-full object-cover opacity-90"
+                            />
+                          ) : (
+                            <span className="text-[8px] text-[#a5762a]/60 font-mono">
+                              {idx + 1}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[8.5px] text-[#a5762a] uppercase tracking-widest font-medium">
+                      {pickedCardIds.size} of {maxPicks} Chosen
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                /* ── STAGE 2: 3 CARDS IN A SINGLE COMPACT ROW (Smooth Animation) ── */
+                <motion.div
+                  key="mobile-spread-view"
+                  initial={{ opacity: 0, scale: 0.93, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.93 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col justify-between h-full py-1"
+                >
+                  {/* Stage 2 Title */}
+                  <div className="text-center mb-1.5 flex items-center justify-between px-1">
+                    <div className="text-left">
+                      <p className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">
+                        Divine Reading
+                      </p>
+                      <p className="text-[10.5px] text-[#4a382e] font-light">
+                        Tap any card to flip and view message
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleFlipAll}
+                      className="text-[8px] font-bold uppercase tracking-wider text-[#a5762a] bg-[#c8a951]/15 border border-[#c8a951]/40 px-2 py-1 rounded-xs"
+                    >
+                      Flip All
+                    </button>
+                  </div>
+
+                  {/* 3 CARDS IN A SINGLE HORIZONTAL ROW */}
+                  <div
+                    className={`grid gap-2 w-full max-w-[340px] mx-auto my-1 ${
+                      spreadMode === "single" ? "grid-cols-1 max-w-[110px]" : "grid-cols-3"
+                    }`}
+                  >
+                    {slots.map((slot, index) => {
+                      const isActive = activeSlotIdx === index;
+                      const label =
+                        spreadMode === "single"
+                          ? "Oracle"
+                          : index === 0
+                          ? "Past"
+                          : index === 1
+                          ? "Present"
+                          : "Future";
+
+                      return (
+                        <div key={index} className="flex flex-col items-center">
+                          <span
+                            className={`text-[8px] font-bold uppercase tracking-wider mb-1 ${
+                              isActive ? "text-[#a5762a]" : "text-[#2a1f1a]/50"
+                            }`}
+                          >
+                            {label}
+                          </span>
+
+                          <div
+                            className={`relative w-full aspect-[2/3] cursor-pointer rounded-md overflow-hidden transition-all duration-300 ${
+                              isActive
+                                ? "ring-2 ring-[#c8a951] shadow-md -translate-y-0.5"
+                                : "shadow-xs opacity-90 hover:opacity-100"
+                            }`}
+                            style={{ perspective: 900 }}
+                            onClick={() => {
+                              handleFlipCard(index);
+                              setActiveSlotIdx(index);
+                            }}
+                          >
+                            <motion.div
+                              className="w-full h-full relative"
+                              style={{ transformStyle: "preserve-3d" }}
+                              animate={{ rotateY: slot.isFlipped ? 180 : 0 }}
+                              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                            >
+                              {/* Face Down Back */}
+                              <div
+                                className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 bg-[#2a1f1a]"
+                                style={{ backfaceVisibility: "hidden" }}
+                              >
+                                <img
+                                  src="/tarot-card-back.webp"
+                                  alt="Tarot Back"
+                                  className="w-full h-full object-cover object-center"
+                                />
+                                <div className="absolute inset-0 bg-black/35 flex items-center justify-center p-1 text-center">
+                                  <span className="text-[7.5px] font-bold uppercase tracking-wider text-white bg-black/60 px-1.5 py-0.5 rounded-full">
+                                    Flip
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Face Up Front */}
+                              <div
+                                className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/80 bg-white"
+                                style={{
+                                  backfaceVisibility: "hidden",
+                                  transform: "rotateY(180deg)",
+                                }}
+                              >
+                                {slot.card && (
+                                  <>
+                                    <img
+                                      src={slot.card.image}
+                                      alt={slot.card.name}
+                                      className="w-full h-full object-cover object-center"
+                                    />
+                                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-1 text-center">
+                                      <p className="text-[6.5px] font-mono text-[#e5c575]">
+                                        {slot.card.number}
+                                      </p>
+                                      <p className="text-[7.5px] font-medium text-white truncate leading-tight">
+                                        {slot.card.name}
+                                      </p>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            </motion.div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Compact Active Card Interpretation Dossier */}
+                  {currentMobileCard ? (
+                    <motion.div
+                      key={currentMobileCard.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white/95 border border-[#c8a951]/35 rounded p-2.5 mt-2 shadow-xs text-left"
+                    >
+                      <div className="flex items-center justify-between mb-1 border-b border-[#e8d9cf] pb-1">
+                        <div>
+                          <span className="text-[7px] font-mono uppercase tracking-widest text-[#a5762a]">
+                            {currentMobileCard.number} · {currentMobileCard.arcana} Arcana
+                          </span>
+                          <h4 className="text-xs sm:text-sm font-serif font-medium text-[#2a1f1a]">
+                            {currentMobileCard.name}
+                          </h4>
+                        </div>
+                        <span className="text-[7.5px] px-1.5 py-0.5 bg-[#c8a951]/15 text-[#8f6d28] font-bold uppercase rounded-xs">
+                          {currentMobileCard.element}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1 my-1">
+                        {currentMobileCard.uprightKeywords.slice(0, 3).map((kw, i) => (
+                          <span
+                            key={i}
+                            className="text-[7px] font-semibold text-[#a5762a] bg-[#fcf8f4] border border-[#c8a951]/30 px-1 py-0.2 rounded-xs"
+                          >
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
+
+                      <p className="text-[9.5px] text-[#4a382e]/85 leading-tight line-clamp-2 mb-1.5 font-light">
+                        {currentMobileCard.summary}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-1 border-t border-[#e8d9cf]/60 text-[8px]">
+                        <span className="text-[#a5762a] font-medium">
+                          Remedy:{" "}
+                          <strong className="text-[#2a1f1a] font-bold">
+                            {currentMobileCard.crystalRemedy}
+                          </strong>
+                        </span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <div className="bg-white/60 border border-dashed border-[#c8a951]/30 rounded p-2.5 mt-2 text-center">
+                      <p className="text-[9.5px] text-[#a5762a]">
+                        Tap any card above to read its oracle message
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Bottom Reset CTA */}
+                  <div className="mt-1.5 text-center">
+                    <button
+                      onClick={handleReshuffle}
+                      className="inline-flex items-center gap-1 text-[8.5px] font-bold uppercase tracking-widest text-[#a5762a] hover:text-[#2a1f1a] transition-colors py-0.5 cursor-pointer"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      Reshuffle & Draw Again
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
 
-      {/* ── 3D FANNED ARC DECK (GENEROUS PADDING SO CARDS NEVER GET CLIPPED) ── */}
-      <div className="relative pt-10 sm:pt-14 pb-8 sm:pb-12 px-3 sm:px-6 mb-12 sm:mb-16 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
-        <div className="text-center mb-6 sm:mb-8">
-          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-1.5">
-            Interactive Deck Fan
-          </p>
-          <p className="text-xs sm:text-sm text-[#4a382e] font-light max-w-md mx-auto">
-            {pickedCardIds.size < maxPicks ? (
-              <>Choose <strong>{maxPicks - pickedCardIds.size}</strong> more card{maxPicks - pickedCardIds.size > 1 ? "s" : ""} from the fanned deck below:</>
-            ) : (
-              <>All {maxPicks} cards chosen! Click each card in the spread below to flip and reveal.</>
-            )}
-          </p>
+      {/* ════════════════════════════════════════════════════════════════════════
+          2. DESKTOP EXPERIENCE (PRESERVED IN FULL FIDELITY)
+          ════════════════════════════════════════════════════════════════════════ */}
+      <div className="hidden md:block">
+        {/* Control bar: Spread Mode Selection & Shuffle */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 pb-6 border-b border-[#e8d9cf]">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 w-full sm:w-auto">
+            <button
+              onClick={() => handleModeChange("three")}
+              className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
+                spreadMode === "three"
+                  ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+                  : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
+              }`}
+            >
+              3-Card Spread (Past · Present · Future)
+            </button>
+            <button
+              onClick={() => handleModeChange("single")}
+              className={`px-4 sm:px-5 py-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] rounded-sm transition-all border ${
+                spreadMode === "single"
+                  ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+                  : "bg-white/80 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
+              }`}
+            >
+              Single Daily Oracle
+            </button>
+          </div>
+
+          <button
+            onClick={handleReshuffle}
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#a5762a] hover:text-[#2a1f1a] transition-colors cursor-pointer"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            Reshuffle Deck
+          </button>
         </div>
+
+        {/* ── 3D FANNED ARC DECK ── */}
+        <div className="relative pt-10 sm:pt-14 pb-8 sm:pb-12 px-3 sm:px-6 mb-12 sm:mb-16 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
+          <div className="text-center mb-6 sm:mb-8">
+            <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-1.5">
+              Interactive Deck Fan
+            </p>
+            <p className="text-xs sm:text-sm text-[#4a382e] font-light max-w-md mx-auto">
+              {pickedCardIds.size < maxPicks ? (
+                <>
+                  Choose <strong>{maxPicks - pickedCardIds.size}</strong> more card
+                  {maxPicks - pickedCardIds.size > 1 ? "s" : ""} from the fanned deck below:
+                </>
+              ) : (
+                <>All {maxPicks} cards chosen! Click each card in the spread below to flip and reveal.</>
+              )}
+            </p>
+          </div>
 
         {/* 3D Curved Fan Spread Container - Height enlarged to 280px-340px with ample headroom */}
         <div className="relative h-[270px] sm:h-[320px] flex items-center justify-center select-none overflow-visible">
@@ -518,6 +879,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 }
