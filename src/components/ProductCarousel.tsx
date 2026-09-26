@@ -20,16 +20,22 @@ export default function ProductCarousel() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
 
   const onScroll = useCallback(() => {
     if (!emblaApi) return;
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
     setScrollProgress(progress);
+    setCanPrev(emblaApi.canScrollPrev());
+    setCanNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanPrev(emblaApi.canScrollPrev());
+    setCanNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   useEffect(() => {
@@ -74,8 +80,31 @@ export default function ProductCarousel() {
       </motion.div>
 
       {/* Carousel */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
+      <div className="relative group">
+        {/* PC Thin Left End Button */}
+        <button
+          type="button"
+          onClick={scrollPrev}
+          disabled={!canPrev}
+          className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Previous products"
+        >
+          <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        {/* PC Thin Right End Button */}
+        <button
+          type="button"
+          onClick={scrollNext}
+          disabled={!canNext}
+          className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Next products"
+        >
+          <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
           {carouselProducts.map((product) => (
             <div
               key={product.id}
@@ -131,6 +160,7 @@ export default function ProductCarousel() {
             </div>
           ))}
         </div>
+      </div>
       </div>
 
       {/* Navigation row */}

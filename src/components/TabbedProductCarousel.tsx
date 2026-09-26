@@ -195,7 +195,30 @@ export default function TabbedProductCarousel() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="relative group"
         >
+          {/* PC Thin Left End Button */}
+          <button
+            type="button"
+            onClick={scrollPrev}
+            disabled={!canScrollPrev}
+            className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+            aria-label="Previous products"
+          >
+            <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+          </button>
+
+          {/* PC Thin Right End Button */}
+          <button
+            type="button"
+            onClick={scrollNext}
+            disabled={!canScrollNext}
+            className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+            aria-label="Next products"
+          >
+            <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+          </button>
+
           <div className="overflow-hidden border-t border-b border-[#e8d9cf]" ref={emblaRef}>
             <div className="flex">
               {currentTab.products.map(product => (

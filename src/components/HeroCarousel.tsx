@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 
 const slides = [
@@ -97,6 +98,26 @@ export default function HeroCarousel() {
       style={{ height: "min(92vh, 860px)", minHeight: "500px" }}
       data-testid="section-hero-carousel"
     >
+      {/* PC Thin Left End Button */}
+      <button
+        type="button"
+        onClick={() => emblaApi?.scrollPrev()}
+        className="hidden md:flex absolute left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/30 hover:bg-black/55 text-white/90 hover:text-white border border-white/20 hover:border-white/50 items-center justify-center backdrop-blur-xs transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-5 h-5 stroke-[1.25]" />
+      </button>
+
+      {/* PC Thin Right End Button */}
+      <button
+        type="button"
+        onClick={() => emblaApi?.scrollNext()}
+        className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/30 hover:bg-black/55 text-white/90 hover:text-white border border-white/20 hover:border-white/50 items-center justify-center backdrop-blur-xs transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-5 h-5 stroke-[1.25]" />
+      </button>
+
       {/* Embla viewport */}
       <div className="overflow-hidden h-full" ref={emblaRef}>
         <div className="flex h-full touch-pan-y">

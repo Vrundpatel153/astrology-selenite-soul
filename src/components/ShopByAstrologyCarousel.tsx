@@ -91,8 +91,31 @@ export default function ShopByAstrologyCarousel() {
       </div>
 
       {/* Carousel */}
-      <div className="overflow-hidden" ref={emblaRef} data-cursor="drag">
-        <div className="flex gap-4 pl-5 md:pl-14">
+      <div className="relative group">
+        {/* PC Thin Left End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollPrev()}
+          disabled={!canPrev}
+          className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Previous zodiac sign"
+        >
+          <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        {/* PC Thin Right End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollNext()}
+          disabled={!canNext}
+          className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Next zodiac sign"
+        >
+          <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4 pl-5 md:pl-14">
           {signs.map((sign, idx) => (
             <Link key={sign.sign} href={`/shop?zodiac=${sign.sign.toLowerCase()}`}>
               <motion.div
@@ -145,6 +168,7 @@ export default function ShopByAstrologyCarousel() {
           {/* Trailing spacer */}
           <div className="flex-none w-5 md:w-14" />
         </div>
+      </div>
       </div>
     </section>
   );

@@ -56,8 +56,31 @@ export default function ShopByConcernCarousel() {
       </div>
 
       {/* Carousel */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-3 pl-4 md:pl-14 pr-4">
+      <div className="relative group">
+        {/* PC Thin Left End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollPrev()}
+          disabled={!canPrev}
+          className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Previous concerns"
+        >
+          <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        {/* PC Thin Right End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollNext()}
+          disabled={!canNext}
+          className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Next concerns"
+        >
+          <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-3 pl-4 md:pl-14 pr-4">
           {concerns.map((concern, idx) => (
             <Link key={concern.id} href={`/shop?filter=${concern.id}`}>
               <motion.div
@@ -89,6 +112,7 @@ export default function ShopByConcernCarousel() {
             </Link>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

@@ -584,72 +584,96 @@ function ShopByProductCarousel() {
         </div>
       </div>
 
-      <div className="overflow-hidden border-t border-b border-[#e8d9cf]" ref={emblaRef} data-cursor="drag">
-        <div className="flex">
-          {shopByProductItems.map(product => (
-            <motion.div
-              key={product.id}
-              className="flex-none w-[56vw] sm:w-[40vw] md:w-[280px] lg:w-[300px] border-r border-[#e8d9cf] bg-[#f9f4ef] group cursor-pointer relative overflow-hidden"
-              onClick={() => navigate(`/product/${product.id}`)}
-              whileHover={{ y: -5, boxShadow: "0 16px 40px rgba(42,31,26,0.10)" }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              data-cursor="hover"
-            >
-              {product.badge && (
-                <div className={`absolute top-3 left-3 z-10 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider ${
-                  product.badge === "SALE" ? "bg-[#8b2020] text-white" :
-                  product.badge === "BEST SELLER" ? "bg-[#c8a951] text-[#2a1f1a]" :
-                  "bg-[#2a1f1a] text-white"
-                }`}>
-                  {product.badge}{product.savePercent ? ` −${product.savePercent}%` : ""}
-                </div>
-              )}
-              <div className="relative aspect-square w-full p-6 md:p-8 bg-[#f9f4ef] overflow-hidden">
-                <motion.img
-                  src={product.image} alt={product.name}
-                  className="w-full h-full object-contain mix-blend-multiply"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                />
-                {/* Add to cart button */}
-                <AnimatePresence>
-                  <motion.button
-                    className={`absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center text-white text-xs font-bold ${addedIds.has(product.id) ? "bg-[#1f8a6f]" : "bg-[#2a1f1a]"}`}
-                    onClick={e => handleAdd(e, product)}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 0 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    whileTap={{ scale: 0.85 }}
-                    transition={{ duration: 0.15 }}
-                    data-cursor="hover"
-                    aria-label="Add to cart"
-                  >
-                    <AnimatePresence mode="wait">
-                      {addedIds.has(product.id)
-                        ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Check className="w-4 h-4 stroke-[2.5]" /></motion.span>
-                        : <motion.span key="plus" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Plus className="w-4 h-4 stroke-[1.5]" /></motion.span>
-                      }
-                    </AnimatePresence>
-                  </motion.button>
-                </AnimatePresence>
-              </div>
-              <div className="p-3.5 md:p-4 bg-white border-t border-[#e8d9cf]">
-                <h3 className="text-[10px] font-normal uppercase tracking-widest text-[#2a1f1a] mb-1.5 truncate">{product.name}</h3>
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-bold text-[#2a1f1a]">₹{product.price}</p>
-                  {product.originalPrice && <p className="text-[11px] text-[#2a1f1a]/35 line-through">₹{product.originalPrice}</p>}
-                </div>
-                {product.swatches && product.swatches.length > 0 && (
-                  <div className="flex gap-1 mt-2">
-                    {product.swatches.slice(0, 5).map((c, i) => (
-                      <motion.div key={i} className="w-3 h-3 border border-[#e8d9cf] cursor-pointer"
-                        style={{ backgroundColor: c }} whileHover={{ scale: 1.5 }} transition={{ duration: 0.15 }} />
-                    ))}
+      <div className="relative group">
+        {/* PC Thin Left End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollPrev()}
+          disabled={!canPrev}
+          className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Previous products"
+        >
+          <ChevronLeft className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        {/* PC Thin Right End Button */}
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollNext()}
+          disabled={!canNext}
+          className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-[#2a1f1a] border border-[#e8d9cf] hover:border-[#c8a951] items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-0 disabled:pointer-events-none hover:scale-105 active:scale-95"
+          aria-label="Next products"
+        >
+          <ChevronRight className="w-4 h-4 stroke-[1.25]" />
+        </button>
+
+        <div className="overflow-hidden border-t border-b border-[#e8d9cf]" ref={emblaRef}>
+          <div className="flex">
+            {shopByProductItems.map(product => (
+              <motion.div
+                key={product.id}
+                className="flex-none w-[56vw] sm:w-[40vw] md:w-[280px] lg:w-[300px] border-r border-[#e8d9cf] bg-[#f9f4ef] group cursor-pointer relative overflow-hidden"
+                onClick={() => navigate(`/product/${product.id}`)}
+                whileHover={{ y: -5, boxShadow: "0 16px 40px rgba(42,31,26,0.10)" }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                data-cursor="hover"
+              >
+                {product.badge && (
+                  <div className={`absolute top-3 left-3 z-10 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider ${
+                    product.badge === "SALE" ? "bg-[#8b2020] text-white" :
+                    product.badge === "BEST SELLER" ? "bg-[#c8a951] text-[#2a1f1a]" :
+                    "bg-[#2a1f1a] text-white"
+                  }`}>
+                    {product.badge}{product.savePercent ? ` −${product.savePercent}%` : ""}
                   </div>
                 )}
-              </div>
-            </motion.div>
-          ))}
+                <div className="relative aspect-square w-full p-6 md:p-8 bg-[#f9f4ef] overflow-hidden">
+                  <motion.img
+                    src={product.image} alt={product.name}
+                    className="w-full h-full object-contain mix-blend-multiply"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                  {/* Add to cart button */}
+                  <AnimatePresence>
+                    <motion.button
+                      className={`absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center text-white text-xs font-bold ${addedIds.has(product.id) ? "bg-[#1f8a6f]" : "bg-[#2a1f1a]"}`}
+                      onClick={e => handleAdd(e, product)}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 0 }}
+                      whileHover={{ opacity: 1, scale: 1 }}
+                      whileTap={{ scale: 0.85 }}
+                      transition={{ duration: 0.15 }}
+                      data-cursor="hover"
+                      aria-label="Add to cart"
+                    >
+                      <AnimatePresence mode="wait">
+                        {addedIds.has(product.id)
+                          ? <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Check className="w-4 h-4 stroke-[2.5]" /></motion.span>
+                          : <motion.span key="plus" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Plus className="w-4 h-4 stroke-[1.5]" /></motion.span>
+                        }
+                      </AnimatePresence>
+                    </motion.button>
+                  </AnimatePresence>
+                </div>
+                <div className="p-3.5 md:p-4 bg-white border-t border-[#e8d9cf]">
+                  <h3 className="text-[10px] font-normal uppercase tracking-widest text-[#2a1f1a] mb-1.5 truncate">{product.name}</h3>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-bold text-[#2a1f1a]">₹{product.price}</p>
+                    {product.originalPrice && <p className="text-[11px] text-[#2a1f1a]/35 line-through">₹{product.originalPrice}</p>}
+                  </div>
+                  {product.swatches && product.swatches.length > 0 && (
+                    <div className="flex gap-1 mt-2">
+                      {product.swatches.slice(0, 5).map((c, i) => (
+                        <motion.div key={i} className="w-3 h-3 border border-[#e8d9cf] cursor-pointer"
+                          style={{ backgroundColor: c }} whileHover={{ scale: 1.5 }} transition={{ duration: 0.15 }} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

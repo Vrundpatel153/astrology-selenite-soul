@@ -7,7 +7,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 
-type CursorState = "default" | "pointer" | "card" | "drag" | "text" | "hidden";
+type CursorState = "default" | "pointer" | "card" | "text" | "hidden";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -45,7 +45,6 @@ export default function CustomCursor() {
       // - Arrow: tip is at top-left (0, 0)
       // - Pointing hand: tip is at (9, 0)
       // - I-beam: center is at (7, 10)
-      // - Drag: center is at (14, 9)
       let offsetX = 0;
       let offsetY = 0;
 
@@ -55,9 +54,6 @@ export default function CustomCursor() {
       } else if (curState === "text") {
         offsetX = -7;
         offsetY = -10;
-      } else if (curState === "drag") {
-        offsetX = -14;
-        offsetY = -9;
       }
 
       cursorRef.current.style.transform = `translate3d(${x + offsetX}px, ${y + offsetY}px, 0)`;
@@ -75,8 +71,6 @@ export default function CustomCursor() {
       if (el) {
         if (el.closest("[data-cursor='card']") || el.closest("[data-cursor='pick']")) {
           nextState = "card";
-        } else if (el.closest("[data-cursor='drag']")) {
-          nextState = "drag";
         } else if (el.closest("input, textarea, [contenteditable]")) {
           nextState = "text";
         } else if (
@@ -239,16 +233,6 @@ export default function CustomCursor() {
               <path d="M3 1H11M7 1V19M3 19H11" stroke="#c8a951" strokeWidth="1.8" strokeLinecap="round" />
               <path d="M4 1H10M7 2V18M4 19H10" stroke="#1c140e" strokeWidth="0.9" strokeLinecap="round" />
             </svg>
-          )}
-
-          {/* 5. DRAG: Horizontal Carousel Pan Pointer */}
-          {state === "drag" && (
-            <div className="flex items-center gap-1 bg-[#1c140e]/95 border border-[#c8a951] px-2 py-0.5 rounded shadow-lg">
-              <svg width="18" height="14" viewBox="0 0 24 16" fill="none" stroke="#c8a951" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 8H19M5 8L9 4M5 8L9 12M19 8L15 4M19 8L15 12" />
-              </svg>
-              <span className="text-[8px] font-bold tracking-widest text-[#dfbe65] uppercase">Drag</span>
-            </div>
           )}
         </div>
       </div>
