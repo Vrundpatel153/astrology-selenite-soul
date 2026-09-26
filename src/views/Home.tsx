@@ -117,8 +117,8 @@ function EktaStory() {
           <motion.img
             ref={imgRef as any}
             src="/ekta-founder.webp"
-            alt="Ekta, Founder of Selenite Soul, holding sacred amethyst and selenite"
-            className="w-full h-full object-cover object-[center_10%] sm:object-[center_16%] lg:object-[center_24%] scale-105"
+            alt="Ekta, Founder of Selenite Soul"
+            className="w-full h-full object-cover object-[center_8%] sm:object-[center_12%] lg:object-[center_18%] scale-105"
             loading="eager"
           />
           {/* Ethereal blend gradient: right fade on desktop, bottom fade on mobile */}

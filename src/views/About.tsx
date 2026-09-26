@@ -137,7 +137,7 @@ export default function About() {
                   <img
                     src="/ekta-founder.webp"
                     alt="Ekta, Founder of Selenite Soul"
-                    className="w-full aspect-[4/3] object-cover object-[center_24%]"
+                    className="w-full aspect-[4/3] object-cover object-[center_16%]"
                     loading="lazy"
                   />
                 </div>
