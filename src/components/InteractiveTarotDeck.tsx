@@ -5,7 +5,7 @@
  * smooth 3D card flips with embossed gold foil backing, and in-depth crystal remedy correlations.
  * Fully responsive and optimized for all viewports.
  */
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, RotateCcw, Moon } from "lucide-react";
 import { Link } from "wouter";
@@ -168,10 +168,65 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
 
   const [pickedCardIds, setPickedCardIds] = useState<Set<string>>(new Set());
   const [selectedDetails, setSelectedDetails] = useState<TarotCardData | null>(null);
+  const [showSpread, setShowSpread] = useState(false);
+  const [timerKey, setTimerKey] = useState(0);
+  const autoHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const desktopSpreadRef = useRef<HTMLDivElement>(null);
+  const desktopFanRef = useRef<HTMLDivElement>(null);
+
+  // Clear timer on component unmount
+  useEffect(() => {
+    return () => {
+      if (autoHideTimerRef.current) {
+        clearTimeout(autoHideTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Smooth reset with 15s inactivity auto-hide timer after using the game
+  const resetAutoHideTimer = useCallback(() => {
+    if (autoHideTimerRef.current) {
+      clearTimeout(autoHideTimerRef.current);
+    }
+    setTimerKey((k) => k + 1);
+
+    autoHideTimerRef.current = setTimeout(() => {
+      // Gracefully trigger smooth out-animation
+      setShowSpread(false);
+
+      // Smoothly glide back up to the fan if the user has scrolled past it
+      if (typeof window !== "undefined" && desktopFanRef.current) {
+        const fanTop = desktopFanRef.current.getBoundingClientRect().top + window.pageYOffset - 110;
+        if (window.pageYOffset > fanTop) {
+          window.scrollTo({ top: fanTop, behavior: "smooth" });
+        }
+      }
+
+      // Allow 850ms exit animation to smoothly complete before clearing state
+      setTimeout(() => {
+        setDeck([...TAROT_DECK].sort(() => 0.5 - Math.random()));
+        setPickedCardIds(new Set());
+        setSelectedDetails(null);
+        if (spreadMode === "single") {
+          setSlots([{ position: "Daily Oracle Guidance", card: null, isFlipped: false }]);
+        } else {
+          setSlots([
+            { position: "1. Past / Root Energy", card: null, isFlipped: false },
+            { position: "2. Present / Current Path", card: null, isFlipped: false },
+            { position: "3. Future / Emerging Potential", card: null, isFlipped: false },
+          ]);
+        }
+      }, 850);
+    }, 15000);
+  }, [spreadMode]);
 
   // Switch spread mode
   const handleModeChange = (mode: "single" | "three") => {
+    if (autoHideTimerRef.current) {
+      clearTimeout(autoHideTimerRef.current);
+      autoHideTimerRef.current = null;
+    }
+    setShowSpread(false);
     setSpreadMode(mode);
     setPickedCardIds(new Set());
     setSelectedDetails(null);
@@ -186,19 +241,54 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     }
   };
 
-  // Reshuffle deck
+  // Reshuffle deck with smooth exit animation
   const handleReshuffle = () => {
-    setDeck([...TAROT_DECK].sort(() => 0.5 - Math.random()));
-    setPickedCardIds(new Set());
-    setSelectedDetails(null);
-    if (spreadMode === "single") {
-      setSlots([{ position: "Daily Oracle Guidance", card: null, isFlipped: false }]);
+    if (autoHideTimerRef.current) {
+      clearTimeout(autoHideTimerRef.current);
+      autoHideTimerRef.current = null;
+    }
+
+    if (showSpread) {
+      // Trigger smooth exit animation
+      setShowSpread(false);
+
+      // Smoothly scroll back to the deck fan if user is scrolled down
+      if (typeof window !== "undefined" && desktopFanRef.current) {
+        const fanTop = desktopFanRef.current.getBoundingClientRect().top + window.pageYOffset - 110;
+        if (window.pageYOffset > fanTop) {
+          window.scrollTo({ top: fanTop, behavior: "smooth" });
+        }
+      }
+
+      // Reset deck and slots after 850ms exit transition completes
+      setTimeout(() => {
+        setDeck([...TAROT_DECK].sort(() => 0.5 - Math.random()));
+        setPickedCardIds(new Set());
+        setSelectedDetails(null);
+        if (spreadMode === "single") {
+          setSlots([{ position: "Daily Oracle Guidance", card: null, isFlipped: false }]);
+        } else {
+          setSlots([
+            { position: "1. Past / Root Energy", card: null, isFlipped: false },
+            { position: "2. Present / Current Path", card: null, isFlipped: false },
+            { position: "3. Future / Emerging Potential", card: null, isFlipped: false },
+          ]);
+        }
+      }, 850);
     } else {
-      setSlots([
-        { position: "1. Past / Root Energy", card: null, isFlipped: false },
-        { position: "2. Present / Current Path", card: null, isFlipped: false },
-        { position: "3. Future / Emerging Potential", card: null, isFlipped: false },
-      ]);
+      // Immediate reset if spread wasn't active
+      setDeck([...TAROT_DECK].sort(() => 0.5 - Math.random()));
+      setPickedCardIds(new Set());
+      setSelectedDetails(null);
+      if (spreadMode === "single") {
+        setSlots([{ position: "Daily Oracle Guidance", card: null, isFlipped: false }]);
+      } else {
+        setSlots([
+          { position: "1. Past / Root Energy", card: null, isFlipped: false },
+          { position: "2. Present / Current Path", card: null, isFlipped: false },
+          { position: "3. Future / Emerging Potential", card: null, isFlipped: false },
+        ]);
+      }
     }
   };
 
@@ -221,13 +311,15 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     const newPicked = new Set(pickedCardIds).add(card.id);
     setPickedCardIds(newPicked);
 
-    // In PC mode, once all cards are chosen, wait gracefully (1.2s) and smoothly glide down to the spread
+    // In PC mode, once all cards are chosen, smoothly animate spread into view and scroll down
     if (newPicked.size >= maxPicks) {
+      setShowSpread(true);
+      resetAutoHideTimer();
       setTimeout(() => {
         if (typeof window !== "undefined" && window.innerWidth >= 768) {
-          scrollToSpread(2.0);
+          scrollToSpread(1.8);
         }
-      }, 1200);
+      }, 350);
     }
   };
 
@@ -255,6 +347,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     updated[index] = { ...updated[index], isFlipped: true };
     setSlots(updated);
     setSelectedDetails(slots[index].card);
+    resetAutoHideTimer();
   };
 
   // Flip all cards on mobile if desired
@@ -264,6 +357,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     if (updated[0]?.card) {
       setSelectedDetails(updated[0].card);
     }
+    resetAutoHideTimer();
   };
 
   const [activeSlotIdx, setActiveSlotIdx] = useState(0);
@@ -656,7 +750,10 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
         </div>
 
         {/* ── 3D FANNED ARC DECK ── */}
-        <div className="relative pt-8 sm:pt-10 pb-6 sm:pb-8 px-3 sm:px-6 mb-8 sm:mb-10 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
+        <div
+          ref={desktopFanRef}
+          className="relative pt-8 sm:pt-10 pb-6 sm:pb-8 px-3 sm:px-6 mb-8 sm:mb-10 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible"
+        >
           <div className="text-center mb-5 sm:mb-6">
             <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-1.5">
               Interactive Deck Fan
@@ -736,187 +833,242 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
         </div>
       </div>
 
-      {/* ── DEALING SPREAD SLOTS (DEALT CARDS) ── */}
-      <div ref={desktopSpreadRef} className="mb-8 scroll-mt-28">
-        <div className="text-center mb-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-1">
-            Your Sacred Reading Spread
-          </p>
-          <p className="text-xs sm:text-sm text-[#665242] font-light">
-            Click any face-down card to flip and unveil its divine archetype.
-          </p>
-        </div>
+      {/* ── DEALING SPREAD SLOTS (DEALT CARDS) & REVELATION DOSSIER ── */}
+      <AnimatePresence>
+        {showSpread && (
+          <motion.div
+            key="desktop-sacred-spread"
+            ref={desktopSpreadRef}
+            initial={{ opacity: 0, height: 0, y: 40, scale: 0.98 }}
+            animate={{ opacity: 1, height: "auto", y: 0, scale: 1 }}
+            exit={{ opacity: 0, height: 0, y: 30, scale: 0.98 }}
+            transition={{
+              duration: 0.85,
+              ease: [0.22, 1, 0.36, 1],
+              opacity: { duration: 0.7, ease: "easeInOut" },
+            }}
+            className="overflow-hidden scroll-mt-28"
+            onPointerDown={resetAutoHideTimer}
+          >
+            <div className="pt-2 pb-10">
+              <div className="text-center mb-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-1">
+                  Your Sacred Reading Spread
+                </p>
+                <p className="text-xs sm:text-sm text-[#665242] font-light">
+                  Click any face-down card to flip and unveil its divine archetype.
+                </p>
 
-        <div
-          className={`grid gap-6 sm:gap-8 justify-center items-center ${
-            spreadMode === "single" ? "grid-cols-1 max-w-[300px] mx-auto" : "grid-cols-1 md:grid-cols-3"
-          }`}
-        >
-          {slots.map((slot, index) => (
-            <div key={index} className="flex flex-col items-center w-full max-w-[280px] mx-auto">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-3 text-center">
-                {slot.position}
-              </span>
+                {/* Ambient 15s Inactivity Auto-Hide Indicator */}
+                <div className="flex flex-col items-center justify-center gap-1.5 mt-3">
+                  <div className="w-full max-w-[260px] h-[2px] bg-[#c8a951]/20 rounded-full overflow-hidden">
+                    <motion.div
+                      key={timerKey}
+                      initial={{ width: "100%" }}
+                      animate={{ width: "0%" }}
+                      transition={{ duration: 15, ease: "linear" }}
+                      className="h-full bg-gradient-to-r from-[#c8a951] via-[#e5cf87] to-[#c8a951]"
+                    />
+                  </div>
+                  <p className="text-[9px] font-mono tracking-widest text-[#a5762a]/70 uppercase">
+                    Auto-clears in 15s of idle time · Click cards to prolong
+                  </p>
+                </div>
+              </div>
 
-              {/* Slot Box with 3D Perspective */}
               <div
-                className="relative w-full max-w-[250px] aspect-[2/3] cursor-pointer"
-                style={{ perspective: 1200 }}
-                onClick={() => handleFlipCard(index)}
-                data-cursor="card"
+                className={`grid gap-6 sm:gap-8 justify-center items-center ${
+                  spreadMode === "single" ? "grid-cols-1 max-w-[300px] mx-auto" : "grid-cols-1 md:grid-cols-3"
+                }`}
               >
-                {slot.card ? (
-                  <motion.div
-                    className="w-full h-full relative"
-                    style={{ transformStyle: "preserve-3d" }}
-                    animate={{ rotateY: slot.isFlipped ? 180 : 0 }}
-                    transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{ y: -6, scale: 1.02 }}
-                  >
-                    {/* Face Down Back */}
-                    <div
-                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-xl bg-[#fdf8f4]"
-                      style={{ backfaceVisibility: "hidden" }}
-                    >
-                      <img
-                        src="/tarot-card-back.webp"
-                        alt="Tarot Back"
-                        className="w-full h-full object-cover object-center"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end justify-center pb-6">
-                        <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#2a1f1a] bg-[#fcf8f4]/95 px-4 py-1.5 border border-[#c8a951]/70 rounded-full shadow-lg">
-                          Click to Reveal
-                        </span>
-                      </div>
-                    </div>
+                {slots.map((slot, index) => (
+                  <div key={index} className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-3 text-center">
+                      {slot.position}
+                    </span>
 
-                    {/* Face Up Front */}
+                    {/* Slot Box with 3D Perspective */}
                     <div
-                      className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-2xl bg-white"
-                      style={{
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                      }}
+                      className="relative w-full max-w-[250px] aspect-[2/3] cursor-pointer"
+                      style={{ perspective: 1200 }}
+                      onClick={() => handleFlipCard(index)}
+                      data-cursor="card"
                     >
-                      <img
-                        src={slot.card.image}
-                        alt={slot.card.name}
-                        className="w-full h-full object-cover object-center"
-                      />
-                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-white via-white/85 to-transparent pt-8 pb-4 px-4 text-center">
-                        <p className="text-[9px] font-mono tracking-widest text-[#a5762a] mb-0.5">
-                          {slot.card.number}
-                        </p>
-                        <h4
-                          className="text-base sm:text-lg font-light text-[#2a1f1a]"
+                      {slot.card ? (
+                        <motion.div
+                          className="w-full h-full relative"
+                          style={{ transformStyle: "preserve-3d" }}
+                          animate={{ rotateY: slot.isFlipped ? 180 : 0 }}
+                          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                          whileHover={{ y: -6, scale: 1.02 }}
+                        >
+                          {/* Face Down Back */}
+                          <div
+                            className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-xl bg-[#fdf8f4]"
+                            style={{ backfaceVisibility: "hidden" }}
+                          >
+                            <img
+                              src="/tarot-card-back.webp"
+                              alt="Tarot Back"
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end justify-center pb-6">
+                              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#2a1f1a] bg-[#fcf8f4]/95 px-4 py-1.5 border border-[#c8a951]/70 rounded-full shadow-lg">
+                                Click to Reveal
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Face Up Front */}
+                          <div
+                            className="absolute inset-0 w-full h-full rounded-md overflow-hidden border border-[#c8a951]/70 shadow-2xl bg-white"
+                            style={{
+                              backfaceVisibility: "hidden",
+                              transform: "rotateY(180deg)",
+                            }}
+                          >
+                            <img
+                              src={slot.card.image}
+                              alt={slot.card.name}
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-white via-white/85 to-transparent pt-8 pb-4 px-4 text-center">
+                              <p className="text-[9px] font-mono tracking-widest text-[#a5762a] mb-0.5">
+                                {slot.card.number}
+                              </p>
+                              <h4
+                                className="text-base sm:text-lg font-light text-[#2a1f1a]"
+                                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                              >
+                                {slot.card.name}
+                              </h4>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ) : (
+                        /* Empty Dealt Slot Placeholder */
+                        <div className="w-full h-full rounded-md border-2 border-dashed border-[#c8a951]/40 bg-[#fbf6f0]/80 flex flex-col items-center justify-center p-6 text-center shadow-inner">
+                          <Moon className="w-8 h-8 text-[#c8a951]/50 mb-3" />
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">
+                            Empty Slot
+                          </p>
+                          <p className="text-[11px] text-[#4a382e]/60 mt-1 font-light">
+                            Click a card in the fanned deck above to place here.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quick reshuffle button below cards when dossier is not yet open */}
+              {!selectedDetails && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={handleReshuffle}
+                    className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#a5762a] hover:text-[#2a1f1a] transition-colors py-2 px-5 rounded-xs border border-[#c8a951]/40 bg-white/70 hover:bg-[#c8a951]/10 cursor-pointer shadow-xs"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    Reshuffle Deck
+                  </button>
+                </div>
+              )}
+
+              {/* ── CARD REVELATION & CRYSTAL ALLY DOSSIER ── */}
+              <AnimatePresence>
+                {selectedDetails && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.6 }}
+                    className="mt-8 bg-white/95 border border-[#c8a951]/45 p-6 sm:p-10 rounded-sm shadow-2xl backdrop-blur-md"
+                  >
+                    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 items-start">
+                      <div className="w-full max-w-[220px] mx-auto aspect-[2/3] rounded-sm overflow-hidden border border-[#c8a951]/50 shadow-xl bg-[#fdf8f4]">
+                        <img
+                          src={selectedDetails.image}
+                          alt={selectedDetails.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                          <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] border border-[#c8a951]/40 px-3 py-1 bg-[#c8a951]/10 rounded-full">
+                            {selectedDetails.arcana} Arcana · {selectedDetails.number}
+                          </span>
+                          <span className="text-[9px] font-bold uppercase tracking-wider text-[#4a382e]/70">
+                            Element: {selectedDetails.element}
+                          </span>
+                        </div>
+
+                        <h3
+                          className="text-2xl sm:text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4"
                           style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                         >
-                          {slot.card.name}
-                        </h4>
+                          {selectedDetails.name}
+                        </h3>
+
+                        <div className="flex flex-wrap gap-1.5 mb-6">
+                          {selectedDetails.uprightKeywords.map((kw) => (
+                            <span
+                              key={kw}
+                              className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2.5 py-1 rounded-sm"
+                            >
+                              {kw}
+                            </span>
+                          ))}
+                        </div>
+
+                        <p className="text-sm sm:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
+                          {selectedDetails.summary}
+                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-[#fdf8f4] border-l-2 border-[#c8a951] rounded-sm mb-6 shadow-sm">
+                          <div>
+                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
+                              Sacred Affirmation
+                            </p>
+                            <p className="text-xs text-[#2a1f1a] italic font-light">
+                              "{selectedDetails.affirmation}"
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
+                              Aligned Crystal Ally
+                            </p>
+                            <p className="text-xs text-[#2a1f1a] font-medium">
+                              {selectedDetails.crystalRemedy}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-4">
+                          <Link href="/tarot#book">
+                            <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/40 transition-all cursor-pointer">
+                              Book Consultation with Ektaz <ArrowRight className="w-3.5 h-3.5" />
+                            </span>
+                          </Link>
+                          <Link href="/shop">
+                            <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
+                              Shop Aligned Crystals
+                            </span>
+                          </Link>
+                          <button
+                            onClick={handleReshuffle}
+                            className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer"
+                          >
+                            <RotateCcw className="w-3.5 h-3.5" />
+                            Reshuffle & Draw Again
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
-                ) : (
-                  /* Empty Dealt Slot Placeholder */
-                  <div className="w-full h-full rounded-md border-2 border-dashed border-[#c8a951]/40 bg-[#fbf6f0]/80 flex flex-col items-center justify-center p-6 text-center shadow-inner">
-                    <Moon className="w-8 h-8 text-[#c8a951]/50 mb-3" />
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">
-                      Empty Slot
-                    </p>
-                    <p className="text-[11px] text-[#4a382e]/60 mt-1 font-light">
-                      Click a card in the fanned deck above to place here.
-                    </p>
-                  </div>
                 )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── CARD REVELATION & CRYSTAL ALLY DOSSIER ── */}
-      <AnimatePresence>
-        {selectedDetails && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/95 border border-[#c8a951]/45 p-6 sm:p-10 rounded-sm shadow-2xl backdrop-blur-md"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 items-start">
-              <div className="w-full max-w-[220px] mx-auto aspect-[2/3] rounded-sm overflow-hidden border border-[#c8a951]/50 shadow-xl bg-[#fdf8f4]">
-                <img
-                  src={selectedDetails.image}
-                  alt={selectedDetails.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div>
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] border border-[#c8a951]/40 px-3 py-1 bg-[#c8a951]/10 rounded-full">
-                    {selectedDetails.arcana} Arcana · {selectedDetails.number}
-                  </span>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#4a382e]/70">
-                    Element: {selectedDetails.element}
-                  </span>
-                </div>
-
-                <h3
-                  className="text-2xl sm:text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                >
-                  {selectedDetails.name}
-                </h3>
-
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {selectedDetails.uprightKeywords.map((kw) => (
-                    <span
-                      key={kw}
-                      className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2.5 py-1 rounded-sm"
-                    >
-                      {kw}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-sm sm:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
-                  {selectedDetails.summary}
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-[#fdf8f4] border-l-2 border-[#c8a951] rounded-sm mb-6 shadow-sm">
-                  <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
-                      Sacred Affirmation
-                    </p>
-                    <p className="text-xs text-[#2a1f1a] italic font-light">
-                      "{selectedDetails.affirmation}"
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
-                      Aligned Crystal Ally
-                    </p>
-                    <p className="text-xs text-[#2a1f1a] font-medium">
-                      {selectedDetails.crystalRemedy}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/tarot#book">
-                    <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/40 transition-all cursor-pointer">
-                      Book Consultation with Ektaz <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </Link>
-                  <Link href="/shop">
-                    <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-6 sm:px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
-                      Shop Aligned Crystals
-                    </span>
-                  </Link>
-                </div>
-              </div>
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
