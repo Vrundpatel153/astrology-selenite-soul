@@ -106,21 +106,22 @@ export default function HeroCarousel() {
               <motion.img
                 src={slide.image}
                 alt={slide.heading.replace("\n", " ")}
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-[center_35%] sm:object-center"
                 animate={selectedIndex === idx ? { scale: 1.04 } : { scale: 1 }}
                 transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
               />
               {/* Colour overlay */}
               <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/35 sm:from-black/65 sm:via-black/10 sm:to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent sm:hidden pointer-events-none" />
 
-              {/* Slide content */}
-              <div className="absolute inset-0 flex flex-col justify-end px-6 pb-20 md:px-14 md:pb-24 lg:px-20 lg:pb-28 max-w-[760px]">
+              {/* Slide content - Centered on mobile so main content is prominent and visible */}
+              <div className="absolute inset-0 flex flex-col justify-center sm:justify-end px-5 pt-16 pb-12 sm:px-14 sm:pb-24 lg:px-20 lg:pb-28 max-w-[760px] z-10">
                 <AnimatePresence mode="wait">
                   {selectedIndex === idx && (
                     <motion.div
                       key={`content-${slide.id}`}
-                      initial={{ opacity: 0, y: 40 }}
+                      initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -129,25 +130,24 @@ export default function HeroCarousel() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.08, duration: 0.45 }}
-                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.35em] mb-3 md:mb-5"
+                        className="text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.3em] mb-2 sm:mb-4"
                         style={{ color: slide.accent }}
                       >
                         {slide.eyebrow}
                       </motion.p>
                       <motion.h2
-                        initial={{ opacity: 0, y: 22 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.15, duration: 0.6 }}
-                        className="font-serif font-light text-white leading-[0.88] mb-4 md:mb-6 whitespace-pre-line"
-                        style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)" }}
+                        className="font-serif font-light text-white leading-[0.92] mb-3.5 sm:mb-6 whitespace-pre-line text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
                       >
                         {slide.heading}
                       </motion.h2>
                       <motion.p
-                        initial={{ opacity: 0, y: 14 }}
+                        initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25, duration: 0.5 }}
-                        className="hidden sm:block text-white/65 text-sm md:text-[15px] max-w-md leading-relaxed mb-7 md:mb-9 font-light"
+                        className="text-white/80 text-xs sm:text-sm md:text-[15px] max-w-sm sm:max-w-md leading-relaxed mb-5 sm:mb-8 font-light line-clamp-2 sm:line-clamp-none"
                       >
                         {slide.subheading}
                       </motion.p>
@@ -155,11 +155,11 @@ export default function HeroCarousel() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.35, duration: 0.45 }}
-                        className="flex flex-wrap gap-3"
+                        className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full sm:w-auto max-w-[280px] sm:max-w-none"
                       >
                         <Link href={slide.cta.href}>
                           <motion.span
-                            className="inline-block px-7 py-3.5 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.22em] text-[#1e1410] cursor-pointer"
+                            className="block sm:inline-block text-center px-5 py-3 sm:px-7 sm:py-3.5 text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#1e1410] cursor-pointer shadow-md rounded-xs"
                             style={{ background: slide.accent }}
                             whileHover={{ scale: 1.04, boxShadow: `0 12px 36px ${slide.accent}55` }}
                             whileTap={{ scale: 0.97 }}
@@ -169,7 +169,7 @@ export default function HeroCarousel() {
                         </Link>
                         <Link href={slide.ctaSecondary.href}>
                           <motion.span
-                            className="inline-block px-7 py-3.5 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.22em] text-white border border-white/35 cursor-pointer"
+                            className="block sm:inline-block text-center px-5 py-3 sm:px-7 sm:py-3.5 text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white border border-white/45 bg-black/25 backdrop-blur-xs sm:bg-transparent cursor-pointer rounded-xs"
                             whileHover={{ borderColor: slide.accent, color: slide.accent }}
                             transition={{ duration: 0.18 }}
                           >
@@ -187,7 +187,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Dot indicators : bottom right */}
-      <div className="absolute bottom-7 md:bottom-10 right-6 md:right-14 flex items-center gap-2 z-20">
+      <div className="absolute bottom-4 sm:bottom-10 right-4 sm:right-14 flex items-center gap-1.5 sm:gap-2 z-20">
         {slides.map((_, idx) => (
           <button
             key={idx}
@@ -195,8 +195,8 @@ export default function HeroCarousel() {
             aria-label={`Slide ${idx + 1}`}
             className="transition-all duration-300 rounded-full"
             style={{
-              width: selectedIndex === idx ? 26 : 6,
-              height: 6,
+              width: selectedIndex === idx ? 24 : 6,
+              height: 5,
               background: selectedIndex === idx ? slides[selectedIndex].accent : "rgba(255,255,255,0.35)",
             }}
           />
@@ -204,7 +204,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Counter : bottom left */}
-      <div className="absolute bottom-7 md:bottom-10 left-6 md:left-14 z-20">
+      <div className="absolute bottom-4 sm:bottom-10 left-4 sm:left-14 z-20">
         <span className="text-white/40 text-[10px] font-mono tracking-widest">
           {String(selectedIndex + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(slides.length).padStart(2, "0")}
         </span>

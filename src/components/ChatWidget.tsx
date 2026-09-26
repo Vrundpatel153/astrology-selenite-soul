@@ -92,21 +92,21 @@ export default function ChatWidget() {
   return (
     <>
       {/* Floating Action Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-[90]">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90]">
         <motion.button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="relative w-14 h-14 rounded-full bg-[#c8a951] text-[#1a0e05] flex items-center justify-center shadow-2xl border-2 border-white hover:scale-105 transition-transform cursor-pointer"
+          className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#c8a951] text-[#1a0e05] flex items-center justify-center shadow-xl border border-white/90 hover:scale-105 transition-transform cursor-pointer"
           whileTap={{ scale: 0.92 }}
           aria-label="Open Spiritual Chat"
           data-cursor="hover"
         >
           {isOpen ? (
-            <X className="w-6 h-6" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           ) : (
             <>
-              <MessageSquare className="w-6 h-6 text-[#1a0e05]" strokeWidth={1.8} />
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#2a1f1a] rounded-full border border-white flex items-center justify-center">
-                <span className="w-1.5 h-1.5 bg-[#c8a951] rounded-full animate-ping" />
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-[#1a0e05]" strokeWidth={1.8} />
+              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#2a1f1a] rounded-full border border-white flex items-center justify-center">
+                <span className="w-1 h-1 bg-[#c8a951] rounded-full animate-ping" />
               </span>
             </>
           )}
@@ -121,7 +121,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-24 right-4 sm:right-6 z-[90] w-[92vw] sm:w-[380px] h-[520px] bg-white border border-[#c8a951]/40 rounded-sm shadow-2xl flex flex-col overflow-hidden text-[#2a1f1a]"
+            className="fixed bottom-16 sm:bottom-22 right-3 sm:right-6 z-[90] w-[calc(100vw-24px)] sm:w-[380px] h-[500px] max-h-[80vh] bg-white border border-[#c8a951]/40 rounded-sm shadow-2xl flex flex-col overflow-hidden text-[#2a1f1a]"
           >
             {/* Header */}
             <div className="bg-[#fcf8f4] border-b border-[#e8d9cf] p-4 flex items-center justify-between">
