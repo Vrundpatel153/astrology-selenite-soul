@@ -65,10 +65,10 @@ export default function About() {
       </section>
 
       {/* ── THE SELENITE SOUL PHILOSOPHY ─────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#fdf8f4]">
+      <section className="py-10 md:py-14 px-6 bg-[#fdf8f4]">
         <div className="max-w-[1200px] mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-10">
               <div className="flex items-center gap-3 justify-center mb-3">
                 <div className="h-px w-8 bg-[#c8a951]/60" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Sacred Pillars</span>
@@ -98,7 +98,7 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-14 p-8 border-l-2 border-[#c8a951] bg-[#f7ebe1]">
+            <div className="mt-10 p-8 border-l-2 border-[#c8a951] bg-[#f7ebe1]">
               <p className="text-base md:text-lg text-[#2a1f1a] leading-relaxed italic font-light" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
                 "I believe every person carries a unique cosmic blueprint written in the stars, in numbers, and in the crystals that call to them. My mission is to help you remember your own innate truth and live from sovereign clarity."
               </p>
@@ -109,10 +109,10 @@ export default function About() {
       </section>
 
       {/* ── EKTA'S STORY ─────────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#f7ebe1]">
+      <section className="py-10 md:py-14 px-6 bg-[#f7ebe1]">
         <div className="max-w-[1200px] mx-auto">
           <ScrollReveal>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-px w-8 bg-[#c8a951]/60" />
@@ -148,9 +148,9 @@ export default function About() {
       </section>
 
       {/* ── EKTA'S JOURNEY TIMELINE ──────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#1a0e08] text-white">
+      <section className="py-10 md:py-14 px-6 bg-[#1a0e08] text-white">
         <div className="max-w-[1000px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#c8a951] mb-2">Chronology</p>
             <h2 className="text-3xl md:text-5xl font-light text-white" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>The Milestones of Mastery</h2>
           </ScrollReveal>
@@ -174,9 +174,9 @@ export default function About() {
       </section>
 
       {/* ── FOUR DISCIPLINES ────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#fdf8f4]">
+      <section className="py-10 md:py-14 px-6 bg-[#fdf8f4]">
         <div className="max-w-[1200px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2">Sacred Services</p>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Explore the Four Disciplines</h2>
           </ScrollReveal>
@@ -209,9 +209,9 @@ export default function About() {
       </section>
 
       {/* ── BRAND BELIEFS / SACRED COMMITMENTS ──────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#1a0e08] text-white">
+      <section className="py-10 md:py-14 px-6 bg-[#1a0e08] text-white">
         <div className="max-w-[1200px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#c8a951] mb-2">Ethics & Vows</p>
             <h2 className="text-3xl md:text-5xl font-light text-white" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Our Sacred Commitments</h2>
           </ScrollReveal>

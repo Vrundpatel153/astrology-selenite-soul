@@ -304,7 +304,7 @@ export default function Tarot() {
       <Header />
 
       {/* ── HERO ────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4]">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#fdf8f4] py-10 md:py-14">
         <TarotAmbientDust count={28} />
         {/* Radial glows */}
         <div className="absolute inset-0 pointer-events-none">
@@ -315,7 +315,7 @@ export default function Tarot() {
         </div>
 
         <motion.div
-          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
+          className="relative z-10 text-center px-6 max-w-4xl mx-auto py-6 md:py-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -329,7 +329,7 @@ export default function Tarot() {
             Tarot Reading<br />
             <span className="italic text-[#a5762a]">with Ekta</span>
           </h1>
-          <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-10">
+          <p className="text-[#4a382e]/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed mb-8">
             Not fortune-telling, but a sacred mirror reflecting your soul's highest wisdom. Draw from the 3D deck below or schedule an intimate consultation with Ekta.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -354,9 +354,9 @@ export default function Tarot() {
       </section>
 
       {/* ── INTERACTIVE 3D TAROT DECK SUITE ────────────────────────────────────────── */}
-      <section id="interactive-deck" className="py-20 md:py-28 px-6 bg-[#f9f4ee] border-t border-b border-[#e8d9cf]">
+      <section id="interactive-deck" className="py-10 md:py-14 px-4 sm:px-6 bg-[#f9f4ee] border-t border-b border-[#e8d9cf]">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2">Live Oracle Deck</p>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               Experience the <em className="italic text-[#a5762a]">Sacred Spread</em>
@@ -371,9 +371,9 @@ export default function Tarot() {
       </section>
 
       {/* ── BESPOKE EDITORIAL GUIDANCE DOMAINS ─────────────────────────────────────── */}
-      <section id="guidance" className="py-24 md:py-32 px-6 bg-[#fcf8f4] border-b border-[#e8d9cf]">
+      <section id="guidance" className="py-10 md:py-14 px-4 sm:px-6 bg-[#fcf8f4] border-b border-[#e8d9cf]">
         <div className="max-w-[1300px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <div className="flex items-center gap-3 justify-center mb-3">
               <div className="h-px w-8 bg-[#c8a951]/60" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Sacred Domains of Ingestion</span>
@@ -432,9 +432,9 @@ export default function Tarot() {
       </section>
 
       {/* ── ABOUT THE SESSION ───────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#f7efe6] border-b border-[#e8d9cf]">
+      <section className="py-10 md:py-14 px-4 sm:px-6 bg-[#f7efe6] border-b border-[#e8d9cf]">
         <div className="max-w-[1100px] mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-2">The Four Sacred Phases</p>
             <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               The Consultation Architecture
@@ -471,9 +471,9 @@ export default function Tarot() {
       </section>
 
       {/* ── BOOKING SECTION ─────────────────────────────────────────────────────── */}
-      <section id="book" className="py-24 md:py-32 px-6 bg-[#fcf8f4] border-b border-[#e8d9cf]">
+      <section id="book" className="py-10 md:py-14 px-4 sm:px-6 bg-[#fcf8f4] border-b border-[#e8d9cf]">
         <div className="max-w-[1100px] mx-auto">
-          <ScrollReveal className="text-center mb-14">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <div className="flex items-center gap-3 justify-center mb-3">
               <div className="h-px w-8 bg-[#c8a951]/60" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Sacred Reservation</span>
@@ -492,9 +492,9 @@ export default function Tarot() {
       </section>
 
       {/* ── FAQ SECTION ─────────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 bg-[#f9f4ee]">
+      <section className="py-10 md:py-14 px-4 sm:px-6 bg-[#f9f4ee]">
         <div className="max-w-3xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
+          <ScrollReveal className="text-center mb-8 md:mb-10">
             <div className="flex items-center gap-3 justify-center mb-3">
               <div className="h-px w-8 bg-[#c8a951]/60" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Sacred Inquiries</span>

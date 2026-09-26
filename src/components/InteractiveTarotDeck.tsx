@@ -280,7 +280,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
       {/* ════════════════════════════════════════════════════════════════════════
           1. MOBILE GAMEPLAY WINDOW (DEDICATED COMPACT EXPERIENCE)
           ════════════════════════════════════════════════════════════════════════ */}
-      <div className="block md:hidden mb-10">
+      <div className="block md:hidden mb-6">
         <div className="relative rounded-lg border border-[#c8a951]/50 bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f4ebe1] shadow-2xl p-4 overflow-hidden min-h-[490px] flex flex-col justify-between">
           {/* Subtle gold ornamental corner accents */}
           <div className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-[#c8a951]/60 pointer-events-none" />
@@ -622,7 +622,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
           ════════════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block">
         {/* Control bar: Spread Mode Selection & Shuffle */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sm:mb-10 pb-6 border-b border-[#e8d9cf]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b border-[#e8d9cf]">
           <div className="flex flex-wrap items-center justify-center gap-2.5 w-full sm:w-auto">
             <button
               onClick={() => handleModeChange("three")}
@@ -656,8 +656,8 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
         </div>
 
         {/* ── 3D FANNED ARC DECK ── */}
-        <div className="relative pt-10 sm:pt-14 pb-8 sm:pb-12 px-3 sm:px-6 mb-12 sm:mb-16 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
-          <div className="text-center mb-6 sm:mb-8">
+        <div className="relative pt-8 sm:pt-10 pb-6 sm:pb-8 px-3 sm:px-6 mb-8 sm:mb-10 rounded-sm bg-gradient-to-b from-[#fcf8f4] via-[#f8f1e8] to-[#f3eae0] border border-[#c8a951]/40 shadow-xl overflow-visible">
+          <div className="text-center mb-5 sm:mb-6">
             <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a] mb-1.5">
               Interactive Deck Fan
             </p>
@@ -737,7 +737,7 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
       </div>
 
       {/* ── DEALING SPREAD SLOTS (DEALT CARDS) ── */}
-      <div ref={desktopSpreadRef} className="mb-14 scroll-mt-28">
+      <div ref={desktopSpreadRef} className="mb-8 scroll-mt-28">
         <div className="text-center mb-8">
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-1">
             Your Sacred Reading Spread
