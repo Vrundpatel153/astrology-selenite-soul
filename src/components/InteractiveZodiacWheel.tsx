@@ -233,19 +233,17 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
 
 export default function InteractiveZodiacWheel({ className = "" }: { className?: string }) {
   const [activeSignIndex, setActiveSignIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const activeSign = ZODIAC_SIGNS[activeSignIndex];
 
-  // Auto-change zodiac sign every 1.5 seconds (1500ms)
+  // Auto-change zodiac sign every 1.4 seconds (1400ms)
   useEffect(() => {
-    if (isPaused) return;
     const interval = setInterval(() => {
       setActiveSignIndex((prev) => (prev + 1) % ZODIAC_SIGNS.length);
-    }, 1500);
+    }, 1400);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [activeSignIndex]);
 
   // Keep the active zodiac button visible within the horizontal scroll ribbon
   useEffect(() => {
@@ -260,13 +258,7 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
   }, [activeSignIndex]);
 
   return (
-    <div
-      className={`w-full max-w-[1300px] mx-auto ${className}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
-    >
+    <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
       {/* Sign Selector Ribbon (All 12 Signs) */}
       <div className="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-8 select-none no-scrollbar">
         {ZODIAC_SIGNS.map((s, idx) => {
