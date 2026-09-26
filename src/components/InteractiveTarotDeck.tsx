@@ -221,13 +221,30 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
     const newPicked = new Set(pickedCardIds).add(card.id);
     setPickedCardIds(newPicked);
 
-    // In PC mode, once all cards are chosen, smoothly scroll down to the spread section
+    // In PC mode, once all cards are chosen, wait gracefully (1.2s) and smoothly glide down to the spread
     if (newPicked.size >= maxPicks) {
       setTimeout(() => {
         if (typeof window !== "undefined" && window.innerWidth >= 768) {
-          desktopSpreadRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollToSpread(2.0);
         }
-      }, 500);
+      }, 1200);
+    }
+  };
+
+  // Silky smooth programmatic scroll to reading spread
+  const scrollToSpread = (customDuration = 1.8) => {
+    if (typeof window === "undefined" || !desktopSpreadRef.current) return;
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.scrollTo === "function") {
+      lenis.scrollTo(desktopSpreadRef.current, {
+        offset: -85,
+        duration: customDuration,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      const top =
+        desktopSpreadRef.current.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 
@@ -652,10 +669,10 @@ export default function InteractiveTarotDeck({ className = "" }: { className?: s
                 </>
               ) : (
                 <button
-                  onClick={() => desktopSpreadRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                  className="underline underline-offset-4 decoration-[#c8a951] hover:text-[#2a1f1a] transition-colors cursor-pointer"
+                  onClick={() => scrollToSpread(1.6)}
+                  className="inline-flex items-center gap-1.5 underline underline-offset-4 decoration-[#c8a951] hover:text-[#2a1f1a] transition-colors cursor-pointer text-[#a5762a]"
                 >
-                  All {maxPicks} cards chosen! Click each card in the spread below to flip and reveal.
+                  All {maxPicks} cards chosen. Revealing your sacred spread below...
                 </button>
               )}
             </p>
