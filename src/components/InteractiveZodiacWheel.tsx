@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
@@ -233,10 +233,40 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
 
 export default function InteractiveZodiacWheel({ className = "" }: { className?: string }) {
   const [activeSignIndex, setActiveSignIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const activeSign = ZODIAC_SIGNS[activeSignIndex];
 
+  // Auto-change zodiac sign every 1.5 seconds (1500ms)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveSignIndex((prev) => (prev + 1) % ZODIAC_SIGNS.length);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  // Keep the active zodiac button visible within the horizontal scroll ribbon
+  useEffect(() => {
+    const currentBtn = buttonRefs.current[activeSignIndex];
+    if (currentBtn) {
+      currentBtn.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [activeSignIndex]);
+
   return (
-    <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
+    <div
+      className={`w-full max-w-[1300px] mx-auto ${className}`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
       {/* Sign Selector Ribbon (All 12 Signs) */}
       <div className="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-8 select-none no-scrollbar">
         {ZODIAC_SIGNS.map((s, idx) => {
@@ -244,8 +274,11 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
           return (
             <button
               key={s.sign}
-              onClick={() => setActiveSignIndex(idx)}
-              className={`flex items-center gap-1.5 px-3 py-2 text-[10px] uppercase font-bold tracking-[0.18em] transition-all whitespace-nowrap rounded-sm border ${
+              ref={(el) => { buttonRefs.current[idx] = el; }}
+              onClick={() => {
+                setActiveSignIndex(idx);
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 text-[10px] uppercase font-bold tracking-[0.18em] transition-all whitespace-nowrap rounded-sm border cursor-pointer ${
                 isActive
                   ? "bg-[#c8a951] text-[#0a0508] border-[#c8a951] shadow-lg shadow-[#c8a951]/20 scale-105"
                   : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951] hover:text-[#a5762a]"
