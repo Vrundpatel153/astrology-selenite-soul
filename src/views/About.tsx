@@ -18,7 +18,7 @@ const journey = [
 const modalities = [
   { numeral: "I", title: "Vedic Kundali", desc: "Deep astrological blueprint decoding your dharma, karma, dashas, and planetary remedies.", href: "/kundali" },
   { numeral: "II", title: "Tarot Channelling", desc: "Intuitive oracle channelling to illuminate present energetic crossroads with clarity.", href: "/tarot" },
-  { numeral: "III", title: "Pythagorean Numerology", desc: "Mathematical vibrations hidden in your birth date and full given name.", href: "/numerology" },
+  { numeral: "III", title: "Chaldean Numerology", desc: "Ancient Babylonian sound vibrations and compound numbers hidden in your birth date and name.", href: "/numerology" },
   { numeral: "IV", title: "Crystal Energetics", desc: "Ethically sourced, full-moon energized gemstones tailored to your auric signature.", href: "/shop" },
 ];
 

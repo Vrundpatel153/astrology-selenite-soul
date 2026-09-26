@@ -1,375 +1,497 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Shield, Compass, BookOpen } from "lucide-react";
 import { Link } from "wouter";
+import {
+  CHALDEAN_LETTER_MAP,
+  CHALDEAN_ARCHETYPES,
+  calculateDriverNumber,
+  calculateDestinyNumber,
+  calculateChaldeanName,
+  calculateChaldeanCompatibility,
+} from "@/lib/chaldeanNumerology";
 
-const PYTHAGOREAN_TABLE: Record<string, number> = {
-  a:1, b:2, c:3, d:4, e:5, f:6, g:7, h:8, i:9,
-  j:1, k:2, l:3, m:4, n:5, o:6, p:7, q:8, r:9,
-  s:1, t:2, u:3, v:4, w:5, x:6, y:7, z:8
-};
-
-export const NUMEROLOGY_ARCHETYPES: Record<number, {
-  title: string;
-  archetype: string;
-  keywords: string[];
-  description: string;
-  mission: string;
-  planet: string;
-  crystal: string;
-  isMaster?: boolean;
-}> = {
-  1: {
-    title: "The Pioneer & Originator",
-    archetype: "Leader",
-    keywords: ["Independence", "Innovation", "Courage", "Self-Reliance"],
-    description: "Number 1 vibrates with the pure creative fire of beginnings. You are destined to blaze original trails where others hesitate to walk.",
-    mission: "To overcome fear of standing alone and lead with uncompromised integrity.",
-    planet: "Sun",
-    crystal: "Red Carnelian & Ruby",
-  },
-  2: {
-    title: "The Sacred Mediator",
-    archetype: "Peacemaker",
-    keywords: ["Intuition", "Harmony", "Empathy", "Partnership"],
-    description: "Number 2 possesses the gentle yet profound power of the feminine tides. You bring healing balance and intuitive reconciliation to conflicting forces.",
-    mission: "To master energetic boundaries while maintaining an open, loving heart.",
-    planet: "Moon",
-    crystal: "Moonstone & Pearl",
-  },
-  3: {
-    title: "The Joyful Alchemist",
-    archetype: "Creator",
-    keywords: ["Expression", "Inspiration", "Artistry", "Optimism"],
-    description: "Number 3 is the spark of divine play and creative genius. Through words, melody, or visuals, you awaken joy in everyone you encounter.",
-    mission: "To channel creative brilliance into purposeful, inspiring creations.",
-    planet: "Jupiter",
-    crystal: "Citrine & Yellow Topaz",
-  },
-  4: {
-    title: "The Master Architect",
-    archetype: "Builder",
-    keywords: ["Stability", "Discipline", "Legacy", "Structure"],
-    description: "Number 4 lays the unyielding granite foundations of reality. Reliable, methodical, and patient, you turn abstract dreams into generational empires.",
-    mission: "To build enduring security without becoming trapped in rigid perfectionism.",
-    planet: "Rahu / Uranus",
-    crystal: "Brown Agate & Hessonite",
-  },
-  5: {
-    title: "The Cosmic Voyager",
-    archetype: "Free Spirit",
-    keywords: ["Freedom", "Adventure", "Versatility", "Magnetism"],
-    description: "Number 5 thrives in the dynamic winds of change. You are the seeker of truth across foreign lands, unconventional ideas, and thrilling sensory experiences.",
-    mission: "To experience boundless freedom while anchoring personal discipline.",
-    planet: "Mercury",
-    crystal: "Green Aventurine & Emerald",
-  },
-  6: {
-    title: "The Sacred Guardian",
-    archetype: "Nurturer",
-    keywords: ["Compassion", "Healing", "Beauty", "Service"],
-    description: "Number 6 embodies the warmth of the cosmic hearth. Deeply empathetic and aesthetically refined, you bring sanctuary, justice, and love into chaotic spaces.",
-    mission: "To nurture others while maintaining sacred self-care and sovereign boundaries.",
-    planet: "Venus",
-    crystal: "Rose Quartz & Diamond",
-  },
-  7: {
-    title: "The Esoteric Mystic",
-    archetype: "Seeker",
-    keywords: ["Wisdom", "Spirituality", "Analysis", "Solitude"],
-    description: "Number 7 walks the solitary path between scientific precision and occult mysticism. You dissect the illusions of the material world to uncover universal truth.",
-    mission: "To trust inner intuitive knowing over external validation.",
-    planet: "Ketu / Neptune",
-    crystal: "Labradorite & Cat's Eye",
-  },
-  8: {
-    title: "The Sovereign Manifestor",
-    archetype: "Powerhouse",
-    keywords: ["Abundance", "Authority", "Karmic Balance", "Mastery"],
-    description: "Number 8 represents the eternal lemniscate of energy and material manifestation. You hold the executive capability to direct wealth toward noble collective evolution.",
-    mission: "To master material abundance without losing spiritual humility.",
-    planet: "Saturn",
-    crystal: "Blue Sapphire & Amethyst",
-  },
-  9: {
-    title: "The Universal Humanitarian",
-    archetype: "Sage",
-    keywords: ["Completion", "Unconditional Love", "Transcendence", "Generosity"],
-    description: "Number 9 carries the cumulative wisdom of all previous numbers. An old soul with universal vision, you are here to release past cycles and uplift humanity.",
-    mission: "To practice universal forgiveness and surrender attachment to outcomes.",
-    planet: "Mars",
-    crystal: "Red Coral & Bloodstone",
-  },
-  11: {
-    title: "The Master Illuminator",
-    archetype: "Spiritual Messenger",
-    keywords: ["Visionary", "Channeller", "High Vibration", "Awakening"],
-    description: "Master Number 11 acts as a living lightning rod between cosmic consciousness and physical reality. You receive profound intuitive downloads to inspire mass awakening.",
-    mission: "To anchor high-frequency spiritual visions into grounded daily life.",
-    planet: "Sun / Moon",
-    crystal: "Selenite & Clear Quartz",
-    isMaster: true,
-  },
-  22: {
-    title: "The Master Builder of Worlds",
-    archetype: "Grand Architect",
-    keywords: ["Legacy", "Global Impact", "Execution", "Practical Genius"],
-    description: "Master Number 22 bridges visionary idealism with monumental execution. You possess the rare capacity to construct institutions that benefit generations.",
-    mission: "To direct immense organizational power solely for the highest good of humanity.",
-    planet: "Saturn / Uranus",
-    crystal: "Lapis Lazuli & Sodalite",
-    isMaster: true,
-  },
-  33: {
-    title: "The Master Teacher of Light",
-    archetype: "Avatar of Love",
-    keywords: ["Universal Compassion", "Divine Healing", "Selfless Service", "Blessing"],
-    description: "Master Number 33 is the highest octave of spiritual devotion. Radiating Christ-consciousness and unconditional love, your very presence heals broken hearts.",
-    mission: "To embody pure unconditional love and elevate collective vibration.",
-    planet: "Jupiter / Neptune",
-    crystal: "Aquamarine & Morganite",
-    isMaster: true,
-  },
-};
-
-function reduceNumber(num: number): number {
-  if (num === 11 || num === 22 || num === 33) return num;
-  while (num > 9) {
-    num = String(num).split("").reduce((acc, digit) => acc + Number(digit), 0);
-    if (num === 11 || num === 22 || num === 33) return num;
-  }
-  return num;
-}
+export { CHALDEAN_ARCHETYPES as NUMEROLOGY_ARCHETYPES };
 
 export default function InteractiveNumerologyMatrix({ className = "" }: { className?: string }) {
-  const [activeTab, setActiveTab] = useState<"lifepath" | "name">("lifepath");
+  const [activeTab, setActiveTab] = useState<"birth" | "name" | "alphabet">("birth");
   const [birthDate, setBirthDate] = useState("1996-08-15");
   const [nameInput, setNameInput] = useState("Ektaz Shah");
 
-  // Calculate Life Path
-  const calculateLifePath = (dateStr: string) => {
-    if (!dateStr) return { number: 7, breakdown: "" };
-    const parts = dateStr.split("-").map(Number);
-    if (parts.length !== 3) return { number: 7, breakdown: "" };
-    const [year, month, day] = parts;
-    const mRed = reduceNumber(month);
-    const dRed = reduceNumber(day);
-    const yRed = reduceNumber(
-      String(year).split("").reduce((s, c) => s + Number(c), 0)
-    );
-    const total = mRed + dRed + yRed;
-    const finalNum = reduceNumber(total);
-    const breakdown = `Month (${mRed}) + Day (${dRed}) + Year (${yRed}) = ${total} → ${finalNum}`;
-    return { number: finalNum, breakdown };
+  // Birth date calculations
+  const driverData = calculateDriverNumber(birthDate);
+  const destinyData = calculateDestinyNumber(birthDate);
+  const driverArch = CHALDEAN_ARCHETYPES[driverData.driverNumber] || CHALDEAN_ARCHETYPES[1];
+  const destinyArch = CHALDEAN_ARCHETYPES[destinyData.destinyNumber] || CHALDEAN_ARCHETYPES[1];
+  const birthSynergy = calculateChaldeanCompatibility(driverData.driverNumber, destinyData.destinyNumber);
+
+  // Name calculation
+  const nameData = calculateChaldeanName(nameInput);
+  const nameArch = CHALDEAN_ARCHETYPES[nameData.rootNumber] || CHALDEAN_ARCHETYPES[1];
+  const nameToDriverSynergy = calculateChaldeanCompatibility(nameData.rootNumber, driverData.driverNumber);
+  const nameToDestinySynergy = calculateChaldeanCompatibility(nameData.rootNumber, destinyData.destinyNumber);
+
+  // Alphabet table groups for the Chaldean sound frequency reference
+  const alphabetByNumber: Record<number, string[]> = {
+    1: ["A", "I", "J", "Q", "Y"],
+    2: ["B", "K", "R"],
+    3: ["C", "G", "L", "S"],
+    4: ["D", "M", "T"],
+    5: ["E", "H", "N", "X"],
+    6: ["U", "V", "W"],
+    7: ["O", "Z"],
+    8: ["F", "P"],
   };
-
-  // Calculate Name Number
-  const calculateName = (nameStr: string) => {
-    const clean = nameStr.toLowerCase().replace(/[^a-z]/g, "");
-    if (!clean.length) return { number: 1, letters: [], sum: 0 };
-    const letters = clean.split("").map(char => ({
-      char: char.toUpperCase(),
-      val: PYTHAGOREAN_TABLE[char] || 0,
-    }));
-    const sum = letters.reduce((acc, item) => acc + item.val, 0);
-    const finalNum = reduceNumber(sum);
-    return { number: finalNum, letters, sum };
-  };
-
-  const lifePathResult = calculateLifePath(birthDate);
-  const nameResult = calculateName(nameInput);
-
-  const activeNumber = activeTab === "lifepath" ? lifePathResult.number : nameResult.number;
-  const activeDetails = NUMEROLOGY_ARCHETYPES[activeNumber] || NUMEROLOGY_ARCHETYPES[1];
 
   return (
-    <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
-      {/* Tabs */}
-      <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 w-full max-w-xl mx-auto">
+    <div className={`w-full max-w-[1320px] mx-auto ${className}`}>
+      {/* Navigation Tabs */}
+      <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 w-full max-w-2xl mx-auto">
         <button
-          onClick={() => setActiveTab("lifepath")}
-          className={`w-full sm:w-auto px-5 sm:px-6 py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center ${
-            activeTab === "lifepath"
-              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+          onClick={() => setActiveTab("birth")}
+          className={`px-5 sm:px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center cursor-pointer ${
+            activeTab === "birth"
+              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20 font-bold"
               : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
           }`}
         >
-          Life Path Number (Birthdate)
+          Driver & Destiny (Birth Blueprint)
         </button>
         <button
           onClick={() => setActiveTab("name")}
-          className={`w-full sm:w-auto px-5 sm:px-6 py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center ${
+          className={`px-5 sm:px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center cursor-pointer ${
             activeTab === "name"
-              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20"
+              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20 font-bold"
               : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
           }`}
         >
-          Name Destiny Number (Pythagorean)
+          Name Vibration & Compound Number
+        </button>
+        <button
+          onClick={() => setActiveTab("alphabet")}
+          className={`px-5 sm:px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm transition-all border text-center cursor-pointer ${
+            activeTab === "alphabet"
+              ? "bg-[#c8a951] text-[#1a0e05] border-[#c8a951] shadow-md shadow-[#c8a951]/20 font-bold"
+              : "bg-white/90 text-[#2a1f1a] border-[#e8d9cf] hover:border-[#c8a951]"
+          }`}
+        >
+          Chaldean Sound Matrix (1 to 8)
         </button>
       </div>
 
-      {/* Inputs & Calculation Engine Display */}
-      <div className="bg-white/95 border border-[#c8a951]/35 p-5 sm:p-7 md:p-10 rounded-sm shadow-xl backdrop-blur-md mb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 items-center">
-          {/* Input control */}
-          <div>
-            {activeTab === "lifepath" ? (
+      {/* ── TAB 1: DRIVER & DESTINY (BIRTH BLUEPRINT) ────────────────────────── */}
+      {activeTab === "birth" && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="space-y-8"
+        >
+          {/* Controls Bar */}
+          <div className="bg-white/95 border border-[#c8a951]/35 p-6 sm:p-8 rounded-sm shadow-xl backdrop-blur-md">
+            <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-6 items-center">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-2">
-                  Select Your Date of Birth
+                  Select Date of Birth
                 </label>
                 <input
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
-                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm [color-scheme:light]"
+                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3 rounded-sm outline-none focus:border-[#c8a951] text-sm [color-scheme:light]"
                 />
                 <p className="text-[11px] text-[#665242] mt-2 font-light">
-                  Decodes the core vibrational blueprint you brought into this lifetime.
+                  Chaldean calculation derives two distinct cosmic forces: Driver (Moolank) and Destiny (Bhagyank).
                 </p>
               </div>
-            ) : (
+
+              <div className="p-5 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a]">
+                    Chaldean Formula Breakdown
+                  </span>
+                  <span className="text-[9px] px-2.5 py-0.5 bg-[#c8a951]/15 text-[#a5762a] font-bold uppercase tracking-wider rounded-full">
+                    Ancient Babylonian Method
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div className="p-3 bg-white border border-[#e8d9cf] rounded-sm">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-[#665242]">Driver (Day of Birth)</p>
+                    <p className="text-xs font-mono text-[#2a1f1a] mt-0.5">{driverData.breakdown}</p>
+                  </div>
+                  <div className="p-3 bg-white border border-[#e8d9cf] rounded-sm">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-[#665242]">Destiny (Full Sum)</p>
+                    <p className="text-xs font-mono text-[#2a1f1a] mt-0.5">{destinyData.breakdown}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dual Dossiers: Driver & Destiny Side by Side */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Driver Number Card */}
+            <div className="bg-white/95 border border-[#c8a951]/40 p-7 sm:p-9 rounded-sm shadow-xl backdrop-blur-md flex flex-col justify-between">
+              <div>
+                <div className="flex items-start justify-between pb-5 border-b border-[#e8d9cf] mb-6">
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] block mb-1">
+                      Psychic / Driver Number (Moolank)
+                    </span>
+                    <h3 className="text-2xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                      {driverArch.title}
+                    </h3>
+                    <p className="text-xs text-[#665242] mt-0.5">
+                      Ruled by {driverArch.planet} ({driverArch.vedicPlanet})
+                    </p>
+                  </div>
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#fdf8f4] border-2 border-[#c8a951]/60 flex items-center justify-center rounded-sm shrink-0">
+                    <span className="text-4xl sm:text-5xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {driverData.driverNumber}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {driverArch.keywords.map((kw) => (
+                    <span key={kw} className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2 py-0.5">
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-xs sm:text-sm text-[#4a382e] leading-relaxed font-light mb-6">
+                  {driverArch.description}
+                </p>
+
+                <div className="space-y-3 p-4 bg-[#fdf8f4] border-l-2 border-[#c8a951] mb-6 text-xs">
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Core Role</span>
+                    <p className="text-[#2a1f1a] font-light mt-0.5">
+                      Governs innate personality, instinctive drives, and inner desires (dominant age 0 to 35).
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Sacred Gemstone</span>
+                    <p className="text-[#2a1f1a] font-medium mt-0.5">{driverArch.crystal}</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Auspicious Day & Color</span>
+                    <p className="text-[#2a1f1a] font-light mt-0.5">{driverArch.luckyDay} | {driverArch.luckyColor}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#e8d9cf] flex items-center justify-between">
+                <span className="text-[10px] text-[#665242]">Inner Soul Frequency</span>
+                <Link href="/shop">
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#a5762a] hover:text-[#2a1f1a] cursor-pointer">
+                    View Crystal Remedy <ArrowRight className="w-3 h-3" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Destiny Number Card */}
+            <div className="bg-white/95 border border-[#c8a951]/40 p-7 sm:p-9 rounded-sm shadow-xl backdrop-blur-md flex flex-col justify-between">
+              <div>
+                <div className="flex items-start justify-between pb-5 border-b border-[#e8d9cf] mb-6">
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] block mb-1">
+                      Destiny / Conductor Number (Bhagyank)
+                    </span>
+                    <h3 className="text-2xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                      {destinyArch.title}
+                    </h3>
+                    <p className="text-xs text-[#665242] mt-0.5">
+                      Ruled by {destinyArch.planet} ({destinyArch.vedicPlanet})
+                    </p>
+                  </div>
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#fdf8f4] border-2 border-[#c8a951]/60 flex items-center justify-center rounded-sm shrink-0">
+                    <span className="text-4xl sm:text-5xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {destinyData.destinyNumber}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {destinyArch.keywords.map((kw) => (
+                    <span key={kw} className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2 py-0.5">
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-xs sm:text-sm text-[#4a382e] leading-relaxed font-light mb-6">
+                  {destinyArch.description}
+                </p>
+
+                <div className="space-y-3 p-4 bg-[#fdf8f4] border-l-2 border-[#c8a951] mb-6 text-xs">
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Karmic Destiny</span>
+                    <p className="text-[#2a1f1a] font-light mt-0.5">
+                      Governs life mission, career trajectory, and worldly achievements (dominant age 35 and onwards).
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Soul Mission</span>
+                    <p className="text-[#2a1f1a] font-light mt-0.5">{destinyArch.soulMission}</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] block">Sacred Gemstone</span>
+                    <p className="text-[#2a1f1a] font-medium mt-0.5">{destinyArch.crystal}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#e8d9cf] flex items-center justify-between">
+                <span className="text-[10px] text-[#665242]">Outer Karmic Trajectory</span>
+                <Link href="/tarot#book">
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#a5762a] hover:text-[#2a1f1a] cursor-pointer">
+                    Book Life Path Reading <ArrowRight className="w-3 h-3" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Planetary Synergy Banner */}
+          <div className="p-6 bg-[#fcf8f4] border border-[#c8a951]/50 rounded-sm flex flex-col md:flex-row items-center justify-between gap-5">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a]">
+                  Planetary Alignment: Driver ({driverData.driverNumber}) vs Destiny ({destinyData.destinyNumber})
+                </span>
+                <span className="px-2 py-0.5 bg-[#c8a951]/20 text-[#a5762a] text-[9px] font-bold rounded-full uppercase">
+                  {birthSynergy.relation} Vibration
+                </span>
+              </div>
+              <p className="text-xs text-[#4a382e] font-light max-w-3xl leading-relaxed">
+                {birthSynergy.description}
+              </p>
+            </div>
+            <div className="text-center shrink-0">
+              <span className="text-2xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                {birthSynergy.score}%
+              </span>
+              <p className="text-[8px] uppercase tracking-wider text-[#665242]">Resonance</p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* ── TAB 2: NAME VIBRATION & COMPOUND NUMBER (CHALDEAN) ────────────────── */}
+      {activeTab === "name" && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="space-y-8"
+        >
+          {/* Controls Bar */}
+          <div className="bg-white/95 border border-[#c8a951]/35 p-6 sm:p-8 rounded-sm shadow-xl backdrop-blur-md">
+            <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 items-center">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-2">
-                  Enter Your Full Birth Name
+                  Enter Your Full Name
                 </label>
                 <input
                   type="text"
                   value={nameInput}
                   onChange={(e) => setNameInput(e.target.value)}
-                  placeholder="e.g. Priya Sharma"
-                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3.5 rounded-sm outline-none focus:border-[#c8a951] text-sm placeholder:text-[#2a1f1a]/30"
+                  placeholder="e.g. Ektaz Shah"
+                  className="w-full bg-[#fdf8f4] border border-[#c8a951]/40 text-[#2a1f1a] px-4 py-3 rounded-sm outline-none focus:border-[#c8a951] text-sm placeholder:text-[#2a1f1a]/30"
                 />
                 <p className="text-[11px] text-[#665242] mt-2 font-light">
-                  Pythagorean alphabetic reduction reveals your outer destiny and expression.
+                  Chaldean letters translate to sound frequencies 1 through 8. No letter is assigned the sacred number 9.
                 </p>
               </div>
-            )}
-          </div>
 
-          {/* Interactive Live Formula Visualization */}
-          <div className="p-6 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm">
-            <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] mb-3">
-              Mathematical Reduction Process
-            </p>
-            {activeTab === "lifepath" ? (
-              <div className="space-y-2">
-                <p className="text-sm font-mono text-[#2a1f1a]">
-                  {lifePathResult.breakdown}
-                </p>
-                <p className="text-xs text-[#665242] font-light">
-                  The day, month, and year are reduced to single digits or sacred Master Numbers (11, 22, 33), then summed.
-                </p>
-              </div>
-            ) : (
-              <div>
+              {/* Sound Letter Display */}
+              <div className="p-5 bg-[#fcf8f4] border border-[#e8d9cf] rounded-sm">
+                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] block mb-3">
+                  Letter Sound Vibrations (Chaldean Numerical Values)
+                </span>
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {nameResult.letters.map((item, i) => (
-                    <div key={i} className="flex flex-col items-center bg-white border border-[#c8a951]/40 px-2 py-1 rounded-sm shadow-sm">
+                  {nameData.letters.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex flex-col items-center bg-white border border-[#c8a951]/40 px-2.5 py-1 rounded-sm shadow-sm min-w-[28px]"
+                    >
                       <span className="text-xs font-bold text-[#2a1f1a]">{item.char}</span>
-                      <span className="text-[9px] text-[#a5762a] font-mono">{item.val}</span>
+                      <span className="text-[9px] text-[#a5762a] font-mono font-semibold">{item.val}</span>
                     </div>
                   ))}
                 </div>
                 <p className="text-xs font-mono text-[#2a1f1a]">
-                  Sum: {nameResult.sum} → Reduced Destiny Number: <strong className="text-[#a5762a] font-bold">{nameResult.number}</strong>
+                  Sum: <strong className="text-[#a5762a]">{nameData.compoundSum}</strong> (Compound) → Root Single Number:{" "}
+                  <strong className="text-[#a5762a]">{nameData.rootNumber}</strong>
                 </p>
               </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Result Card Dossier */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${activeTab}-${activeNumber}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white/95 border border-[#c8a951]/40 p-8 md:p-12 rounded-sm shadow-2xl backdrop-blur-md"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 items-start">
-            {/* Massive Golden Number Emblem */}
-            <div className="flex flex-col items-center justify-center p-8 bg-[#fdf8f4] border-2 border-[#c8a951]/60 rounded-sm text-center shadow-lg">
-              <span
-                className="text-7xl md:text-8xl font-light text-[#a5762a] leading-none mb-3"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                {activeNumber}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a5762a] border-t border-[#c8a951]/30 pt-3 w-full">
-                {activeDetails.isMaster ? "Sacred Master Number" : `${activeTab === "lifepath" ? "Life Path" : "Expression"} Archetype`}
-              </span>
             </div>
+          </div>
 
-            {/* In-depth Archetype breakdown */}
-            <div>
-              <div className="flex flex-wrap items-center gap-3 mb-2">
-                <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-[#c8a951]/15 text-[#a5762a] border border-[#c8a951]/30 rounded-full font-semibold">
-                  Archetype: {activeDetails.archetype}
-                </span>
-                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#665242]">
-                  Ruling Planet: {activeDetails.planet}
-                </span>
-              </div>
-
-              <h3
-                className="text-3xl md:text-4xl font-light text-[#2a1f1a] mb-4"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                {activeDetails.title}
-              </h3>
-
-              <div className="flex flex-wrap gap-2 mb-6">
-                {activeDetails.keywords.map((kw) => (
-                  <span key={kw} className="text-[9px] font-bold uppercase tracking-wider text-[#2a1f1a] bg-[#f5ede4] border border-[#e8d9cf] px-2.5 py-1">
-                    {kw}
+          {/* Result Card: Compound and Root */}
+          <div className="bg-white/95 border border-[#c8a951]/40 p-8 sm:p-10 rounded-sm shadow-2xl backdrop-blur-md">
+            <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
+              {/* Emblem with Compound + Single Root */}
+              <div className="flex flex-col items-center justify-center p-8 bg-[#fdf8f4] border-2 border-[#c8a951]/60 rounded-sm text-center shadow-lg">
+                <div className="flex items-baseline justify-center gap-2 mb-2">
+                  <span className="text-6xl sm:text-7xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                    {nameData.compoundSum}
                   </span>
-                ))}
+                  <span className="text-2xl text-[#665242] font-light">/</span>
+                  <span className="text-4xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                    {nameData.rootNumber}
+                  </span>
+                </div>
+                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] border-t border-[#c8a951]/30 pt-3 w-full">
+                  Compound {nameData.compoundSum} · Root {nameData.rootNumber}
+                </span>
+                <span className="text-[9px] font-semibold text-[#665242] mt-1">
+                  Ruled by {nameArch.planet} ({nameArch.vedicPlanet})
+                </span>
               </div>
 
-              <p className="text-sm md:text-base text-[#4a382e] leading-relaxed mb-6 font-light">
-                {activeDetails.description}
-              </p>
+              {/* In-depth Compound & Root Meaning */}
+              <div>
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 bg-[#c8a951]/15 text-[#a5762a] border border-[#c8a951]/30 rounded-full">
+                    Chaldean Compound Name
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#665242]">
+                    Status: {nameData.compoundInfo?.fortune}
+                  </span>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-[#fdf8f4] border-l-2 border-[#c8a951] mb-6 shadow-sm">
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
-                    Soul Mission & Highest Potential
+                <h3 className="text-3xl font-light text-[#2a1f1a] mb-2" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                  {nameData.compoundInfo?.name}
+                </h3>
+                <p className="text-xs text-[#a5762a] font-medium uppercase tracking-wider mb-4">
+                  Root Vibration: {nameArch.title}
+                </p>
+
+                <div className="p-4 bg-[#fdf8f4] border-l-2 border-[#c8a951] mb-6">
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-[#a5762a] mb-1">
+                    Occult / Esoteric Symbolism of Compound {nameData.compoundSum}
                   </p>
-                  <p className="text-xs text-[#2a1f1a] leading-relaxed font-light">
-                    {activeDetails.mission}
+                  <p className="text-xs sm:text-sm text-[#2a1f1a] leading-relaxed font-light">
+                    {nameData.compoundInfo?.symbolism}
                   </p>
                 </div>
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-1">
-                    Harmonizing Crystal Remedy
-                  </p>
-                  <p className="text-xs text-[#2a1f1a] font-medium mb-1">
-                    {activeDetails.crystal}
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex flex-wrap gap-4">
-                <Link href="/shop">
-                  <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
-                    Shop Number {activeNumber} Crystals <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-                <Link href="/tarot">
-                  <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
-                    Book Numerology Reading
-                  </span>
-                </Link>
+                <p className="text-xs sm:text-sm text-[#4a382e] leading-relaxed font-light mb-6">
+                  {nameArch.description}
+                </p>
+
+                {/* Compatibility with Birth Numbers */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#fcf8f4] border border-[#e8d9cf] mb-6">
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#665242] block">
+                      Name ({nameData.rootNumber}) vs Driver ({driverData.driverNumber})
+                    </span>
+                    <p className="text-xs text-[#2a1f1a] font-medium mt-0.5">
+                      {nameToDriverSynergy.relation} Harmony ({nameToDriverSynergy.score}%)
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#665242] block">
+                      Name ({nameData.rootNumber}) vs Destiny ({destinyData.destinyNumber})
+                    </span>
+                    <p className="text-xs text-[#2a1f1a] font-medium mt-0.5">
+                      {nameToDestinySynergy.relation} Harmony ({nameToDestinySynergy.score}%)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/shop">
+                    <span className="inline-flex items-center gap-2 bg-[#c8a951] text-[#1a0e05] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] shadow-lg hover:shadow-[#c8a951]/30 transition-all cursor-pointer">
+                      Shop Harmonizing Crystals <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
+                  <Link href="/tarot#book">
+                    <span className="inline-flex items-center gap-2 border border-[#c8a951]/60 text-[#a5762a] px-7 py-3 text-[10px] font-bold uppercase tracking-[0.22em] hover:bg-[#c8a951]/10 transition-all cursor-pointer">
+                      Consult Ektaz Shah on Name Correction
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </motion.div>
-      </AnimatePresence>
+      )}
+
+      {/* ── TAB 3: CHALDEAN SOUND MATRIX (ALPHABET VALUES 1 TO 8) ─────────────── */}
+      {activeTab === "alphabet" && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="bg-white/95 border border-[#c8a951]/40 p-8 sm:p-12 rounded-sm shadow-2xl backdrop-blur-md space-y-8"
+        >
+          <div className="max-w-2xl">
+            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#a5762a] block mb-1">
+              Ancient Babylonian Sound Science
+            </span>
+            <h3 className="text-3xl font-light text-[#2a1f1a]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+              The Sacred Chaldean Alphabet Values
+            </h3>
+            <p className="text-xs sm:text-sm text-[#4a382e]/80 font-light mt-2 leading-relaxed">
+              Unlike Pythagorean numerology which mechanically counts from 1 to 9 in sequence, Chaldean numerology assigns values based on the acoustic sound frequency each letter emits into the astral sphere.
+            </p>
+          </div>
+
+          {/* 1 to 8 Sound Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
+              const arch = CHALDEAN_ARCHETYPES[num];
+              const letters = alphabetByNumber[num] || [];
+              return (
+                <div
+                  key={num}
+                  className="p-4 bg-[#fdf8f4] border border-[#c8a951]/40 rounded-sm text-center flex flex-col justify-between hover:border-[#c8a951] hover:shadow-md transition-all"
+                >
+                  <div>
+                    <span className="text-3xl sm:text-4xl font-light text-[#a5762a]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {num}
+                    </span>
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-[#665242] mt-1">
+                      {arch.planet}
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-1.5 mt-3 mb-2">
+                      {letters.map((ch) => (
+                        <span key={ch} className="px-2 py-0.5 bg-white border border-[#e8d9cf] font-bold text-xs text-[#2a1f1a]">
+                          {ch}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-[8px] text-[#a5762a] font-medium border-t border-[#e8d9cf] pt-2 block mt-2">
+                    {arch.vedicPlanet}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* The Mystery of Sacred Number 9 */}
+          <div className="p-6 bg-[#fcf8f4] border border-[#c8a951] rounded-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xl text-[#a5762a] font-light" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Number 9:
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a]">
+                The Sacred Unassigned Frequency
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#4a382e] font-light leading-relaxed">
+              In genuine Chaldean numerology, the number 9 is held sacred because it represents the highest cosmic completion and divine manifestation. No letter of the alphabet has the value of 9 because 9 disappears when added to any single digit (e.g., 9 + 4 = 13 → 4). It is only found when numbers are added together or when a person is born on the 9th, 18th, or 27th of the month.
+            </p>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

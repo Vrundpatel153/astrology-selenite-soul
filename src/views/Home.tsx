@@ -477,14 +477,14 @@ function NumerologySection() {
         <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
           <div className="flex items-center gap-3 justify-center mb-3">
             <div className="h-px w-8 bg-[#c8a951]/60" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Pythagorean Numerology</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#a5762a]">Chaldean Sacred Numerology</span>
             <div className="h-px w-8 bg-[#c8a951]/60" />
           </div>
           <h2 className="text-3xl md:text-5xl font-light text-[#2a1f1a] mb-4" style={serif}>
             Numbers Are the <em className="italic text-[#a5762a]">Language of the Universe</em>
           </h2>
           <p className="text-xs md:text-sm text-[#4a382e]/80 font-light leading-relaxed">
-            Every number carries a precise vibrational frequency. Enter your details below to reveal your life path and expression archetype.
+            Ancient Babylonian sound vibrations and Vedic planetary frequencies. Decode your Driver (Moolank), Destiny (Bhagyank), and sacred Name compound numbers below.
           </p>
         </div>
 
