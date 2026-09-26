@@ -250,28 +250,20 @@ function BrandPhilosophy() {
 
       <div className="relative z-10 px-5 md:px-14 max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 md:mb-10">
-          <div>
-            <motion.p
-              className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a] mb-3"
-              initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            >
-              Selenite Soul Philosophy
-            </motion.p>
-            <motion.h2
-              className="text-4xl md:text-5xl xl:text-6xl font-light text-[#2a1f1a] leading-[1.08]" style={serif}
-              initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
-            >
-              Where Ancient Wisdom<br />
-              <em className="italic text-[#a5762a]">Meets Modern Life</em>
-            </motion.h2>
-          </div>
+        <div className="mb-8 md:mb-10">
           <motion.p
-            className="text-sm md:text-base text-[#4a382e]/80 leading-relaxed max-w-md font-light"
-            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#a5762a] mb-3"
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            We bridge the sacred knowledge of Vedic India with the rhythms of your everyday life through crystals, astrology, Tarot, and numbers.
+            Selenite Soul Philosophy
           </motion.p>
+          <motion.h2
+            className="text-4xl md:text-5xl xl:text-6xl font-light text-[#2a1f1a] leading-[1.08]" style={serif}
+            initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.08 }}
+          >
+            Where Ancient Wisdom<br />
+            <em className="italic text-[#a5762a]">Meets Modern Life</em>
+          </motion.h2>
         </div>
 
         {/* Pillar Cards in Luxury Ivory Glass */}
