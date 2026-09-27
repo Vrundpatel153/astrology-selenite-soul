@@ -7,6 +7,7 @@ interface BrandLogoProps {
   isScrolled?: boolean;
   showTagline?: boolean;
   variant?: "header" | "footer" | "drawer";
+  fontStyle?: "pinyon" | "greatvibes" | "alexbrush" | "pacifico";
 }
 
 export default function BrandLogo({
@@ -15,23 +16,36 @@ export default function BrandLogo({
   isScrolled = false,
   showTagline = true,
   variant = "header",
+  fontStyle = "pinyon",
 }: BrandLogoProps) {
   // Dimension adjustments based on size
-  const iconSize = size === "sm" ? 20 : size === "lg" ? 28 : isScrolled ? 21 : 24;
+  const iconSize = size === "sm" ? 18 : size === "lg" ? 26 : isScrolled ? 19 : 22;
+
+  // Cursive scripts require natural, flowing sizing without uppercase transform
   const textSize =
     size === "sm"
-      ? "text-base tracking-[0.16em]"
+      ? "text-xl md:text-2xl"
       : size === "lg"
-      ? "text-2xl md:text-3xl tracking-[0.18em]"
+      ? "text-3xl md:text-4xl"
       : isScrolled
-      ? "text-base md:text-lg tracking-[0.16em]"
-      : "text-lg md:text-xl tracking-[0.18em]";
+      ? "text-2xl md:text-[26px]"
+      : "text-[26px] md:text-[30px]";
 
-  const taglineSize = size === "sm" ? "text-[6.5px]" : size === "lg" ? "text-[8.5px]" : "text-[7px]";
+  const taglineSize = size === "sm" ? "text-[6px]" : size === "lg" ? "text-[8px]" : "text-[6.5px]";
+
+  // Font family selection
+  const fontFamily =
+    fontStyle === "greatvibes"
+      ? "'Great Vibes', cursive"
+      : fontStyle === "alexbrush"
+      ? "'Alex Brush', cursive"
+      : fontStyle === "pacifico"
+      ? "'Pacifico', cursive"
+      : "'Pinyon Script', 'Great Vibes', cursive";
 
   return (
-    <div className={`flex items-center gap-2.5 sm:gap-3 group select-none cursor-pointer ${className}`}>
-      {/* Sacred Celestial Emblem: Crescent Moon embracing a 4-point Selenite Crystal Star */}
+    <div className={`flex items-center gap-2 sm:gap-2.5 group select-none cursor-pointer ${className}`}>
+      {/* Delicate Celestial Accent: Crescent Moon with 4-point Selenite Star */}
       <div className="relative shrink-0 flex items-center justify-center">
         <svg
           width={iconSize}
@@ -48,7 +62,7 @@ export default function BrandLogo({
             stroke="currentColor"
             strokeWidth="0.6"
             strokeDasharray="2 3"
-            className="opacity-45"
+            className="opacity-40"
           />
 
           {/* Luminous Crescent Moon */}
@@ -57,7 +71,7 @@ export default function BrandLogo({
             fill="currentColor"
             fillOpacity="0.12"
             stroke="currentColor"
-            strokeWidth="0.8"
+            strokeWidth="0.75"
           />
 
           {/* Central 4-point Selenite Crystal Star */}
@@ -65,35 +79,33 @@ export default function BrandLogo({
             d="M16 8L17.2 12.8L22 14L17.2 15.2L16 20L14.8 15.2L10 14L14.8 12.8L16 8Z"
             fill="currentColor"
             stroke="currentColor"
-            strokeWidth="0.4"
+            strokeWidth="0.35"
           />
 
           {/* Small celestial diamond point */}
-          <circle cx="16" cy="14" r="0.9" fill="#fcf8f4" />
+          <circle cx="16" cy="14" r="0.8" fill="#fcf8f4" />
         </svg>
       </div>
 
-      {/* Typographic Wordmark */}
+      {/* Elegant Flowing Cursive Script Wordmark */}
       <div className="flex flex-col leading-none">
-        <div className="flex items-baseline">
-          <span
-            className={`font-semibold text-[#2a1f1a] uppercase transition-colors duration-300 group-hover:text-[#a5762a] ${textSize}`}
-            style={{ fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif" }}
-          >
-            Selenite Soul
-          </span>
-        </div>
+        <span
+          className={`font-normal text-[#2a1f1a] transition-colors duration-300 group-hover:text-[#a5762a] leading-none ${textSize}`}
+          style={{ fontFamily }}
+        >
+          Selenite Soul
+        </span>
 
         {showTagline && (
-          <div className="flex items-center gap-1.5 mt-1">
-            <span className="w-2.5 h-px bg-[#c8a951]/60" />
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="w-2 h-px bg-[#c8a951]/60" />
             <span
-              className={`font-medium tracking-[0.32em] uppercase text-[#a5762a] opacity-90 ${taglineSize}`}
+              className={`font-semibold tracking-[0.34em] uppercase text-[#a5762a] opacity-85 ${taglineSize}`}
               style={{ fontFamily: "'Cinzel', Georgia, serif" }}
             >
               Sanctuary
             </span>
-            <span className="w-2.5 h-px bg-[#c8a951]/60" />
+            <span className="w-2 h-px bg-[#c8a951]/60" />
           </div>
         )}
       </div>
