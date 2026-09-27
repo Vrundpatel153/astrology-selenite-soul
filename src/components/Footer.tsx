@@ -4,6 +4,7 @@ import { Instagram, Twitter, Facebook, Youtube, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import BrandLogo from "./BrandLogo";
 
 const footerLinks = [
   {
@@ -134,13 +135,8 @@ export default function Footer() {
         {/* Newsletter & Brand */}
         <div className="pt-8 border-t border-[#e8d9cf] flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
           <div>
-            <Link href="/">
-              <span
-                className="text-2xl font-normal text-[#2a1f1a] cursor-pointer"
-                style={{ fontFamily: "'Pacifico', cursive" }}
-              >
-                Selenite Soul
-              </span>
+            <Link href="/" className="inline-block">
+              <BrandLogo size="lg" variant="footer" showTagline={true} />
             </Link>
             <p className="text-xs text-[#4a382e]/70 mt-1 font-light max-w-sm">
               Ethically sourced healing crystals & authentic Vedic Jyotish wisdom. Energized under lunar cycles.

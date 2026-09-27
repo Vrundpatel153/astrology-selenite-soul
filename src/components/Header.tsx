@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Search, MapPin, ShoppingBag, Menu, X, Heart, ChevronRight, User as UserIcon, Tag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import BrandLogo from "./BrandLogo";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 
@@ -198,27 +199,15 @@ export default function Header() {
               <Search className="w-4 h-4 stroke-[1.5]" />
             </motion.button>
 
-            <Link href="/">
-              <motion.span
-                className={`hidden md:inline font-normal text-[#2a1f1a] cursor-pointer transition-all duration-500 ${isScrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}
-                style={{ fontFamily: "'Pacifico', cursive" }}
-                whileHover={{ opacity: 0.75 }}
-                transition={{ duration: 0.2 }}
-              >
-                Selenite Soul
-              </motion.span>
+            <Link href="/" className="hidden md:inline-flex">
+              <BrandLogo size="md" isScrolled={isScrolled} />
             </Link>
           </div>
 
           {/* Center */}
           <div className="flex-none">
-            <Link href="/">
-              <span
-                className="md:hidden text-lg font-normal text-[#2a1f1a] cursor-pointer"
-                style={{ fontFamily: "'Pacifico', cursive" }}
-              >
-                Selenite Soul
-              </span>
+            <Link href="/" className="md:hidden flex">
+              <BrandLogo size="sm" isScrolled={isScrolled} showTagline={false} />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -424,12 +413,7 @@ export default function Header() {
               {/* Drawer header */}
               <div className="flex items-center justify-between px-5 h-14 border-b border-[#e8d9cf] shrink-0 bg-[#fdf8f4]">
                 <Link href="/" onClick={() => setMenuOpen(false)}>
-                  <span
-                    className="text-xl font-normal text-[#2a1f1a] cursor-pointer"
-                    style={{ fontFamily: "'Pacifico', cursive" }}
-                  >
-                    Selenite Soul
-                  </span>
+                  <BrandLogo size="md" showTagline={true} />
                 </Link>
                 <motion.button onClick={() => setMenuOpen(false)} whileTap={{ scale: 0.85 }}>
                   <X className="w-5 h-5 text-[#2a1f1a]" />
