@@ -233,6 +233,7 @@ export const ZODIAC_SIGNS: ZodiacSignDetails[] = [
 
 export default function InteractiveZodiacWheel({ className = "" }: { className?: string }) {
   const [activeSignIndex, setActiveSignIndex] = useState(0);
+  const ribbonRef = useRef<HTMLDivElement | null>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const activeSign = ZODIAC_SIGNS[activeSignIndex];
 
@@ -243,16 +244,21 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
     }, 1400);
 
     return () => clearInterval(interval);
-  }, [activeSignIndex]);
+  }, []);
 
-  // Keep the active zodiac button visible within the horizontal scroll ribbon
+  // Keep the active zodiac button visible within the horizontal scroll ribbon WITHOUT hijacking window scroll
   useEffect(() => {
     const currentBtn = buttonRefs.current[activeSignIndex];
-    if (currentBtn) {
-      currentBtn.scrollIntoView({
+    const container = ribbonRef.current;
+    if (currentBtn && container) {
+      const btnLeft = currentBtn.offsetLeft;
+      const btnWidth = currentBtn.offsetWidth;
+      const containerWidth = container.clientWidth;
+      const targetLeft = btnLeft - containerWidth / 2 + btnWidth / 2;
+
+      container.scrollTo({
+        left: Math.max(0, targetLeft),
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, [activeSignIndex]);
@@ -260,7 +266,10 @@ export default function InteractiveZodiacWheel({ className = "" }: { className?:
   return (
     <div className={`w-full max-w-[1300px] mx-auto ${className}`}>
       {/* Sign Selector Ribbon (All 12 Signs) */}
-      <div className="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-8 select-none no-scrollbar">
+      <div
+        ref={ribbonRef}
+        className="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-8 select-none no-scrollbar"
+      >
         {ZODIAC_SIGNS.map((s, idx) => {
           const isActive = idx === activeSignIndex;
           return (
