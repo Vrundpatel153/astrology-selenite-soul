@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -18,8 +18,8 @@ import { Link } from "wouter";
 
 // ─── Chaldean Compatibility Section ──────────────────────────────────────────
 function ChaldeanCompatibilityCalculator() {
-  const [a, setA] = useState({ name: "", date: "1994-04-12" });
-  const [b, setB] = useState({ name: "", date: "1996-08-15" });
+  const [a, setA] = useState({ name: "", date: "" });
+  const [b, setB] = useState({ name: "", date: "" });
   const [result, setResult] = useState<{
     driverA: number;
     destinyA: number;
@@ -30,9 +30,11 @@ function ChaldeanCompatibilityCalculator() {
     description: string;
   } | null>(null);
 
+  const outputRef = useRef<HTMLDivElement>(null);
+
   function calculate() {
     if (!a.date || !b.date) {
-      toast.error("Please enter both birth dates.");
+      toast.error("Please select both birth dates to calculate resonance.");
       return;
     }
     const dDataA = calculateDriverNumber(a.date);
@@ -56,7 +58,22 @@ function ChaldeanCompatibilityCalculator() {
       relation: driverMatch.relation,
       description: driverMatch.description,
     });
+
+    // Smooth redirect/scroll to output card with animation
+    setTimeout(() => {
+      outputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
   }
+
+  const handleUpdateA = (field: "name" | "date", val: string) => {
+    setA((p) => ({ ...p, [field]: val }));
+    if (result) setResult(null);
+  };
+
+  const handleUpdateB = (field: "name" | "date", val: string) => {
+    setB((p) => ({ ...p, [field]: val }));
+    if (result) setResult(null);
+  };
 
   return (
     <div className="bg-white/95 border border-[#c8a951]/40 p-8 md:p-12 shadow-2xl backdrop-blur-md rounded-sm">
@@ -66,7 +83,7 @@ function ChaldeanCompatibilityCalculator() {
           Chaldean Planetary Compatibility Matcher
         </h3>
         <p className="text-xs text-[#4a382e]/80 mt-2 font-light">
-          Compare two birth dates to calculate the energetic resonance between both Driver (Moolank) and Destiny (Bhagyank) numbers.
+          Enter both birth dates below, then click analyze to decode the energetic resonance between both Driver (Moolank) and Destiny (Bhagyank) numbers.
         </p>
       </div>
 
@@ -76,10 +93,10 @@ function ChaldeanCompatibilityCalculator() {
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-4">First Person's Details</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name (Optional)</label>
               <input
                 value={a.name}
-                onChange={(e) => setA((p) => ({ ...p, name: e.target.value }))}
+                onChange={(e) => handleUpdateA("name", e.target.value)}
                 placeholder="e.g. Maya"
                 className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-[#2a1f1a]/30"
               />
@@ -89,7 +106,7 @@ function ChaldeanCompatibilityCalculator() {
               <input
                 type="date"
                 value={a.date}
-                onChange={(e) => setA((p) => ({ ...p, date: e.target.value }))}
+                onChange={(e) => handleUpdateA("date", e.target.value)}
                 className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:light]"
               />
             </div>
@@ -101,10 +118,10 @@ function ChaldeanCompatibilityCalculator() {
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a5762a] mb-4">Second Person's Details</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name</label>
+              <label className="block text-[9px] font-bold uppercase tracking-wider text-[#4a382e] mb-1.5">Name (Optional)</label>
               <input
                 value={b.name}
-                onChange={(e) => setB((p) => ({ ...p, name: e.target.value }))}
+                onChange={(e) => handleUpdateB("name", e.target.value)}
                 placeholder="e.g. Rohan"
                 className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm placeholder:text-[#2a1f1a]/30"
               />
@@ -114,7 +131,7 @@ function ChaldeanCompatibilityCalculator() {
               <input
                 type="date"
                 value={b.date}
-                onChange={(e) => setB((p) => ({ ...p, date: e.target.value }))}
+                onChange={(e) => handleUpdateB("date", e.target.value)}
                 className="w-full bg-white border border-[#e8d9cf] text-[#2a1f1a] px-3.5 py-2.5 text-sm outline-none focus:border-[#c8a951] rounded-sm [color-scheme:light]"
               />
             </div>
@@ -125,7 +142,7 @@ function ChaldeanCompatibilityCalculator() {
       <div className="text-center mb-8">
         <motion.button
           onClick={calculate}
-          className="bg-[#c8a951] text-[#1a0e05] px-10 py-3.5 text-[11px] font-bold uppercase tracking-[0.24em] shadow-xl hover:shadow-[#c8a951]/30 rounded-sm cursor-pointer"
+          className="bg-[#c8a951] text-[#1a0e05] px-10 py-3.5 text-[11px] font-bold uppercase tracking-[0.24em] shadow-xl hover:shadow-[#c8a951]/30 rounded-sm cursor-pointer transition-all"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -136,9 +153,12 @@ function ChaldeanCompatibilityCalculator() {
       <AnimatePresence>
         {result && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="p-8 bg-[#fdf8f4] border border-[#c8a951] rounded-sm text-center shadow-md"
+            ref={outputRef}
+            initial={{ opacity: 0, y: 35, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.97 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="p-8 bg-[#fdf8f4] border border-[#c8a951] rounded-sm text-center shadow-md scroll-mt-28"
           >
             <div className="grid grid-cols-2 gap-6 max-w-md mx-auto mb-6">
               <div className="p-4 bg-white border border-[#e8d9cf] rounded-sm">

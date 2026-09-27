@@ -607,6 +607,7 @@ export default function Kundali() {
   const heroRef   = useRef<HTMLDivElement>(null);
   const formRef   = useRef<HTMLFormElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY   = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
@@ -736,7 +737,14 @@ export default function Kundali() {
     setBirthData(data);
     generateKundali(
       { data: { name: form.name, date: form.date, time: form.time, latitude: lat, longitude: lon, place: form.place } },
-      { onSuccess: () => setActiveTab("crystals") },
+      {
+        onSuccess: () => {
+          setActiveTab("crystals");
+          setTimeout(() => {
+            resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 200);
+        },
+      },
     );
   }
 
@@ -1153,10 +1161,12 @@ export default function Kundali() {
         <AnimatePresence mode="wait">
           {result && birthData && (
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
+              ref={resultsRef}
+              initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="scroll-mt-24"
             >
 
               {/* Summary banner */}
